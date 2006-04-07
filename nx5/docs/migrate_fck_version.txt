@@ -1,0 +1,78 @@
+Migrate version of FCKEditor
+-----------------------------
+
+1. Edit fckeditor.html and paste the line at the top of all script-includes.
+<SCRIPT language="javascript" src="js/nx_config.php"></SCRIPT>
+
+2. Copy the file nx_config.php to the js folder of fckeditor.
+
+3. Edit the js/fck_config.js to something like the following:
+
+***
+paste this on top:
+// BEGIN: URLParams holds all URL passed parameters (like ?Param1=Value1&Param2=Value2)
+var URLParams = new Object();
+
+var aParams = document.location.search.substr(1).split('&');
+
+for (i = 0; i < aParams.length; i++) {
+	var aParam = aParams[i].split('=');
+
+	URLParams[aParam[0]] = aParam[1];
+}
+
+***
+config.ToolbarSets["Default"] = [
+	['EditSource','-','Cut','Copy','Paste','PasteText','PasteWord','-','Print','SpellCheck','Find','-','Undo','Redo','-','SelectAll','RemoveFormat','-','Link','RemoveLink','-','Image','Table','Rule','SpecialChar'] ,
+	['Bold','Italic','Underline','StrikeThrough','JustifyLeft','JustifyCenter','JustifyRight','JustifyFull','-','InsertOrderedList','InsertUnorderedList','-','Outdent','Indent','-','ShowTableBorders','ShowDetails','-','Zoom'] ,
+	['Font','-','FontSize','-','TextColor','BGColor']
+] ;
+
+***
+
+config.ImageBrowser = true;
+var sid = URLParams['sid'];
+config.ImageBrowserURL = nxpath + "modules/content/objectbrowser.php?sid=" + sid + "&linkset=SELECT|EDIT|USAGE|LAUNCH|DELETE&filter=IMAGE";
+config.ImageBrowserWindowWidth = 950;
+config.ImageBrowserWindowHeight = 550;
+
+config.ImageUpload = false;
+
+***
+config.LinkBrowser = true;
+config.LinkBrowserURL = nxpath + "plugin/text/internallink.php?sid=" + sid;
+config.LinkBrowserWindowWidth = 800;
+config.LinkBrowserWindowHeight = 200;
+
+***
+config.LinkUpload = false ;
+
+4. api/userinterface/htmlinput/richedit.php
+  Correct the path, e.g.
+  require_once $c["path"] . "ext/fckeditor16/fckeditor.php";
+  
+5. Edit the FCKEditor CSS and set correct background-colors of dialogs to
+  #EDEFF3
+  
+6. Edit fckeditor.php.
+ * Change the constructor to something like this.
+ 	function FCKeditor()
+	{
+		global $c;
+		$this->ToolbarSet = '' ;
+		$this->Value = '' ;
+		$this->CanUpload = 'none' ;
+		$this->CanBrowse = 'none' ;
+		$this->BasePath = $c["docroot"] . "ext/fckeditor16/"; ;
+	}
+	
+  * Edit the ReturnFCKEditorFunction:
+  -Add:
+  	global $sid;
+	if (!isset($sid))
+		$sid = getVar($sid);
+  -Change:
+  	$sLink = $this->BasePath . "fckeditor.html?FieldName=$instanceName&sid=$sid" ;
+
+ 7. Browse for ImageBrowserURL and ensure, that window is opened with scrollbar.
+ 

@@ -1,0 +1,1 @@
+ALTER TABLE `sitepage_master` ADD `THUMBNAIL` VARCHAR( 64 ) AFTER `DELETED` ;

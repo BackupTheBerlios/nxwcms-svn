@@ -1,0 +1,2 @@
+ 
+CREATE TABLE `var_log` (`NAME` VARCHAR( 32 ) NOT NULL ,PRIMARY KEY ( `NAME` ) );

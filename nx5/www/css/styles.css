@@ -1,0 +1,99 @@
+body,td,p { color: #000000;
+font-family:  Arial, sans-serif;
+font-size: 12px;
+line-height: 14px;
+background-color: #ffffff;
+margin: 0px;
+padding: 0px;
+}
+
+.searchinput, {
+  font-size:11px;
+  height: 17px;
+  border: 1px solid #000000;  
+}
+
+input,textarea {
+  font-size:11px;
+  font-family: Arial, sans-serif;
+  height: 17px;
+  border: 1px solid #000000;  
+}
+
+.searchsubmit {
+  color: #ffffff;
+  font-size: 11px;
+  height: 17px;
+  border: 1px solid #000000;
+  background-color: #1a9cc0;
+}
+
+a {color: #3333ee;
+text-decoration: underline;}
+
+a:hover {color: #3333ee;
+text-decoration: underline;}
+
+
+.h1 {font-size: 24px;
+line-height: 38px;
+font-family: Arial, sans-serif;
+text-align: left;}
+
+.h2 {font-size: 14px;
+line-height:18px;
+font-family: Arial, sans-serif;
+text-align: left;}
+
+.h3 {font-size: 18px;
+line-height: 22px;
+font-family: Arial, sans-serif;
+text-align: left;}
+
+.menuarea {
+color: #ffffff;
+font-family: Arial, sans-serif;
+background-color: #000000;
+font-size: 12px;
+padding:0px;
+margin: 0px;
+}
+
+
+.menulink {color: #ffffff;
+background-color: #000000;
+padding-top, padding-bottom: 2px;
+font-size: 15px;
+font-weight: bold;
+text-decoration: none;}
+
+.menulinkactive {
+color: #ffffff;
+background-color: #1a9cc0;
+padding-top, padding-bottom: 2px;
+font-size: 15px;
+font-weight: bold;
+text-decoration: none;
+}
+
+a.menuarea {color: #ffffff;
+text-decoration: none;}
+
+a.menuarea:hover {color: #1a9cc0;
+text-decoration: none;}
+
+a.menuareaactive {
+font-family: Arial, sans-serif;
+color: #1a9cc0;
+text-decoration: none;
+}
+
+a.menuareaactive:hover {
+text-decoration: none;
+}
+
+h3 {font-size: 12px;
+line-height: 20px;
+font-family: Arial, sans-serif;
+font-weight: bold;
+text-align: left;}
