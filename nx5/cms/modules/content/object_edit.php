@@ -34,7 +34,6 @@
 	if (! $aclf->hasAccess($auth->userId))
 	  header("Location: ". $c["docroot"]."modules/common/noaccess.php?sid=$sid&guid=$pnode");
 	//// ACL Check ////
-	
 	/************************************************************************************
 	 * Initializing
 	 ************************************************************************************/
@@ -91,6 +90,7 @@
         		$oname = new TextInput($lang->get("o_name"), "content", "NAME", $cond, "type:text,width:200,size:32", "MANDATORY&UNIQUE");
         		$oname->setFilter("CATEGORY_ID = $category_id");
         		$editpanel->add($oname);
+        		$editpanel->add(new TextInput($lang->get('access_key', 'Access Key', 'Key-Value with which you can access this content from the editor by typing [key].'), 'content', 'ACCESSKEY', $cond, "type:text,width:100,size:16",'UNIQUE'));        		
         		$editpanel->backto = $c["docroot"] . "modules/content/objectbrowser.php?sid=$sid";
         
         		// Edit
@@ -106,7 +106,7 @@
         
         		// Description
         		$editpanel->add(new Subtitle("st", $lang->get("content_desc", "Description of Content")));
-        		$editpanel->add(new TextInput($lang->get("description"), "content", "DESCRIPTION", $cond, "type:textarea,width:300,size:3", ""));
+        		//$editpanel->add(new TextInput($lang->get("description"), "content", "DESCRIPTION", $cond, "type:textarea,width:300,size:3", ""));
         		$editpanel->add(new TextInput($lang->get("keywords"), "content", "KEYWORDS", $cond, "type:textarea,width:300,size:3", ""));
         		// MetaData 
         		$editpanel->add(new MetaDataEditor($oid, $template, 2));

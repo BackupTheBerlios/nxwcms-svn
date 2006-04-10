@@ -25,12 +25,15 @@
  *	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **********************************************************************/
 
-
+  require_once($c["path"].'api/parser/objectparser.php');
+  
   /**
    * Apply the filter-plugins on a given input
    * @param string Text to filter
    */
    function applyFilterPlugins($text) {
+   	 $objectParser = new ObjectParser();
+   	 $text = $objectParser->parse($text);
    	 $plugins = createDBCArray("modules", "MODULE_ID", "MODULE_TYPE_ID=4");   
    	 for ($i=0; $i<count($plugins); $i++) {
    	   includePGNSources();
