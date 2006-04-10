@@ -666,14 +666,15 @@
 			$keywords = addslashes($query->field("KEYWORDS"));
 			$description = addslashes($query->field("DESCRIPTION"));
 			$delme = $query->field("DELETED");
+			$accesskey = $query->field("ACCESSKEY");
 
 			// do some launches
 			$mtTrans = launchMetaTemplate($mtid, $level);
 
 			$sql = "DELETE FROM content WHERE CID = $out";
 			$query = new query($db, $sql);
-			$sql = "INSERT INTO content (CID, MODULE_ID, CATEGORY_ID, MT_ID, NAME, DESCRIPTION, KEYWORDS, CREATED, LAST_MODIFIER, VERSION, DELETED) VALUES ";
-			$sql .= "($out, $module, $category, $mtTrans, '$name', '$description', '$keywords', NOW(), '$auth->user', $level, $delme)";
+			$sql = "INSERT INTO content (CID, MODULE_ID, CATEGORY_ID, MT_ID, NAME, DESCRIPTION, KEYWORDS, CREATED, LAST_MODIFIER, VERSION, DELETED, ACCESSKEY) VALUES ";
+			$sql .= "($out, $module, $category, $mtTrans, '$name', '$description', '$keywords', NOW(), '$auth->user', $level, $delme, '$accesskey')";
 			
 			$query = new query($db, $sql);
 			// launch the content.

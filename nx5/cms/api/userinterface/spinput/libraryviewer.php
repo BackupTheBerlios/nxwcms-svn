@@ -35,6 +35,7 @@
 		var $module_id;
 		var $module_name;
 		var $fkid;
+		var $accesskey;
 
 		/**
 		  * Standard constructor
@@ -54,6 +55,7 @@
 			$variation_temp = $variation;
 			$this->module_id = getDBCell("content", "MODULE_ID", "CID = $oid");
 			$this->name = getDBCell("content", "NAME", "CID = $oid");
+			$this->accesskey = getDBCell("content", "ACCESSKEY", "CID = $oid");
 			$this->module_name = getDBCell("modules", "MODULE_NAME", "MODULE_ID = " . $this->module_id);			
 			$check = getDBCell("content_variations", "VARIATION_ID", "VARIATION_ID = $variation AND CID = $oid");
 			if ($check =="") {
@@ -127,16 +129,11 @@
 			echo '<td valign="top" style="border: 1px solid black;">';
 			echo  $ref->preview();
 			unset($ref);
-			echo '</td><td valign="middle" class="standardlight">';
-			br();
-			echo "<b>" . $lang->get("description"). ": </b><br/>";
-			$desc = getDBCell("content", "DESCRIPTION", "CID = " . $this->oid);
+			echo '</td><td valign="top" class="standardlight">';
+		
+			echo "<br><b>" . $lang->get("ackey", 'Access Key'). ": </b>";
+			echo "[".$this->accesskey."]";
 
-			if ($desc == "") {
-				echo "-";
-			} else {
-				echo $desc;
-			}
 
 			br();
 			br();
