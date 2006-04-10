@@ -114,7 +114,7 @@
 				}
 			}
 
-			if ($errors == "" && (! $this->quickpanel) && (value("action") == $lang->get("back") || value("action") == $lang->get("save_back"))) {
+			if ($errors == "" && (! $this->quickpanel) && (htmlentities(value("action")) == $lang->get("back") || htmlentities(value("action")) == $lang->get("save_back"))) {
 				$db->close();
 				header ("Location: " . $this->backto);
 				exit;

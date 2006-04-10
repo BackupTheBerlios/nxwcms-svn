@@ -55,13 +55,13 @@
 			$this->selectedValue = $selectedValue;
 
 			if ($width == 0) {
-				$this->width = $c_theme["iconselect"]["width"];
+				$this->width = 350;
 			} else {
 				$this->width = $width;
 			}
 
 			if ($height == 0) {
-				$this->height = $c_theme["iconselect"]["height"];
+				$this->height = 250;
 			} else {
 				$this->height = $height;
 			}
@@ -78,7 +78,7 @@
 
 			$output = WUIObject::std_header();
 
-			$output .= "<div align=\"left\" class=\"iconselect\" id=\"iconselect\" style=\"position:static; width:" . $this->width . "; height:" . $this->height . "; z-index:1; overflow: auto;\">\n";
+			$output .= "<div align=\"left\" id=\"iconselect\" style=\"position:static; width:" . $this->width . "; height:" . $this->height . "; z-index:1; overflow: auto; border: 1px solid #999999; padding:2px;\">\n";
 			$output .= "<table width=\"100%\" border=\"0\" class=\"iconselect_table\" cellspacing=\"10\" cellpadding=\"0\">\n";
 
 			for ($i = 0; $i < count($this->value); $i++) {

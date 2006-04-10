@@ -149,7 +149,7 @@
   	/**
   	 * Evaluate the link to url.
   	 */
-  	function getHref($mainmenu=-1, $submenu=-1) {
+  	function getHref($mainmenu=-1, $submenu=0) {
   		$href = $this->doc;
   		
   		if ($mainmenu > 0)  {  			  		
