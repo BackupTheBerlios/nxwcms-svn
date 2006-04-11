@@ -149,9 +149,10 @@
   	/**
   	 * Evaluate the link to url.
   	 */
-  	function getHref($mainmenu=-1, $submenu=0) {
+  	function getHref($mainmenu=-1, $submenu=-1) {
   		$href = $this->doc;
-  		
+  		if (count($this->submenucontainer[$mainmenu])>0  && $submenu==-1)
+  		  $submenu = 0;
   		if ($mainmenu > 0)  {  			  		
   			if ($submenu > -1) { 				
   			  if ($this->submenucontainer[$mainmenu][$submenu][1] != '')
