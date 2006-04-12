@@ -19,7 +19,7 @@ $pagemenu->addSubMenu($lang->get("cl_group","Cluster Group" ), "modules/compound
 		
 $pagemenu->addMenu($lang->get("mt_title", "Maintenance"), "MAINTENANCE");
 $pagemenu->addSubmenu($lang->get("m_purge"), "modules/purge/purge.php", "PURGE_DATABASE", "purge");
-$pagemenu->addSubMenu($lang->get("mt_spider", "Run Spider"), "ext/phpdig/admin/index.php", "SearchEngineAdm", "maintenance2");
+$pagemenu->addSubMenu($lang->get("mt_spider", "Run Spider"), "ext/phpdig/admin/nxindex.php", "SearchEngineAdm", "maintenance2");
 $pagemenu->addSubMenu($lang->get("mt_generate_dta", "Generate DataTypes"), "modules/maintenance/datatypes.php", "ADMINISTRATOR", "maintenance");			
 if ($c["renderstatichtml"])
 	$pagemenu->addSubMenu($lang->get("rb_cache", "Rebuild Cache"), "modules/maintenance/rebuild_cache.php", "ADMINISTRATOR", "maintenance2");	

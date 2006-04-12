@@ -49,6 +49,7 @@
 		var $bodyAttributes="";
 		var $onLoad="";
 		var $tipp="";
+		var $jsContainer="";
 		
 		/**
 		   * standard constructor
@@ -82,6 +83,14 @@
 			$next = count($this->container);
 
 			$this->container[$next] = &$item;
+		}
+		
+		/**
+		 * Display the page with given url as iframe on the page.
+		 * @param string $url URL to display.
+		 */
+		function setJSContainer($url) {
+		  $this->jsContainer	 = $url;
 		}
 
 		/**
@@ -183,27 +192,32 @@
 		 */
 		function _drawBody() {
 		   global $lang, $c;			   
-		   echo '<div class="contentcenter"><br/><br/></div>';
-	    	if (count($this->menu) > 0) {
-		  		echo '<div class="contentleft">';	
-		   		for ($i = 0; $i < count($this->menu); $i++) {		   			
-		    		  $this->menu[$i]->draw();			
-		  		}			
-		  		echo '</div>';
-	    	}
-			
-			echo '<div id="Content" style="width:600px;">';
-			for ($i = 0; $i < count($this->container); $i++) {				
-				$this->container[$i]->draw();				
-			}					
-			echo "</div>";				
-
-			/**if (($this->tipp != "") && (count($this->container)>0)) {
-			  echo '<div class="contentright">';
-			  echo getFormHeadline($lang->get('help', 'Help'));
-			  echo $this->tipp;
-			  echo '</div>';
-			}*/
+		   if ($this->jsContainer == "") {
+  		   echo '<div class="contentcenter"><br/><br/></div>';
+  	    	if (count($this->menu) > 0) {
+  		  		echo '<div class="contentleft">';	
+  		   		for ($i = 0; $i < count($this->menu); $i++) {		   			
+  		    		  $this->menu[$i]->draw();			
+  		  		}			
+  		  		echo '</div>';
+  	    	}
+  			
+  			echo '<div id="Content" style="width:600px;">';
+  			for ($i = 0; $i < count($this->container); $i++) {				
+  				$this->container[$i]->draw();				
+  			}					
+  			echo "</div>";				
+  
+  			/**if (($this->tipp != "") && (count($this->container)>0)) {
+  			  echo '<div class="contentright">';
+  			  echo getFormHeadline($lang->get('help', 'Help'));
+  			  echo $this->tipp;
+  			  echo '</div>';
+  			}*/
+  		} else {
+  			br();
+  			echo '<iframe src="'.$this->jsContainer.'" name="contentset" id="contentset" frameborder="0" style="width:98%;height:800px;border:0px;"></iframe>';  			
+  		}
 		}
 		
 		
