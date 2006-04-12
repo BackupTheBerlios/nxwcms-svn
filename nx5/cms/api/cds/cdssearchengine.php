@@ -39,31 +39,34 @@
   
     /**
      * Search for a phrase
+     * 
+     * note: you can draw your own search-form and add a path-variable. with the
+     * path variable you can limit the search to url paths like www/cars/.. or www/bikes ...
+     * 
      * @param string Search Phrase
      * @param integer Number of search results to diplay on one page.
      * @param String OPtion for search. Allowed are "any", "exact" and "start"
      */
     function search($searchPhrase, $limit=20, $options="any") {
-    	global $c;
+    	global $c, $phpdig_words_chars;
 	define('SEARCH_PAGE',$_SERVER['PHP_SELF']); 
+	define('DISPLAY_DROPDOWN', 0);	
 	$relative_script_path = $c["path"]."ext/phpdig";
 	include_once $c["path"]."ext/phpdig/includes/config.php";
-	include_once $c["path"]."ext/phpdig/admin/debug_functions.php";
 	include_once $c["path"]."ext/phpdig/libs/search_function.php";
-	
-	extract(phpdigHttpVars(
-     		array('query_string'=>'string',
-           	'template_demo'=>'string',
-           	'refine'=>'integer',
-           	'refine_url'=>'string',
-           	'site'=>'integer',
-           	'limite'=>'integer',
-           	'option'=>'string',
-           	'search'=>'string',
-           	'lim_start'=>'integer',
-           	'browse'=>'integer',
-           	'path'=>'string'
-           )));
+   extract(phpdigHttpVars(
+     array('query_string'=>'string',
+           'refine'=>'integer',
+           'refine_url'=>'string',
+           'site'=>'string', // set to integer later
+           'limite'=>'integer',
+           'option'=>'string',
+           'lim_start'=>'integer',
+           'browse'=>'integer',
+           'path'=>'string'
+           )
+     ),EXTR_SKIP);
+
 	$results = phpdigSearch($id_connect, $searchPhrase, $options, $refine,
               $refine_url, $lim_start, $limite, $browse,
               $site, $path, $relative_script_path, 'array');
@@ -75,7 +78,7 @@
      * @param mixed array created with the search function
      * @param string Text, which will be displayed, if no hits are found.
      */
-    function drawResultList($resultArray, $nores = "Your search query returned no results.") {
+    function drawResultList($resultArray, $nores = "Your search query returned no results.") {    	
     	if ($resultArray == "") {
     	  echo '<span class="search_text"><i>'.$nores.'</i></span>';	
     	}

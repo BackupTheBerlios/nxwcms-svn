@@ -226,7 +226,7 @@
 		    $css = '<style type="text/css">'."\n";
 		    $css.= '  .searchinformation { color: #008000; }'."\n";
 		    $css.= '  .searchtext { color: black; }'."\n";
-		    $css.= '  .phpdig { color: #0000cc; }'."\n";
+		    $css.= '  .phpdig {color: #0000cc; }'."\n";
 		    $css.= '  .phpdigHighlight { font-weight:bolder; }'."\n";
 		    $css.= '</style>'."\n";
 		    $this->addToHeader($css);	

@@ -22,7 +22,8 @@ function phpdigSearch($id_connect, $query_string, $option='start', $refine=0,
                        $refine_url='', $lim_start=0, $limite=10, $browse=0,
                        $site=0, $path='', $relative_script_path = '.', $template='', $adlog_flag=0, $rssdf='', $template_demo='')
 {
-
+global $c,$phpdig_words_chars;
+$relative_script_path = $c['path'].'ext/phpdig';
 // check input
 
 // $id_connect set in connect.php file
@@ -51,7 +52,6 @@ $timer = new phpdigTimer('html');
 $timer->start('All');
 
 // init variables
-global $phpdig_words_chars;
 settype($maxweight,'integer');
 $ignore = '';
 $ignore_common = '';
@@ -142,6 +142,7 @@ $what_query_chars = "[^".$phpdig_words_chars[PHPDIG_ENCODING]." \'.\_~@#$:&\%/;,
 if (eregi($what_query_chars,$query_to_parse)) {
 	$query_to_parse = eregi_replace($what_query_chars," ",$query_to_parse);
 }
+
 
 $query_to_parse = ereg_replace('(['.$phpdig_words_chars[PHPDIG_ENCODING].'])[\'.\_~@#$:&\%/;,=-]+($|[[:space:]]$|[[:space:]]['.$phpdig_words_chars[PHPDIG_ENCODING].'])','\1 \2',$query_to_parse);
 

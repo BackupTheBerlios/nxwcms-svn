@@ -7,13 +7,13 @@ Modified by: Charter - http://www.phpdig.net/
 
 require_once "../prepend.php";
 $no_connect = 0;
+
 include "$relative_script_path/includes/config.php";
 include "$relative_script_path/libs/auth.php";
 include "$relative_script_path/admin/robot_functions.php";
 
 // extract http vars
 extract(phpdigHttpVars(array('type' => 'string')),EXTR_SKIP);
-
 set_time_limit(300);
 ?>
 <?php include $relative_script_path.'/libs/htmlheader.php' ?>
@@ -29,7 +29,7 @@ set_time_limit(300);
 	<p class='grey'>
 	<?=phpdigPrnMsg('upd_sites')?>
 	</p>
-	<a href="index.php?sid=<?php echo $sid;?>" target="_top">
+	<a href="index.php?sid=<?php echo $sid;?>" target="contentset">
 		[<?php phpdigPrnMsg('back') ?>]</a> 
 	<?php phpdigPrnMsg('to_admin') ?>.
 	</td>
@@ -151,6 +151,7 @@ if ((isset($_REQUEST['links'])) && (!$_REQUEST['links'])) { /* SHOW the form to 
 exit();
 
 function form_cron_limits($id_connect, $upd=0){
+	global $sid;
 	if ((isset($_GET['dir'])) && ($_GET['dir'] == 'DESC')) $dir='ASC'; else $dir='DESC';
 
 	if($upd == 1) { 
@@ -170,6 +171,7 @@ function form_cron_limits($id_connect, $upd=0){
 		</tr>
 		<form class="grey" action="limit_update.php" method="post">
 		<?php
+		retain("sid", $sid);
 		//list of sites in the database
 	$query = "SELECT S.site_id,S.site_url,P.days,P.links,P.depth 
 				FROM ".PHPDIG_DB_PREFIX."sites AS S  
@@ -254,8 +256,8 @@ function form_cron_limits($id_connect, $upd=0){
 			<input class="phpdigSelect" type="text" name="depth[<?=$id?>]" value="<?=$depth?>" size="10"/>
              </td>
 		</tr>
-		<?
-	retain('sid', $sid);
+		<?php
+	
 	} ?>
 	<tr><td><input type="submit" name="sent" value="<?php echo phpdigPrnMsg('go'); ?>"></td></tr>
 	</form>

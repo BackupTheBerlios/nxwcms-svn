@@ -54,10 +54,9 @@ if ($path) {
 else {
     $andpath = '';
 }
-
 $verify = phpdigMySelect($id_connect,'SELECT locked FROM '.PHPDIG_DB_PREFIX.'sites WHERE site_id='.$site_id);
-if (!is_array($verify)) {
-    die();
+if (!is_array($verify)) {    
+	die();
 }
 elseif ($unlock) {
     mysql_query('UPDATE '.PHPDIG_DB_PREFIX.'sites SET locked=0 WHERE site_id='.$site_id,$id_connect);
@@ -67,9 +66,8 @@ elseif (!$verify[0]['locked']) {
   if($sup) {
     $query = "SELECT spider_id FROM ".PHPDIG_DB_PREFIX."spider WHERE site_id=$site_id $andpath";
     $result_id = mysql_query($query,$id_connect);
-
     if ( mysql_num_rows($result_id) > 0) {
-        $ftp_id = phpdigFtpConnect();
+    	$ftp_id = phpdigFtpConnect();
         $in = "IN (0";
         while (list($spider_id) = mysql_fetch_row($result_id)) {
                phpdigDelText($relative_script_path,$spider_id,$ftp_id);
@@ -83,7 +81,6 @@ elseif (!$verify[0]['locked']) {
 
         $query = "DELETE FROM ".PHPDIG_DB_PREFIX."spider WHERE site_id=$site_id $andpath";
         $result_id = mysql_query($query,$id_connect);
-
         // deny branch
         if ($deny && $path) {
             $query = "DELETE FROM ".PHPDIG_DB_PREFIX."excludes WHERE ex_site_id=$site_id AND ex_path LIKE '".str_replace('%','\%',$path)."%'";
@@ -95,7 +92,7 @@ elseif (!$verify[0]['locked']) {
     }
   }
   elseif ($exp) {
-    $query = "DELETE FROM ".PHPDIG_DB_PREFIX."tempspider WHERE site_id=$site_id";
+  	$query = "DELETE FROM ".PHPDIG_DB_PREFIX."tempspider WHERE site_id=$site_id";
     mysql_query($query,$id_connect);
     if (($path) && (strlen($path) > 0) && (LIMIT_TO_DIRECTORY)) {
         $query_includes = "INSERT INTO ".PHPDIG_DB_PREFIX."includes SET in_site_id = ".$site_id.", in_path = '".str_replace('%','\%',$path)."';";
@@ -105,7 +102,7 @@ elseif (!$verify[0]['locked']) {
     mysql_query($query,$id_connect);
 
     mysql_query('UPDATE '.PHPDIG_DB_PREFIX.'sites SET locked=0 WHERE site_id='.$site_id,$id_connect);
-    header ("location:spider.php?site_id=$site_id&mode=small");
+    header ("location:spider.php?site_id=$site_id&mode=small&sid=$sid");
   }
   elseif ($ex_id) {
     $query = "DELETE FROM ".PHPDIG_DB_PREFIX."excludes WHERE ex_site_id=$site_id and ex_id = ".$ex_id;
@@ -172,7 +169,7 @@ if ($port) {
    print '<p class="blue"><b>'
           .phpdigMsg('uri')."$site_url"." ("."$num_tot".phpdigMsg('pages').")</b><br />"
           .'<i>'.phpdigMsg('locked').' :</i> '
-          .'<a href="update.php?site_id='.$site_id.'&amp;unlock=1&sid='.$sid.'">'.phpdigMsg('unlock').'</a>'
+          .'<a href="update.php?site_id='.$site_id.'&unlock=1&sid='.$sid.'">'.phpdigMsg('unlock').'</a>'
           ."</p>\n";
 
 if (is_array($list_exclude)) {
@@ -240,13 +237,13 @@ for ($n = 0; $n<$num; $n++) {
         else {
            print "<img src='fill.gif' width='10' height='10' border='0' align='middle' alt='' />&nbsp;\n";
         }
-        print "<a href='update.php?site_id=$site_id&amp;path=".urlencode($path_name)."&amp;sup=1#$aname2&amp;sid=" .$sid. "' target='_self'><img src='no.gif' width='10' height='10' border='0' align='middle' alt='".phpdigMsg('delete')."' /></a>&nbsp;\n";
-        print "<a href='update.php?path=".urlencode($path_name)."&amp;sid=".$sid."&amp;site_id=$site_id&amp;exp=1' target='_top'><img src='yes.gif' width='10' height='10' border='0' align='middle' alt='".phpdigMsg('reindex')."' /></a>&nbsp;\n";
+        print "<a href='update.php?site_id=$site_id&sid=".$sid."&path=".urlencode($path_name)."&sup=1#$aname2' target='_self'><img src='no.gif' width='10' height='10' border='0' align='middle' alt='".phpdigMsg('delete')."' /></a>&nbsp;\n";
+        print "<a href='update.php?path=".urlencode($path_name)."&sid=".$sid."&site_id=$site_id&exp=1' target='contentset'><img src='yes.gif' width='10' height='10' border='0' align='middle' alt='".phpdigMsg('reindex')."' /></a>&nbsp;\n";
     }
     if ($path_name == "") {
           $path_name_aff = "<i><b style='color:red;'>".phpdigMsg('root')."</b></i>";
     }
-    print '<code>'.$path_name_aff."</code>&nbsp;<a href='files.php?path=".urlencode($path_name)."&amp;site_id=$site_id&amp;sid=" .$sid. "' target='files' ><img src='details.gif' width='10' height='10' border='0' align='middle' alt='".phpdigMsg('files')."' /></a><br />\n";
+    print '<code>'.$path_name_aff."</code>&nbsp;<a href='files.php?path=".urlencode($path_name)."&site_id=$site_id&sid=" .$sid. "' target='files' ><img src='details.gif' width='10' height='10' border='0' align='middle' alt='".phpdigMsg('files')."' /></a><br />\n";
 }
 ?>
 </p>

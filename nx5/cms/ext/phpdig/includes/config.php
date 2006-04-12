@@ -81,7 +81,7 @@ define('PHPDIG_VERSION','1.8.8');
 $phpdig_language = "en"; // ca, cs, da, de, en, es, fr, gr, it, nl, no, pt
 if (!isset($phpdig_language)) { $phpdig_language = "en"; }
 
-define('PHPDIG_ADM_AUTH','1');     //Activates/deactivates the authentification functions
+define('PHPDIG_ADM_AUTH','0');     //Activates/deactivates the authentification functions
 define('PHPDIG_ADM_USER','admin'); //Username
 define('PHPDIG_ADM_PASS','admin'); //Password
 
@@ -117,11 +117,11 @@ define('WEIGHT_HEIGHT','5');                     //Baragraph height
 define('WEIGHT_WIDTH','50');                     //Max baragraph width
 
 define('SEARCH_PAGE','search.php');              //The name of the search page
-define('DISPLAY_DROPDOWN',true);                 //Display dropdown on search page
-define('DROPDOWN_URLS',true);                    //Always URLs in dropdown: DISPLAY_DROPDOWN needs to be true
+define('DISPLAY_DROPDOWN',false);                 //Display dropdown on search page
+define('DROPDOWN_URLS',false);                    //Always URLs in dropdown: DISPLAY_DROPDOWN needs to be true
 
-define('SUMMARY_DISPLAY_LENGTH',150);            //Max chars displayed in summary
-define('SNIPPET_DISPLAY_LENGTH',200);            //Max chars displayed in each snippet
+define('SUMMARY_DISPLAY_LENGTH',100);            //Max chars displayed in summary
+define('SNIPPET_DISPLAY_LENGTH',100);            //Max chars displayed in each snippet
 
 define('DISPLAY_SNIPPETS',true);                 //Display text snippets
 define('DISPLAY_SNIPPETS_NUM',4);                //Max snippets to display
@@ -203,7 +203,7 @@ define('TITLE_WEIGHT',3);                //relative title weight: APPEND_TITLE_M
 
 define('CHUNK_SIZE',1024);               //chunk size for regex processing
 
-define('SUMMARY_LENGTH',500);            //length of results summary
+define('SUMMARY_LENGTH',200);            //length of results summary
 
 define('TEXT_CONTENT_PATH','text_content/'); //Text content files path
 
