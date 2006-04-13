@@ -289,8 +289,17 @@
 
 	function getSPNameUrlSafe($spid) {
 		$spname = getSPName($spid);
-
-		$spname = strtolower($spname);
+		$spname = makeURLSave($spname);
+		return $spname;
+	}
+	
+	/**
+	 * Ensures the string is url and directory save
+	 *
+	 * @param string $uri URI to encode
+	 */
+	function makeURLSave($uri) {
+		$spname = strtolower($uri);
 		$spname = stripslashes($spname);
 		$spname = strip_tags($spname);
 		$spname = str_replace("&", "", $spname);
@@ -305,8 +314,26 @@
 		$spname = str_replace("/", "", $spname);
 		$spname = str_replace("\\", "", $spname);	
 		$spname_split = explode(' ', $spname);
-		$spname = implode('_', $spname_split);
+		$spname = implode('_', $spname_split);	
 		return $spname;
+	}
+	
+	/**
+	 * Get the nice pageURL
+	 *
+	 * @param integer sitemap.menuId
+	 * @param integer variationId
+	 */
+	function getPageURL($menuId, $v) {
+		$result = "";
+		while ($menuId != "") {				  
+		  $tmpresult = makeURLSave(getDBCell("sitemap", "NAME", "MENU_ID=".$menuId));
+		  if ($tmpresult != "")
+		    $result =	'/'.$tmpresult.$result;
+		  $menuId = getDBCell("sitemap", "PARENT_ID", "MENU_ID=".$menuId); 	    
+	  }
+		$result = '/'.getDBCell('variations', 'SHORTTEXT', 'VARIATION_ID='.$v).$result;
+		return $result;
 	}
 
 	/**

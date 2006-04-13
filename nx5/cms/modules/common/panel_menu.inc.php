@@ -33,7 +33,9 @@
 	$menuPanel->add(new SubTitle("st", $lang->get("sp_menuprops"), 3));
 	$menuPanel->add(new Cell('clc', '', 3, 600,10));
 	$menuPanel->add(new TextInput($lang->get("sp_menuname"), "sitepage_names", "NAME", "VARIATION_ID = $variation AND SPID = $spid", "type:text,size:128,width:300", ""));
-
+	$menuPanel->add(new Label('lbl', $lang->get('url', 'URL'), 'standard',1));
+	$menuPanel->add(new Label('lbl', getPageURL($menuID, $variation), 'standardlight',2));
+	
 	if ($aclf->checkAccessToFunction("DIRECT_URL")) {		
 		$menuPanel->add(new Cell('clc', '', 3, 600,10));
 		$menuPanel->add(new SubTitle("st", $lang->get("sp_menudirecttitle", "Define optional Path on server for direct access"), 3));

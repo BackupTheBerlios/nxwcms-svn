@@ -25,9 +25,9 @@
 
 	// Database variables.
 	$c["dbhost"] = "localhost";  				// name of the mysql-Database. Standard-port is used.
-	$c["database"] = "translation";   					// name of the database. 
+	$c["database"] = "nx4";   					// name of the database. 
 	$c["dbuser"] = "root";       				// name of the database user.
-	$c["dbpasswd"] = "";         			// password of the database user.
+	$c["dbpasswd"] = "test";         			// password of the database user.
 	$c["dbdriver"] = "mysql";    				// type of your database. Do not change.
 	$c["dbnow"] = "NOW()";       				// for future versions. Do not change.
 	$c["dbcode"] = "3dYqpm8UhF"; 				// for future versions. Do not change.
@@ -77,7 +77,9 @@
 	
 	// AUTH
 	$c["disalbehostchecking"] = true; 			 // Disabled auth-check, if user still has same IP or host-address. 
-												 // Required for some firewalls and proxy servers.
+																						 // Required for some firewalls and proxy servers.
+
+  $c["classicurls"] = false;		// do not show urls with paths but with query-parameters.
 
 	// ImageMagic Configuration
 	$c["useimagemagick"] = false;				 // switch image-magick on or off. Switch on only, if you set the correct path!
