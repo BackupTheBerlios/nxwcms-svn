@@ -34,7 +34,7 @@
 	$menuPanel->add(new Cell('clc', '', 3, 600,10));
 	$menuPanel->add(new TextInput($lang->get("sp_menuname"), "sitepage_names", "NAME", "VARIATION_ID = $variation AND SPID = $spid", "type:text,size:128,width:300", ""));
 	$menuPanel->add(new Label('lbl', $lang->get('url', 'URL'), 'standard',1));
-	$menuPanel->add(new Label('lbl', getPageURL($menuID, $variation), 'standardlight',2));
+	$menuPanel->add(new Label('lbl', '<a href="'.$c["host"].$c["livedocroot"].getPageURL($menuID, $variation).'" target="_blank">'.$c["host"].$c["livedocroot"].getPageURL($menuID, $variation).'</a>', 'standardlight',2));
 	
 	if ($aclf->checkAccessToFunction("DIRECT_URL")) {		
 		$menuPanel->add(new Cell('clc', '', 3, 600,10));

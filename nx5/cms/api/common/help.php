@@ -332,7 +332,7 @@
 		    $result =	'/'.$tmpresult.$result;
 		  $menuId = getDBCell("sitemap", "PARENT_ID", "MENU_ID=".$menuId); 	    
 	  }
-		$result = '/'.getDBCell('variations', 'SHORTTEXT', 'VARIATION_ID='.$v).$result;
+		$result = getDBCell('variations', 'SHORTTEXT', 'VARIATION_ID='.$v).$result;
 		return $result;
 	}
 

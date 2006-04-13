@@ -50,6 +50,66 @@
 			fclose ($index_file);
 		}
 	}
+	
+	/**
+	 * Create the page with URL-Path
+	 * 
+	 * @param integer SitepageId of the page
+	 * @param integer VariationId of the page
+	 */
+	function launchURLPage($spid, $variation) {
+	    global $c;
+		$menuId = getDBCell("sitepage", "MENU_ID", "SPID=".$spid);
+	    $short = getPageURL($menuId, $variation);
+	    
+	    if (substr($short, 0, 1) == "/")
+			$short = substr($short, 1);
+
+		$allDir = $c["livepath"];
+		// ensure that path exists
+		$directories = explode("/", $short);
+
+		if (count($directories) > 0) {
+			for ($i = 0; $i < count($directories); $i++) {
+				$thisDir = $directories[$i];
+
+				if ($thisDir != "") {
+					if (!is_dir($allDir . $thisDir)) {
+						mkdir($allDir . $thisDir, 0755);
+					}
+
+					$allDir = $allDir . $thisDir . "/";
+				}
+			}
+
+			// delete old index file 
+			nxDelete ($allDir , "index.php");
+			$template = getTemplate($spid);
+			
+			// create new index-file...
+			$index = "<?php \n";
+			$index.= ' $v='.$variation.';'."\n";
+			$index.= ' $page='.$spid.';'."\n";
+			$index.= ' $c["path"] = \''.$c["path"].'\';'."\n";
+			$index.= ' require_once \''.$c["livepath"].$template.'\';'."\n";			
+			$index.= "?>";
+			
+			// write to disk 
+			$index_file = fopen($allDir . "index.php", "w");
+			fwrite($index_file, $index);
+			fclose ($index_file);
+		}			
+	}
+	
+	/**
+	 * Clear the page with URL-Path
+	 * 
+	 * @param integer SitepageId of the page
+	 * @param integer VariationId of the page
+	 */
+	function clearURLPage($spid, $variation) {
+		
+	}
 
 	/**
 	 * Places an empty page on the path and displays a text that the page ist no longer live.
@@ -314,6 +374,9 @@
 		if ($short != "")
 			clearShortURL ($short);
 		
+		if (!$c["classicurls"])
+		  clearURLPage($spidTrans, $variation);
+			
 		global $JPCACHE_ON;
 		//cc on launch
 		if ($c["renderstatichtml"]) {
@@ -475,7 +538,7 @@
 * @returns integer Translated ID after launch
 */
 	function launchSitepageName($in, $level, $variation) {
-		global $db;
+		global $db, $c;
 
 		$out = translateState($in, $level, false);
 		$sql = "SELECT * FROM sitepage_names WHERE SPID = $in AND VARIATION_ID = $variation";
@@ -501,6 +564,7 @@
 			if ($short != "") {
 				createShortUrl($out, $variation, $short);
 			}
+			
 
 			if ($name != "" || $help != "") { // Aenderung wegen Menünamen in type 2 und 3			
 				$sql = "DELETE FROM sitepage_names WHERE SPID = $out AND VARIATION_ID = $variation";
@@ -511,7 +575,9 @@
 				$query->free();
 			}
 		}
-
+		if (!$c["classicurls"]) 
+				launchURLPage($out, $variation);
+			
 		return $out;
 	}
 

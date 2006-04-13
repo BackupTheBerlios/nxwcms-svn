@@ -310,15 +310,19 @@
 		if ($this->level == 10) { // Live-Version			
 			$cached = getDBCell("sitemap", "IS_CACHED", "MENU_ID = $this->menuId");
 
-			if ($c["renderstatichtml"] && ($cached == 1)) {
-				$spname = getSPNameUrlSafe($this->pageId);
-				$link_uri = $c["cachedocroot"] . $spname . "_" . $this->pageId . "_v" . $this->variation . ".html";
-
-				return ($link_uri);
+			if (!$c["classicurls"]) {
+			  return $c["docroothtml"].getPageURL($this->menuId, $this->variation);
 			} else {
-				$template = $this->getTemplate();
-				$link_uri = $c["docroothtml"] . $template . "?page=" . $this->pageId . "&v=" . $this->variation;
-				return ($link_uri . $linkadd);
+				if ($c["renderstatichtml"] && ($cached == 1)) {
+					$spname = getSPNameUrlSafe($this->pageId);
+					$link_uri = $c["cachedocroot"] . $spname . "_" . $this->pageId . "_v" . $this->variation . ".html";
+
+					return ($link_uri);
+				} else {
+					$template = $this->getTemplate();
+					$link_uri = $c["docroothtml"] . $template . "?page=" . $this->pageId . "&v=" . $this->variation;
+					return ($link_uri . $linkadd);
+				}
 			}
 		} else { // Development- (Template-) Version
 			$template = $this->getTemplate();
