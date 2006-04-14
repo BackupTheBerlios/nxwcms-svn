@@ -421,4 +421,5 @@
 		$oid = $spid;
 	$page->draw();
 	$db->close();
+	echo $errors;
 ?>

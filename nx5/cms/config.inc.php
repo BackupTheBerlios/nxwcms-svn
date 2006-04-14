@@ -50,7 +50,7 @@
 	$c["standardencoding"] = "text/html; charset=iso-8859-1"; // set standard encoding scheme for the Website
 
 	// Static Cache (generate html-files)
-	$c["renderstatichtml"] = false;              // enable Rendering of Static HTML-Code (Caching)
+	$c["renderstatichtml"] = true;              // enable Rendering of Static HTML-Code (Caching)
 
 	// Dynamic Cache
 	$JPCACHE_ON = false;    					// Turn dynamic page caching on/off

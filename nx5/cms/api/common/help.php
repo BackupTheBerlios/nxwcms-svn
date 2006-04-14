@@ -309,6 +309,8 @@
 		$spname = str_replace("#", "", $spname);
 		$spname = str_replace("$", "", $spname);
 		$spname = str_replace("§", "", $spname);
+		$spname = str_replace("(", "_", $spname);
+		$spname = str_replace(")", "_", $spname);
 		$spname = str_replace("%", "", $spname);
 		$spname = str_replace("@", "", $spname);
 		$spname = str_replace("/", "", $spname);

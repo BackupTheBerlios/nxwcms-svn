@@ -52,8 +52,7 @@
     }
 
     
-    $form->add(new TextInput($lang->get("name"), "channels", "NAME", $cond, "type:text,width:200,size:64", "MANDATORY&UNIQUE"));  	
-    
+    $form->add(new TextInput($lang->get("name"), "channels", "NAME", $cond, "type:text,width:200,size:64", "MANDATORY&UNIQUE"));  	    
     if ($page_action != "INSERT") {
     	$updateHandler = new ActionHandler("UPDATE");
 		$updateHandler->addFNCAction("syncSPMVariations");

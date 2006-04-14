@@ -5,39 +5,7 @@
 	 */
 	$cc = array ();
 
-	/**
-	 * renders a SitePage and stores output in a file in temporary cache-folder $c["tmpcachepath"]
-	 *
-	 * @param integer SPID of the SitePage to render
-	 * @param integer Variation-ID of the SitePage to render
-	 */
-	function renderTMPSitePage($spid, $variation) {
-		global $c, $db;
- 
-		if ($c["renderstatichtml"]) {
-			$template = getTemplate($spid);
 
-			$filename = $c["livepath"] . $template;
-			$content_array = @file($filename);
-
-			if (is_array($content_array)) {
-				$content_string = implode("", $content_array);
-				$full_url = $c["hostlivedocroot"] . $template . "?page=" . $spid . "&v=" . $variation;
-				forceDirectories ($c["tmpcachepath"]);
-				$fp = fopen($full_url, "r");
-				if ($fp != "") {
-					while (!feof($fp)) $content .= fgets($fp, 128);
-	
-					fclose ($fp);
-					$spname = getSPNameUrlSafe($spid);
-					$cache_file = fopen($c["tmpcachepath"] .$spname ."_" . $spid . "_v" . $variation . ".html", "w");
-					fwrite($cache_file, $content);
-					fclose ($cache_file);
-				}
-			}
-			return true;
-		}
-	}
 
 	/**
 		* moves cached files from temporary cache-dir to their final destination
@@ -62,8 +30,7 @@
 	  * @param integer Variation-ID of the SitePage to render
 	  */
 	function renderSitePage($spid, $variation) {
-		global $c, $db;
-
+		global $c, $db;		
 		if ($c["renderstatichtml"] && !checkCC($spid)) {
 			global $cc, $deploy;
 			array_push($cc, $spid);
@@ -79,17 +46,40 @@
 				$fp = fopen($full_url, "r");
 				if ($fp != "") {
 					while (!feof($fp)) $content .= fgets($fp, 128);
-
 					fclose ($fp);
-					$spname = getSPNameUrlSafe($spid);
-					$cache_file = fopen($c["cachepath"] .$spname."_" . $spid . "_v" . $variation . ".html", "w");
-					fwrite($cache_file, $content);
-					fclose ($cache_file);
-					if (count($deploy)>0)
-						nxCopy($c["cachepath"] .$spname."_" . $spid . "_v" . $variation . ".html", $c["cachepath"], $spname."_".$spid."_v".$variation.".html");
+					
+					$menuId = getDBCell("sitepage", "MENU_ID", "SPID=".$spid);
+	    			$short = getPageURL($menuId, $variation);
+					if (substr($short, 0, 1) == "/")
+						$short = substr($short, 1);
+
+						$allDir = $c["livepath"];
+						// ensure that path exists
+						$directories = explode("/", $short);
+
+						if (count($directories) > 0) {
+							for ($i = 0; $i < count($directories); $i++) {
+								$thisDir = $directories[$i];
+
+								if ($thisDir != "") {
+									if (!is_dir($allDir . $thisDir)) {
+										mkdir($allDir . $thisDir, 0755);
+									}
+									$allDir = $allDir . $thisDir . "/";
+								}
+							}
+
+							// delete old index file
+							@nxDelete ($allDir , "index.html");	    			
+							@nxDelete ($allDir , "index.php" );
+						}
+	    			
+	    			
+	    			$index_file = fopen($allDir . "index.html", "w");
+					fwrite($index_file, $content);
+					fclose ($index_file);
 				}
 			}
-
 			return true;
 		}
 	}
@@ -113,24 +103,15 @@
 				$sv_query = new query($db, $sv_sql);
 				while ($sv_query->getrow()) {
 					$my_variation = $sv_query->field("VARIATION_ID");
-
 					if (isCached($my_spid, $my_variation)) {
-						if (SPVarExists($my_spid, $my_variation)) {
-							flushSitePage($my_spid, $my_variation);
-							renderTMPSitePage($my_spid, $my_variation);
-							$cacheList[$clist_id]["SPID"] = $my_spid;
-							$cacheList[$clist_id]["VARI"] = $my_variation;
-							$clist_id++;
+						if (SPVarExists($my_spid, $my_variation)) {							
+							renderSitePage($my_spid, $my_variation);
 						}
 					}
 				}
 			}
 
 			ini_set("max_execution_time", $maxtime);
-
-			for ($clist_id = 0; $clist_id < count($cacheList); $clist_id++) {
-				launchCache($cacheList[$clist_id]["SPID"], $cacheList[$clist_id]["VARI"]);
-			}
 		}
 	}
 
@@ -141,12 +122,11 @@
 		* @param integer Variation-ID of the SitePage to remove from cache
 		*/
 	function flushSitePage($spid, $variation) {
-		global $c;
-
-		if ($c["renderstatichtml"]) {
-			$spname = getSPNameUrlSafe($spid);
-			nxDelete ($c["cachepath"], $spname."_" . $spid . "_v" . $variation . ".html");
-		}
+		global $c;		
+		$menuId = getDBCell("sitepage", "MENU_ID", "SPID=".$spid);
+	   	$short = getPageURL($menuId, $variation);
+		@unlink($c["livepath"].$short.'/index.html');
+		@unlink($c["livepath"].$short.'/index.php');		
 	}
 
 	/**
@@ -157,7 +137,7 @@
 		*/
 	function isCached($spid, $variation) {
 		global $c;
-
+		if ($spid=="") return false;
 		if ($c["renderstatichtml"]) {
 			$menuId = getDBCell("sitepage", "MENU_ID", "SPID=$spid");
 

@@ -21,8 +21,6 @@
 	 **********************************************************************/
 	require "../../config.inc.php";
 
-	require "menudef.inc.php";
-
 	$auth = new auth("MAINTENANCE");
 	$page = new page("Rebuild Cache");
 
@@ -37,8 +35,7 @@
 	$maintenanceHandler->addFncAction("rebuildCache");
 	$form->addCheck("generate", $lang->get("rb_cache", "Rebuild Cache"), $maintenanceHandler);
 
-	$page->add($form);
-	$page->addMenu($menu);
+	$page->add($form);	
 	$page->draw();
 	$db->close();
 ?>

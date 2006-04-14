@@ -31,6 +31,7 @@
       $nameInput = new TextInput($lang->get("name"), "channel_categories", "NAME", $cond, "type:text,width:300,size:64", "MANDATORY&UNIQUE");
       $nameInput->setFilter("CHID = ".$selch->selected);
       $form->add($nameInput);
+      $form->add(new SitepageSelector($lang->get("outputpage", "Output Page", 'Page where the articles will be rendered to.'),'channel_categories', 'PAGE_ID', $cond));
       $form->add(new NonDisplayedValueOnInsert("channel_categories", "CHID", $cond, $selch->selected, "NUMBER"));
       $page->add($form);
   }

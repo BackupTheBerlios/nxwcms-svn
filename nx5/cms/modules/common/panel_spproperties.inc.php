@@ -113,7 +113,7 @@
 
 		if ($auth->checkAccessToFunction("C_CACHE") && $c["renderstatichtml"]) {
 			$propPanel->add(new Cell("clc", "standard", 3, 600, 10));
-			$propPanel->add(new Label("lbl", "<b>" . $lang->get("cconlaunch", "Clear Cache on Launch"). "</b>", "title1", 3));
+			$propPanel->add(new Subtitle("st", $lang->get("cconlaunch"),3));
 			$propPanel->add(new Textinput($lang->get("cconlaunch_lbl", "Dev-Page-IDs (commaseparated)"), "sitemap", "CC_ON_LAUNCH", "MENU_ID = " . $menuID, "type:text,size:250,width:300"));
 		}
 

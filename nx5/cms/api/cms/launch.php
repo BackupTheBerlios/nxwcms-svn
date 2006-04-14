@@ -83,9 +83,10 @@
 			}
 
 			// delete old index file 
-			nxDelete ($allDir , "index.php");
-			$template = getTemplate($spid);
+			@nxDelete ($allDir , "index.php");
+			@nxDelete ($allDir , "index.html");
 			
+			$template = getTemplate($spid);			
 			// create new index-file...
 			$index = "<?php \n";
 			$index.= ' $v='.$variation.';'."\n";
@@ -108,7 +109,53 @@
 	 * @param integer VariationId of the page
 	 */
 	function clearURLPage($spid, $variation) {
-		
+		global $c;
+
+		$menuId = getDBCell("sitepage", "MENU_ID", "SPID=".$spid);
+	    $short = getPageURL($menuId, $variation);
+		if (substr($short, 0, 1) == "/")
+			$short = substr($short, 1);
+
+		$allDir = $c["livepath"];
+		// ensure that path exists
+		$directories = explode("/", $short);
+
+		if (count($directories) > 0) {
+			for ($i = 0; $i < count($directories); $i++) {
+				$thisDir = $directories[$i];
+
+				if ($thisDir != "") {
+					$allDir = $allDir . $thisDir . "/";
+				}
+			}
+
+			// delete old index file 
+			if (file_exists($allDir . "index.php")) {
+				nxDelete ($allDir, "index.php");
+			}
+
+			// create new index-file...
+			global $c;
+			$index = 'html>';
+			$index .= '<head>';
+			$index .= '<title>Page does not exist</title>';
+			$index .= '<meta name="generator" content="N/X WCMS">';
+			$index .= '</head>';
+			$index .= '<body text="#000000" bgcolor="#FFFFFF" link="#FF0000" alink="#FF0000" vlink="#FF0000">';
+			$index .= '<center>';
+			$index .= '<font face="VERDANA" size="2">';
+			$index .= 'The URL you entered is not available at present.<br>';
+			$index .= 'Please try again later or go to <a href="' . $c["livedocroot"] . '">Startpage</a>.';
+			$index .= '</font>';
+			$index .= '</center>';
+			$index .= '</body>';
+			$index .= '</html>';
+
+			// write to disk 
+			$index_file = fopen($allDir . "index.php", "w");
+			fwrite($index_file, $index);
+			fclose ($index_file);
+		}	
 	}
 
 	/**
@@ -360,9 +407,7 @@
 			$query->free();
 		}
 
-		if (isCached($spidTrans, $variation)) {
-			flushSitePage($spidTrans, $variation);
-		}
+		flushSitePage($spidTrans, $variation);
 
 		// clear direct path
 		$sql = "SELECT DIRECT_URL FROM sitepage_names WHERE SPID = $spid AND VARIATION_ID = $variation";
@@ -379,35 +424,35 @@
 			
 		global $JPCACHE_ON;
 		//cc on launch
-		if ($c["renderstatichtml"]) {
-			$menu = getDBCell("sitepage", "MENU_ID", "SPID = $spid");
-			$cconlaunch = getDBCell("sitemap", "CC_ON_LAUNCH", "MENU_ID = " . $menu);
-			$ccarray = explode(",", $cconlaunch);
-			$mparray = createDBCArray("sitepage", "SPID", "MENU_ID = " . $menu);
-
-			for ($i = 0; $i < count($ccarray); $i++) {
-				$spidTrans = translateState($ccarray[$i], $level, false);
-
-				if ($spidTrans != "") {
-					renderSitePage($spidTrans, $variation);
-					if ($JPCACHE_ON) {
-		 			  @unlink($c["dyncachepath"]."dyncache-".jpcacheFilename($spidTrans, $variation));	
-					}
-				}
-			}
-
-			for ($i = 0; $i < count($mparray); $i++) {
-				$spidTrans = translateState($mparray[$i], $level, false);
-
-				if ($spidTrans != "") {
-					renderSitePage($spidTrans, $variation);
-					if ($JPCACHE_ON) {
-		 			  @unlink($c["dyncachepath"]."dyncache-".jpcacheFilename($spidTrans, $variation));	
-					}
 		
+		$menu = getDBCell("sitepage", "MENU_ID", "SPID = $spid");
+		$cconlaunch = getDBCell("sitemap", "CC_ON_LAUNCH", "MENU_ID = " . $menu);
+		$ccarray = explode(",", $cconlaunch);
+		$mparray = createDBCArray("sitepage", "SPID", "MENU_ID = " . $menu);
+
+		for ($i = 0; $i < count($ccarray); $i++) {
+			$spidTrans = translateState($ccarray[$i], $level, false);
+
+			if ($spidTrans != ""  && isCached($ccarray[$i], $variation)) {	
+				renderSitePage($spidTrans, $variation);
+				if ($JPCACHE_ON) {
+					@unlink($c["dyncachepath"]."dyncache-".jpcacheFilename($spidTrans, $variation));
 				}
 			}
 		}
+
+		for ($i = 0; $i < count($mparray); $i++) {
+			$spidTrans = translateState($mparray[$i], $level, false);
+
+			if ($spidTrans != ""  && isCached($mparray[$i], $variation)) {	
+				renderSitePage($spidTrans, $variation);
+				if ($JPCACHE_ON) {
+					@unlink($c["dyncachepath"]."dyncache-".jpcacheFilename($spidTrans, $variation));
+				}
+
+			}
+		}
+
 	}
 	
 	
@@ -496,14 +541,13 @@
 
 		if ($c["renderstatichtml"]) {
 			$cconlaunch = getDBCell("sitemap", "CC_ON_LAUNCH", "MENU_ID = " . $menu);
-
 			$ccarray = explode(",", $cconlaunch);
 			$mparray = createDBCArray("sitepage", "SPID", "MENU_ID = " . $menu);
 
 			for ($i = 0; $i < count($ccarray); $i++) {
 				$spidTrans = translateState($ccarray[$i], $level, false);
 
-				if ($spidTrans != "") {
+				if ($spidTrans != ""  && isCached($ccarray[$i], $variation)) {
 					renderSitePage($spidTrans, $variation);
 					if ($JPCACHE_ON) {
 		 			  @unlink($c["dyncachepath"]."dyncache-".jpcacheFilename($spidTrans, $variation));	
@@ -514,7 +558,7 @@
 			for ($i = 0; $i < count($mparray); $i++) {
 				$spidTrans = translateState($mparray[$i], $level, false);
 
-				if ($spidTrans != "") {
+				if ($spidTrans != "" && isCached($mparray[$i], $variation)) {
 					renderSitePage($spidTrans, $variation);
 					if ($JPCACHE_ON) {
 		 			  @unlink($c["dyncachepath"]."dyncache-".jpcacheFilename($spidTrans, $variation));	
@@ -524,6 +568,7 @@
 		}
 		$cached = getDBCell("sitemap", "IS_CACHED", "MENU_ID = " . $menuTrans);
 		if ($cached == 1) {
+echo "555";			
 			renderSitePage($out, $variation);
 		}
 	}
@@ -575,9 +620,11 @@
 				$query->free();
 			}
 		}
-		if (!$c["classicurls"]) 
-				launchURLPage($out, $variation);
-			
+		
+		if (!$c["classicurls"]) { 
+			launchURLPage($out, $variation);
+		}
+					
 		return $out;
 	}
 
