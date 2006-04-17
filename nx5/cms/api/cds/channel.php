@@ -84,7 +84,32 @@
 	  		}
          }
         
-        /**
+         /**
+          * Returns the link to the given article.
+          *
+          * @param integer $articleId
+          * @param integer $variation
+          */
+         function getLink($articleId, $variation=0) {
+         	global $c, $cds;
+         	 if ($variation == 0)
+                    $variation = $this->variation;
+             
+         	if ($cds->is_development) {
+         		// dev url
+         		$category = getDBCell("channel_articles", "CH_CAT_ID", "ARTICLE_ID=".$articleId);
+         		$spid = getDBCell("channel_categories", "PAGE_ID", "CH_CAT_ID=".$cat);
+         		$spm = getDBCell("sitepage", "SPM_ID", "SPID=".$spid);
+         		$template=getDBCell("sitepage_master", "TEMPLATE_PATH", "SPM_ID=".$spm);
+         		$result = $c['devdocroot'].$template."?page=$spid&v=$variation&article=$articleId";
+         	} else {
+         		// live url.
+         		$result = $c['livedocroot'].getArticleURL($articleId, $variation);         		
+         	}
+         	return $result;
+         }
+         
+         /**
          * returns an array containg the ids of clusters of this channel.
          * Use cluster->getById() to retrieve the content of the cluster.
          * @param string Name of the cluster

@@ -12,7 +12,8 @@
   echo '<tr><td width="50%" valign="top">';
   // Article menu
   $articles = $cds->channel->get("Stage");
-  $article = value("article", "NUMERIC", $articles[0]);
+  if (!isset($article))
+    $article = value("article", "NUMERIC", $articles[0]);
   for ($i=0; $i < count($articles); $i++) {  	
   	$arCluster = $cds->cluster->getById($articles[$i]);
   	if ($article == $articles[$i]) {
@@ -20,7 +21,7 @@
   	} else {
   	    $style = '';	
   	}
-  	echo '<a '.$style.' href="'.$cds->getPageURL().'?v='.$cds->variation.'&page='.$cds->pageId.'&article='.$articles[$i].'">';
+  	echo '<a '.$style.' href="'.$cds->channel->getLink($articles[$i]).'">';
     echo $arCluster->channel->getArticleDate($articles[$i], '%d-%m-%Y').': '.$arCluster->content->get("Headline");	    
     echo '</a>';
     br();

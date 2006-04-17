@@ -9,7 +9,8 @@
   br();
   
   $articles = $cds->channel->get("Stage"); 
-  $article = value("article", "NUMERIC", $articles[0]);
+  if (!isset($article))     
+    $article = value("article", "NUMERIC", $articles[0]);
   
   $position = 1;
   
@@ -26,9 +27,9 @@
   
   echo '<div align="center">'; 
   if ($position > 1) {
-    echo '<a href="'.$cds->getPageURL().'?v='.$cds->variation.'&page='.$cds->pageId.'&article='.$articles[0].'">&lt;&lt;</a>';
+    echo '<a href="'.$cds->channel->getLink($articles[0]).'">&lt;&lt;</a>';
     echo '&nbsp;&nbsp;';
-    echo '<a href="'.$cds->getPageURL().'?v='.$cds->variation.'&page='.$cds->pageId.'&article='.$articles[$position-2].'">&lt;</a>';
+    echo '<a href="'.$cds->channel->getLink($articles[$position-2]).'">&lt;</a>';
     echo '&nbsp;&nbsp;';
   } else {
   	echo '&lt;&lt;';
@@ -41,9 +42,10 @@
 
   if ($position < count($articles)) {
     echo '&nbsp;&nbsp;';
-    echo '<a href="'.$cds->getPageURL().'?v='.$cds->variation.'&page='.$cds->pageId.'&article='.$articles[$position].'">&gt;</a>';
+    
+    echo '<a href="'.$cds->channel->getLink($articles[$position]).'">&gt;</a>';
     echo '&nbsp;&nbsp;';
-    echo '<a href="'.$cds->getPageURL().'?v='.$cds->variation.'&page='.$cds->pageId.'&article='.$articles[count($articles)-1].'">&gt;&gt;</a>';
+    echo '<a href="'.$cds->channel->getLink($articles[count($articles)-1]).'">&gt;&gt;</a>';
   } else {
   	echo '&nbsp;&nbsp;';
     echo '&gt;';
@@ -76,9 +78,9 @@
 
   if ($position < count($articles)) {
     echo '&nbsp;&nbsp;';
-    echo '<a href="'.$cds->getPageURL().'?v='.$cds->variation.'&page='.$cds->pageId.'&article='.$articles[$position].'">&gt;</a>';
+    echo '<a href="'.$cds->channel->getLink($articles[$position]).'">&gt;</a>';
     echo '&nbsp;&nbsp;';
-    echo '<a href="'.$cds->getPageURL().'?v='.$cds->variation.'&page='.$cds->pageId.'&article='.$articles[count($articles)-1].'">&gt;&gt;</a>';
+    echo '<a href="'.$cds->channel->getLink($articles[count($articles)-1]).'">&gt;&gt;</a>';
   } else {
   	echo '&nbsp;&nbsp;';
     echo '&gt;';

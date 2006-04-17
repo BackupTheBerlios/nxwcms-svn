@@ -314,6 +314,7 @@
 		$spname = str_replace("%", "", $spname);
 		$spname = str_replace("@", "", $spname);
 		$spname = str_replace("/", "", $spname);
+		$spname = str_replace("!", "_", $spname);
 		$spname = str_replace("\\", "", $spname);	
 		$spname_split = explode(' ', $spname);
 		$spname = implode('_', $spname_split);	

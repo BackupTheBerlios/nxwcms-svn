@@ -3,13 +3,11 @@
   echo $menuCluster->content->get("LNews");
   br();
   
-  $newsChannel = $menuCluster->channel->get("News");
-  $newsPage = $cds->getPageByPath("/About/News");
-  $newsLink = $newsPage->menu->getLink();
+  $newsChannel = $menuCluster->channel->get("News");  
   for ($i=0; $i<count($newsChannel); $i++) {
   	br();
   	$newsCluster = $cds->cluster->getById($newsChannel[$i]);
-  	echo '<a href="'.$newsLink.'&article='.$newsChannel[$i].'"><b>'.$newsCluster->content->get("Headline").'</b></a>';
+  	echo '<a href="'.$cds->channel->getLink($newsChannel[$i]).'"><b>'.$newsCluster->content->get("Headline").'</b></a>';
   	br();
   	echo $newsCluster->content->get("Abstract");
   	br();

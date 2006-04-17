@@ -20,7 +20,7 @@
   	} else {
   	    $style = '';	
   	}
-  	echo '<a '.$style.' href="'.$cds->getPageURL().'?v='.$cds->variation.'&page='.$cds->pageId.'&article='.$articles[$i].'">';
+  	echo '<a '.$style.' href="'.$cds->channel->getLink($articles[$i]).'">';
     echo $arCluster->channel->getArticleDate($articles[$i], '%d-%m-%Y').': '.$arCluster->content->get("Headline");	    
     echo '</a>';
     br();
