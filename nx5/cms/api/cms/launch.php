@@ -568,7 +568,6 @@
 		}
 		$cached = getDBCell("sitemap", "IS_CACHED", "MENU_ID = " . $menuTrans);
 		if ($cached == 1) {
-echo "555";			
 			renderSitePage($out, $variation);
 		}
 	}

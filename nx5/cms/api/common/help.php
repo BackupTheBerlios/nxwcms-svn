@@ -337,6 +337,25 @@
 		$result = getDBCell('variations', 'SHORTTEXT', 'VARIATION_ID='.$v).$result;
 		return $result;
 	}
+	
+	/**
+	 * Get the nice URL of an channel-article
+	 *
+	 * @param integer $articleId
+	 * @param integer $v - VariationId		
+	 */
+	function getArticleURL($articleId, $v) {
+	  $cat = getDBCell('channel_articles', 'CH_CAT_ID', "ARTICLE_ID = ".$articleId);	  
+	  $name = getDBCell('channel_articles', 'TITLE', "ARTICLE_ID = ".$articleId);	  
+	  $catname = getDBCell('channel_categories', 'NAME', 'CH_CAT_ID='.$cat);
+	  $spid = getDBCell('channel_categories', 'PAGE_ID', 'CH_CAT_ID='.$cat);
+	  $spid = getDBCell("state_translation", "OUT_ID", "IN_ID=$spid AND LEVEL=10");
+	  $menuId = getDBCell('sitepage', 'MENU_ID', 'SPID='.$spid);
+	  $result = getPageURL($menuId, $v);
+	  $result.='/'.makeURLSave($catname);
+	  $result.='/'.makeURLSave($name);
+	  return $result;		
+	}
 
 	/**
 	 * Checks, whether the keys variation and changevariation are set and changes

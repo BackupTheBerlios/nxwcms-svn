@@ -215,7 +215,66 @@
              $replacements["VERSION"] = $level;
              deleteRow("channel_articles", "ARTICLE_ID = $articleIdTrans");
              copyRow('channel_articles', "ARTICLE_ID = $articleId", $replacements);       
+             launchArticleURL($articleIdTrans, $variation);
              return $articleIdTrans;
+    }
+
+    
+    
+    /**
+     * Creates the index-file for nice URLS
+     *
+     * @param integer $articleId
+     * @param integer $variation
+     */
+    function launchArticleURL($articleId, $variation) {
+     global $c;		
+        $short = getArticleURL($articleId, $variation);
+	    $cat = getDBCell('channel_articles', 'CH_CAT_ID', "ARTICLE_ID = ".$articleId);	  
+	    $spid0 = getDBCell('channel_categories', 'PAGE_ID', 'CH_CAT_ID='.$cat);
+		$spid = getDBCell("state_translation", "OUT_ID", "IN_ID=$spid0 AND LEVEL=10");
+	    if (spid != "")  {
+	    	if (substr($short, 0, 1) == "/")
+	    	$short = substr($short, 1);
+
+	    	$allDir = $c["livepath"];
+	    	// ensure that path exists
+	    	$directories = explode("/", $short);
+
+	    	if (count($directories) > 0) {
+	    		for ($i = 0; $i < count($directories); $i++) {
+	    			$thisDir = $directories[$i];
+
+	    			if ($thisDir != "") {
+	    				if (!is_dir($allDir . $thisDir)) {
+	    					mkdir($allDir . $thisDir, 0755);
+	    				}
+
+	    				$allDir = $allDir . $thisDir . "/";
+	    			}
+	    		}
+
+	    		// delete old index file
+	    		@nxDelete ($allDir , "index.php");
+	    		@nxDelete ($allDir , "index.html");
+
+	    		$template = getTemplate($spid);
+	    		// create new index-file...
+	    		$index = "<?php \n";
+	    		$index.= ' $v='.$variation.';'."\n";
+	    		$index.= ' $page='.$spid.';'."\n";
+	    		$index.= ' $article='.$articleId.';'."\n";
+	    		$index.= ' $c["path"] = \''.$c["path"].'\';'."\n";
+	    		$index.= ' require_once \''.$c["livepath"].$template.'\';'."\n";
+	    		$index.= "?>";
+
+	    		// write to disk
+	    		$index_file = fopen($allDir . "index.php", "w");
+	    		fwrite($index_file, $index);
+	    		fclose ($index_file);
+	    	}
+		}				
+    	
     }
     
     /**
