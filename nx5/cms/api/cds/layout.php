@@ -43,15 +43,24 @@
 		var $media = null;
 		var $docType = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
 		var $contentType='text/html; charset=iso-8859-1';
+		var $menuRef;
 		
 		/**
 		* Standard constructor.
 		*/
 		function Layout(&$parent) { 
+			global $c;
 			$this->parent = &$parent; 
 			$this->menu = new MenuLayout($this->parent);
 			$this->dhtml = new DHTMLLayout($this->parent);
 			$this->media = new MediaLayout($this->parent);
+			if (!is_object($this->menuRef)) {
+		   	   $menuType = reg_load('CDS/MENU');		   	
+		   	   $this->menuRef = createDCRef($c["path"]."designs/menu/".$menuType);
+		    }
+		   
+		    if (is_object($this->menuRef))
+		      $this->menuRef->setupPage($this);
 		}
 		
 		/**
@@ -178,6 +187,41 @@
 		 */
 		 function addToBodyAttributes($line) {
 			$this->bodyAttributes = $this->bodyAttributes . $line ." "; 	
+		 }
+		 
+		 
+		 /**
+		  * Draw the menu selected in designclasses.		  
+		  */
+		 function drawMenu() {
+		 	$this->drawMenuHeader();
+		 	$this->drawMenuFooter();		 	
+		 }
+		 
+		 /**
+		  * Draws the menuheader, use this instead of drawMenu for some special menus.
+		  *
+		  */
+		 function drawMenuHeader() {
+		    global $c;		 	
+		    if (!is_object($this->menuRef)) {
+		   	 $menuType = reg_load('CDS/MENU');		   	
+		   	 $this->menuRef = createDCRef($c["path"]."designs/menu/".$menuType);
+		   }
+		   echo $this->menuRef->getHeader();
+		 }
+		 
+		 /**
+		  * Draws the menu footer, use this instead of drawMenu for some special menus.
+		  *
+		  */
+		 function drawMenuFooter() {
+		 	global $c;
+		 	if (!is_object($this->menuRef)) {
+		   	 $menuType = reg_load('CDS/MENU');
+		   	 $this->menuRef = createDCRef($c["path"]."designs/menu/".$menuType);
+		   }
+		   echo $this->menuRef->getFooter();
 		 }
 		 
 		  

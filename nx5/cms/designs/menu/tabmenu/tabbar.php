@@ -3,7 +3,7 @@
   /**
    * Creates a tabmenu
    */
-  class TabBar {
+  class CDSTabBar {
   	
  	
   	var $menucontainer = null;
@@ -20,24 +20,10 @@
   	/**
 		 * standard constructor.
 		 */
-		function TabBar($tabid='menu', $id="mmid") {			
-			$this->id = $id;
-			$temp_menu = $_GET[$this->id];
-			if ($temp_menu == '') 
-			  $temp_menu = $_POST[$this->id];
-			if ($temp_menu == '')
-			  $temp_menu = getVar($tabid);
-
-			$this->selectedMenu = 1;
-			$this->selectedSubmenu = 0;
-			if ($temp_menu != "") {
-				//process the menu id (mid) now.
-				// it has Form: <menu>x<submenu>
-				$msplit = explode("x", $temp_menu);
-				$this->selectedMenu = $msplit[0];
-				$this->selectedSubmenu = $msplit[1];
-			}
-			pushVar($tabid, $temp_menu);
+		function CDSTabBar() {			
+			$this->id = 'menu';
+			$this->selectedMenu = 0;
+			$this->selectedSubmenu = 0;			
 			$this->doc = $_SERVER['REQUEST_URI'];
 		}	
 		

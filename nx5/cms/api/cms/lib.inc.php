@@ -24,7 +24,7 @@
 	 **********************************************************************/
 
 	require_once $c["path"] . "api/cms/cache.php";
-   require_once $c["path"] . "api/cms/journal.php";
+    require_once $c["path"] . "api/cms/journal.php";
 	require_once $c["path"] . "api/cms/launch.php";
 	require_once $c["path"] . "api/cms/mass_operations.php";
 	require_once $c["path"] . "api/cms/oiddictionary.php";
@@ -37,8 +37,10 @@
 	require_once $c["path"] . "api/cms/cdsinformation.php";
 	require_once $c["path"] . "api/cms/acl/lib.inc.php";
 	require_once $c["path"] . "api/cms/log.php";
-   require_once $c["path"] . "api/cms/meta.php";
-   require_once $c["path"] . "api/cms/cluster_template.php";
-   require_once $c["path"] . "api/cms/cluster.php";
-   require_once $c["path"] . "api/cms/channel.php";
+    require_once $c["path"] . "api/cms/meta.php";
+    require_once $c["path"] . "api/cms/cluster_template.php";
+    require_once $c["path"] . "api/cms/cluster.php";
+    require_once $c["path"] . "api/cms/channel.php";
+    require_once $c["path"] . "api/cms/design.class.php";
+    require_once $c["path"] . "api/cms/designclasses.php"
 ?>

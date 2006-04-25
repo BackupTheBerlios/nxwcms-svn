@@ -36,4 +36,5 @@
 	require_once $c["path"] . "api/userinterface/form/panelform.php";
 	require_once $c["path"] . "api/userinterface/form/stdforms.php";
 	require_once $c["path"] . "api/userinterface/form/yesnoform.php";
+	require_once $c["path"] . "api/userinterface/form/settingsform.php";
 ?>

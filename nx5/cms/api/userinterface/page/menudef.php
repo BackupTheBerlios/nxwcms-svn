@@ -16,6 +16,7 @@ $pagemenu->addSubMenu($lang->get("m_ptemp", "Page Templates"), "modules/pagetemp
 $pagemenu->addSubMenu($lang->get("m_clt", "Cluster Templates"), "modules/clustertemplate/clustertemplates.php", "CL_TEMP_BROWSER", "clustertemplates");
 $pagemenu->addSubMenu($lang->get("m_meta"), "modules/meta/metascheme.php", "META_TEMP", "meta");
 $pagemenu->addSubMenu($lang->get("cl_group","Cluster Group" ), "modules/compoundgroup/compound_groups.php", "COMPOUND_GROUPS", "clustergroup")	;
+$pagemenu->addSubmenu($lang->get("designs", "Layout Designs"), "modules/designs/overview.php", 'ADMINISTRATOR');
 		
 $pagemenu->addMenu($lang->get("mt_title", "Maintenance"), "MAINTENANCE");
 $pagemenu->addSubmenu($lang->get("m_purge"), "modules/purge/purge.php", "PURGE_DATABASE", "purge");

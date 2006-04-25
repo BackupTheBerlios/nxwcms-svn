@@ -52,7 +52,6 @@
 	 */
 	function reg_load($key) {
 		$pk = reg_getpk($key);
-
 		return getDBCell("registry", "VALUE", "REGID=$pk");
 	}
 
