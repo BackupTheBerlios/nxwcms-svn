@@ -33,7 +33,7 @@
  	$form->addFilterRule($lang->get("email"), "MailAddress");
  	$form->addFilterRule($lang->get("city"), "City");
  	$form->width="900";
- 	$form->newAction = $c["docroot"]."modules/address/edit.php";
+ 	$form->newAction = "modules/address/edit.php?go=create&sid=".$sid;
  	$page->add($form);
 
   $page->draw();

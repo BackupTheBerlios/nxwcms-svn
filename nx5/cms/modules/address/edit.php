@@ -22,6 +22,27 @@
      *    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
      **********************************************************************/
 
-echo "test";
-
+  require_once "../../config.inc.php";
+  $auth = new auth("ADDRESS");
+  $page = new Page("Edit Contacts");
+  
+  $form = new stdEDForm($lang->get("edcontact", "Edit contact"));
+  $cond = $form->setPK("address", "GGUID");
+  
+  $form->addHeaderLink(crHeaderLink($lang->get("back"), "modules/address/overview.php?sid=".$sid));
+  $form->add(new Subtitle("st", $lang->get("personal_information", "Personal Information")));
+  $form->add(new TextInput($lang->get("adrletter", "Salutation"), "address", "Addressletter", $cond, "type:text,size:64,width:200", ""));
+  $form->add(new TextInput($lang->get("name", "Name"), "address", "Name", $cond, "type:text,size:64,width:200", "MANDATORY"));
+  $form->add(new TextInput($lang->get("firstname", "Firstname"), "address", "Firstname", $cond, "type:text,size:64,width:200", ""));  
+  $form->add(new TextInput($lang->get("email", "E-Mail"), "address", "MailAddress", $cond, "type:text,size:128,width:200", ""));
+  $form->add(new DateInput($lang->get("birthday", "Birthday"), "address", "Birthday", $cond));
+  $form->add(new Spacer(2));
+  $form->add(new Subtitle('st',$lang->get("company", "Company")));
+  $form->add(new TextInput($lang->get("compname", "Company Name"), "address", "Company", $cond, "type:text,size:64,width:200", "MANDATORY"));
+  $form->add(new Spacer(2));
+  $form->add(new Subtitle('st', $lang->get("address", "Address")));
+  
+  $page->add($form);
+  $page->draw();
+echo $errors;
 ?>
