@@ -105,9 +105,10 @@
   	    // active tab	
   	    $out.= '<td nowrap id="'.$this->id.$position.'Head" class="activeTab">';
   	    $out.= '<div class="active1" id="'.$this->id.$position.'p1"><div class="active2" id="'.$this->id.$position.'p2"><div class="active3" id="'.$this->id.$position.'line"></div></div></div>';
-  	    $out.= '<div class="activeTabText" id="'.$this->id.$position.'text">&nbsp;&nbsp;<a href="#" onclick="'.$onclick.';">';
+  	    $out.= '<div class="activeTabText" id="'.$this->id.$position.'text">&nbsp;&nbsp;<a href="#" onclick="' . $onclick . '">';
   	    $out.=$this->menucontainer[$position][0];
   	    $out.= '</a>&nbsp;&nbsp;</div>';
+  	    
   	    $out.= '</td>';
   	  } else {
   	  	// inactive tab  	  	

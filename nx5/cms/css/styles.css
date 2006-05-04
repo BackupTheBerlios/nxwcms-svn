@@ -216,7 +216,7 @@ div.inactiveTabText a, div.inactiveTabText a:visisted {
 
 
 div.activeTabText a, div.activeTabText a:visited {
-  padding: 0px 1em 2px;
+  padding: 0px 0px 2px;
   color: white;
   white-space: nowrap;
   text-decoration:none;
