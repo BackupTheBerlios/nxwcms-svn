@@ -37,15 +37,15 @@
       	var $newAction="";
       	var $order = "";
       	var $orderdir ="";
-		var $page=1;
-		var $recordsPerPage = 20;
-		var $filterColumns;
-		var $currentFilterColumn;
-		var $searchphrase;
-		var $searchdrawn;
-		var $searchcolumn;
-		var $buttonbar;
-		var $showall;
+				var $page=1;
+				var $recordsPerPage = 20;
+				var $filterColumns;
+				var $currentFilterColumn;
+				var $searchphrase;
+				var $searchdrawn;
+				var $searchcolumn;
+				var $buttonbar;
+				var $showall;
       
       /**
        * Standard constuctor
@@ -82,9 +82,8 @@
         	$this->recordsPerPage = 1000;
         }
           
-		$this->init();
-		
-		$this->buttonbar = new Buttonbar("launch", "standard", count($this->colTitles));
+			$this->init();		
+			$this->buttonbar = new Buttonbar("launch", "standard", count($this->colTitles));
 		
       }
       
@@ -177,8 +176,12 @@
         for ($row=0; $row < count($data); $row++) {        
         echo "<tr class=\"grid\" onMouseOver='this.style.backgroundColor=\"#ffffcc\";' onMouseOut='this.style.backgroundColor=\"#e8eef7\";' onClick='document.location.href=\"".$this->editAction."?sid=".$sid."&go=update&oid=".$data[$row][0]."\";'>";
           for ($i=1; $i< count($data[$row]); $i++) {          
-            $style=' style="border-bottom:1px solid #cccccc;" ';            
-            echo "<td $style>".$data[$row][$i]."</td>";
+            $style=' style="border-bottom:1px solid #cccccc;cursor:pointer;padding-top:2px; padding-bottom:2px;" ';            
+            if ($data[$row][$i] <> "") {
+              echo "<td $style>".$data[$row][$i]."</td>";
+             } else {
+             	 echo "<td $style>&nbsp;</td>";
+            }
 
           }
           echo "</tr>";
@@ -249,7 +252,7 @@
       	echo "<tr>";
       	echo '<td valign="top" colspan="'.(count($this->displayColumns)-1).'"class="standardwhite">';
       	if (!$this->searchdrawn && count($this->filterColumns) >0) {      		
-			$this->drawSearchForm();
+			    $this->drawSearchForm();
       		echo '</td>';
       		echo "<td valign='top'  style=\"padding-top:6px;\"  align=\"right\">";
       	} else {
@@ -257,7 +260,8 @@
       	}      	
       	$pageStart = ($this->page - 1) * $this->recordsPerPage;
       	$pageEnd = ($this->page) * $this->recordsPerPage;
-      	$pages = ceil($this->countRows() / $this->recordsPerPage);
+      	$pages = ceil($this->countRows(true) / $this->recordsPerPage);      	      	
+      	
       	// draw the buttons
       	if ($this->page != 1) {
       	  $out = '<a href="'.$doc."?sid=$sid&page="."1".'">&laquo;</a>';	
@@ -265,7 +269,7 @@
       	  $out = '&laquo;';	
          }
 
-		 $out.="&nbsp;&nbsp;";
+		 		$out.="&nbsp;&nbsp;";
 
          if ($this->page > 1) {
       	  $out.= '<a href="'.$doc."?sid=$sid&page=".($this->page-1).'">&lsaquo;</a>';	

@@ -34,6 +34,7 @@
  	$form->addFilterRule($lang->get("city"), "City");
  	$form->width="900";
  	$form->newAction = "modules/address/edit.php?go=create&sid=".$sid;
+ 	$form->editAction = "edit.php";
  	$page->add($form);
 
   $page->draw();

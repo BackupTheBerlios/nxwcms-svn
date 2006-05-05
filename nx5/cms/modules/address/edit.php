@@ -31,18 +31,36 @@
   
   $form->addHeaderLink(crHeaderLink($lang->get("back"), "modules/address/overview.php?sid=".$sid));
   $form->add(new Subtitle("st", $lang->get("personal_information", "Personal Information")));
-  $form->add(new TextInput($lang->get("adrletter", "Salutation"), "address", "Addressletter", $cond, "type:text,size:64,width:200", ""));
+  if ($page_action != "CREATE") {
+  	$form->add(new DisplayedValue($lang->get("nr", "NO"), "address", "GGUID", $cond));  	  	
+  }
+  $form->add(new TextInput($lang->get("adrletter", "Salutation"), "address", "AddressLetter", $cond, "type:text,size:64,width:200", ""));
   $form->add(new TextInput($lang->get("name", "Name"), "address", "Name", $cond, "type:text,size:64,width:200", "MANDATORY"));
   $form->add(new TextInput($lang->get("firstname", "Firstname"), "address", "Firstname", $cond, "type:text,size:64,width:200", ""));  
   $form->add(new TextInput($lang->get("email", "E-Mail"), "address", "MailAddress", $cond, "type:text,size:128,width:200", ""));
   $form->add(new DateInput($lang->get("birthday", "Birthday"), "address", "Birthday", $cond));
   $form->add(new Spacer(2));
   $form->add(new Subtitle('st',$lang->get("company", "Company")));
-  $form->add(new TextInput($lang->get("compname", "Company Name"), "address", "Company", $cond, "type:text,size:64,width:200", "MANDATORY"));
+  $form->add(new TextInput($lang->get("compname", "Company Name"), "address", "Company", $cond, "type:text,size:64,width:200", ""));
   $form->add(new Spacer(2));
   $form->add(new Subtitle('st', $lang->get("address", "Address")));
+  $form->add(new TextInput($lang->get("street1", "Street 1"), "address", "Street1", $cond, "type:text,size:128,width:300", ""));
+  $form->add(new TextInput($lang->get("street2", "Street 2"), "address", "Street2", $cond, "type:text,size:128,width:300", ""));
+  $form->add(new TextInput($lang->get("zip", "ZIP"), "address", "ZIP", $cond, "type:text,size:32,width:100", ""));
+  $form->add(new TextInput($lang->get("city", "City"), "address", "City", $cond, "type:text,size:128,width:200", ""));
+  $form->add(new TextInput($lang->get("region", "Region"), "address", "Region", $cond, "type:text,size:128,width:200", ""));
+  $form->add(new TextInput($lang->get("country", "Country"), "address", "Country", $cond, "type:text,size:128,width:200", ""));
+  $form->add(new Spacer(2));
+  $form->add(new Subtitle("st", $lang->get("Contact", "Contact")));
+  $form->add(new TextInput($lang->get("phone", "Phone"), "address", "Phone", $cond, "type:text,size:32,width:150", ""));  
+  $form->add(new TextInput($lang->get("fax", "Fax"), "address", "Fax", $cond, "type:text,size:32,width:150", ""));  
+  $form->add(new TextInput($lang->get("cellphone", "Cell Phone"), "address", "Cellphone", $cond, "type:text,size:32,width:150", ""));  
+  $form->add(new Spacer(2));
+  $form->add(new Subtitle("st", $lang->get("additional_info", "Additional Information")));
+  $form->add(new TextInput($lang->get("website", "Website"), "address", "Website", $cond, "type:text,size:128,width:300", ""));  
+  $form->add(new TextInput($lang->get("notes", "Notes"), "address", "Notes", $cond, "type:textarea,size:6,width:300", ""));  
+  $form->add(new NonDisplayedValue("address", "LAST_Modified", $cond, getdate()));
   
   $page->add($form);
   $page->draw();
-echo $errors;
 ?>

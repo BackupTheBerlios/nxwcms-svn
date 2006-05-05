@@ -50,9 +50,9 @@ h3, .h3 {
 }
 
 .headbox {
-  background-color: #ecf2f7;
-  border: 1px solid #336699;
-  padding:4px;
+  background-color: #bbddff;
+  border-top: 1px solid #336699;  
+  padding:3px;  
 }
 
 .headbox2 {
@@ -129,7 +129,7 @@ h3, .h3 {
   padding-bottom:4px;
   padding-left:2px;
   padding-right:2px;
-  cursor:  hand;
+  cursor:pointer;
   border-bottom:1px solid #e0e0e0;
 }
 
