@@ -4,17 +4,11 @@
 	 **********************************************************************/
 
 	/**
-	 * Logic for processing folders
+	 * Logic for processing shop categories.
 	 * @package InternalLogic
 	 */
 
-	
-	
-	
-	//// ACL Check ////
-	if (! $aclf->hasAccess($auth->userId))
-	  header("Location: ". $c["docroot"]."modules/common/noaccess.php?sid=$sid&guid=$pnode");
-	//// ACL Check ////
+
 	
 	// initialize
 	$action = value("action");

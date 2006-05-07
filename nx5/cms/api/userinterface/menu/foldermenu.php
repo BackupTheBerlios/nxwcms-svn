@@ -33,6 +33,8 @@
 		var $staticMenu = false;
 		var $pnode;
 		var $pathToRoot;
+		var $startNode = "0";
+		var $rootTitle;
 		
 		/**
 		 * Standard constructor
@@ -40,7 +42,7 @@
 		 
 		 */
 		function Foldermenu($title) {
-			global $c;
+			global $c, $lang;
 			$this->title = $title;
 
 			if ($_GET["pnode"] != "") {
@@ -49,6 +51,7 @@
 			$this->pnode = getVar("pnode");
 			$temp =  explode("?",$GLOBALS["REQUEST_URI"]);
 			$this->action = $temp[0];
+			$this->rootTitle = $lang->get("content", "Content");
 			$this->staticMenu = $c["staticMenues"];
 		}
 
@@ -104,15 +107,15 @@
 				$expandedIcon = 'folder-expanded.gif';
 				$menu = new HTML_TreeMenu();
 				$startnode = new HTML_TreeNode(array (
-				'text' => "&nbsp;".$lang->get("content", "Content"),
-				'link' => $this->action . "?sid=$sid&pnode=0",
+				'text' => "&nbsp;".$this->rootTitle,
+				'link' => $this->action . "?sid=$sid&pnode=".$this->startNode,
 				'icon' => $icon,
 				'expandedIcon' => $expandedIcon,
 				isDynamic => true,
 				'defaultClass' => "treemenu"
 				));
 				
-				$this->buildMenu($startnode, "0");
+				$this->buildMenu($startnode, $this->startNode);
 				
 				$menu->addItem($startnode);
 				$treeMenu = new HTML_TreeMenu_DHTML($menu, array (

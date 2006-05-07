@@ -32,3 +32,9 @@ INSERT INTO `sys_functions` ( `FUNCTION_ID` , `PARENT_ID` , `NAME` , `DESCRIPTIO
 VALUES (
 'ADDRESS', 'ESERVICES', 'Address Editor', 'Allow displaying, editing and deleting Contacts'
 );
+
+INSERT INTO `sys_functions` (`FUNCTION_ID`, `PARENT_ID`, `NAME`, `DESCRIPTION`) VALUES ('SHOP', 'ESERVICES', 'Shop Access', 'Allow access to general shop backoffice');
+INSERT INTO `sys_functions` (`FUNCTION_ID`, `PARENT_ID`, `NAME`, `DESCRIPTION`) VALUES ('SHOPADM', 'SHOP', 'Shop-Administrator', 'Technical Shop Administration');
+INSERT INTO `sys_functions` (`FUNCTION_ID`, `PARENT_ID`, `NAME`, `DESCRIPTION`) VALUES ('SHOPPRODADM', 'SHOP', 'Product-Administrator', 'Edit categories, products.....');
+INSERT INTO `sys_functions` (`FUNCTION_ID`, `PARENT_ID`, `NAME`, `DESCRIPTION`) VALUES ('ORDERPROC', 'SHOP', 'Order Processor', 'Account for processing orders');
+
