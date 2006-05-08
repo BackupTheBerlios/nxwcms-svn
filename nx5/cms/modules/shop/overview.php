@@ -12,6 +12,10 @@
 	// initialize variables
 	$action = value("action");
 	$handled = false;
+  $pnode = value("pnode", "NUMERIC", "");
+	if ($pnode == "")
+			$pnode = "11";
+
 	
 	// Kategoriebaum erstellen
 	$browser = new Foldermenu($lang->get("shopcat", "Shop Categories"));
@@ -29,7 +33,7 @@
 		$go = "view";
 		$form = new Form($lang->get("shopoverview", "Shop Categoy Overview"));
 
-        $form->buttonbar->add("action", $lang->get("new_product", "New Product"), "submit", "document.form1.processing.value = '';");
+    $form->buttonbar->add("action", $lang->get("new_product", "New Product"), "submit", "document.form1.processing.value = '';");
 		$form->buttonbar->add("separator", "", "", "", "");		
 		$form->buttonbar->add("action", $lang->get("new_category", "New Category"), "submit", "document.form1.processing.value = '';");
 
@@ -38,16 +42,14 @@
 			$form->buttonbar->add("action", $lang->get("del_cat", "Delete Category"), "submit", "document.form1.processing.value= '';");
 		}
 
-		// Build breadcrumb
-		if ($pnode == "")
-			$pnode = "11";
-
-		//$str = pathToRootFolder($pnode);
+		// Build breadcrumb		
+		$str = pathToRootFolder($pnode, 11);
 		
 		$form->add(new Spacer(2));
-		$form->add(new AlignedLabel('lnl', getBoxedText($str, 'headergrey', '100%'), 'left', '', 2));
+		$form->add(new AlignedLabel('lnl', getBoxedText($str, 'headeryellow', '100%'), 'left', '', 2));
 		$form->add(new Spacer(2));
-
+		$form->add(new SubCategorySelector($pnode, $lang->get("avail_subcat", "Subcategories in this category"), $c["docroot"]."modules/shop/overview.php?sid=$sid&pnode="));
+		$form->add(new Spacer(2));
 		// add contents
 		if ($filter != "0") {
 			pushVar("filter", $filter);
@@ -92,15 +94,15 @@
 		}
 		
 		$form->add(new Hidden("action", ""));
+		$form->add(new Hidden("pnode", $pnode));
 		$page->add($form);
 
 	}
-	
-	
-
-	
-	
 	$page->draw();
 	$db->close();
+	echo $action;
+br();
+echo $errors;
+echo "PNODE:".$pnode;
 //echo "Error: $errors OID: $oid GO: $go PAGEACTION $page_action PAGESTATE $page_state PROCCESING $processing";
 ?>

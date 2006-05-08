@@ -25,9 +25,9 @@
 
 	// Database variables.
 	$c["dbhost"] = "localhost";  				// name of the mysql-Database. Standard-port is used.
-	$c["database"] = "translation";   					// name of the database. 
+	$c["database"] = "nx41";   					// name of the database. 
 	$c["dbuser"] = "root";       				// name of the database user.
-	$c["dbpasswd"] = "";         			// password of the database user.
+	$c["dbpasswd"] = "test";         			// password of the database user.
 	$c["dbdriver"] = "mysql";    				// type of your database. Do not change.
 	$c["dbnow"] = "NOW()";       				// for future versions. Do not change.
 	$c["dbcode"] = "3dYqpm8UhF"; 				// for future versions. Do not change.

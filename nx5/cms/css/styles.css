@@ -62,14 +62,14 @@ h3, .h3 {
 }
 
 .standard {  
-  background-color:#f6f6f6;
+  background-color:#e8f1fa;
   font-weight:bold;
   padding:4px;
 }
 
 .standardlight {
   color:#333333;
-  background-color:#f6f6f6;
+  background-color:#e8f1fa;
   padding:4px;
 }
 
@@ -101,6 +101,13 @@ h3, .h3 {
   font-size: 100%;
   background-color:#fce669;
 }
+
+.headeryellow {
+  font-weight:bold;
+  font-size: 100%;
+  background-color:#ffffcc;
+}
+
 
 .headergrey {
   font-weight:bold;

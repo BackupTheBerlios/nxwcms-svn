@@ -51,17 +51,21 @@
 	 * returns a path to the root folder of the system
 	 * @param $pnode integer ID of the current folder
 	 */
-	function pathToRootFolder($pnode) {
-		global $c, $sid;
+	function pathToRootFolder($pnode, $baseNode="0") {
+		global $c, $sid, $lang;
 
-		$basehref = '<a href="?sid=' . $sid . '&pnode=';
-		$str_base = $basehref . '0">Content &gt;</a> ';
+		if ($baseNode == "0") {
+			$basehref = '<a href="?sid=' . $sid . '&pnode=';
+			$str_base = $basehref . '0">Content &gt;</a> ';
+		} else if ($baseNode == "11") {
+			$basehref = '<a href="?sid=' . $sid . '&pnode=';
+			$str_base = $basehref . '11">'.$lang->get("shop").' &gt;</a> ';			
+		}
+		
 		$str = "";
 		$tmp = $pnode;
-
-		while ($tmp != "0") {
-			$str = $basehref . "$tmp\">" . getDBCell("categories", "CATEGORY_NAME", "CATEGORY_ID = $tmp"). "	&gt; </a> " . $str;
-
+		while ($tmp != $baseNode && $tmp != "") {
+			$str = $basehref . "$tmp\">" . getDBCell("categories", "CATEGORY_NAME", "CATEGORY_ID = $tmp"). "	&gt; </a>&nbsp;&nbsp;" . $str;
 			$tmp = getDBCell("categories", "PARENT_CATEGORY_ID", "CATEGORY_ID = $tmp");
 		}
 

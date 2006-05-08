@@ -44,19 +44,21 @@
 		var $editState = false;
 		var $editor = false;
 		var $developer = false;
-        var $forceEditAll = false;
+    var $forceEditAll = false;
+    
 
 		/**
 		 * Standard constructor
 		 * @param integer ID of the Cluster-Template-Item that is used to create this Content-Item.
 		 * @param integer ID of the Cluster-Variation the clti is from.
-         * @param booleean Forced Edit-All-Mode
+     * @param booleean Forced Edit-All-Mode
+     * @param booleaan Suppress permissions checks
 		 */
 
-		function AbstractEnvelope($clti, $cl, $forceEditAll=false) {
+		function AbstractEnvelope($clti, $cl, $forceEditAll=false, $isExternal = false) {
 			global $db, $lang, $aclf, $isArticle;
-            $this->forceEditAll = $forceEditAll;
-            $this->clti = $clti;
+      $this->forceEditAll = $forceEditAll;
+      $this->clti = $clti;
 			$this->cl = $cl;
 			$this->action = value("action");
             $this->saction = value("saction");
@@ -76,8 +78,13 @@
 			$this->plugin = $query->field("FKID");
 			$query->free();
 			$this->editState = (($this->action == $lang->get("edit_all")) || ($this->action == $lang->get("save") || $this->action == $lang->get("save_back") || $this->action == "editsingle" || value("status") == "editsingle") && $this->action != $lang->get("back")) || $isArticle;
-			$this->developer = $aclf->checkAccessToFunction("EDIT_CL_CONTENT");
-			$this->editor = $aclf->checkAccessToFunction("EDIT_CL_CONTENT");
+			if ($isExternal) {
+			  $this->developer = true;
+			  $this->editor    = true;	
+			} else {
+			  $this->developer =  $aclf->checkAccessToFunction("EDIT_CL_CONTENT");
+			  $this->editor =  $aclf->checkAccessToFunction("EDIT_CL_CONTENT");
+			}
 			
 			$this->members = $this->getItemData();
 			$this->prepare_overview();

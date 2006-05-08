@@ -30,7 +30,8 @@
 	 * @package DatabaseConnectedInput
 	 */
 	class FolderDropdown extends DBO {
-
+		var $baseNode = "0";
+		var $stopNode = "-1";
 		/**
 		  * standard constructor
 		  * @param string Text that is to be shown as description or label with your object.
@@ -66,9 +67,9 @@
 
 			$folders = null;
 			$folders[0][0] = "&gt;";
-			$folders[0][1] = 0;
+			$folders[0][1] = $this->baseNode;
 
-			createFolders($folders, "&gt;", 0);
+			createFolders($folders, "&gt;", $this->baseNode, $this->stopNode);
 
 			// set the values
 			$this->v_wuiobject->value = $folders;

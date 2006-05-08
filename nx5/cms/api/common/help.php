@@ -513,25 +513,25 @@
 	 * @param array array with name-value pairs of the folders
 	 * @param string prefix, which to write in front of all foldernames. Leave blank, is internally used.
 	 * @param integer node where to start indexing
+	 * @param integer $stopnode  This ID is excluded from the tree.
 	 */
-	function createFolders(&$folder, $prefix, $node) {
+	function createFolders(&$folder, $prefix, $node, $stopnode="-1") {
 		global $db;
 
-		$sql = "SELECT CATEGORY_ID, CATEGORY_NAME from categories WHERE DELETED = 0 AND PARENT_CATEGORY_ID=$node ORDER BY CATEGORY_NAME ASC";
+		$sql = "SELECT CATEGORY_ID, CATEGORY_NAME from categories WHERE DELETED = 0 AND PARENT_CATEGORY_ID=$node AND CATEGORY_ID <> $stopnode ORDER BY CATEGORY_NAME ASC";
 		$query = new query($db, $sql);
 
 		while ($query->getrow()) {
 			$name = $query->field("CATEGORY_NAME");
-
 			$id = $query->field("CATEGORY_ID");
+
 			$nextId = count($folder);
 			$nprefix = $prefix . "&nbsp;" . $name . "&nbsp;&gt;";
 
 			if ($id != $oid) {
 				$folder[$nextId][0] = $nprefix;
-
 				$folder[$nextId][1] = $id;
-				createFolders($folder, $nprefix, $id);
+				createFolders($folder, $nprefix, $id, $stopnode);
 			}
 		}
 

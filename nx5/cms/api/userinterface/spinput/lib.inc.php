@@ -41,4 +41,5 @@
    require_once $c["path"] . "api/userinterface/spinput/select_channel_categories.php";  
    require_once $c["path"] . "api/userinterface/spinput/plugin_input.php";
    require_once $c["path"] . "api/userinterface/spinput/iframeobject.php";  	
+   require_once $c["path"] . "api/userinterface/spinput/subcategory_selector.php";  	
 ?>
