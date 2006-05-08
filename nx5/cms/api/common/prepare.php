@@ -40,7 +40,7 @@
 
 		
 	// setting version
-	$nx_version = "4.5";
+	$nx_version = "4.5 rev svn:Rev";
 	// Global variables
 	// database related
 	$recordsets = null;
