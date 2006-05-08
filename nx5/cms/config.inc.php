@@ -25,9 +25,9 @@
 
 	// Database variables.
 	$c["dbhost"] = "localhost";  				// name of the mysql-Database. Standard-port is used.
-	$c["database"] = "nx41";   					// name of the database. 
+	$c["database"] = "translation";   					// name of the database. 
 	$c["dbuser"] = "root";       				// name of the database user.
-	$c["dbpasswd"] = "test";         			// password of the database user.
+	$c["dbpasswd"] = "";         			// password of the database user.
 	$c["dbdriver"] = "mysql";    				// type of your database. Do not change.
 	$c["dbnow"] = "NOW()";       				// for future versions. Do not change.
 	$c["dbcode"] = "3dYqpm8UhF"; 				// for future versions. Do not change.
@@ -210,9 +210,18 @@
 	 *************************************************************************************************/
 	if (!$c["checkconfig"]) {
 		
+	
 	require_once $c["path"]."deployment.inc.php";	
 	
-	 // Server configuration
+	// check database connection	
+	$con = @mysql_pconnect($c["dbhost"], $c["dbuser"], $c["dbpasswd"]);
+	if ($con === false) {
+		echo "Could not connect to database. Please check the settings in config.inc.php.";
+		die();		
+	}
+	
+	
+	// Server configuration
 	set_magic_quotes_runtime(0);
 	$c_magic_quotes_gpc = get_magic_quotes_gpc(); //disable magic quotes.
 
@@ -222,16 +231,16 @@
 	require_once $c["path"] . "api/database/lib.inc.php";
 	require_once $c["path"] . "ext/adodb/adodb-session.php";
 	require_once $c["path"] . "api/auth/lib.inc.php";
-	require_once $c["path"] . "api/userinterface/form/pagestate.php";
 	require_once $c["path"] . "api/common/lib.inc.php";
+	require_once $c["path"] . "api/userinterface/form/pagestate.php";
 	require_once $c["path"] . "api/common/initialize.php";	
 	require_once $c["path"] . "plugin/plugin.inc.php";
-	require_once $c["path"] . "api/tools/lib.inc.php";
-	require_once $c["path"] . "api/userinterface/lib.inc.php";
+	require_once $c["path"] . "api/tools/lib.inc.php";	
 	require_once $c["path"] . "api/cms/lib.inc.php";
 	require_once $c["path"] . "api/common/prepare.php";
     require_once $c["path"] . "api/xml/lib.inc.php";
     require_once $c["path"] . "api/parser/lib.inc.php";
+    require_once $c["path"] . "api/userinterface/lib.inc.php";	
 	
 	//setup language translation for backoffice.
 	$lang = new lang();

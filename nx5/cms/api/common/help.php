@@ -5,6 +5,22 @@
 	 */
 
 
+	/**
+	 * Reverse htmlspecialchars
+	 *
+	 * @param string $string input string
+	 * @return string reversed output string
+	 */
+	function unhtmlspecialchars( $string )   {
+       $string = str_replace ( '&amp;', '&', $string );
+       $string = str_replace ( '&#039;', '\'', $string );
+       $string = str_replace ( '&quot;', '\"', $string );
+       $string = str_replace ( '&lt;', '<', $string );
+       $string = str_replace ( '&gt;', '>', $string );
+       $string = str_replace ( '\\"', '"', $string);
+       
+       return $string;
+   }
 	 
 	 /**
 	  * Places a static html file at the www or wwwdev folder that show a under maintenance message.

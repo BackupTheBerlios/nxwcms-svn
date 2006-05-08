@@ -32,5 +32,5 @@
 	$auth = new auth("ANY", false);
 	$page= new page("test");
 	$page->draw();
-   			$db->close();
+   	$db->close();
 	?>
