@@ -36,19 +36,20 @@
 		var $startNode = "0";
 		var $rootTitle;
 		
+		
 		/**
 		 * Standard constructor
 		 * @param string Title of the Browser
 		 
 		 */
-		function Foldermenu($title) {
+		function Foldermenu($title, $saveVar="pnode") {
 			global $c, $lang;
 			$this->title = $title;
 
 			if ($_GET["pnode"] != "") {
-				pushVar("pnode", value("pnode", "NUMERIC"));
+				pushVar($saveVar, value("pnode", "NUMERIC"));
 			}
-			$this->pnode = getVar("pnode");
+			$this->pnode = getVar($saveVar);
 			$temp =  explode("?",$GLOBALS["REQUEST_URI"]);
 			$this->action = $temp[0];
 			$this->rootTitle = $lang->get("content", "Content");

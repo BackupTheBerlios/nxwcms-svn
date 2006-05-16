@@ -26,7 +26,7 @@
 	// needed to split one file into more because of documentation.
 	require_once $c["path"] . "api/userinterface/spinput/abstract_envelope.php";
 	require_once $c["path"] . "api/userinterface/spinput/cluster_envelope.php";
-   require_once $c["path"] . "api/userinterface/spinput/channel_envelope.php";
+    require_once $c["path"] . "api/userinterface/spinput/channel_envelope.php";
 	require_once $c["path"] . "api/userinterface/spinput/cluster_information.php";
 	require_once $c["path"] . "api/userinterface/spinput/compound_cluster_envelope.php";
   	require_once $c["path"] . "api/userinterface/spinput/phpeditor.php";
@@ -38,9 +38,9 @@
 	require_once $c["path"] . "api/userinterface/spinput/multipage_position.php";	
 	require_once $c["path"] . "api/userinterface/spinput/embedded_menu.php";
 	require_once $c["path"] . "api/userinterface/spinput/sitemap_position.php";
-   require_once $c["path"] . "api/userinterface/spinput/select_channel_categories.php";  
-   require_once $c["path"] . "api/userinterface/spinput/plugin_input.php";
-   require_once $c["path"] . "api/userinterface/spinput/plugin_input_variation.php";
-   require_once $c["path"] . "api/userinterface/spinput/iframeobject.php";  	
-   require_once $c["path"] . "api/userinterface/spinput/subcategory_selector.php";  	
+    require_once $c["path"] . "api/userinterface/spinput/select_channel_categories.php";  
+    require_once $c["path"] . "api/userinterface/spinput/plugin_input.php";
+    require_once $c["path"] . "api/userinterface/spinput/plugin_input_variation.php";
+    require_once $c["path"] . "api/userinterface/spinput/iframeobject.php";  	
+    require_once $c["path"] . "api/userinterface/spinput/subcategory_selector.php";  	
 ?>

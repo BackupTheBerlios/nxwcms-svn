@@ -23,13 +23,14 @@
 			$pnode = "11";
 	
 	// Kategoriebaum erstellen
-	$browser = new Foldermenu($lang->get("shopcat", "Shop Categories"));
+	$browser = new Foldermenu($lang->get("shopcat", "Shop Categories"), "snode");
 	// category startnode for shop.
 	$browser->startNode = "11"; 
 	// Title for root Node
 	$browser->rootTitle = $lang->get("shop", "Shop");
 	$browser->action = $c["docroot"] . "modules/shop/overview.php";
 	$page->addMenu($browser);		
+    require_once $c["path"] . "modules/shop/logic/shop_api.php";
 	require_once $c["path"] . "modules/shop/logic/category_logic.php";
 	
 	// Kategorieausgabe

@@ -25,8 +25,6 @@
 				$go = "insert";
 			if ($go == "insert")
 				$page_action = "INSERT";
-			$insertHandler = new ActionHandler("INSERT");
-			$insertHandler->addDbAction('INSERT INTO categories_info (CATEGORY_ID, DATE_ADDED, SORT_ORDER) VALUES(<oid>,NOW(),0)');
 			$form = new stdEDForm($lang->get("new_category"));
 			$cond = $form->setPK("categories", "CATEGORY_ID");
 			$catname = new TextInput($lang->get("cat_name", "Category Name"), "categories", "CATEGORY_NAME", $cond, "type:text,width:200,size:32", "MANDATORY&UNIQUE");
@@ -35,8 +33,7 @@
 			$form->add(new Hidden("action", $lang->get("new_category")));
 			$form->add(new Hidden("pnode", $pnode));
 			$form->add(new NonDisplayedValueOnInsert("categories", "PARENT_CATEGORY_ID", $cond, $pnode, "NUMBER"));
-			$form->add(new NonDisplayedValueOnInsert("categories", "DELETED", $cond, 0, "NUMBER"));
-			$form->registerActionHandler($insertHandler);
+			$form->add(new NonDisplayedValueOnInsert("categories", "DELETED", $cond, 0, "NUMBER"));			
 			$form->forbidDelete(true);
 			$page->add($form);
 			$handled = true;
@@ -68,16 +65,15 @@
 				$query = new query($db, $sql3);
 				$query->getrow();
 				$amount += $query->field("ANZ");
-				$deleteHandler = new ActionHandler("DELETE");
-// @todo: Kategorien sauber weglöschen mit allen Inhalten.
+				$delHandler = new ActionHandler("DELETE");				
 				if ($amount == 0) {
 					if (value("decision") == $lang->get("yes")) {
 						// set new folder-id.
 						$parentId = getDBCell("categories", "PARENT_CATEGORY_ID", "CATEGORY_ID = " . $oid);
-						pushVar("pnode", $parentId);
-						
+						pushVar("snode", $parentId);			
 						// delete folder.
 						$delhandler->addDBAction("DELETE FROM categories WHERE CATEGORY_ID = $oid");
+						$delhandler->addDBAction("Delete From categories_info Where CATEGORY_ID=$oid");
 						$delhandler->process("deletefolder");
 						// set new id.
 						$oid = $pnode = $parentId;
@@ -105,6 +101,8 @@
 
 			$isFolder = true;
 			$oid = $pnode;
+			if (! categoryInfoExists($oid, $variation)) 
+			  createCategoryInfo($oid, $variation);
 			$page_action = "UPDATE";
 			$form = new EditForm($lang->get("r_editfolder"), "i_folderproperties.gif");
 			$cond = $form->setPK("categories", "CATEGORY_ID");
@@ -112,19 +110,26 @@
 			$fd = new FolderDropdown($lang->get("parent_cat", "Parent Category"), "categories", "PARENT_CATEGORY_ID", $cond);
 			$fd->baseNode = "11";
 			$fd->stopNode = $pnode;
+			$form->headerlink = crHeaderLink($lang->get("back"), "modules/shop/overview.php?sid=$sid&pnode=$oid");
 			$form->buttonbar->setVariationSelector(createNameValueArrayEx("variations", "NAME", "VARIATION_ID", "1", "ORDER BY NAME ASC"), $variation);
 			$form->add($fd);
 			$form->add(new Hidden("pnode", $pnode));
 			$form->add(new Hidden("action", $lang->get("edit_cat")));
-			$form->add(new PluginInputVariation($lang->get("title", "Title"), "categories_info", "TITLE", $cond, "Label", $form, false, "standard"));
+			$cond2 = $cond." AND VARIATION_ID=$variation";
+			
+			
+			$specialID = $variation;
+			// label
+			
+			$form->add(new TextInput($lang->get("disptitle", "Display Name"), "categories_info", "TITLE", $cond2, "type:text,width:350,size:255", "MANDATORY"));
 			$form->add(new SubTitle("st", $lang->get("sel_image", "Select image"),2));
 			$form->add(new LibrarySelect("categories_info", "IMAGE", $cond, "IMAGE"));
-			$specialID = "header";
-			$form->add(new PluginInputVariation($lang->get("header", "Header"), "categories_info", "HEADER", $cond, "Text", $form, false, "standard"));
-			$specialID = "footer";
-			$form->add(new PluginInputVariation($lang->get("footer", "Footer"), "categories_info", "FOOTER", $cond, "Text", $form, false, "standard"));
-					
 			
+			$form->add(new SubTitle("st", $lang->get("header")));
+			$form->add(new RicheditInput($lang->get("header", "Header"), "categories_info", "HEADER", $cond2, "type:rich,width:580,size:6", ""));		
+			$form->add(new SubTitle("st", $lang->get("footer")));
+			$form->add(new RicheditInput($lang->get("footer", "Footer"), "categories_info", "FOOTER", $cond2, "type:rich,width:580,size:6", ""));		
+
 			$page->add($form);
 			$handled = true;				
 		} 

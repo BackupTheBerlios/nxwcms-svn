@@ -6,7 +6,7 @@ $pagemenu->addMenu($lang->get("content", "Content"), "EXPLORE_SITE_M", false);
 $pagemenu->addSubMenu($lang->get("m_www", "Website"), "modules/sitepages/sitepagebrowser.php", "EXPLORE_SITE_S", "editsite");
 $pagemenu->addSubMenu($lang->get("m_lib", "Library"), "modules/content/objectbrowser.php?resetfilter=1", "OBJECT_BROWSER", "contenbase");
 $pagemenu->addSubMenu($lang->get("m_articles", "Articles"), "modules/channels/overview.php", "CHANNEL_EDIT", "channel");
-$pagemenu->addSubMenu($lang->get("m_clusters", "Clusters"), "modules/cluster/clusterbrowser.php", "CL_BROWSER", "clusters");
+$pagemenu->addSubMenu($lang->get("m_clusters", "Clusters"), "modules/cluster/clusterbrowser.php?resetfilter=1", "CL_BROWSER", "clusters");
 $pagemenu->addSubMenu($lang->get("m_rollout", "Rollout"), "modules/rollout/rollout.php", "ROLLOUT", "rollout");
 $pagemenu->addSubMenu($lang->get("m_import_wz", "Import Wizard"), "modules/syndication/wz_import.php", "IMPORT", "import");
 $pagemenu->addSubMenu($lang->get("m_export_wz", "Export Wizard"), "modules/syndication/wz_export.php", "EXPORT", "export");
