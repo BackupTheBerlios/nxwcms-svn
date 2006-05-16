@@ -11,11 +11,16 @@
 	
 	// initialize variables
 	$action = value("action");
+	
+	// do the variation-handling
+	$variation = variation();
+	if ((value("changevariation") != "0" && value("changevariation") != "")) 
+		$page_state = "";
+
 	$handled = false;
-  $pnode = value("pnode", "NUMERIC", "");
+    $pnode = value("pnode", "NUMERIC", "");
 	if ($pnode == "")
 			$pnode = "11";
-
 	
 	// Kategoriebaum erstellen
 	$browser = new Foldermenu($lang->get("shopcat", "Shop Categories"));
@@ -100,9 +105,7 @@
 	}
 	$page->draw();
 	$db->close();
-	echo $action;
-br();
 echo $errors;
-echo "PNODE:".$pnode;
+
 //echo "Error: $errors OID: $oid GO: $go PAGEACTION $page_action PAGESTATE $page_state PROCCESING $processing";
 ?>

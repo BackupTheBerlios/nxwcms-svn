@@ -90,11 +90,11 @@
 					$this->addToTopText($lang->get("saveerror"));
 					$this->topstyle = 'headererror';
 					
-				} else {
-					if ($page_action == "INSERT") {
+				} else {				
+					if ($page_action == "INSERT") {						
 						$page_action = "UPDATE";
 						$oid = $oids[0];												
-						$this->processHandlers("INSERT");
+						$this->processHandlers("INSERT");						
 					} else {
 						$this->processHandlers("UPDATE");						
 					}

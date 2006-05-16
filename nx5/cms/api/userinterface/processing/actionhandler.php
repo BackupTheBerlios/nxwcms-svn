@@ -76,10 +76,9 @@
 	function process($type) {
 		global $db, $oid;
 		if (strtoupper($type) == $this->type) {
-			
 			for ( $i = 0; $i < count($this->dbactions); $i++ ) {
 				$this->dbactions[$i] = ereg_replace("<oid>", $oid, $this->dbactions[$i]);
-				$query = new query($db, $this->dbactions[$i]);
+				$query = new query($db, $this->dbactions[$i]);				
 			}
 			//  use pconnect, connection will be closed automatically.
 			for ( $j = 0; $j < count($this->fncactions); $j++) {

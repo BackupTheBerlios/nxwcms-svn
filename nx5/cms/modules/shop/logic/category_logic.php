@@ -21,11 +21,12 @@
 		// Create new Category
 		
 		if ($action == $lang->get("new_category")) {
-			if (value("go") == "0")
+			if ((value("go") == "0") && (value("goon") == "0"))
 				$go = "insert";
 			if ($go == "insert")
 				$page_action = "INSERT";
-
+			$insertHandler = new ActionHandler("INSERT");
+			$insertHandler->addDbAction('INSERT INTO categories_info (CATEGORY_ID, DATE_ADDED, SORT_ORDER) VALUES(<oid>,NOW(),0)');
 			$form = new stdEDForm($lang->get("new_category"));
 			$cond = $form->setPK("categories", "CATEGORY_ID");
 			$catname = new TextInput($lang->get("cat_name", "Category Name"), "categories", "CATEGORY_NAME", $cond, "type:text,width:200,size:32", "MANDATORY&UNIQUE");
@@ -35,6 +36,7 @@
 			$form->add(new Hidden("pnode", $pnode));
 			$form->add(new NonDisplayedValueOnInsert("categories", "PARENT_CATEGORY_ID", $cond, $pnode, "NUMBER"));
 			$form->add(new NonDisplayedValueOnInsert("categories", "DELETED", $cond, 0, "NUMBER"));
+			$form->registerActionHandler($insertHandler);
 			$form->forbidDelete(true);
 			$page->add($form);
 			$handled = true;
@@ -66,7 +68,8 @@
 				$query = new query($db, $sql3);
 				$query->getrow();
 				$amount += $query->field("ANZ");
-
+				$deleteHandler = new ActionHandler("DELETE");
+// @todo: Kategorien sauber weglöschen mit allen Inhalten.
 				if ($amount == 0) {
 					if (value("decision") == $lang->get("yes")) {
 						// set new folder-id.
@@ -109,19 +112,18 @@
 			$fd = new FolderDropdown($lang->get("parent_cat", "Parent Category"), "categories", "PARENT_CATEGORY_ID", $cond);
 			$fd->baseNode = "11";
 			$fd->stopNode = $pnode;
+			$form->buttonbar->setVariationSelector(createNameValueArrayEx("variations", "NAME", "VARIATION_ID", "1", "ORDER BY NAME ASC"), $variation);
 			$form->add($fd);
 			$form->add(new Hidden("pnode", $pnode));
 			$form->add(new Hidden("action", $lang->get("edit_cat")));
-			$clti = 100122;
-			$cl= 100144;
-			$ce = new ClusterEnvelope($clti, $cl, true,true);
-			$form->add($ce);
-			
-			$cl= 100158;
-			$ce2 =new ClusterEnvelope($clti, $cl, true,true);
-			$form->add($ce2);
-			
-			
+			$form->add(new PluginInputVariation($lang->get("title", "Title"), "categories_info", "TITLE", $cond, "Label", $form, false, "standard"));
+			$form->add(new SubTitle("st", $lang->get("sel_image", "Select image"),2));
+			$form->add(new LibrarySelect("categories_info", "IMAGE", $cond, "IMAGE"));
+			$specialID = "header";
+			$form->add(new PluginInputVariation($lang->get("header", "Header"), "categories_info", "HEADER", $cond, "Text", $form, false, "standard"));
+			$specialID = "footer";
+			$form->add(new PluginInputVariation($lang->get("footer", "Footer"), "categories_info", "FOOTER", $cond, "Text", $form, false, "standard"));
+					
 			
 			$page->add($form);
 			$handled = true;				

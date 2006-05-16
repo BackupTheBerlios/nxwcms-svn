@@ -55,10 +55,9 @@
 		  * you must return it as return value!
 		  */
 		function preview() {
-			global $lang;
-			$out = "<br>";
-			$out.= 'Impressions: '.getDBCell("pgn_adsense", "IMPRESSIONS", "FKID= $this->fkid")."<br>";
-			$out.= 'Clicks: '.getDBCell("pgn_adsense", "CLICKS", "FKID= $this->fkid")."<br>";
+			global $lang;			
+			$out= ' Impressions: '.getDBCell("pgn_adsense", "IMPRESSIONS", "FKID= $this->fkid")."<br>";
+			//$out.= 'Clicks: '.getDBCell("pgn_adsense", "CLICKS", "FKID= $this->fkid")."<br>";
 			return $out;
 		}
 
@@ -69,11 +68,12 @@
 		   * @return		string	HTML-CODE to be written into the template.
 		   */
 		function draw($param = "") {
-			global $cds;
+			global $cds, $c;
 			if ($cds->is_development) {
 				$content = '<div style="border:1px solid black; background-color:#e0e0e0;align:center;vertical-align:middle;padding:10px;">Adsene Placeholder. <br>Avoids influences to your adsense statistics.</div>';
-			} else {
-			  $content = unhtmlspecialchars(getDBCell("pgn_adsense", "ADTEXT", "FKID = $this->fkid"));			
+			} else {			  
+			  $content = unhtmlspecialchars(getDBCell("pgn_adsense", "ADTEXT", "FKID = $this->fkid"));						  
+			  $content.= '<script type="text/javascript">bug = new Image(); bug.src=\''.$c["livedocroot"]."sys/adsense.php?ad=".$this->fkid.'\';</script>';
 			}
 			return $content;
 		}
