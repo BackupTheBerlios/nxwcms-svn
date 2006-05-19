@@ -7,8 +7,9 @@
 	$auth = new auth("SHOP");
 	
 	$page = new page("Shop overview");
-	$page->setJS("TREE");
+  include("logic/menudef.inc.php");		
 	
+	$page->setJS("TREE");	
 	// initialize variables
 	$action = value("action");
 	
