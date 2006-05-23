@@ -72,8 +72,9 @@
 
 			return 0;
 		}
+	
 		
-			/**
+	/**
 	 * Checks, whether a Sitepage is expired or not.
 	 * @param 	integer 	ID of the CLuster to check for expiration.
 	 * @param 	integer		ID of the Variation, takes std-variation from parent-api
@@ -280,4 +281,40 @@
 		*/
 		function getClusterNodeFromPage($pageId) { return getDBCell("sitepage", "CLNID", "SPID=$pageId"); }
 	}
+	
+	
+	
+			/**
+		 * To be used in header.inc.php to determine the URI of the startpage.
+		 * to use.
+		 * @param integer ID of the variation the Startpage should be find in.
+		 * @returns	integer		Sitepage-ID of the first sitepage to use.
+		 */		
+		function getStartPageURI($variation=0, $level=10) {
+			global $c;
+			
+			$uri=0;
+			$pageId = 0;
+			
+			if ($variation == 0)
+			  $variation = $c["stdvariation"];
+			$zeroTrans = getDBCell("state_translation", "OUT_ID", "IN_ID=0 AND LEVEL=10");
+			
+			if ($level < 10) {
+				$menues = createDBCArray("sitemap", "MENU_ID", "IS_DISPLAYED=1 AND PARENT_ID=0 ORDER BY POSITION ASC");
+			} else {
+				$menues = createDBCArray("sitemap", "MENU_ID", "IS_DISPLAYED=1 AND PARENT_ID=$zeroTrans ORDER BY POSITION ASC");
+			}
+
+			for ($i = 0; $i < count($menues); $i++) {
+				$spids = createDBCArray("sitepage", "SPID", "MENU_ID = " . $menues[$i] . " ORDER BY POSITION");
+				for ($j = 0; $j < count($spids); $j++) {
+					if (!isSPExpired($spids[$j], $variation, $level)) {
+						$pageId =  $spids[$j];
+			 			$menu =	new Menu(null, $pageId, $variation, $level);
+		  			return $c["host"].$menu->getLink();			
+					}
+				}
+			}		  		 			
+		}
 ?>

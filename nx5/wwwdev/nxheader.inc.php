@@ -16,6 +16,20 @@
 			$sid = "";
 		$cds = new SMA_CDSApi(true);
 	} else {
+ 		
+ 	// determine startpage and forward to startpage if no pageid isset.	 
+	 if (!isset($page)) {
+	    $page = value("page", "NUMERIC",-1);	    
+	    if ($page == -1) {
+	 			 $forward = getStartPageURI(0,0);
+	 			 if ($forward != "") 
+	 			   header("location: ".$forward); 
+	    }    	
+	 }
+ 		
+ 		
+ 		
+ 		
  		$cds = new CDSApi(true);
 	}
 ?>

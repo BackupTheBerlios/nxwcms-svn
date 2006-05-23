@@ -40,7 +40,7 @@
 
 		
 	// setting version
-	$nx_version = "4.5.0.27";
+	$nx_version = "4.5.0.$Rev$";
 	// Global variables
 	// database related
 	$recordsets = null;
