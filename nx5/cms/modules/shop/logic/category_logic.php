@@ -96,7 +96,7 @@
 		
 		// Edit existing category.
 	
-		} else if ($action == $lang->get("edit_cat") && $pnode != "11") {
+		} else if ($action == $lang->get("edit_cat")) {
 			$go = "UPDATE";
 
 			$isFolder = true;
@@ -105,14 +105,17 @@
 			  createCategoryInfo($oid, $variation);
 			$page_action = "UPDATE";
 			$form = new EditForm($lang->get("r_editfolder"), "i_folderproperties.gif");
-			$cond = $form->setPK("categories", "CATEGORY_ID");
-			$form->add(new TextInput($lang->get("cat_name"), "categories", "CATEGORY_NAME", $cond, "type:text,width:200,size:32", "MANDATORY"));
-			$fd = new FolderDropdown($lang->get("parent_cat", "Parent Category"), "categories", "PARENT_CATEGORY_ID", $cond);
-			$fd->baseNode = "11";
-			$fd->stopNode = $pnode;
+			$cond = $form->setExPK("categories", "CATEGORY_ID");
+			if ($pnode != 11) {
+			  $form->add(new TextInput($lang->get("cat_name"), "categories", "CATEGORY_NAME", $cond, "type:text,width:200,size:32", "MANDATORY"));
+			  $fd = new FolderDropdown($lang->get("parent_cat", "Parent Category"), "categories", "PARENT_CATEGORY_ID", $cond);
+			  $fd->baseNode = "11";
+			  $fd->stopNode = $pnode;
+			  $form->add($fd);
+			}
+			
 			$form->headerlink = crHeaderLink($lang->get("back"), "modules/shop/overview.php?sid=$sid&pnode=$oid");
-			$form->buttonbar->setVariationSelector(createNameValueArrayEx("variations", "NAME", "VARIATION_ID", "1", "ORDER BY NAME ASC"), $variation);
-			$form->add($fd);
+			$form->buttonbar->setVariationSelector(createNameValueArrayEx("variations", "NAME", "VARIATION_ID", "1", "ORDER BY NAME ASC"), $variation);			
 			$form->add(new Hidden("pnode", $pnode));
 			$form->add(new Hidden("action", $lang->get("edit_cat")));
 			$cond2 = $cond." AND VARIATION_ID=$variation";

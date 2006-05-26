@@ -8,7 +8,7 @@
 	
 	$page = new page("Shop overview");
   include("logic/menudef.inc.php");		
-	
+
 	$page->setJS("TREE");	
 	// initialize variables
 	$action = value("action");
@@ -43,9 +43,9 @@
     $form->buttonbar->add("action", $lang->get("new_product", "New Product"), "submit", "document.form1.processing.value = '';");
 		$form->buttonbar->add("separator", "", "", "", "");		
 		$form->buttonbar->add("action", $lang->get("new_category", "New Category"), "submit", "document.form1.processing.value = '';");
-
-	    if ($pnode != "11") {		
-			$form->buttonbar->add("action", $lang->get("edit_cat", "Edit Category"), "submit", "document.form1.processing.value= '';");
+    $form->buttonbar->add("action", $lang->get("edit_cat", "Edit Category"), "submit", "document.form1.processing.value= '';");
+	  
+	  if ($pnode != "11") {					
 			$form->buttonbar->add("action", $lang->get("del_cat", "Delete Category"), "submit", "document.form1.processing.value= '';");
 		}
 

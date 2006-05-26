@@ -27,7 +27,23 @@
 	$auth = new auth("SHOPADM");
 	$page = new page("Tax configuration");
   include("logic/menudef.inc.php");		
+	
+	$filter = new Filter("shop_tax", "TAX_ID");
+	$filter->addRule($lang->get("name"), "NAME", "NAME");
+	$filter->type_name = $lang->get("tax", "Tax");
+	$filtermenu = new Filtermenu($lang->get("tax"), $filter);
+	
+	$deleteHandler = new ActionHandler("Delete");
+	$deleteHandler->addDBAction("Delete from shop_tax Where TAX_ID = <oid>");
+	
+	$form = new StdEDForm($lang->get("edit_tax", "Edit tax"));
+	$cond = $form->setPK("shop_tax", "TAX_ID");
+	$form->add(new TextInput($lang->get("name"), "shop_tax", "NAME", $cond, "type:text,width:300,size:128", "MANDATORY&UNIQUE"));
+	$form->add(new TextInput($lang->get("percent", "Percent (%)"), "shop_tax", "PERCENT", $cond, "type:text,width:50,size:6", "NUMBER&MANDATORY"));
+	$form->registerActionHandler($deleteHandler);
 	 
-	 
+	
+	$page->addMenu($filtermenu);
+	$page->add($form);
 	$page->draw(); 
 ?>	 
