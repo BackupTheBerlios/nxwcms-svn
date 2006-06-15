@@ -67,7 +67,7 @@
 					$linkadd .= '&' . ((is_int($key)) ? 'var' . $key : $key) . '=' . rawurlencode($value);
 			}
 
-		$link_uri = $c["docroot"] . "modules/sma/sma.php?page=" . $this->pageId . "&v=" . $this->variation;
+		$link_uri = $c["docroot"] . "modules/sma/sma.php?page=" . $this->pageId . "&amp;v=" . $this->variation;
 		return ($link_uri . $linkadd);
 	}
  }

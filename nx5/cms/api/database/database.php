@@ -50,7 +50,7 @@
 				$database = $c["database"];
 
 			if ($c["dbdriver"] == "mysql") {
-                                $this->ADODB = &ADONewConnection($this->type);
+                    $this->ADODB = &ADONewConnection($this->type);
 			        $this->ADODB->PConnect($dbhost, $dbuser, $dbpasswd, $database);
                         } else if ($c["dbdriver"] == "mssql") {
                                 $this->ADODB = &ADONewConnection("ado_mssql");
