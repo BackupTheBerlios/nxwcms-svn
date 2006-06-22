@@ -210,40 +210,7 @@
 			return $output;
 		}
 		
-		/**
-		 * Draws the quick-links to directly switch from one image to another in fullscreen-view
-		 * @return		string	HTML-CODE to be written into the template.
-		 */
-		function drawQuickLinks() {
-			
-		}
-		
-		 /**
-		  * Draws current weather of a town.
-		  * @param string ZIP of the town (PLZ)
-		  * @param string design of the button (Numeric 0-9)
-		  */
-		 function drawCurrentWeather($zip, $design, $region="DEPLZ") {
-		 	return $this->_draw('C', $zip, $this->_getDesign($design), $region);
-		 }
-		 
-		 /**
-		  * Draws forecast weather of a town.
-		  * @param string ZIP of the town (PLZ)
-		  * @param string design of the button (Numeric 0-9)
-		  */
-		 function drawForecastWeather($zip, $design, $region="DEPLZ") {
-		   return $this->_draw('F', $zip, $this->_getDesign($design), $region);	
-		 }
-		 
-		 /**
-		  * Translate numeric-values into wetter.com-design
-		  * @param integer Number (0-9) of design
-		  */
-		 function _getDesign($design) {
-		   $designs=array("1", "1b", "1c", "1d", "2", "2b", "2c", "3", "4", "5");
-		   return $designs[$design];	
-		 }
+
 		 
 		 /**
 		  * Draw the html of the button

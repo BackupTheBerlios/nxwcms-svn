@@ -55,11 +55,11 @@
 			if ($variation == 0)
 			  $variation = $c["stdvariation"];
 			$zeroTrans = getDBCell("state_translation", "OUT_ID", "IN_ID=0 AND LEVEL=10");
-			
+				
 			if ($this->parent->level < 10) {
-				$menues = createDBCArray("sitemap", "MENU_ID", "IS_DISPLAYED=1 AND PARENT_ID=0 ORDER BY POSITION");
-			} else {
-				$menues = createDBCArray("sitemap", "MENU_ID", "IS_DISPLAYED=1 AND PARENT_ID=$zeroTrans ORDER BY POSITION");
+				$menues = createDBCArray("sitemap", "MENU_ID", "IS_DISPLAYED=1 AND PARENT_ID=0 ORDER BY POSITION");			
+			} else {			
+				$menues = createDBCArray("sitemap", "MENU_ID", "IS_DISPLAYED=1 AND PARENT_ID=$zeroTrans ORDER BY POSITION");				
 			}
 
 			for ($i = 0; $i < count($menues); $i++) {

@@ -55,8 +55,9 @@
 			$this->dhtml = new DHTMLLayout($this->parent);
 			$this->media = new MediaLayout($this->parent);
 			if (!is_object($this->menuRef)) {
-		   	   $menuType = reg_load('CDS/MENU');		   	
-		   	   $this->menuRef = createDCRef($c["path"]."designs/menu/".$menuType);
+		   	   $menuType = reg_load('CDS/MENU');	
+		   	   if ($menuType != "")	   	
+		   	     $this->menuRef = createDCRef($c["path"]."designs/menu/".$menuType);
 		    }
 		   
 		    if (is_object($this->menuRef))
@@ -206,7 +207,8 @@
 		    global $c;		 	
 		    if (!is_object($this->menuRef)) {
 		   	 $menuType = reg_load('CDS/MENU');		   	
-		   	 $this->menuRef = createDCRef($c["path"]."designs/menu/".$menuType);
+		   	 if ($menuType != "") 
+		   	   $this->menuRef = createDCRef($c["path"]."designs/menu/".$menuType);
 		   }
 		   echo $this->menuRef->getHeader();
 		 }
@@ -219,7 +221,8 @@
 		 	global $c;
 		 	if (!is_object($this->menuRef)) {
 		   	 $menuType = reg_load('CDS/MENU');
-		   	 $this->menuRef = createDCRef($c["path"]."designs/menu/".$menuType);
+		   	 if ($menuType != "")
+		   	   $this->menuRef = createDCRef($c["path"]."designs/menu/".$menuType);
 		   }
 		   echo $this->menuRef->getFooter();
 		 }
