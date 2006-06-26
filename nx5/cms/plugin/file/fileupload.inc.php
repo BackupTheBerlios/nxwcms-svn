@@ -81,6 +81,7 @@
 				}
 			}
 		}
+		
 		/**
 		 * determine the size of the image. write size to the database.
 		 * copy file to local folder
@@ -93,8 +94,7 @@
 
 			if ($delete) {
 				addUpdate("pgn_file", "FILENAME", "", "FKID = " . $this->fileId, "TEXT");
-
-				addUpdate("pgn_file", "TYPE", "", "FKID = " . $this->fileID, "TEXT");
+				addUpdate("pgn_file", "FILETYPE", "", "FKID = " . $this->fileID, "TEXT");
 			} else {
 				if ($this->suffix != "") {
 					$file = $HTTP_POST_FILES[$this->name]['tmp_name'];
@@ -105,7 +105,7 @@
 					$filename = $this->fileId . "." . $this->suffix;
 					// updating the database
 					addUpdate("pgn_file", "FILENAME", $filename, "FKID = " . $this->fileId, "TEXT");
-					addUpdate("pgn_file", "TYPE", $this->suffix, "FKID = " . $this->fileId, "NUMBER");
+					addUpdate("pgn_file", "FILETYPE", $this->suffix, "FKID = " . $this->fileId, "TEXT");
 
 					// loading up new item.
 					if ($oldfile != "")
@@ -118,6 +118,7 @@
 				}
 			}
 		}
+		
 		/** For Down-Grade-Compatibility only **/
 		function proccess() { $this->process(); }
 
