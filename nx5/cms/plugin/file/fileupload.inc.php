@@ -94,7 +94,7 @@
 
 			if ($delete) {
 				addUpdate("pgn_file", "FILENAME", "", "FKID = " . $this->fileId, "TEXT");
-				addUpdate("pgn_file", "FILETYPE", "", "FKID = " . $this->fileID, "TEXT");
+				addUpdate("pgn_file", "FILETYPE", "", "FKID = " . $this->fileId, "TEXT");
 			} else {
 				if ($this->suffix != "") {
 					$file = $HTTP_POST_FILES[$this->name]['tmp_name'];

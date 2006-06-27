@@ -23,7 +23,6 @@
 	 *	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	 **********************************************************************/
 	require "../../config.inc.php";
-
 	$auth = new auth("EDIT_OBJECT|OBJECT_PROPS");
 	$page = new page("Edit Object");
 	$page->setJS("TREE");	

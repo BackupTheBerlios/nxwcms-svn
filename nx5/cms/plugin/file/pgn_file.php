@@ -61,40 +61,16 @@
 		  * you must return it as return value!
 		  */
 		function preview() {
-			global $c;
-
-			$width = getDBCell("pgn_image", "WIDTH", "FKID = $this->fkid");
-			$height = getDBCell("pgn_image", "HEIGHT", "FKID = $this->fkid");
-
-			if ($width == 0 && $height == 0)
-				return "<div align=\"center\">No image uploaded yet.</div>";
-
-			// Scaling down image.
-			$scale_to = 200; //scale to 200px.
-			$scale = 1;
-			$dwidth = $width;
-			$dheight = $height;
-
-			if ($width > $scale_to || $height > $scale_to) {
-				$scale_w = $width / $scale_to;
-
-				$scale_h = $height / $scale_to;
-				$scale = max($scale_w, $scale_h);
-				//scale down
-				$dwidth = $width / $scale;
-				$dheight = $height / $scale;
-			}
-
-			$alt = getDBCell("pgn_image", "ALT", "FKID = $this->fkid");
-			$filename = getDBCell("pgn_image", "FILENAME", "FKID = $this->fkid");
-			$copyright = getDBCell("pgn_image", "COPYRIGHT", "FKID = $this->fkid");
-
-			// painting preview.
-			mt_srand ((double)microtime() * 1000000);
-			$randval = mt_rand();
-			$output = "<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n";
-			$output .= "<tr><td class=\"standardlight\"><b>Width:</b> $width<br><b>Height:</b> $height<br><br><b>ALT-Tag:</b> $alt<br><b>Copyright:</b> $copyright</td><td><a href=\"#\" border=\"0\" onClick=\"preview = window.open('" . $c["devfilesdocroot"] . $filename . "', '', 'width=$width,height=$height,scrollbars=no,status=no,menubar=no');\"><img src=\"" . $c["devfilesdocroot"] . $filename . "?$randval\" width=\"$dwidth\" height=\"$dheight\" alt=\"$alt\" border=\"0\"></a></td></tr>";
-			$output .= "</table>";
+			global $c, $lang;
+	
+	  	$filename = getDBCell("pgn_file", "FILENAME", "FKID = $this->fkid");
+			$copyright = getDBCell("pgn_file", "COPYRIGHT", "FKID = $this->fkid");
+			$name	  = getDBCell("pgn_file", "NAME", "FKID=$this->fkid");
+      if ($filename=="") {
+        return "<div align=\"center\">".$lang->get('nofile', 'No file uploaded yet.')."</div>";
+      } else {			
+			  return "<div align=\"center\"><a href=\"".$c['devfilesdocroot'].$filename."\" target=\"blank\">".$name."</a></div>";	
+      }
 			return $output;
 		}
 
@@ -115,43 +91,25 @@
 			$query->getrow();
 			$filename = $query->field("FILENAME");
 			
+			$im["name"] = $query->field("NAME");
+			$im["filename"] = $filename;
+			$im["description"] = $query->fields("DESCRIPTION");
+			$im["location"] = $query->fields("LOCATION");
+			
 			if (is_object($cds)) {
 			  $splevel = $cds->level;
 			}
+			
 			if ($splevel == 10) {
 				$im["path"] = $c["livefilesdocroot"] . $filename; // splevel=10 is for live-site, 0 for development.
-			//  $im["tpath"] = $c["livefilesdocroot"]."t".$filename;
-			//  $im["gtpath"] = $c["livefilesdocroot"]."gt".$filename;
 			}
 
 			if ($splevel == 0) {
 				$im["path"] = $c["devfilesdocroot"] . $filename;
-			//  $im["tpath"] = $c["devfilesdocroot"]."t".$filename;
-			//  $im["gtpath"] = $c["devfilesdocroot"]."gt".$filename;
 			}
-
-			$im["width"] = $query->field("WIDTH");
-			$im["height"] = $query->field("HEIGHT");
-
-			//$this->width = $im["width"];
-			//$this->height = $im["height"];
-			//$scaled = $this->scale();
-			//$im["twidth"] = $scaled["WIDTH"];
-			//$im["theight"] = $scaled["HEIGHT"];
-			$im["copyright"] = $query->field("COPYRIGHT");
-			$im["alt"] = $query->field("ALT");
-
-			if (stristr($param, "ALL"))
-				return $im;
-
-			if ($im["width"] != 0) {
-				$tag = "<img src=\"" . $im["path"] . "\" width=\"" . $im["width"] . "\" height=\"" . $im["height"] . "\" alt=\"" . $im["alt"] . "\" border=\"0\" >";
-			} else {
-				$tag = "";
-			}
-
+		
 			$query->free();
-			return $tag;
+			return $im;
 		}
 
 		/**
@@ -160,8 +118,7 @@
 		  */
 		function createRecord() {
 			$createHandler = new ActionHandler("CREATE");
-
-			$createHandler->addDBAction("INSERT INTO $this->management_table ($this->pk_name, FILENAME, ALT, WIDTH, HEIGHT, COPYRIGHT) VALUES ($this->fkid, '', '', 0,0,'')");
+			$createHandler->addDBAction("INSERT INTO $this->management_table ($this->pk_name, FILENAME) VALUES ($this->fkid, '')");
 			$createHandler->process("CREATE");
 		}
 
@@ -172,6 +129,7 @@
 		function deleteRecord() { Plugin::deleteRecord();
 			// does not need to be changed as long working on one table only!
 			}
+
 
 		/**
 		   * Create the sql-code for a version of the selected object
@@ -190,11 +148,13 @@
 			$querySQL = "SELECT * FROM $this->management_table WHERE $this->pk_name = $this->fkid";
 			$query = new query($db, $querySQL);
 			$query->getrow();
-			$width = addslashes($query->field("WIDTH"));
-			$height = addslashes($query->field("HEIGHT"));
-			$alt = addslashes($query->field("ALT"));
-			$copyright = addslashes($query->field("COPYRIGHT"));
+			      
 			$filename = $query->field("FILENAME");
+			$description = addslashes($query->field("DESCRIPTION"));
+			$filetype = $query->field("FILETYPE");
+			$location = $query->field("LOCATION");
+			$name     = $query->field("NAME");
+			
 			$query->free();
 			// copy image to new version
 			$fileparts = explode(".", $filename);
@@ -204,16 +164,12 @@
 			if (!$copy) {
 				nxDelete ($destinationPath , $newfile);
 			}
-
-			//if (file_exists($c["livefilespath"]."t".$newfile) && $filename != "") unlink($c["livefilespath"]."t".$newfile);
-			//if (file_exists($c["livefilespath"]."gt".$newfile) && $filename != "") unlink($c["livefilespath"]."gt".$newfile);
-			if ($suffix != "") {
+			
+			if ($suffix != "") {				
 				nxCopy($c["devfilespath"] . $filename, $destinationPath , $newfile);
 			}
-
-			//if ($filename != "") copy($c["devfilespath"]."t".$filename, $c["livefilespath"]."t".$newfile);
-			//if ($filename != "") copy($c["devfilespath"]."gt".$filename, $c["livefilespath"]."gt".$newfile);
-			$sql = "INSERT INTO $this->management_table ($this->pk_name, FILENAME, ALT, WIDTH, HEIGHT, COPYRIGHT) VALUES ($newid, '$newfile', '$alt', $width, $height, '$copyright')";
+		
+			$sql = "INSERT INTO $this->management_table ($this->pk_name, NAME,FILENAME, FILETYPE, LOCATION, DESCRIPTION) VALUES ($newid, '$name', '$newfile', '$filetype', '$location', '$description')";
 			return $sql;
 		}
 
