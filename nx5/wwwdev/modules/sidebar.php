@@ -1,17 +1,17 @@
 <?PHP
     
-  echo $menuCluster->content->get("LNews");
+ // echo $menuCluster->content->get("LNews");
   br();
   
-  $newsChannel = $menuCluster->channel->get("News");  
-  for ($i=0; $i<count($newsChannel); $i++) {
+  //$newsChannel = $menuCluster->channel->get("News");  
+  //for ($i=0; $i<count($newsChannel); $i++) {
   	br();
-  	$newsCluster = $cds->cluster->getById($newsChannel[$i]);
-  	echo '<a href="'.$cds->channel->getLink($newsChannel[$i]).'"><b>'.$newsCluster->content->get("Headline").'</b></a>';
+  	//$newsCluster = $cds->cluster->getById($newsChannel[$i]);
+  //	echo '<a href="'.$cds->channel->getLink($newsChannel[$i]).'"><b>'.$newsCluster->content->get("Headline").'</b></a>';
   	br();
-  	echo $newsCluster->content->get("Abstract");
+  //	echo $newsCluster->content->get("Abstract");
   	br();
-  }
+  //}
   br();
   /**
   uncomment to display an rss feed in the sidebar.
