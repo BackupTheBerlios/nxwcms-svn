@@ -400,10 +400,10 @@
 		  * do not call manually.
 		  */
 		function draw_header() {
-			global $c, $auth;			
+			global $c, $auth, $nx_version;			
 			echo "<html>";
 			echo "<head>";
-			echo "<title>$this->title</title>";	
+			echo "<title>N/X WCMS Backoffice v".$nx_version." - $this->title (".$c["database"].")</title>";	
 			echo "<meta http-equiv=\"Pragma\" content=\"no-cache\">\n";
 			echo "<meta http-equiv=\"Cache-Control\" content=\"no-cache, must-revalidate\">";
 			echo "<meta http-equiv=\"Expires\" content=\"0\">\n";

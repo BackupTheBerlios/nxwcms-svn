@@ -73,7 +73,7 @@
 					$spm = getDBCell("sitepage", "SPM_ID", "SPID = " . $spid);
 
 					$path = getDBCell("sitepage_master", "TEMPLATE_PATH", "SPM_ID = $spm");
-					$href = $c["devdocroot"] . $path . "?page=$spid&v=$variation";
+					$href = $c["devdocroot"] . $path . "?page=$spid&amp;v=$variation";
 				}
 
 				$content = "<a href=\"$href\" target=\"_blank\">$link_text</a>";

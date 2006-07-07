@@ -366,11 +366,13 @@
 	  $name = getDBCell('channel_articles', 'TITLE', "ARTICLE_ID = ".$articleId);	  
 	  $catname = getDBCell('channel_categories', 'NAME', 'CH_CAT_ID='.$cat);
 	  $spid = getDBCell('channel_categories', 'PAGE_ID', 'CH_CAT_ID='.$cat);
-	  $spid = getDBCell("state_translation", "OUT_ID", "IN_ID=$spid AND LEVEL=10");
-	  $menuId = getDBCell('sitepage', 'MENU_ID', 'SPID='.$spid);
-	  $result = getPageURL($menuId, $v);
-	  $result.='/'.makeURLSave($catname);
-	  $result.='/'.makeURLSave($name);
+	  if ($spid != "") {
+	    $spid = getDBCell("state_translation", "OUT_ID", "IN_ID=$spid AND LEVEL=10");
+	    $menuId = getDBCell('sitepage', 'MENU_ID', 'SPID='.$spid);
+	    $result = getPageURL($menuId, $v);
+	    $result.='/'.makeURLSave($catname);
+	    $result.='/'.makeURLSave($name);
+	  }
 	  return $result;		
 	}
 

@@ -25,12 +25,14 @@
 		var $icon;
 		var $type_name;
 		var $orderColumn="";
+		var $newLabel = ""; // Label which is displayed for creating a record.
 
 		/**
 		 * @param string db-table, on which you want to filter
 		 * @param string primary key of the table
 		 */
 		function Filter($table, $pk) {
+			global $lang;
 			$this->table = $table;
 
 			$this->pk = $pk;
@@ -41,6 +43,7 @@
 			$temp2 = explode("/", $temp[0]);
 			$this->link_action = $temp2[count($temp2) - 1];
 			$this->new_action = $this->link_action;
+			$this->newLabel = $lang->get("new");
 
 			// check and initialize filter variables.
 			$filter_rule = parseSQL(value("filter_rule", "", ""));
@@ -196,7 +199,7 @@
 			echo '<table width="100%" cellpadding="0" cellspacing="0" border="0">';
 			echo '<tr><td>' . drawSpacer(5, 5). '</td></tr>';
 			echo "<tr><td>" . drawSpacer(14, 11). "<a href=\"" . $this->new_action . "?sid=$sid&go=create\" class=\"list\">";
-			echo "<b>" . $lang->get("new"). "</b></a></td></tr>";
+			echo "<b>" . $this->newLabel. "</b></a></td></tr>";
 			$counter = 0;
 
 			while ($this->recordset->getrow()) {
