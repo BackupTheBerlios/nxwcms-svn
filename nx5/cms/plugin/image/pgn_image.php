@@ -130,7 +130,7 @@
 	  * @param integer Maximum height of the thumbnail
 	  * @returns array["WIDTH"], array["HEIGHT"]
 	  */
-		function scale($XScale = 280, $YScale = 200) {
+		function scale($XScale = 150, $YScale = 200) {
 			$scale = 1;
 
 			$dwidth = $this->width;

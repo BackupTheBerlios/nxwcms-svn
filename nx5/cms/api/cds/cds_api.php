@@ -66,8 +66,7 @@
 		$this->messages = new Messages($this);		
 		// Check PageId
 		if ($this->pageId == "0" || $this->pageId == "") {
-			$this->pageId = $this->management->getStartPage();	
-			echo "got it:".$this->pageId;
+			$this->pageId = $this->management->getStartPage();				
 		} else {			
 			if ($this->management->isSPExpired($this->pageId))	{
 				$this->messages->draw("pageExpired");

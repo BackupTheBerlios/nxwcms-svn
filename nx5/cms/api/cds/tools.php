@@ -54,6 +54,29 @@
 		  } 
 		  return $result;
 		}
+		
+		
+		/**
+		 * Get the URL of the last page to traverse back		 
+		 */
+		function getLastPageURL() {					
+			$lastURL = $_SERVER['HTTP_REFERER'];
+			return $lastURL;
+		}
+		
+		/**
+		 * Get a link back to the page who opened the actual one
+		 *
+		 * @param string $title
+		 * @param string $css
+		 * @return string
+		 */
+		function getBackLink($title, $css="") {
+			$class='';
+			if ($css != "") $class=' class="'.$css.'" ';
+			$result='<a href="'.$this->getLastPageURL().'" '.$class.'>'.$title.'</a>';
+			return $result;
+		}
 
 		/**
 		 * Trim a text to a special length. Searches for last point.
