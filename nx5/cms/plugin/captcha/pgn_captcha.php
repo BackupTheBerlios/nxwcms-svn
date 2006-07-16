@@ -33,7 +33,7 @@
 		
         
 		var $pluginType = 3; //CDS-API-Extension
-        
+        var $helpfile = "captcha/plugin_captcha.pdf";
 		/**
 		   * This function is used for drawing the html-code out to the templates.
 		   * It just returns the code
