@@ -94,6 +94,50 @@
 			return $content;
 		}
 		
+		
+		
+		/**
+		 * Retrieves the output of a field as defined in Cluster-Template. 
+		 * To be used for Items with maximum cardinality of 1 only!!!
+		 * @param string name of the access - key to query the content from.
+		 * @param string additional parameters for this plugin. // might be changed to array in future versions
+		 * @param integer ID of the Variation to query. Leave Blank or set to zero for Page-Variation. 
+		 * @returns string The output of the module.
+		 */
+		function getByAccessKey($key, $params = null, $variation = 0) {
+			// set variation.
+			if ($variation)
+				$this->variation = $variation;	
+			
+				// get content id.
+				$cid = getDBCell("content", "CID", "UPPER(ACCESSKEY)='".strtoupper($key)."' AND VERSION=".$this->parent->level);
+				if ($cid != "") {
+					$plugin = getDBCell("content", "MODULE_ID", "UPPER(ACCESSKEY)='".strtoupper($key)."'");
+					$oid = getDBCell("content_variations", "FK_ID", "CID = $cid AND VARIATION_ID = $this->variation AND DELETED=0");
+
+					if ($oid != "" && $plugin != "") {
+						$ref = createPGNRef($plugin, $oid, $clti);
+
+						$content = $ref->draw($params);
+						unset ($ref);
+					} else 
+					  $content = "";
+
+					if ($content != "")
+					  return $content;
+
+					// now the content seems to be empty. So we try standard variation.
+					if ($this->variation != $this->parent->stdVariation)
+					  $content = $this->get($name, $params, $this->parent->stdVariation);
+					return $content;			  
+					
+				} else {
+					log_error ("Content with accesskey ".$key." not found. May be it is not published (if live version).");					
+				}
+			
+			return "";
+		}
+		
 
 		/**
 		 * Retrieves the output of a field as defined in Cluster-Template. 

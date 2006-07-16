@@ -33,6 +33,7 @@
   $filter->addRule($lang->get("name"), "MODULE_NAME", "MODULE_NAME");
   $filter->icon = "li_plugin.gif";
   $filter->type_name = "Plugins";
+  $filter->newLabel = $lang->get('install_pgn', 'Install a plugin');
  
   $filtermenu = new Filtermenu($lang->get("pg_title"), $filter);
   $filtermenu->tipp = $lang->get("help_pgn", "Plug-ins allow you to enhance N/X beyond its standard features. Typically, plug-ins are used to create new objects types in addition to the two standard object types text and image.");

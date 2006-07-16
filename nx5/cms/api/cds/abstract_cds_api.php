@@ -23,6 +23,7 @@
  define("_LIVE", "10");
  define("_DEV", "0");
  $clusterCache = array();
+ $logger = "";
  
   /**
    * Base class for the oo CDS-API
@@ -44,7 +45,8 @@
 	var $messages = null;
 	var $cluster = null;
 	var $meta = null;
-   var $channel = null;
+    var $channel = null;
+    var $logTo = "";
 		
  	/**
  	 * Constructor for creating the CDS API interface
@@ -110,6 +112,28 @@
  		echo "Cluster-Node:".$this->pageClusterNodeId."<br>";
  		echo "Cluster: ".$this->pageClusterId."<br>";		
   	}	
+ }
+ 
+ 
+ /**
+  * Logs a CDS-Error and writes it to the place which is setup.
+  *
+  * @param unknown_type $txt
+  */
+ function log_error($txt) {
+   global $cds, $logger;	
+   if ($cds->logTo =="" && $cds->level == 0) {
+   	  echo $txt;   	
+   }
+   
+   if ($cds->logTo == "screen") {
+   	 echo $txt;
+   }
+   
+   if ($cds->logTo == "logger") {
+   	$logger.=$txt."\n";
+   }
+ 	
  }
  
  

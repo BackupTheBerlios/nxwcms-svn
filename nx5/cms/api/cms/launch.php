@@ -152,9 +152,9 @@
 			$index .= '</html>';
 
 			// write to disk 
-			$index_file = fopen($allDir . "index.php", "w");
-			fwrite($index_file, $index);
-			fclose ($index_file);
+			$index_file = @fopen($allDir . "index.php", "w");
+			@fwrite($index_file, $index);
+			@fclose ($index_file);
 		}	
 	}
 

@@ -98,7 +98,7 @@
          	if ($cds->is_development) {
          		// dev url
          		$category = getDBCell("channel_articles", "CH_CAT_ID", "ARTICLE_ID=".$articleId);
-         		$spid = getDBCell("channel_categories", "PAGE_ID", "CH_CAT_ID=".$cat);
+         		$spid = getDBCell("channel_categories", "PAGE_ID", "CH_CAT_ID=".$category);         		         		
          		$spm = getDBCell("sitepage", "SPM_ID", "SPID=".$spid);
          		$template=getDBCell("sitepage_master", "TEMPLATE_PATH", "SPM_ID=".$spm);
          		$result = $c['devdocroot'].$template."?page=$spid&v=$variation&article=$articleId";

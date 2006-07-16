@@ -79,7 +79,7 @@
 		  	$clearButton = new LinkButton("cl_".$this->name, $lang->get("clear", "Clear"), "navelement", "button", 'document.form1.'.$this->name.'.value=\'\'; document.getElementById(\'disp_'.$this->name.'\').innerHTML=\''.$noObj.'\';');
 		  	$clearButton->draw();
 		  	echo drawSpacer(5,5);		  		
-		  	$selectButton = new LinkButton("cl_".$this->name, $lang->get('find_obj',"Find Object"), "navelement", "button", "window.open('" . $c["docroot"] . "modules/content/objectbrowser.php?sid=$sid&filter=".$this->filter."&sname=".$this->name."&linkset=SELECT.LIB', 'library','Width=900px,Height=600px,help=no,status=yes,scrollbars=yes,resizable=yes')");
+		  	$selectButton = new LinkButton("cl_".$this->name, $lang->get('find_obj',"Find Object"), "navelement", "button", "window.open('" . $c["docroot"] . "modules/content/objectbrowser.php?sid=$sid&filter=".$this->filter."&sname=".$this->name."&linkset=SELECT.LIB', 'library','Width=1000px,Height=700px,help=no,status=yes,scrollbars=yes,resizable=yes')");
 		  	$selectButton->draw();
 		  	br();br();
 		  }

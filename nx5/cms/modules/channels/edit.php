@@ -1,5 +1,6 @@
 <?php
   require_once "../../config.inc.php";
+
   $auth = new auth("CHANNEL_EDIT");
   $aclf = $auth; // no acls present yet.
   $page = new Page("Edit Channels");
@@ -70,4 +71,6 @@
   	$page->draw();
   	
   }
+  
+  echo $errors;
 ?>

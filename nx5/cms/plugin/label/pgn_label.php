@@ -82,7 +82,7 @@
 			$content = nl2br(getDBCell("pgn_label", "CONTENT", "FKID = $this->fkid"));
 			$css = $this->getOption("TEXT1");
 			if ($css != "") {
-			  $content = '<span class="'.$css.'">'.$content."</span>";	
+			  $content = '<div class="'.$css.'">'.$content."</div>";	
 			}
 			return applyFilterPlugins($content);
 		}

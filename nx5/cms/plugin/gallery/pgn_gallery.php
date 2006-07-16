@@ -240,7 +240,7 @@
 			$content = '<div id="pgnIGContainer" style="width:'.$width.'px;height:'.$height.'px;">
 			  <img onClick="popupImg();" style="cursor:pointer;" src="'.$pgnIG["src"].'" alt="'.$pgnIG["alt"].'" width="'.$pgnIG["width"].'" height="'.$pgnIG["height"].'" id="pgnIGImage"/>
 	          <div id="pgnIGDescription" align="center"><b>1/'.$pgnIG["count"].'</b><br/>'.$pgnIG["alt"].'</div>
-			  <div id="pgnIGButtons" align="center"><a href="#" onClick="pgnIGPrev();return false;"/><img src="'.$syspath.'galprev.gif" width="70" height="15" border="0" alt="prev"/></a>&nbsp;&nbsp;<a href="#" onClick="pgnIGNext(); return false;"/><img src="'.$syspath.'galnext.gif" border="0" width="70" height="15" alt="next"/></a></div>
+			  <div id="pgnIGButtons" align="center"><a href="#" onClick="pgnIGPrev();return false;"/><img src="'.$syspath.'galprev.gif" border="0" alt="prev"/></a>&nbsp;&nbsp;<a href="#" onClick="pgnIGNext(); return false;"/><img src="'.$syspath.'galnext.gif" border="0" alt="next"/></a></div>
 			  </div>';
 			
 
