@@ -91,12 +91,8 @@ function ViewTicket($id) {
 	
 		}
 	</script>
-	<table align="center" bgcolor="silver" cellspacing="0" cellpadding="0" width="500" border=0>
-		<tr bgcolor="black">
-			<td class="formtitle">General Information</td>
-		</tr>
-	</table>
-	<table align="center" bgcolor="silver" cellspacing="0" cellpadding="0" width="500" border=0>
+	<table align="center" cellspacing="0" cellpadding="0" width="600" border=0>
+	<tr><td colspan="2">'.getFormHeadline("Ticket Information").'</td></tr>
 	<tr>
 		<td align="right" width="140" class="standard"><b>Ticket ID:</b></tD>
 		<td class="standardlight">'.$ticket_row["ID"].'</td>
@@ -133,7 +129,7 @@ function ViewTicket($id) {
 	<td align="right" class="standard">&nbsp;</tD>
 		<Td class="standardlight">&nbsp;</td>
 	</tr>
-	
+	<tr><td colspan="2">'.getFormFooterline().'</td></tr>	
 	</table>
 	<br>';
 	
@@ -143,7 +139,7 @@ function ViewTicket($id) {
 		/* Zuerst werden die Antworten angezeigt, die wir bereits gesendet haben */
 		$answers_res = mysql_query("select * from pgn_tickets_answers where reference = ".$msg_row["ID"]." order by timestamp DESC, ID DESC;");
 		while ($answer_row = mysql_fetch_array($answers_res)) {
-			$out.='<table align="center" bgcolor="silver" cellspacing="0" cellpadding="0" width="500" border=0>
+			$out.='<table align="center" cellspacing="0" cellpadding="0" width="600" border=0>
 			<tr bgcolor="black">
 				<td class="formtitle"><b>Reply: '.date("l, F j Y \a\t H:i", $answer_row["timestamp"]).'</b></td>
 				<td class="formtitle" width="50"><a href="javascript:toggle(\'mes'.$divCounter.'\');" class="box">toggle</a></td>
@@ -151,7 +147,7 @@ function ViewTicket($id) {
 			</table><div>			
 			<table id="mes'.$divCounter; 
 			$divCounter++;
-			$out.='" align="center" bgcolor="silver" cellspacing="0" cellpadding="0" width="500" border=0';
+			$out.='" align="center" cellspacing="0" cellpadding="0" width="600" border=0';
 			if ($divCounter>3) $out.=$hide;
 			$out.='>
 			<tr>
@@ -169,7 +165,7 @@ function ViewTicket($id) {
 
 		/* Jetzt wird die Anfrage angezeigt, auf die wir evtl. antworten sollten (wenn nicht bereits geschehen) */
 		$out.='
-		<table align="center" bgcolor="silver" cellspacing="0" cellpadding="0" width="500" border=0>
+		<table align="center" cellspacing="0" cellpadding="0" width="600" border=0>
 		<tr bgcolor="black">
 			<td class="formtitle" width="*"><b>Request: '.date("l, F j Y \a\t H:i", $msg_row["timestamp"]).'</b></td>
 			<td class="formtitle" width="50"><a href="javascript:toggle(\'mes'. $divCounter.'\');" class="box">toggle</a></td>
@@ -196,7 +192,7 @@ function ViewTicket($id) {
 	
 	
 	
-	$out.='<table align="center" bgcolor="silver" cellspacing="0" cellpadding="0" width="500" border=0>
+	$out.='<table align="center"  cellspacing="0" cellpadding="0" width="600" border=0>
 	<tr>
 		<td class="formtitle">Post Reply</td>
 	</tr>
@@ -237,7 +233,7 @@ function ViewTicket($id) {
 		<input type="hidden" name="a" value="panswer">
 		<input type="hidden" name="id" value="'. $firstId.'">
 		<input type="hidden" name="sid" value="'.$sid.'">
-		<textarea name="message" cols="80" rows="10" wrap="soft"></textarea><br><br>
+		<textarea name="message" rows="10" wrap="soft" style="width:500px;"></textarea><br><br>
 		<input type="submit" value="Post">
 		<input type="reset" value="Reset From">
 		</form>
@@ -264,18 +260,18 @@ function ShowMain() {
 	</script>
 	
 	<form name="ticket" action="index.php" method="POST">
-	<table align="center" bgcolor="silver" cellspacing="0" cellpadding="0" width="500" border=0>
+	<table align="center" bgcolor="silver" cellspacing="0" cellpadding="0" width="600" border=0>
 		<tr bgcolor="black">
-			<td class="formtitle">'.$headline.'</td>
+			<td>'.getFormHeadline($headline).'</td>
 		</tr>
 	</table>
-	<table width="500" border="0" cellspacing=0 cellpadding=0 align="centeR">
-	<tr class="title2">
+	<table width="600" border="0" cellspacing=0 cellpadding=0 align="centeR">
+	<tr>
 		<td>&nbsp;</td>
-		<td><b>Subject</b></td>
-		<td><b>From</b></td>
-		<td><b>Category</b></td>
-		<Td><b>Unanswered Msgs</b></td>
+		<td>Subject</td>
+		<td>From</td>
+		<td>Category</td>
+		<Td>Unanswered Msgs</td>
 	</tr>';
 	
 	$tick_count = 0;
@@ -318,14 +314,16 @@ function ShowMain() {
 	if ($status=='open') $out.=  '<input type="submit" name="close" value="Close Selected">';
 	if ($status=='closed') $out.=  '<input type="submit" name="reopen" value="Reopen Selected">';
 	$out.=  '<input type="submit" name="refresh" value="Refresh Page">';
-	$out.=  '</td><td align="right">';
+	$out.=  '</td><td align="right"><br>';
 	$out.=  '<input type="submit" name="delete" value="Delete Selected" onClick="return chkTicketDelete();">';
 	$out.=  '</td></tr></table>';
 	$out.=  '</td></tr>';
+	$out.=  '<tr><td colspan="5">'.getFormFooterline().'</td></tr>';
 	$out.=  "</table>";
-	$out.=  '</form>';
+	$out.=  '</form>';	
 }
-$container = new ExtContentContainer();
+
+$container = new ExtContentContainer("Ticketing");
 $container->extcontent = $out;
 $page->addMenu($menu);
 $page->add($container);
