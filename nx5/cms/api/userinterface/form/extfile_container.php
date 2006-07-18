@@ -52,4 +52,26 @@
 			echo WUIObject::std_footer();
 		}
 	}
+	
+	
+	
+	/**
+	 * Container for any HTML-Code you like.
+	 * @package WebUserInterface
+	 */
+	class ExtContentContainer extends Form {
+		var $extcontent;
+		var $title;
+		
+		function ExtContentContainer($title) {
+			$this->title = $title;			
+		}
+		
+		/**
+		  * Draw the container 
+		  */
+		function draw() {
+			echo $this->extcontent;
+		}
+	}
 ?>
