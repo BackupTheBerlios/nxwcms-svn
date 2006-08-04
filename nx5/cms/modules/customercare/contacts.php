@@ -10,7 +10,7 @@
 
  require_once "../../config.inc.php";
 
-$auth= new auth("ADMINISTRATOR|CUSTOMER-CARE");
+$auth= new auth("CUSTOMERCARE");
 $page= new page ("Tickets Category Administration");
 
 

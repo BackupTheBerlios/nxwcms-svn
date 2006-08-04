@@ -1,7 +1,7 @@
 <?
 //session_register ("rep");
 require_once "../../config.inc.php";
-$auth = new auth("ADMINISTRATOR|CUSTOMER-CARE");
+$auth = new auth("CUSTOMERCARE|CUSTOMERCAREADMIN");
 $page = new Page("Email Ticketing");
 require_once("tickets.inc.php");
 GetEmails();
@@ -275,10 +275,12 @@ function ShowMain() {
 	</tr>';
 	
 	$tick_count = 0;
-	while ($tickets_row = mysql_fetch_array($tickets_res)) {
+	if (!!$ticket_res) {
+	  while ($tickets_row = mysql_fetch_array($tickets_res)) {
 
-		$tickets[$tickets_row["ID"]] = new Ticket($tickets_row);
-		$tick_count++;
+		  $tickets[$tickets_row["ID"]] = new Ticket($tickets_row);
+		  $tick_count++;
+	  }
 	}
 	
 	$count = 0;

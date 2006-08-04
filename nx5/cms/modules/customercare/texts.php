@@ -4,7 +4,7 @@
  **********************************************************************/
 
  require_once "../../config.inc.php";
-$auth= new auth("ADMINISTRATOR|CUSTOMER-CARE");
+$auth= new auth("CUSTOMERCAREADMIN");
  $page= new page ("Textblock Administration");
 
  $filter = new Filter("pgn_tickets_textblocks", "BLOCK_ID");

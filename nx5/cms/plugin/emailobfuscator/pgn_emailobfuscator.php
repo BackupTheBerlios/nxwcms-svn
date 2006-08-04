@@ -42,7 +42,16 @@
 		 * @param string Text to parse
 		 */
 		 function parseText($text) {
-		   return $text;
+		   return $text.'parsed';
+		 }
+		 
+		 
+		 /**
+		  * Mask the mailaddress so that harvestors cannot make use of it.
+		  * @param string mailaddress
+		  */
+		 function getMaskedMailAddress($mailAddress) {
+		 	//<!-- Begin user = "yourname"; site = "yoursite.com"; document.write('<a href=\"mailto:' + user + '@' + site + '\">'); document.write('email me'+'</a>'); // End --> 
 		 }
 		
 

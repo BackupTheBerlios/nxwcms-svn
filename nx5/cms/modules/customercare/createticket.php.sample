@@ -1,7 +1,7 @@
 <?
 /* This script is called by a form on your website used by your clients to submit a support ticket. */
 
-include("phpTickets/tickets.inc.php");
+include("tickets.inc.php");
 
 $ticket = CreateTicket($ticket_subject, $ticket_name, $ticket_email, $ticket_category, $ticket_phone, $ticket_pri);
 if ($ticket == false)
