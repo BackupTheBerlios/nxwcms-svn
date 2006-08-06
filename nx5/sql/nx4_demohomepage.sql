@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 2.7.0-pl1
 -- http://www.phpmyadmin.net
 -- 
@@ -9116,3 +9116,19 @@ CREATE TABLE `variations` (
 
 INSERT INTO `variations` (`VARIATION_ID`, `NAME`, `SHORTTEXT`, `DESCRIPTION`, `DELETED`) VALUES (1, 'Standard', 'std', 'Standard Value, No Variation', 0);
 INSERT INTO `variations` (`VARIATION_ID`, `NAME`, `SHORTTEXT`, `DESCRIPTION`, `DELETED`) VALUES (101362, 'Deutsch', 'de', 'German language variation', 0);
+
+CREATE TABLE `tickets` (
+  `subject` text,
+  `name` text,
+  `email` text,
+  `phone` text,
+  `status` enum('open','closed') NOT NULL default 'open',
+  `rate` int(2) default NULL,
+  `rep` int(5) default NULL,
+  `ID` int(6) NOT NULL default '0',
+  `cat` int(5) NOT NULL default '0',
+  `priority` tinyint(1) NOT NULL default '2',
+  `tracking` varchar(32) default NULL,
+  `INSERTTIMESTAMP` datetime NOT NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=MyISAM;

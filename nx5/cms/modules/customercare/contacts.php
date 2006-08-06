@@ -22,11 +22,7 @@ $page= new page ("Tickets Category Administration");
 
 
 $menu = new Filtermenu("Edit Contact", $filter);
-
-$menu->addMenuEntry("Open Requests", "index.php");
-$menu->addMenuEntry("Closed Requests", "index.php?status=closed&sid=$sid");
-$menu->addMenuEntry("Edit Textblocks", "texts.php");
-$menu->addMenuEntry("Browse Contacts", "contacts.php");
+include "menudef.inc.php";
 
 if ($auth->checkPermission("ADMINISTRATOR")) $menu->addMenuEntry("Edit Categories", "category.php");
 

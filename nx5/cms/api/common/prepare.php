@@ -8,14 +8,13 @@
 	// Anti-Cycle-List Array
 	$acl = array ();
 
-	/**
-	if (ini_get("register_globals") == true) {
-		echo "We are doing a refactoring of N/X at the moment. You need to turn register_globals off, to start the system.";
 
-		echo "Please report any failures to sven@nxsystems.org!";
+	if (ini_get("register_globals") == true) {
+		echo "For security reasons N/X WCMS should never be run with the PHP-Option register_globals=On!<br>";
+		echo "You can change this option by editing your php.ini or by creating an .htaccess file if you are running on an shared hoster.<br><br>";
+		echo "To remove this message, you need to edit the file cms/api/common/prepare.php.";		
 		exit();
 	}
-	*/
 	
 	// set variables that should not be parsed.
 	$excludeFromIDS = array (
@@ -40,7 +39,7 @@
 
 		
 	// setting version
-	$nx_version = "4.5.0.45";
+	$nx_version = "4.5.0.60";
 	// Global variables
 	// database related
 	$recordsets = null;

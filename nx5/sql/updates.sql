@@ -3792,6 +3792,21 @@ INSERT INTO `sys_functions` (`FUNCTION_ID`, `PARENT_ID`, `NAME`, `DESCRIPTION`) 
 INSERT INTO `sys_functions` (`FUNCTION_ID`, `PARENT_ID`, `NAME`, `DESCRIPTION`) VALUES ('CUSTOMERCAREADMIN', 'ESERVICES', 'Customer Care Admin', 'Allow technical adminstration of customer care.');
 
 
+CREATE TABLE `tickets` (
+  `subject` text,
+  `name` text,
+  `email` text,
+  `phone` text,
+  `status` enum('open','closed') NOT NULL default 'open',
+  `rate` int(2) default NULL,
+  `rep` int(5) default NULL,
+  `ID` int(6) NOT NULL default '0',
+  `cat` int(5) NOT NULL default '0',
+  `priority` tinyint(1) NOT NULL default '2',
+  `tracking` varchar(32) default NULL,
+  `INSERTTIMESTAMP` datetime NOT NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=MyISAM;
 
 
 

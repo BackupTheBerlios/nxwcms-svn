@@ -1,18 +1,25 @@
 <?
-//session_register ("rep");
-require_once "../../config.inc.php";
-$auth = new auth("CUSTOMERCARE|CUSTOMERCAREADMIN");
-$page = new Page("Email Ticketing");
-require_once("tickets.inc.php");
-GetEmails();
-$menu = new StdMenu("Customer Care");
-$menu->addMenuEntry("Open Requests", "index.php");
-$menu->addMenuEntry("Closed Requests", "index.php?status=closed&sid=$sid");
-$menu->addMenuEntry("Edit Textblocks", "texts.php");
-$menu->addMenuEntry("Browse Contacts", "contacts.php");
-$out = '<!-- start ---->';
-if ($auth->checkPermission("ADMINISTRATOR")) $menu->addMenuEntry("Edit Categories", "category.php");
-	
+  require_once "../../config.inc.php";
+  $auth = new auth("CUSTOMERCARE|CUSTOMERCAREADMIN");
+  $page = new Page("Email Ticketing");
+  
+  $menu = new StdMenu("Customer Care");
+  include "menudef.inc.php";
+
+  require_once("tickets.inc.php");
+  GetEmails();
+  $a = value("a", "NOSPACES", "");
+  $id= value("id", "NUMERIC", "0");
+  $close   = value("close");
+  $reopen  = value("reopen");
+  $delete  = value("delete");
+  $t = value("t");
+  if (isset($_POST["a"]))
+    $a = $_POST["a"];
+  
+  if (isset($_POST["id"]))
+    $id = $_POST["id"];
+      
 		$rep["username"] = $auth->userName;
 				
 		switch ($a) {
@@ -20,21 +27,21 @@ if ($auth->checkPermission("ADMINISTRATOR")) $menu->addMenuEntry("Edit Categorie
 				ViewTicket($id);
 				break;
 			case "manage":
-				if ($delete) {
+				if ($delete != "0") {
 					if (isset($t)) {
 						foreach ($t as $id => $val) {
-							mysql_query("delete from pgn_tickets_answers where ticket = ".$id.";", $link);
-							mysql_query("delete from pgn_tickets_messages where ticket = ".$id.";", $link);
-							mysql_query("delete from pgn_tickets where ID = ".$id.";", $link);
+							mysql_query("delete from tickets_answers where ticket = ".$id.";", $link);
+							mysql_query("delete from tickets_messages where ticket = ".$id.";", $link);
+							mysql_query("delete from tickets where ID = ".$id.";", $link);
 						}
 					}
-				} else if ($close) {
+				} else if ($close != "0") {
 					if (isset($t)) {
 						foreach ($t as $id => $val) {
 							if ($id != "") CloseTicket($id);
 						}
 					}
-				} else if ($reopen) {
+				} else if ($reopen != "0") {
 					if (isset($t)) {
 						foreach ($t as $id => $val) {
 							if ($id != "") OpenTicket($id);
@@ -43,11 +50,12 @@ if ($auth->checkPermission("ADMINISTRATOR")) $menu->addMenuEntry("Edit Categorie
 				}						
 				ShowMain();
 				break;
-			case "panswer":
+			case "panswer":				
 				//$reps_res = mysql_query("select ID from reps where username = '".$rep["username"]."';");
 				//$reps_row = mysql_fetch_array($reps_res);
-				$msg_res = mysql_query("select ticket from pgn_tickets_messages where ID = $id");
+				$msg_res = mysql_query("select ticket from tickets_messages where ID = $id");
 				$msg_row = mysql_fetch_array($msg_res);
+				$message = value("message");
 				if (PostAnswer($message, $auth->userId, $id))
 					ViewTicket($msg_row["ticket"]);
 				else
@@ -66,9 +74,9 @@ function ViewTicket($id) {
 	$divCounter=1;
 	$firstId = 0;
 	$hide=" style='display:none;'";
-	$ticket_res = mysql_query("select * from pgn_tickets where ID = $id;");
+	$ticket_res = mysql_query("select * from tickets where ID = $id;");
 	$ticket_row = mysql_fetch_array($ticket_res);
-	$cat_res = mysql_query("select * from pgn_tickets_categories where id = ".$ticket_row["cat"].";");
+	$cat_res = mysql_query("select * from tickets_categories where id = ".$ticket_row["cat"].";");
 	$cat_row = mysql_fetch_array($cat_res);
 	if ($ticket_row["priority"] == 1)
 		$pri = '<font color="green">Low</font>';
@@ -94,53 +102,45 @@ function ViewTicket($id) {
 	<table align="center" cellspacing="0" cellpadding="0" width="600" border=0>
 	<tr><td colspan="2">'.getFormHeadline("Ticket Information").'</td></tr>
 	<tr>
-		<td align="right" width="140" class="standard"><b>Ticket ID:</b></tD>
+		<td width="140" class="standard"><b>Ticket ID:</b></tD>
 		<td class="standardlight">'.$ticket_row["ID"].'</td>
 	</tr>
 	<tr>
-		<td align="right" class="standard"><b>Status:</b></tD>
+		<td  class="standard"><b>Status:</b></tD>
 		<Td class="standardlight">'.$ticket_row["status"].'</td>
 	</tr>
 	<tr>
-		<td align="right" class="standard"><b>Subject:</b></tD>
+		<td  class="standard"><b>Subject:</b></tD>
 		<Td class="standardlight">'.stripslashes($ticket_row["subject"]).'</td>
 	</tr>
 	<tr>
-		<td align="right" class="standard"><b>Category:</b></tD>
+		<td  class="standard"><b>Category:</b></tD>
 		<Td class="standardlight">'. $cat_row["name"].'</td>
 	</tr>
 	<tr>
-		<td align="right" class="standard"><b>Name:</b></tD>
+		<td  class="standard"><b>Name:</b></tD>
 		<Td class="standardlight">'. htmlspecialchars($ticket_row["name"]).'</td>
 	</tr>
 	<tr>
-		<td align="right" class="standard"><b>Email:</b></tD>
+		<td class="standard"><b>Email:</b></tD>
 		<Td class="standardlight">'.htmlspecialchars($ticket_row["email"]).'</td>
 	</tr>
 	<tr>
-		<td align="right" class="standard"><b>Phone:</b></tD>
+		<td  class="standard"><b>Phone:</b></tD>
 		<Td class="standardlight">'.$ticket_row["phone"].'</td>
-	</tr>
-	<tr>
-	<td align="right" class="standard">&nbsp;</tD>
-		<Td class="standardlight"><a class="box" href="contacts.php?sid='.$sid.'&oid='.$ticket_row["ID"].'&go=update">Edit user profile</a>
-	</td><td>&nbsp;</td></tr>
-	<tr>
-	<td align="right" class="standard">&nbsp;</tD>
-		<Td class="standardlight">&nbsp;</td>
 	</tr>
 	<tr><td colspan="2">'.getFormFooterline().'</td></tr>	
 	</table>
 	<br>';
 	
 	
-	$msg_res = mysql_query("select * from pgn_tickets_messages where ticket = ".$ticket_row["ID"]." order by timestamp DESC, ID DESC;");
+	$msg_res = mysql_query("select * from tickets_messages where ticket = ".$ticket_row["ID"]." order by timestamp DESC, ID DESC;");
 	while ($msg_row = mysql_fetch_array($msg_res)) {
 		/* Zuerst werden die Antworten angezeigt, die wir bereits gesendet haben */
-		$answers_res = mysql_query("select * from pgn_tickets_answers where reference = ".$msg_row["ID"]." order by timestamp DESC, ID DESC;");
+		$answers_res = mysql_query("select * from tickets_answers where reference = ".$msg_row["ID"]." order by timestamp DESC, ID DESC;");
 		while ($answer_row = mysql_fetch_array($answers_res)) {
-			$out.='<table align="center" cellspacing="0" cellpadding="0" width="600" border=0>
-			<tr bgcolor="black">
+			$out.='<table align="center" cellspacing="0" cellpadding="0" width="600" border=0 class="headbox2">
+			<tr>
 				<td class="formtitle"><b>Reply: '.date("l, F j Y \a\t H:i", $answer_row["timestamp"]).'</b></td>
 				<td class="formtitle" width="50"><a href="javascript:toggle(\'mes'.$divCounter.'\');" class="box">toggle</a></td>
 			</tr>
@@ -165,15 +165,17 @@ function ViewTicket($id) {
 
 		/* Jetzt wird die Anfrage angezeigt, auf die wir evtl. antworten sollten (wenn nicht bereits geschehen) */
 		$out.='
-		<table align="center" cellspacing="0" cellpadding="0" width="600" border=0>
-		<tr bgcolor="black">
-			<td class="formtitle" width="*"><b>Request: '.date("l, F j Y \a\t H:i", $msg_row["timestamp"]).'</b></td>
-			<td class="formtitle" width="50"><a href="javascript:toggle(\'mes'. $divCounter.'\');" class="box">toggle</a></td>
+		<table align="center" cellspacing="0" cellpadding="0" width="600" border=0  class="headbox2">
+		<tr>
+			<td  width="*"><b>Request: '.date("l, F j Y \a\t H:i", $msg_row["timestamp"]).'</b></td>
+			<td  width="50"><a href="javascript:toggle(\'mes'. $divCounter.'\');" class="box">toggle</a></td>
 		</tr>
-		</table>		
+		</table>
+
+			
 		<div><table id="mes'.$divCounter; 
 		$divCounter++;
-		$out.='" align="center" bgcolor="silver" cellspacing="0" cellpadding="0" width="500" border=0 ';
+		$out.='" align="center" bgcolor="silver" cellspacing="0" cellpadding="0" width="600" border=0 ';
 		if ($divCounter>3) $out.= $hide; 
 		$out.='><tr>
 			<td class="standardlight">';
@@ -191,12 +193,12 @@ function ViewTicket($id) {
 	}
 	
 	
-	
+	$out.='<br><br>';
 	$out.='<table align="center"  cellspacing="0" cellpadding="0" width="600" border=0>
 	<tr>
-		<td class="formtitle">Post Reply</td>
+		<td class="headbox">Post Reply</td>
 	</tr>
-	<tR bgcolor="silver">
+	<tR bgcolor="standard">
 		<td align="center" class="standardlight"><br>
 		<font color="white">
 		<form  name="replies" method="POST">
@@ -211,7 +213,7 @@ function ViewTicket($id) {
 		
 		$blocks = null;
 		global $db;
-		$sql = "SELECT NAME, CONTENT FROM pgn_tickets_textblocks ORDER BY NAME";
+		$sql = "SELECT NAME, CONTENT FROM tickets_textblocks ORDER BY NAME";
 		$query = new query($db, $sql);
 		$i=0;
 		while ($query->getrow()) {
@@ -251,7 +253,10 @@ function ShowMain() {
 		$headline = "Open Requests";
 		$status = "open";
 	}
-	$tickets_res = mysql_query("select * from pgn_tickets where status = '$status' order by INSERTTIMESTAMP DESC", $link);
+
+	$sql = "select * from tickets where status = '$status' order by INSERTTIMESTAMP DESC";
+
+	$tickets_res = mysql_query($sql, $link);
 	$out.='
 	<script language="JavaScript">
 		function chkTicketDelete() {
@@ -265,23 +270,24 @@ function ShowMain() {
 			<td>'.getFormHeadline($headline).'</td>
 		</tr>
 	</table>
+	<br>
 	<table width="600" border="0" cellspacing=0 cellpadding=0 align="centeR">
 	<tr>
-		<td>&nbsp;</td>
-		<td>Subject</td>
-		<td>From</td>
-		<td>Category</td>
-		<Td>Unanswered Msgs</td>
+		<td class="gridtitle">&nbsp;</td>
+		<td class="gridtitle">Subject</td>
+		<td class="gridtitle">From</td>
+		<td class="gridtitle">Category</td>
+		<td class="gridtitle">Unanswered Msgs</td>
 	</tr>';
 	
 	$tick_count = 0;
-	if (!!$ticket_res) {
+	if ($tickets_res) {
 	  while ($tickets_row = mysql_fetch_array($tickets_res)) {
-
 		  $tickets[$tickets_row["ID"]] = new Ticket($tickets_row);
 		  $tick_count++;
 	  }
 	}
+	
 	
 	$count = 0;
 	while ($count < $tick_count) {
@@ -298,7 +304,7 @@ function ShowMain() {
 		$out.=  '<td><input type="checkbox" name="t['.$tickets[$next]->id.']"></td>';
 		$out.=  '<td><a href="index.php?a=vticket&id='.$tickets[$next]->id.'&sid='.$sid.'">'.$tickets[$next]->subject.'</a></td>';
 		$out.=  '<td>'.$tickets[$next]->name.'</td>';
-		$cat_res = mysql_query("select * from pgn_tickets_categories where id = ".$tickets[$next]->cat.";", $link);
+		$cat_res = mysql_query("select * from tickets_categories where id = ".$tickets[$next]->cat.";", $link);
 		$cat_row = mysql_fetch_array($cat_res);
 		$out.=  '<td>'.$cat_row["name"].'</td>';
 		$out.=  '<td>'.$tickets[$next]->unanswered.'</tD>';

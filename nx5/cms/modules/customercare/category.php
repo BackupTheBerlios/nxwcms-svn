@@ -10,12 +10,8 @@
  $filter = new Filter("tickets_categories", "id");
  $filter->addRule("Category", "name", "name");
 
-$menu = new Filtermenu("Edit Categories", $filter);
-$menu->addMenuEntry("Open Requests", "index.php");
-$menu->addMenuEntry("Closed Requests", "index.php?status=closed&sid=$sid");
-$menu->addMenuEntry("Edit Textblocks", "texts.php");
-$menu->addMenuEntry("Browse Contacts", "contacts.php");
-$menu->addMenuEntry("Edit Categories", "category.php");
+ $menu = new Filtermenu("Edit Categories", $filter);
+ include "menudef.inc.php";
   
  $deleteHandler = new ActionHandler("DELETE");
  $deleteHandler->addDbAction("DELETE FROM tickets_categories where id=$oid");

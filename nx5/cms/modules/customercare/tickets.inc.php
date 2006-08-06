@@ -40,9 +40,9 @@ class Ticket {
 		$this->printed = false;
 		$this->lastanswer = 0; // to be updated in the next lines.
 
-		$messages_res = mysql_query("select * from pgn_tickets_messages where ticket = ".$this->id." order by timestamp ASC;");
+		$messages_res = mysql_query("select * from tickets_messages where ticket = ".$this->id." order by timestamp ASC;");
 		/* added by FK (lastanswer) */
-		$tanswers_res = mysql_query("select * from pgn_tickets_answers where ticket = ".$this->id." order by timestamp ASC;");
+		$tanswers_res = mysql_query("select * from tickets_answers where ticket = ".$this->id." order by timestamp ASC;");
 
 		while ($tanswers_row = mysql_fetch_array($tanswers_res)) {
 			if ($tanswers_row["timestamp"] > $this->lastanswer) 
@@ -52,7 +52,7 @@ class Ticket {
 
 		while ($messages_row = mysql_fetch_array($messages_res)) {
 			$this->in = 0;
-			$answer_res = mysql_query("select * from pgn_tickets_answers where reference = ".$messages_row["ID"].";");
+			$answer_res = mysql_query("select * from tickets_answers where reference = ".$messages_row["ID"].";");
 			$this->out = $this->out + mysql_num_rows($answer_res);
 			if (mysql_num_rows($answer_res) == 0) {
 				if (!isset($this->age))
@@ -79,62 +79,64 @@ function GetEmails() {
 	global $trouble_email;
 
 	/* Find out which pop accounts (categories) we have to check */
-	$cat_res = mysql_query("select * from pgn_tickets_categories;");
+	$cat_res = mysql_query("select * from tickets_categories;");
 
 	/* Check each pop accounts / categories */
-	while ($cat_row = mysql_fetch_array($cat_res)) {
-		$mbox = imap_open("{".$cat_row["pophost"].":110/pop3/notls}INBOX",$cat_row["popuser"],$cat_row["poppass"])
+	if (!!$cat_res) {	
+		while ($cat_row = mysql_fetch_array($cat_res)) {
+			$mbox = imap_open("{".$cat_row["pophost"].":110/pop3/notls}INBOX",$cat_row["popuser"],$cat_row["poppass"])
 			or die("can't connect: ".imap_last_error());
-		 
-		$curmsg = 1;
-		while ($curmsg <= imap_num_msg($mbox)) {
-			//print "Retrieving new message.<br>";
-			$body = get_part($mbox, $curmsg, "TEXT/PLAIN");
-			if ($body == "")
+
+			$curmsg = 1;
+			while ($curmsg <= imap_num_msg($mbox)) {
+				//print "Retrieving new message.<br>";
+				$body = get_part($mbox, $curmsg, "TEXT/PLAIN");
+				if ($body == "")
 				$body = get_part($mbox, $curmsg, "TEXT/HTML");
-			// if ($body == "") { /* We can't do anything with this email, leave it there */
-			//	print "Error: Message could not be parsed. I left it in the mailbox.<br>";
-			//	continue;
-			// }
-			$head = imap_headerinfo($mbox, $curmsg, 800, 800);
-			// TODO:  Name and Email address should be properly parsed here.
-			$email = $head->reply_toaddress;
-			$name = $head->fromaddress;
-			$subject = $head->fetchsubject;
-			//print "Subject: $subject<br>";
-			
-			/* Check the subject for ticket number */
-			if (!ereg ("[[][#][0-9]{6}[]]", $head->fetchsubject)) {
-				/* Seems like a new ticket, create it first */
-				//print "Creating a new ticket.<br>";
-				$ticket_id = CreateTicket($subject, $name, $email, $cat_row["id"], "");
-				if ($ticket_id == false) {
-					/* We had troubles creating the ticket. Forward the problematic email to a real human  */
-					print "Warning: CreateTicket failed! Message forwarded to $trouble_email <br>";
-					mail ($trouble_email, "{TROUBLE} $subject", "[ERROR: CreateTicket failed]\n".$body, "From: $name\nReply-To: $email");
-					imap_delete($mbox, $curmsg);
-					$curmsg++;
-					continue;
+				// if ($body == "") { /* We can't do anything with this email, leave it there */
+				//	print "Error: Message could not be parsed. I left it in the mailbox.<br>";
+				//	continue;
+				// }
+				$head = imap_headerinfo($mbox, $curmsg, 800, 800);
+				// TODO:  Name and Email address should be properly parsed here.
+				$email = $head->reply_toaddress;
+				$name = $head->fromaddress;
+				$subject = $head->fetchsubject;
+				//print "Subject: $subject<br>";
+
+				/* Check the subject for ticket number */
+				if (!ereg ("[[][#][0-9]{6}[]]", $head->fetchsubject)) {
+					/* Seems like a new ticket, create it first */
+					//print "Creating a new ticket.<br>";
+					$ticket_id = CreateTicket($subject, $name, $email, $cat_row["id"], "");
+					if ($ticket_id == false) {
+						/* We had troubles creating the ticket. Forward the problematic email to a real human  */
+						print "Warning: CreateTicket failed! Message forwarded to $trouble_email <br>";
+						@mail ($trouble_email, "{TROUBLE} $subject", "[ERROR: CreateTicket failed]\n".$body, "From: $name\nReply-To: $email");
+						@imap_delete($mbox, $curmsg);
+						$curmsg++;
+						continue;
+					}
+				} else {
+					/* Seems like a followup of an existing ticket, extract ticket_id from subject */
+					$ticket_id = substr(strstr($head->fetchsubject, "[#"), 2, 6);
+					//print "Follow up to ticket #$ticket_id<br>";
+					SendNotification($name, $email, "", $subject, $cat_row["id"]);
 				}
-			} else {
-				/* Seems like a followup of an existing ticket, extract ticket_id from subject */
-				$ticket_id = substr(strstr($head->fetchsubject, "[#"), 2, 6);
-				//print "Follow up to ticket #$ticket_id<br>"; 
-				SendNotification($name, $email, "", $subject, $cat_row["id"]);
-			}
-			$body = ereg_replace("\n\n", "\n", $body);
-			if (!PostMessage($ticket_id, $body)) {
-				/* Could not post the ticket, forward the problematic email to a real human */
-				print "Warning: PostMessage failed! Message forwarded to $trouble_email <bR>";
-				mail ($trouble_email, "{TROUBLE} $subject", "[ERROR: PostMessage failed]\n".$body, "From: $name\nReply-To: $email");
+				$body = ereg_replace("\n\n", "\n", $body);
+				if (!PostMessage($ticket_id, $body)) {
+					/* Could not post the ticket, forward the problematic email to a real human */
+					print "Warning: PostMessage failed! Message forwarded to $trouble_email <bR>";
+					mail ($trouble_email, "{TROUBLE} $subject", "[ERROR: PostMessage failed]\n".$body, "From: $name\nReply-To: $email");
+				}
+
+				imap_delete($mbox, $curmsg);
+				$curmsg++;
 			}
 
-			imap_delete($mbox, $curmsg);
-			$curmsg++;
+			imap_expunge($mbox);
+			imap_close($mbox);
 		}
-
-		imap_expunge($mbox);
-		imap_close($mbox);
 	}
 }
 
@@ -195,7 +197,7 @@ function CreateTicket($subject, $name, $email, $cat, $phone, $pri=2) {
 	} while(ValidID($ID) == false);
 
 	/* Insert the ticket */
-	mysql_db_query($db_name, "insert into pgn_tickets (subject, name, email, cat, phone, status, ID, priority) VALUES ('".addslashes($subject)."', '$name', '$email', '$cat', '$phone', 'open', $ID, $pri);", $link);
+	mysql_db_query($db_name, "insert into tickets (subject, name, email, cat, phone, status, ID, priority) VALUES ('".addslashes($subject)."', '$name', '$email', '$cat', '$phone', 'open', $ID, $pri);", $link);
 
 	if (mysql_error($link))
 		return false;
@@ -212,7 +214,7 @@ function PostMessage($ticket, $message) {
 
 	$now = time();
 	
-	$res = mysql_db_query($db_name, "select * from pgn_tickets where ID = $ticket;", $link);
+	$res = mysql_db_query($db_name, "select * from tickets where ID = $ticket;", $link);
 	if (mysql_error($link)) {
 		print mysql_error($link) . "<br>";
 		return false;
@@ -224,9 +226,9 @@ function PostMessage($ticket, $message) {
 	}
 	
 	/* Make sure the ticket is open */
-	mysql_db_query($db_name, "update pgn_tickets set status = 'open' where ID = $ticket;", $link);
+	mysql_db_query($db_name, "update tickets set status = 'open' where ID = $ticket;", $link);
 
-	mysql_db_query($db_name, "insert into pgn_tickets_messages (ticket, message, timestamp) VALUES($ticket, '".addslashes($message)."', $now);", $link);
+	mysql_db_query($db_name, "insert into tickets_messages (ticket, message, timestamp) VALUES($ticket, '".addslashes($message)."', $now);", $link);
 	if (mysql_error($link)) {
 		print mysql_error($link) . "<br>";
 		return false;
@@ -239,27 +241,25 @@ function PostAnswer($message, $rep, $reference) {
 	global $link, $message_footer, $organization;
 
 	$now = time();
-	
-	$msg_res = mysql_query("select ticket from pgn_tickets_messages where ID = $reference;");
+	$msg_res = mysql_query("select ticket from tickets_messages where ID = $reference;");
 	$msg_row = mysql_fetch_array($msg_res);
 	$ticket = $msg_row["ticket"];
 
-	$res = mysql_query("select * from pgn_tickets where ID = $ticket;");
+	$res = mysql_query("select * from tickets where ID = $ticket;");
+	echo "1";
 	if (mysql_error($link)) {
 		return false;
 	}
-
 	if (mysql_num_rows($res) == 0) {
 		return false;
 	}
-
-	mysql_query("insert into pgn_tickets_answers (ticket, message, timestamp, rep, reference) VALUES($ticket, '$message', $now, $rep, $reference);");
+	mysql_query("insert into tickets_answers (ticket, message, timestamp, rep, reference) VALUES($ticket, '$message', $now, $rep, $reference);");
 	if (mysql_error($link)) {
 		return false;
 	}
-	
+
 	$ticket_row = mysql_fetch_array($res);
-	$cat_res = mysql_query("select * from pgn_tickets_categories where id = ".$ticket_row["cat"].";");
+	$cat_res = mysql_query("select * from tickets_categories where id = ".$ticket_row["cat"].";");
 	$cat_row = mysql_fetch_array($cat_res);
 	//$rep_res = mysql_query("select * from reps where id = $rep;");
 	//$rep_row = mysql_fetch_array($rep_res);
@@ -274,7 +274,7 @@ function PostAnswer($message, $rep, $reference) {
 function CloseTicket($ticket) {
 	global $link;
 
-	mysql_query("update pgn_tickets set status = 'closed' where ID = $ticket;", $link);
+	mysql_query("update tickets set status = 'closed' where ID = $ticket;", $link);
 
 	return;	
 }
@@ -283,14 +283,14 @@ function CloseTicket($ticket) {
 function OpenTicket($ticket) {
 	global $link;
 
-	mysql_query("update pgn_tickets set status = 'open' where ID = $ticket;", $link);
+	mysql_query("update tickets set status = 'open' where ID = $ticket;", $link);
 
 	return;	
 }
 
 function ValidID($ID) {
 	global $link, $db_name;
-	$res = mysql_db_query($db_name, "SELECT ID FROM pgn_tickets where ID = $ID;", $link)
+	$res = mysql_db_query($db_name, "SELECT ID FROM tickets where ID = $ID;", $link)
 		or die (mysql_error($link));
 
 	if (mysql_num_rows($res) != 0)
@@ -304,7 +304,7 @@ function ValidID($ID) {
  */
 function SendNotification($name, $email, $phone, $subject, $cat) {
 	 
-		$notify_res = mysql_query("SELECT * FROM pgn_tickets_categories WHERE id = ".$cat.";");
+		$notify_res = mysql_query("SELECT * FROM tickets_categories WHERE id = ".$cat.";");
 		$notify = mysql_fetch_array($notify_res);
 		
 		$notification_subject = str_replace("[--subject--]", $subject, $notify["notify_subject"]);
@@ -318,7 +318,7 @@ function SendNotification($name, $email, $phone, $subject, $cat) {
 		$notification_body = str_replace("[--name--]", $name, $notification_body);
 	 
 		if ($notify["notify_to"] != "") {
-			mail($notify["notify_to"], $notification_subject, $notification_body, "From: ".$notify["notify_from"]."\r\nReply-To: ".$notify["notify_replyto"]."\r\n".$notify["notify_headers"]); 
+			@mail($notify["notify_to"], $notification_subject, $notification_body, "From: ".$notify["notify_from"]."\r\nReply-To: ".$notify["notify_replyto"]."\r\n".$notify["notify_headers"]); 
 		}
 	
 
