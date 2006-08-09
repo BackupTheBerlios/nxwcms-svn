@@ -33,6 +33,7 @@
 	$menuPanel->add(new SubTitle("st", $lang->get("sp_menuprops"), 3));
 	$menuPanel->add(new Cell('clc', '', 3, 600,10));
 	$menuPanel->add(new TextInput($lang->get("sp_menuname"), "sitepage_names", "NAME", "VARIATION_ID = $variation AND SPID = $spid", "type:text,size:128,width:300", ""));
+	$menuPanel->add(new TextInput($lang->get("sp_menudescription", "Page Description (for sitemap...)"), "sitepage_names","HELP", "VARIATION_ID = $variation AND SPID = $spid", "type:textarea,size:5,width:400", ""));
 	$menuPanel->add(new Label('lbl', $lang->get('url', 'URL'), 'standard',1));
 	$uri = getPageURL($menuID, $variation);
 	if (file_exists($c["livepath"].$uri)) {
