@@ -54,6 +54,19 @@
 		$name = getDBCell("sitemap", "NAME", "MENU_ID = $menu");
 		return $name;
 	}
+	
+	/**
+	 * Checks, whether the page with menuID and variationID is expired or not
+	 */
+	function isMenuExpired($menuID, $variationID) {
+		$result = true;
+		$spid = getDBCell("sitepage", "SPID", "MENU_ID=".$menuID);		
+		if ($spid != "") {
+			$result = isSPExpired($spid, $variationID);		
+		}
+		
+		return $result;
+	}
 
 	/**
 	 * Returns the name of a SitePageMaster
