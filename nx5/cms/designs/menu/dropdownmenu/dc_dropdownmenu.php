@@ -51,8 +51,7 @@
   	  
   	  // get the path of menues, e.g. if a thrid-level page is active you 
   	  // get the corresponding3rd/2nd/1st level menues
-  	  $this->themeName = 'NX';
-  	  
+  	    	  
   	  $this->pathToRoot = $this->cds->menu->getPathToRoot();
   	  // get the actice toplevelmenu
 	  // get the startpage
@@ -118,7 +117,7 @@
   	 */
   	function setupPage($layout)	{ 
   		global $cds; 						
-  		$this->themeName = 'NX';
+  		$this->themeName = 'Office2003';
   		$out = '<SCRIPT type="text/javascript" LANGUAGE="JavaScript" SRC="'.$cds->docroot.'sys/designs/menu/dropdownmenu/JSCookMenu.js"></SCRIPT>
 <LINK REL="stylesheet" HREF="'.$cds->docroot.'sys/designs/menu/dropdownmenu/Theme'.$this->themeName.'/theme.css" TYPE="text/css">
 <SCRIPT LANGUAGE="JavaScript" type="text/javascript" SRC="'.$cds->docroot.'sys/designs/menu/dropdownmenu/Theme'.$this->themeName.'/theme.js"></SCRIPT>  		
