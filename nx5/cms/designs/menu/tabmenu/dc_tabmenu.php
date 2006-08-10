@@ -73,7 +73,7 @@
   	  $out.= '<table border="0" align="center" width="100%" cellpadding="0" cellspacing="0" id="subTabs">';
   	  $out.= '<tr><td class=>';	  
   	  $this->drawSubTabs($topMenu, $out);  
-      $out.='</td></tr></table>';
+      $out.='</td></tr></table><br/>';
   
   	  return $out;
   	}

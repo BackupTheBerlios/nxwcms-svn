@@ -4,15 +4,14 @@
 {
 	cursor:		default;
 	font-family:	Arial;
-	font-size:	13px;
+	font-size:	12px;
 
 	padding:	3px;
 	border:		0;
 	white-space:	nowrap;
 }
 
-.ThemeNXMenu
-{
+.ThemeNXMenu {
 }
 
 .ThemeNXSubMenu
@@ -96,3 +95,37 @@
 {
 	display:	none;
 }
+
+/*- Mainmenubox -*/
+div#mainmenu {
+  float:none;
+  margin: 0px 10px 0px 0px;
+  width: 800%;  
+  color:#333333; 
+}
+
+#mainmenuleft {
+  height: 45px;
+  width:20px;
+  float: left;
+  background-image:url(menuleft.jpg);
+  background-repeat:no-repeat;
+}
+
+#mainmenuright {
+  height: 45px;
+  width:40px;
+  float: left;
+  background-image:url(menuright.jpg);
+  background-repeat:no-repeat;
+}
+
+#mainmenucenter {
+  height:45px;
+  padding-top:12px;
+  width:700px;
+  background-image:url(menu.jpg);
+  float:left;
+  background-repeat:repeat-x;
+}
+

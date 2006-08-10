@@ -10,5 +10,4 @@
   
   // Close the maindiv.
   echo '</div>';
-  $cds->layout->htmlFooter(); 
 ?>

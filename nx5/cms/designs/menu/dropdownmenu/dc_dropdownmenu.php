@@ -48,7 +48,7 @@
   	 * Draw the menu.
   	 */
   	function draw() {
-  	  
+  	  global $cds;
   	  // get the path of menues, e.g. if a thrid-level page is active you 
   	  // get the corresponding3rd/2nd/1st level menues
   	    	  
@@ -61,7 +61,9 @@
 
   	  $topMenu = array_pop($this->pathToRoot);
       if ($topMenu == null) $topMenu = $startMenu;
-	  $out = "
+       
+      $out= '<div id="mainmenu"><div id="mainmenuleft"></div><div id="mainmenucenter">';
+      $out.= "
 	  <SCRIPT LANGUAGE='JavaScript'>
 		var dsMenu =
 		[";
@@ -75,7 +77,8 @@
   	  $out.=']; </SCRIPT><DIV ID="dsMenu"></DIV>
 
 	<SCRIPT LANGUAGE="JavaScript">cmDraw ("dsMenu", dsMenu, "hbr", cmTheme'.$this->themeName.', "Theme'.$this->themeName.'");</SCRIPT>';
-  	  return $out;
+    $out.= '</div><div id="mainmenuright"></div></div>';
+  	return $out;
   	}
   	
 
@@ -117,10 +120,10 @@
   	 */
   	function setupPage($layout)	{ 
   		global $cds; 						
-  		$this->themeName = 'Office2003';
-  		$out = '<SCRIPT type="text/javascript" LANGUAGE="JavaScript" SRC="'.$cds->docroot.'sys/designs/menu/dropdownmenu/JSCookMenu.js"></SCRIPT>
-<LINK REL="stylesheet" HREF="'.$cds->docroot.'sys/designs/menu/dropdownmenu/Theme'.$this->themeName.'/theme.css" TYPE="text/css">
-<SCRIPT LANGUAGE="JavaScript" type="text/javascript" SRC="'.$cds->docroot.'sys/designs/menu/dropdownmenu/Theme'.$this->themeName.'/theme.js"></SCRIPT>  		
+  		$this->themeName = 'NX';
+  		$out = '<SCRIPT type="text/javascript" LANGUAGE="JavaScript" SRC="'.$layout->parent->docroot.'sys/designs/menu/dropdownmenu/JSCookMenu.js"></SCRIPT>
+<LINK REL="stylesheet" HREF="'.$layout->parent->docroot.'sys/designs/menu/dropdownmenu/Theme'.$this->themeName.'/theme.css" TYPE="text/css">
+<SCRIPT LANGUAGE="JavaScript" type="text/javascript" SRC="'.$layout->parent->docroot.'sys/designs/menu/dropdownmenu/Theme'.$this->themeName.'/theme.js"></SCRIPT>  		
   		';
   		$layout->addToHeader($out);
   	}

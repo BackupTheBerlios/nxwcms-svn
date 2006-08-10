@@ -16,14 +16,11 @@
   // Draw the Menu. Some Menues consist of Header and Footer. The footer is drawn with
   // the call $cds->layout->drawMenuFooter() in footer.php.
   $cds->layout->drawMenuHeader();
-  
-  // Draw the breadcrumb now
-  br();
-  echo $cds->layout->menu->breadcrumb();
-  br();
-  
+    
   // Draw the table, which separates the content from the sidebar.
   echo '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
   echo '<tr>';
   echo '<td valign="top" id="content">';
+  // Draw the breadcrumb now
+  echo $cds->layout->menu->breadcrumb().'<br/>';
 ?>

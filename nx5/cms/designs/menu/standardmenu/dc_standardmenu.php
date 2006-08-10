@@ -26,7 +26,6 @@
 	class StandardMenu extends AbstractDesign {
 		
 		var $pathToRoot;
-		var $width="160";
 		var $prefix;
 		
 		/**
@@ -39,20 +38,26 @@
 		}
 		
 		/**
-		 *  Draw the menu
+		 *  Draw the Footer
 		 *
 		 */
-		function getHeader() {
-		  return $this->draw();
+		function getFooter() {
+		  $out = "</td></tr></table>";
+		  return $out;
 		}
 
 	/**
-  	 * Draw the tabbar.
+  	 * Draw the Header
   	 */
-  	function draw() {
+  	function getHeader() {
+  	  // draw a table around the menu
+  	  $out = '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
+  	  $out.= '<tr><td colspan="3" id="navheader">&nbsp;</td></tr>';
+  	  $out.= '<tr><td valign="top" width="180" align="left" id="navbox">';
+  		
   	  // get the path of menues, e.g. if a thrid-level page is active you 
   	  // get the corresponding3rd/2nd/1st level menues
-  	  
+  	    	  
   	  $this->pathToRoot = $this->cds->menu->getPathToRoot();
   	  // get the actice toplevelmenu
 	  // get the startpage
@@ -66,7 +71,8 @@
 			$this->prefix = '&rsaquo;'."&nbsp;";
 			
 			// Draw the menu
-			$out.= '<div id="navbox"><ul>';
+			//$out.= '<div id="navbox" align="left"><ul>';
+			$out.='<ul>';
  			for ($i=0; $i < count($firstLevelMenues); $i++) {			
  				$title = $firstLevelMenues[$i]->getTitle();
  				$link  = $firstLevelMenues[$i]->getLink();
@@ -98,8 +104,10 @@
  				 // close menu
  				 $out.="</li>";
  			}
-			$out.='</ul></div>';
-  	
+			$out.='</ul>';
+  			
+			// close the menu cell and open the output cell.
+			$out.='</td><td width="10">&nbsp;&nbsp;</td><td valign="top" style="padding-top:5px;">';
   	  return $out;
   	}
   	
@@ -157,7 +165,7 @@
   	 */
   	function setupPage($layout)	{
   			global $c; 
-  			$tag = '<link href="'.$layout->docroot.'css/menu_standard.css" rel="stylesheet" type="text/css" media="screen, projection, print">'; 			  			
+  			$tag = '<link href="'.$layout->parent->docroot.'sys/designs/menu/standardmenu/menu.css" rel="stylesheet" type="text/css" media="screen, projection, print">'; 			  			
 			$layout->addToHeader($tag);
   	}
   	
