@@ -27,6 +27,8 @@
 	    }    	
 	 }
  		
+ 	if (!isset($article)) 
+	   $article = value("article", "NUMERIC");
  		
  		
  		

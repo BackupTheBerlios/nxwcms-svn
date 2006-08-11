@@ -3,7 +3,7 @@
   
   // Add CSS and JS to the Header, Setup the Title of the homepage
   $cds->layout->addStyleSheet('css/styles.css');
-  
+  $cds->layout->setStaticTitle($cds->content->getByAccessKey("HomepageTitle"));
   // Draw the HTML Header with title tags, js, css.... 
   $cds->layout->htmlHeader(); 
   

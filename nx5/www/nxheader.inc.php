@@ -21,6 +21,9 @@
 	    }    	
 	 } 
 	 
+	 if (!isset($article)) 
+	   $article = value("article", "NUMERIC");
+	 
 	 if (!isset($v))
 	   $v = value("variation", "NUMERIC", $c["stdvariation"]);
 	 

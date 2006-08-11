@@ -20,10 +20,10 @@
 			$sitepage = countRows("sitepage", "SPID", "SPID = $id");
 			$sitemap = countRows("sitemap", "MENU_ID", "MENU_ID = $id");
 
-			if ($sitemap == 1)
+			if ($sitemap > 0)
 				$delHandler->addDBAction("UPDATE sitemap SET DELETED=1 WHERE MENU_ID = $id");
 
-			if ($sitepage == 1) {
+			if ($sitepage > 0) {
 				$delHandler->addDBAction("UPDATE sitepage SET DELETED=1 WHERE SPID = $id");
 			}
 		}
@@ -94,23 +94,7 @@
 		// step ready, so process.
 		$delHandler->process("del");
 		$delHandler = new ActionHandler("del");
-
-		// check, whether all content-items are still require_onced.
-		$cids = createDBCArray("content", "CID", "DELETED=0 AND VERSION=10");
-
-		for ($i = 0; $i < count($cids); $i++) {
-			$id = $cids[$i];
-
-			$check = countRows("cluster_template_items", "FKID", "FKID = $id AND DELETED = 0 AND VERSION = 10");
-
-			if ($check == 0)
-				$delHandler->addDBAction("UPDATE content SET DELETED=1 WHERE CID = $id");
-		}
-
-		// step ready, so process.
-		$delHandler->process("del");
-		$delHandler = new ActionHandler("del");
-
+		
 		// check, whether all clusters are still required.
 		// note: checks for variations are not done here, as there may be dependencies between 
 		// standard and other variations.

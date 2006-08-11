@@ -89,7 +89,7 @@
 				if ($auth->useAgent) {
 					$result = "<div style='cursor:help;' class=\"agenttip\" oncontextmenu=\"javascript:showmenuie5();\" onClick=\"javascript:parent.AgentTooltip('".htmlentities($agenttip, ENT_COMPAT)."');\" onMouseOver=\"javascript:parent.AgentThinks();\">$tmpreturn</div>";
 				} else {
-			  		$result = "<div style='cursor:help;' title='".htmlentities($tooltip, ENT_COMPAT)."'>$tmpreturn</div>";	
+			  		$result = "<div style='cursor:help;display:inline;' title='".htmlentities($tooltip, ENT_COMPAT)."'>$tmpreturn</div>";	
 			  	}
 			} else {
 			  $result = $tmpreturn;

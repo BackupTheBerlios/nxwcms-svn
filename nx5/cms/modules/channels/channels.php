@@ -65,4 +65,6 @@
   $page->addMenu($filtermenu);
   $page->add($form);
   $page->drawAndForward("modules/channels/channels.php?sid=$sid&oid=<oid>&go=update");
+  
+  echo $errors;
 ?>

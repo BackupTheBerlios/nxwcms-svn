@@ -40,7 +40,7 @@
 		 * Write HTML for the WUI-Object.
 		 */
 		function draw() {
-			$output = "<td width=\"100%\" colspan=\"$this->columns\" class=\"$this->style\" valign=\"top\" id=\"".$this->name."\" ".$this->payload.">";
+			$output = "<td colspan=\"$this->columns\" class=\"$this->style\" valign=\"top\" id=\"".$this->name."\" ".$this->payload.">";
 			$output.= '<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>';
 			echo $output;
 			$this->obj->draw();

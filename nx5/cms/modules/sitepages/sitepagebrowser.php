@@ -166,6 +166,12 @@
 				$delhandler->addDBAction("UPDATE sitepage SET POSITION = (POSITION-1) WHERE POSITION > $posi AND MENU_ID = $mid");
 				$delhandler->addDBAction("DELETE FROM sitepage WHERE SPID = $oid");
 				$delhandler->addDBAction("DELETE FROM sitepage_names WHERE SPID = $oid");
+				$spm = getDBCell("sitepage", "SPM_ID", "SPID=$oid");
+  			$sptype = getDBCell("sitepage_master", "SPMTYPE_ID", "SPM_ID = $spm");
+				if ($sptype!=2) {				  
+				  $currMid = getDBCell("sitepage", "MENU_ID", "SPID=".$spid);
+				  $delhandler->addDBAction("DELETE FROM sitemap WHERE MENU_ID =$currMid");
+				}
 
 			//include live site also!!!
 			//$delhandler->addDBAction("UPDATE cluster_template_items SET FKID=0 WHERE FKID=$oid");
