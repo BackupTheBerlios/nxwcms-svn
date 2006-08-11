@@ -18,7 +18,7 @@
   $cds->layout->drawMenuHeader();
     
   // Draw the table, which separates the content from the sidebar.
-  echo '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
+  echo '<div style="display:block;clear:both;"><table width="100%" border="0" cellpadding="0" cellspacing="0">';
   echo '<tr>';
   echo '<td valign="top" id="content">';
   // Draw the breadcrumb now

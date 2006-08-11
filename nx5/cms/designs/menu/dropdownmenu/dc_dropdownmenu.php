@@ -64,7 +64,7 @@
        
       $out= '<div id="mainmenu"><div id="mainmenuleft"></div><div id="mainmenucenter">';
       $out.= "
-	  <SCRIPT LANGUAGE='JavaScript'>
+	  <SCRIPT type='text/javascript'>
 		var dsMenu =
 		[";
     
@@ -76,7 +76,7 @@
   	  }
   	  $out.=']; </SCRIPT><DIV ID="dsMenu"></DIV>
 
-	<SCRIPT LANGUAGE="JavaScript">cmDraw ("dsMenu", dsMenu, "hbr", cmTheme'.$this->themeName.', "Theme'.$this->themeName.'");</SCRIPT>';
+	<SCRIPT type="text/javascript">cmDraw ("dsMenu", dsMenu, "hbr", cmTheme'.$this->themeName.', "Theme'.$this->themeName.'");</SCRIPT>';
     $out.= '</div><div id="mainmenuright"></div></div>';
   	return $out;
   	}

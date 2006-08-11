@@ -48,3 +48,13 @@ font-size: 18pt;
 line-height:24pt;
 font-family: Arial, sans-serif;
 text-align: left;}
+
+li.sitemap {
+  padding:0px;
+  margin:0px;
+}
+
+ul.sitemap {
+  padding:0px 0px 0px 10px;
+  margin:0px 0px 0px 20px;
+}

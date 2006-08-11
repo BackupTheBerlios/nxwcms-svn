@@ -3,7 +3,7 @@
   echo '</td>';
   echo '<td valign="top" id="sidebar">';
   include "sidebar.php";
-  echo '</td></tr></table>';
+  echo '</td></tr></table></div>';
   
   
   $cds->layout->drawMenuFooter(); 
