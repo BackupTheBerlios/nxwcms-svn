@@ -305,7 +305,11 @@ function ValidID($ID) {
 function SendNotification($name, $email, $phone, $subject, $cat) {
 	 
 		$notify_res = mysql_query("SELECT * FROM tickets_categories WHERE id = ".$cat.";");
-		$notify = mysql_fetch_array($notify_res);
+		if ($notify_res) {
+		  $notify = mysql_fetch_array($notify_res);
+		} else {
+			echo "Are you sure, the mailings category '$cat' is defined? I could not find it.<br><br>";			
+		}
 		
 		$notification_subject = str_replace("[--subject--]", $subject, $notify["notify_subject"]);
 		$notification_subject = str_replace("[--email--]", $email, $notification_subject);

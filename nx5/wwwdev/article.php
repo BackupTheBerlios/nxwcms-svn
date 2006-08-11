@@ -10,7 +10,7 @@
   br();
     
   // link back to the page where the article was called    
-  echo $cds->content->get("Backlink Title");
+  echo $cds->tools->getBackLink($cds->content->get("Backlink Title"));
   
   require_once $cds->path."inc/footer.php";
   require_once "nxfooter.inc.php";

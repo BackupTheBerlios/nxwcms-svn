@@ -96,7 +96,7 @@
 				$output .= "</td><td>";
 				$output .= "<img src=\"" . $this->value[$i]["iconpath"] . $this->value[$i]["icon"] . "\" border=\"0\">";
 				$output .= "</td><td valign=\"top\">";
-				$output .= "<font class=\"iconselect_name\">" . $this->value[$i]["name"] . "</font><br><font class=\"iconselect_description\">" . $this->value[$i]["description"] . "</font>";
+				$output .= "<span style='font-size:12px;font-weight:strong;'>" . $this->value[$i]["name"] . "</span><br><span style='font-size:11px;color:#666;'>" . $this->value[$i]["description"] . "</span>";
 				$output .= "</td></tr>\n";
 			}
 

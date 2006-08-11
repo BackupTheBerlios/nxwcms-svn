@@ -74,10 +74,10 @@
   	 * Draw the captcha and the input.
   	 *
   	 */
-  	function get($inputTitle="Validation Code:") { 	  
+  	function get($inputTitle="Validation Code:", $tableWidth="100%", $titleWidth="30%", $formWidth="70%") { 	  
   	  $captcha = $this->_getCaptcha();
-  	  $output = '<table border="0" cellspacing="0" cellpadding="2">';
-  	  $output.= '<tr><td>&nbsp;</td><td>'.$captcha->display_captcha().'</td></tr>';
+  	  $output = '<table border="0" cellspacing="0" cellpadding="2" width="'.$tableWidth.'">';
+  	  $output.= '<tr><td width="'.$titleWidth.'">&nbsp;</td><td width="'.$captchaWidth.'">'.$captcha->display_captcha().'</td></tr>';
   	  $output.= '<tr><td>'.$inputTitle.'</td><td><input type="text" name="private_key" maxlen="5"></td></tr></table>';
   	  return $output;  	  
   	}
