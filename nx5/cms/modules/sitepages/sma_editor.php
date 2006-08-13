@@ -4,7 +4,8 @@
 	require_once $c["path"] . "api/auth/auth_sma.php";
 	$sid = $_COOKIE["nxwcms"];
 	$auth = new authSMA("B_LIVE_AUTHORING", false);
-	$page = new page("SMA Editor");
+	$disableMenu = true;
+	$page = new page("SMA Editor");	
 	$sma = 1;
 	$oid = value("oid", "NUMERIC");
 

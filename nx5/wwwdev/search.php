@@ -1,18 +1,26 @@
 <?PHP
-  require_once "nxheader.inc.php";
-  $cds->layout->addStyleSheet("css/styles.css");
-  $cds->layout->setStandardSearchEngineCSS();
-  $cds->layout->htmlHeader(); 
-  include "modules/siteheader.php";
+require_once "nxheader.inc.php";
+$cds->layout->setStandardSearchEngineCSS();
+require_once $cds->path."inc/header.php";
 
-  echo $cds->content->get("Headline");
-  
-  
-  // output of content
-  $cds->searchengine->drawSearchForm();
-  if (value("searchphrase") != "0") 
-    $cds->searchengine->drawResultList($cds->searchengine->search(value("searchphrase")), $cds->content->get("No Results"));
-  
-  include "modules/sitefooter.php";
-  require_once "nxfooter.inc.php";
+if ($headline != "") {
+	echo $headline;
+	br();
+}
+
+if ($body !="") {
+	echo $cds->content->get("Body");
+	br();
+}
+
+
+if ($sma!=1) {
+	// output of content
+	$cds->searchengine->drawSearchForm($cds->content->get("search button"));
+	if (value("searchphrase") != "0")
+	$cds->searchengine->drawResultList($cds->searchengine->search(value("searchphrase")), $cds->content->get("No Results Text"));
+}
+
+include $cds->path."inc/footer.php";
+require_once "nxfooter.inc.php";
 ?>

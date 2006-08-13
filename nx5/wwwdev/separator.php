@@ -1,5 +1,5 @@
 <?PHP
-  require_once "nxheader.inc.php";
+  require_once "nxheader.inc.php";  
   if ($cds->menu->hasLowerLevel()) {
     $childs = $cds->menu->lowerLevel();
     $url = $childs[0]->getLink();
@@ -7,7 +7,7 @@
       header("Location:".$url);
   } else if ($cds->menu->hasUpperLevel()) {
     $upperLevel = $cds->menu->UpperLevel();
-    $url = $upperLebel->getLink();
+    $url = $upperLvbel->getLink();
     if (strlen($url)>0)  
       header("Location:".$url);
   }

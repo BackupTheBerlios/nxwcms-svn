@@ -10,4 +10,9 @@
   
   // Close the maindiv.
   echo '</div>';
+  
+  // Draw the pixel for editing the website.
+  echo '<div align="right" style="float:right">';
+  echo $cds->layout->drawSMAEntry();
+  echo '</div>';
 ?>
