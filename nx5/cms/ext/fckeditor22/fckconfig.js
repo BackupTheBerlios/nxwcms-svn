@@ -150,8 +150,8 @@ FCKConfig.LinkBrowserWindowWidth	= 800;
 FCKConfig.LinkBrowserWindowHeight	= 200;
 
 FCKConfig.ImageBrowser = true ;
-FCKConfig.ImageBrowserURL = nxpath + "modules/content/objectbrowser?sid=" + sid + "&linkset=SELECT|EDIT|USAGE|LAUNCH|DELETE&filter=IMAGE";
-FCKConfig.ImageBrowserWindowWidth  = 950 ;	// 70% ;
+FCKConfig.ImageBrowserURL = nxpath + "modules/content/objectbrowser.php?sid=" + sid + "&linkset=SELECT|EDIT|USAGE|LAUNCH|DELETE&filter=IMAGE";
+FCKConfig.ImageBrowserWindowWidth  = 1000 ;	// 70% ;
 FCKConfig.ImageBrowserWindowHeight = 550 ;	// 70% ;
 
 FCKConfig.FlashBrowser = false ;

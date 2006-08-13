@@ -34,72 +34,27 @@
 		var $pk_name = "FKID";
 
 		// Name of the Plugin's Management Table. All tables should start with pgn_
-		var $management_table = "pgn_googlemaps";
+		var $management_table = "";
+		var $pluginType=3;
 		var $isSingleConfig = false;
-		
-		/**
-		  * Creates the input fields for editing text
-		  * @param integer &$form link to the form the input-fields are to be created in 
-		  */
-		function edit(&$form) {
-			global $lang, $sid, $c;
-			// add button for external editor.
-			$condition = "FKID = $this->fkid";
-		//	$form->add(new TextInput($lang->get("adtextas", "AD-Javascript (copy from Google Adsense Homepage)"), "pgn_adsense", "ADTEXT", $condition, "type:textarea,width:350,size:10", ""));
-		}
+		var $helpfile = "googlemaps/plugin_googlemaps.pdf";
 		
 
-		/** 
-		  * Used, for painting a preview of the content in the cms. Note, that the data
-		  * is to be drawn in a table cell. Therefore you may design any html output, but
-		  * you must return it as return value!
-		  */
-		function preview() {
-			global $lang;			
-		
-		}
-
 		/**
-		   * This function is used for drawing the html-code out to the templates.
+		   *This functions returns a reference to the GoogleMaps API
 		   * It just returns the code
 		   * @param 		string	Optional parameters for the draw-function. There are none supported.
 		   * @return		string	HTML-CODE to be written into the template.
 		   */
 		function draw($param = "") {
 			global $cds, $c;
-			return $content;
+			require "phoogle.php";
+			$api = new PhoogleMap();
+			$api->setAPIkey($param);
+			return $api;
 		}
 		
- 		/**
-		  * Create a new Record with the given $this->fkid in the database.
-		  * Initialize with standard values!
-		  */
-		function createRecord() {
-			$createHandler = new ActionHandler("CREATE");
-			$createHandler->addDBAction("INSERT INTO $this->management_table ($this->pk_name) VALUES ($this->fkid)");
-			$createHandler->process("CREATE");
-		}
-
-		
-
-		/**
-		   * Create the sql-code for a version of the selected object
-		   * @param integer ID of new Version.
-		   * @returns string SQL Code for new Version.
-		   */
-		function createVersion($newid) {
-			// query for content
-			global $db;
-
-		//	$querySQL = "SELECT ADTEXT FROM $this->management_table WHERE $this->pk_name = $this->fkid";
-		//	$query = new query($db, $querySQL);
-		//	$query->getrow();
-		//	$content = addslashes($query->field("ADTEXT"));
-		//	$query->free();
-
-			// $sql = "INSERT INTO $this->management_table ($this->pk_name, ADTEXT) VALUES ($newid, '$content')";
-			return $sql;
-		}
+ 		
 
 		/**
 		   * Specifies information for installation and deinstallation of the plugin.
@@ -114,9 +69,9 @@
 				Plugin::registration();
 
 				// Name of the Plugin. The name will be displayed in the WCMS for selection
-				$this->name = "Google Maps";
+				$this->name = "Google Maps API";
 				// A short description, what the Plugin is for.
-				$this->description = "Google Maps.";
+				$this->description = "Google Maps API";
 				// Version of the plugin. Use integer numbers only. Is important for future releases.
 				$this->version = 1;
 
@@ -125,15 +80,12 @@
 				//del1
 
 				// SQL for creating the tables in the database. Do not call, if you do not need any tables in the database 
-				$this->installHandler->addDBAction("CREATE TABLE `pgn_googlemaps` (`FKID` BIGINT,`APIKEY` VARCHAR( 128 ) ,`HEIGHT` INT( 8 ) ,`WIDTH` INT( 8 ) ,`ZOOMLEVEL` INT( 8 ) ,`CONTROL` VARCHAR( 32 ) ,`VIEWTYPE` VARCHAR( 32 ) ,PRIMARY KEY ( `FKID` )) TYPE = MYISAM ;");
-				$this->installHandler->addDBAction("CREATE TABLE `pgn_googlemaps_poi` (  `GUID` bigint(20) NOT NULL default '0',  `FKID` bigint(20) NOT NULL default '0',  `POSITION` bigint(20) NOT NULL default '0',  `XCOORD` double NOT NULL default '0',  `YCOORD` double NOT NULL default '0',  `ADDRESS` varchar(255) collate utf8_unicode_ci default NULL,  `HTML` text collate utf8_unicode_ci NOT NULL,  PRIMARY KEY  (`GUID`)) ENGINE=MyISAM ;");
-
+				
 				// SQL for deleting the tables from the database. 
-				$this->uninstallHandler->addDBAction("DROP TABLE `pgn_googlemaps`");
-				$this->uninstallHandler->addDBAction("DROP TABLE `pgn_googlemaps_poi`");
 				/**** change nothing beyond this point ****/
 				global $source, $classname; // the source path has to be provided by the calling template
 				$modId = nextGUID();				
+				$this->installHandler->addDBAction("INSERT INTO modules (MODULE_ID, MODULE_NAME, DESCRIPTION, VERSION, MT_ID, CLASS, SOURCE, MODULE_TYPE_ID) VALUES ($modId, '$this->name', '$this->description', $this->version, $mtid, '$classname', '$source', 3)");				
 			}
 		}
 	}

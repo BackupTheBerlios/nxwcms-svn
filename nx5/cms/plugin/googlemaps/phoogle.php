@@ -227,9 +227,10 @@ function centerMap($lat,$long){
 * @returns      nothing
 * @description  Adds the necessary Javascript for the Google Map to function
 *               should be called in between the html <head></head> tags
+* 				Changed by sven@nxsystems.org
 */
 	function printGoogleJS(){
-		echo "\n<script src=\"http://maps.google.com/maps?file=api&v=1&key=".$this->apiKey."\" type=\"text/javascript\"></script>\n";
+		return "\n<script src=\"http://maps.google.com/maps?file=api&v=1&key=".$this->apiKey."\" type=\"text/javascript\"></script>\n";
 	}
 /**
 * @function     showMap

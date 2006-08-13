@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Erstellungszeit: 13. August 2006 um 13:14
+-- Erstellungszeit: 13. August 2006 um 15:39
 -- Server Version: 5.0.18
 -- PHP-Version: 5.1.1
 -- 
@@ -16,7 +16,6 @@
 -- Tabellenstruktur für Tabelle `acl_management`
 -- 
 
-DROP TABLE IF EXISTS `acl_management`;
 CREATE TABLE `acl_management` (
   `GUID` bigint(20) NOT NULL default '0',
   `TYPE_ID` bigint(20) default NULL,
@@ -44,7 +43,6 @@ INSERT INTO `acl_management` (`GUID`, `TYPE_ID`, `SYSTEM`, `INTERNAL`, `DISABLED
 -- Tabellenstruktur für Tabelle `acl_relations`
 -- 
 
-DROP TABLE IF EXISTS `acl_relations`;
 CREATE TABLE `acl_relations` (
   `GUID` bigint(20) NOT NULL default '0',
   `ACCESSOR_GUID` bigint(20) NOT NULL default '0',
@@ -65,7 +63,6 @@ INSERT INTO `acl_relations` (`GUID`, `ACCESSOR_GUID`, `ROLE_ID`) VALUES (0, 1015
 -- Tabellenstruktur für Tabelle `address`
 -- 
 
-DROP TABLE IF EXISTS `address`;
 CREATE TABLE `address` (
   `GGUID` bigint(20) NOT NULL default '0',
   `Name` varchar(64) collate latin1_general_ci default NULL,
@@ -101,7 +98,6 @@ CREATE TABLE `address` (
 -- Tabellenstruktur für Tabelle `categories`
 -- 
 
-DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `CATEGORY_ID` bigint(20) NOT NULL default '0',
   `CATEGORY_NAME` varchar(32) NOT NULL default '',
@@ -129,7 +125,6 @@ INSERT INTO `categories` (`CATEGORY_ID`, `CATEGORY_NAME`, `PARENT_CATEGORY_ID`, 
 -- Tabellenstruktur für Tabelle `categories_info`
 -- 
 
-DROP TABLE IF EXISTS `categories_info`;
 CREATE TABLE `categories_info` (
   `CATEGORY_ID` bigint(20) NOT NULL default '0',
   `VARIATION_ID` bigint(20) NOT NULL default '0',
@@ -153,7 +148,6 @@ CREATE TABLE `categories_info` (
 -- Tabellenstruktur für Tabelle `centerstage`
 -- 
 
-DROP TABLE IF EXISTS `centerstage`;
 CREATE TABLE `centerstage` (
   `STAGE_ID` bigint(20) NOT NULL default '0',
   `CHID` bigint(20) default NULL,
@@ -184,7 +178,6 @@ INSERT INTO `centerstage` (`STAGE_ID`, `CHID`, `CH_CAT_ID`, `SORT_ALGORITHM`, `M
 -- Tabellenstruktur für Tabelle `channel_articles`
 -- 
 
-DROP TABLE IF EXISTS `channel_articles`;
 CREATE TABLE `channel_articles` (
   `ARTICLE_ID` bigint(20) NOT NULL default '0',
   `CHID` bigint(20) NOT NULL default '0',
@@ -214,7 +207,6 @@ INSERT INTO `channel_articles` (`ARTICLE_ID`, `CHID`, `CH_CAT_ID`, `CLT_ID`, `PO
 -- Tabellenstruktur für Tabelle `channel_categories`
 -- 
 
-DROP TABLE IF EXISTS `channel_categories`;
 CREATE TABLE `channel_categories` (
   `CH_CAT_ID` bigint(20) NOT NULL default '0',
   `CHID` bigint(20) NOT NULL default '0',
@@ -236,7 +228,6 @@ INSERT INTO `channel_categories` (`CH_CAT_ID`, `CHID`, `PAGE_ID`, `NAME`) VALUES
 -- Tabellenstruktur für Tabelle `channel_cluster_templates`
 -- 
 
-DROP TABLE IF EXISTS `channel_cluster_templates`;
 CREATE TABLE `channel_cluster_templates` (
   `CHID` bigint(20) NOT NULL default '0',
   `CLT_ID` bigint(20) NOT NULL default '0',
@@ -255,7 +246,6 @@ INSERT INTO `channel_cluster_templates` (`CHID`, `CLT_ID`, `POSITION`) VALUES (1
 -- Tabellenstruktur für Tabelle `channels`
 -- 
 
-DROP TABLE IF EXISTS `channels`;
 CREATE TABLE `channels` (
   `CHID` bigint(20) NOT NULL default '0',
   `NAME` varchar(32) NOT NULL default '',
@@ -274,7 +264,6 @@ INSERT INTO `channels` (`CHID`, `NAME`) VALUES (100154, 'News');
 -- Tabellenstruktur für Tabelle `cluster_content`
 -- 
 
-DROP TABLE IF EXISTS `cluster_content`;
 CREATE TABLE `cluster_content` (
   `CLCID` bigint(20) NOT NULL default '0',
   `CLID` bigint(20) NOT NULL default '0',
@@ -410,6 +399,15 @@ INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, 
 INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100511, 100508, 100504, 1, '', 100511, 0);
 INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100509, 100508, 100510, 1, '', 0, 0);
 INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100516, 100508, 100503, 1, '', 0, 0);
+INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100591, 100590, 100564, 1, '', 0, 0);
+INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100592, 100590, 100566, 1, '', 0, 0);
+INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100593, 100590, 100568, 1, '', 0, 0);
+INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100667, 100666, 100616, 1, '', 0, 0);
+INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100668, 100666, 100618, 1, '', 0, 0);
+INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100669, 100666, 100620, 1, '', 0, 0);
+INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100670, 100666, 100622, 1, '', 0, 0);
+INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100671, 100666, 100647, 1, '', 0, 0);
+INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100672, 100666, 100645, 1, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -417,7 +415,6 @@ INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, 
 -- Tabellenstruktur für Tabelle `cluster_node`
 -- 
 
-DROP TABLE IF EXISTS `cluster_node`;
 CREATE TABLE `cluster_node` (
   `CLNID` bigint(20) NOT NULL default '0',
   `CLT_ID` bigint(20) NOT NULL default '0',
@@ -459,6 +456,8 @@ INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VAL
 INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100439, 100428, 'Gallery', 0, 0);
 INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100507, 100502, 'Create', 0, 10);
 INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100527, 100104, 'RSS', 0, 10);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100589, 100560, 'test in frame', 0, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100665, 100612, 'Map', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -466,7 +465,6 @@ INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VAL
 -- Tabellenstruktur für Tabelle `cluster_template_item_types`
 -- 
 
-DROP TABLE IF EXISTS `cluster_template_item_types`;
 CREATE TABLE `cluster_template_item_types` (
   `CLTITYPE_ID` tinyint(4) NOT NULL default '0',
   `NAME` varchar(32) NOT NULL default '',
@@ -494,7 +492,6 @@ INSERT INTO `cluster_template_item_types` (`CLTITYPE_ID`, `NAME`, `DESCRIPTION`)
 -- Tabellenstruktur für Tabelle `cluster_template_items`
 -- 
 
-DROP TABLE IF EXISTS `cluster_template_items`;
 CREATE TABLE `cluster_template_items` (
   `CLTI_ID` bigint(20) NOT NULL default '0',
   `CLT_ID` bigint(20) NOT NULL default '0',
@@ -587,6 +584,15 @@ INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `
 INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100504, 100502, 'Channel', 3, 1, 1, 1, 8, 0, 0, 10);
 INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100503, 100502, 'Feedname', 4, 1, 1, 100018, 2, 0, 0, 10);
 INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100506, 100502, 'Feed Description', 2, 1, 1, 100018, 2, 0, 0, 10);
+INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100564, 100560, 'Headline', 1, 1, 1, 100018, 2, 0, 0, 0);
+INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100566, 100560, 'Body', 2, 1, 1, 100024, 2, 0, 0, 0);
+INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100568, 100560, 'URL', 3, 1, 1, 100048, 2, 0, 0, 0);
+INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100616, 100612, 'Headline', 1, 1, 1, 100018, 2, 0, 0, 0);
+INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100618, 100612, 'Body', 2, 1, 1, 100024, 2, 0, 0, 0);
+INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100620, 100612, 'Address', 3, 1, 1, 100018, 2, 0, 0, 0);
+INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100622, 100612, 'ShowControls', 4, 1, 1, 100062, 2, 0, 0, 0);
+INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100645, 100612, 'Google-API-Key', 6, 1, 1, 100018, 2, 0, 0, 0);
+INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100647, 100612, 'Address Description', 5, 1, 1, 100024, 2, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -594,7 +600,6 @@ INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `
 -- Tabellenstruktur für Tabelle `cluster_templates`
 -- 
 
-DROP TABLE IF EXISTS `cluster_templates`;
 CREATE TABLE `cluster_templates` (
   `CLT_ID` bigint(20) NOT NULL default '0',
   `MT_ID` bigint(20) NOT NULL default '0',
@@ -634,6 +639,8 @@ INSERT INTO `cluster_templates` (`CLT_ID`, `MT_ID`, `CATEGORY_ID`, `NAME`, `DESC
 INSERT INTO `cluster_templates` (`CLT_ID`, `MT_ID`, `CATEGORY_ID`, `NAME`, `DESCRIPTION`, `CLT_TYPE_ID`, `TEMPLATE`, `DELETED`, `VERSION`) VALUES (101177, 100432, 100011, 'RSS Reader', '', 0, '', 0, 0);
 INSERT INTO `cluster_templates` (`CLT_ID`, `MT_ID`, `CATEGORY_ID`, `NAME`, `DESCRIPTION`, `CLT_TYPE_ID`, `TEMPLATE`, `DELETED`, `VERSION`) VALUES (100428, 100432, 100011, 'Gallery', 'Class which is used to build a Gallery', 0, '', 0, 0);
 INSERT INTO `cluster_templates` (`CLT_ID`, `MT_ID`, `CATEGORY_ID`, `NAME`, `DESCRIPTION`, `CLT_TYPE_ID`, `TEMPLATE`, `DELETED`, `VERSION`) VALUES (100502, 100034, 100011, 'RSS Creator', '', 0, '', 0, 10);
+INSERT INTO `cluster_templates` (`CLT_ID`, `MT_ID`, `CATEGORY_ID`, `NAME`, `DESCRIPTION`, `CLT_TYPE_ID`, `TEMPLATE`, `DELETED`, `VERSION`) VALUES (100560, 2, 100011, 'Internal Frame', '', 0, '', 0, 0);
+INSERT INTO `cluster_templates` (`CLT_ID`, `MT_ID`, `CATEGORY_ID`, `NAME`, `DESCRIPTION`, `CLT_TYPE_ID`, `TEMPLATE`, `DELETED`, `VERSION`) VALUES (100612, 100432, 100011, 'Map Page', '', 0, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -641,7 +648,6 @@ INSERT INTO `cluster_templates` (`CLT_ID`, `MT_ID`, `CATEGORY_ID`, `NAME`, `DESC
 -- Tabellenstruktur für Tabelle `cluster_variations`
 -- 
 
-DROP TABLE IF EXISTS `cluster_variations`;
 CREATE TABLE `cluster_variations` (
   `CLNID` bigint(20) NOT NULL default '0',
   `VARIATION_ID` bigint(20) NOT NULL default '0',
@@ -688,6 +694,8 @@ INSERT INTO `cluster_variations` (`CLNID`, `VARIATION_ID`, `CLID`, `DELETED`, `L
 INSERT INTO `cluster_variations` (`CLNID`, `VARIATION_ID`, `CLID`, `DELETED`, `LAST_CHANGED`, `CREATED_AT`, `LAST_USER`, `CREATE_USER`, `LAUNCHED_AT`, `LAUNCH_USER`) VALUES (100439, 1, 100440, 0, 20060812171436, 20060812171410, 'Administrator', 'Administrator', NULL, NULL);
 INSERT INTO `cluster_variations` (`CLNID`, `VARIATION_ID`, `CLID`, `DELETED`, `LAST_CHANGED`, `CREATED_AT`, `LAST_USER`, `CREATE_USER`, `LAUNCHED_AT`, `LAUNCH_USER`) VALUES (100507, 1, 100508, 0, 20060813124833, 20060811234658, NULL, NULL, NULL, NULL);
 INSERT INTO `cluster_variations` (`CLNID`, `VARIATION_ID`, `CLID`, `DELETED`, `LAST_CHANGED`, `CREATED_AT`, `LAST_USER`, `CREATE_USER`, `LAUNCHED_AT`, `LAUNCH_USER`) VALUES (100527, 1, 100528, 0, NULL, 20060811234340, NULL, NULL, NULL, NULL);
+INSERT INTO `cluster_variations` (`CLNID`, `VARIATION_ID`, `CLID`, `DELETED`, `LAST_CHANGED`, `CREATED_AT`, `LAST_USER`, `CREATE_USER`, `LAUNCHED_AT`, `LAUNCH_USER`) VALUES (100589, 1, 100590, 0, 20060813132859, 20060813132507, 'Administrator', 'Administrator', NULL, NULL);
+INSERT INTO `cluster_variations` (`CLNID`, `VARIATION_ID`, `CLID`, `DELETED`, `LAST_CHANGED`, `CREATED_AT`, `LAST_USER`, `CREATE_USER`, `LAUNCHED_AT`, `LAUNCH_USER`) VALUES (100665, 1, 100666, 0, 20060813153808, 20060813145308, 'Administrator', 'Administrator', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -695,7 +703,6 @@ INSERT INTO `cluster_variations` (`CLNID`, `VARIATION_ID`, `CLID`, `DELETED`, `L
 -- Tabellenstruktur für Tabelle `compound_group_members`
 -- 
 
-DROP TABLE IF EXISTS `compound_group_members`;
 CREATE TABLE `compound_group_members` (
   `CGID` bigint(20) NOT NULL default '0',
   `CGMID` bigint(20) NOT NULL default '0',
@@ -714,7 +721,6 @@ CREATE TABLE `compound_group_members` (
 -- Tabellenstruktur für Tabelle `compound_groups`
 -- 
 
-DROP TABLE IF EXISTS `compound_groups`;
 CREATE TABLE `compound_groups` (
   `CGID` bigint(20) NOT NULL default '0',
   `NAME` varchar(64) NOT NULL default '',
@@ -735,7 +741,6 @@ CREATE TABLE `compound_groups` (
 -- Tabellenstruktur für Tabelle `content`
 -- 
 
-DROP TABLE IF EXISTS `content`;
 CREATE TABLE `content` (
   `CID` bigint(20) NOT NULL default '0',
   `MODULE_ID` bigint(20) NOT NULL default '0',
@@ -779,7 +784,6 @@ INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, 
 -- Tabellenstruktur für Tabelle `content_variations`
 -- 
 
-DROP TABLE IF EXISTS `content_variations`;
 CREATE TABLE `content_variations` (
   `CID` bigint(20) NOT NULL default '0',
   `VARIATION_ID` bigint(20) NOT NULL default '0',
@@ -813,7 +817,6 @@ INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VAL
 -- Tabellenstruktur für Tabelle `dig_clicks`
 -- 
 
-DROP TABLE IF EXISTS `dig_clicks`;
 CREATE TABLE `dig_clicks` (
   `c_num` mediumint(9) NOT NULL default '0',
   `c_url` varchar(255) collate latin1_general_ci NOT NULL default '',
@@ -832,7 +835,6 @@ CREATE TABLE `dig_clicks` (
 -- Tabellenstruktur für Tabelle `dig_engine`
 -- 
 
-DROP TABLE IF EXISTS `dig_engine`;
 CREATE TABLE `dig_engine` (
   `spider_id` mediumint(9) NOT NULL default '0',
   `key_id` mediumint(9) NOT NULL default '0',
@@ -851,7 +853,6 @@ CREATE TABLE `dig_engine` (
 -- Tabellenstruktur für Tabelle `dig_excludes`
 -- 
 
-DROP TABLE IF EXISTS `dig_excludes`;
 CREATE TABLE `dig_excludes` (
   `ex_id` mediumint(11) NOT NULL auto_increment,
   `ex_site_id` mediumint(9) NOT NULL default '0',
@@ -871,7 +872,6 @@ CREATE TABLE `dig_excludes` (
 -- Tabellenstruktur für Tabelle `dig_includes`
 -- 
 
-DROP TABLE IF EXISTS `dig_includes`;
 CREATE TABLE `dig_includes` (
   `in_id` mediumint(11) NOT NULL auto_increment,
   `in_site_id` mediumint(9) NOT NULL default '0',
@@ -891,7 +891,6 @@ CREATE TABLE `dig_includes` (
 -- Tabellenstruktur für Tabelle `dig_keywords`
 -- 
 
-DROP TABLE IF EXISTS `dig_keywords`;
 CREATE TABLE `dig_keywords` (
   `key_id` int(9) NOT NULL auto_increment,
   `twoletters` char(2) collate latin1_general_ci NOT NULL default '',
@@ -912,7 +911,6 @@ CREATE TABLE `dig_keywords` (
 -- Tabellenstruktur für Tabelle `dig_logs`
 -- 
 
-DROP TABLE IF EXISTS `dig_logs`;
 CREATE TABLE `dig_logs` (
   `l_id` mediumint(9) NOT NULL auto_increment,
   `l_includes` varchar(255) collate latin1_general_ci NOT NULL default '',
@@ -937,7 +935,6 @@ CREATE TABLE `dig_logs` (
 -- Tabellenstruktur für Tabelle `dig_site_page`
 -- 
 
-DROP TABLE IF EXISTS `dig_site_page`;
 CREATE TABLE `dig_site_page` (
   `site_id` int(4) NOT NULL default '0',
   `days` int(4) NOT NULL default '0',
@@ -957,7 +954,6 @@ CREATE TABLE `dig_site_page` (
 -- Tabellenstruktur für Tabelle `dig_sites`
 -- 
 
-DROP TABLE IF EXISTS `dig_sites`;
 CREATE TABLE `dig_sites` (
   `site_id` mediumint(9) NOT NULL auto_increment,
   `site_url` varchar(127) collate latin1_general_ci NOT NULL default '',
@@ -981,7 +977,6 @@ CREATE TABLE `dig_sites` (
 -- Tabellenstruktur für Tabelle `dig_spider`
 -- 
 
-DROP TABLE IF EXISTS `dig_spider`;
 CREATE TABLE `dig_spider` (
   `spider_id` mediumint(9) NOT NULL auto_increment,
   `file` varchar(127) collate latin1_general_ci NOT NULL default '',
@@ -1008,7 +1003,6 @@ CREATE TABLE `dig_spider` (
 -- Tabellenstruktur für Tabelle `dig_tempspider`
 -- 
 
-DROP TABLE IF EXISTS `dig_tempspider`;
 CREATE TABLE `dig_tempspider` (
   `file` text collate latin1_general_ci NOT NULL,
   `id` mediumint(11) NOT NULL auto_increment,
@@ -1033,7 +1027,6 @@ CREATE TABLE `dig_tempspider` (
 -- Tabellenstruktur für Tabelle `groups`
 -- 
 
-DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
   `GROUP_ID` bigint(20) NOT NULL default '0',
   `GROUP_NAME` varchar(32) NOT NULL default '',
@@ -1053,7 +1046,6 @@ INSERT INTO `groups` (`GROUP_ID`, `GROUP_NAME`, `DESCRIPTION`) VALUES (1, 'Syste
 -- Tabellenstruktur für Tabelle `internal_resources`
 -- 
 
-DROP TABLE IF EXISTS `internal_resources`;
 CREATE TABLE `internal_resources` (
   `RESID` varchar(32) NOT NULL default '',
   `LANGID` char(3) NOT NULL default '',
@@ -4622,7 +4614,6 @@ INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES 
 -- Tabellenstruktur für Tabelle `internal_resources_languages`
 -- 
 
-DROP TABLE IF EXISTS `internal_resources_languages`;
 CREATE TABLE `internal_resources_languages` (
   `LANGID` char(3) NOT NULL default '',
   `NAME` varchar(32) NOT NULL default '',
@@ -4650,7 +4641,6 @@ INSERT INTO `internal_resources_languages` (`LANGID`, `NAME`, `AGENT_LANGID`, `A
 -- Tabellenstruktur für Tabelle `log`
 -- 
 
-DROP TABLE IF EXISTS `log`;
 CREATE TABLE `log` (
   `LOG_ID` bigint(20) NOT NULL default '0',
   `CATEGORY` varchar(16) NOT NULL default '',
@@ -4756,7 +4746,6 @@ INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TA
 -- Tabellenstruktur für Tabelle `mailinglist`
 -- 
 
-DROP TABLE IF EXISTS `mailinglist`;
 CREATE TABLE `mailinglist` (
   `MAILINGLIST_ID` bigint(20) NOT NULL default '0',
   `NAME` varchar(128) collate latin1_general_ci NOT NULL default '',
@@ -4779,7 +4768,6 @@ CREATE TABLE `mailinglist` (
 -- Tabellenstruktur für Tabelle `messaging`
 -- 
 
-DROP TABLE IF EXISTS `messaging`;
 CREATE TABLE `messaging` (
   `GUID` bigint(20) NOT NULL default '0',
   `SENDER_NAME` varchar(64) default NULL,
@@ -4805,7 +4793,6 @@ CREATE TABLE `messaging` (
 -- Tabellenstruktur für Tabelle `meta`
 -- 
 
-DROP TABLE IF EXISTS `meta`;
 CREATE TABLE `meta` (
   `MID` bigint(20) NOT NULL default '0',
   `MTI_ID` bigint(20) NOT NULL default '0',
@@ -4826,7 +4813,6 @@ CREATE TABLE `meta` (
 -- Tabellenstruktur für Tabelle `meta_datatypes`
 -- 
 
-DROP TABLE IF EXISTS `meta_datatypes`;
 CREATE TABLE `meta_datatypes` (
   `MTYPE_ID` mediumint(9) NOT NULL default '0',
   `NAME` varchar(16) NOT NULL default '',
@@ -4849,7 +4835,6 @@ INSERT INTO `meta_datatypes` (`MTYPE_ID`, `NAME`, `DESCRIPTION`) VALUES (3, 'Col
 -- Tabellenstruktur für Tabelle `meta_template_items`
 -- 
 
-DROP TABLE IF EXISTS `meta_template_items`;
 CREATE TABLE `meta_template_items` (
   `MTI_ID` bigint(20) NOT NULL default '0',
   `MT_ID` bigint(20) NOT NULL default '0',
@@ -4875,7 +4860,6 @@ INSERT INTO `meta_template_items` (`MTI_ID`, `MT_ID`, `NAME`, `POSITION`, `MTYPE
 -- Tabellenstruktur für Tabelle `meta_templates`
 -- 
 
-DROP TABLE IF EXISTS `meta_templates`;
 CREATE TABLE `meta_templates` (
   `MT_ID` bigint(20) NOT NULL default '0',
   `NAME` varchar(32) NOT NULL default '',
@@ -4901,7 +4885,6 @@ INSERT INTO `meta_templates` (`MT_ID`, `NAME`, `DESCRIPTION`, `INTERNAL`, `VERSI
 -- Tabellenstruktur für Tabelle `module_type`
 -- 
 
-DROP TABLE IF EXISTS `module_type`;
 CREATE TABLE `module_type` (
   `MODULE_TYPE_ID` tinyint(4) NOT NULL default '0',
   `NAME` varchar(32) NOT NULL default '',
@@ -4924,7 +4907,6 @@ INSERT INTO `module_type` (`MODULE_TYPE_ID`, `NAME`) VALUES (4, 'Textfilter Exte
 -- Tabellenstruktur für Tabelle `modules`
 -- 
 
-DROP TABLE IF EXISTS `modules`;
 CREATE TABLE `modules` (
   `MODULE_ID` bigint(20) NOT NULL default '0',
   `MODULE_NAME` varchar(32) NOT NULL default '',
@@ -4955,6 +4937,7 @@ INSERT INTO `modules` (`MODULE_ID`, `MODULE_NAME`, `DESCRIPTION`, `VERSION`, `MT
 INSERT INTO `modules` (`MODULE_ID`, `MODULE_NAME`, `DESCRIPTION`, `VERSION`, `MT_ID`, `CLASS`, `SOURCE`, `MODULE_TYPE_ID`) VALUES (100311, 'Captcha', 'CDS-API-Extension for creating Captchas', 1, 100310, 'pgnCaptcha', 'captcha/pgn_captcha.php', 3);
 INSERT INTO `modules` (`MODULE_ID`, `MODULE_NAME`, `DESCRIPTION`, `VERSION`, `MT_ID`, `CLASS`, `SOURCE`, `MODULE_TYPE_ID`) VALUES (100427, 'Gallery', 'Gallery Plugin', 1, 100425, 'pgnGallery', 'gallery/pgn_gallery.php', 1);
 INSERT INTO `modules` (`MODULE_ID`, `MODULE_NAME`, `DESCRIPTION`, `VERSION`, `MT_ID`, `CLASS`, `SOURCE`, `MODULE_TYPE_ID`) VALUES (100445, 'BulkImage', 'System-Extensions for importing images in archives.', 1, 0, 'pgnBulkImage', 'bulkimage/pgn_bulkimage.php', 3);
+INSERT INTO `modules` (`MODULE_ID`, `MODULE_NAME`, `DESCRIPTION`, `VERSION`, `MT_ID`, `CLASS`, `SOURCE`, `MODULE_TYPE_ID`) VALUES (100606, 'Google Maps API', 'Google Maps API', 1, 100605, 'pgnGoogleMaps', 'googlemaps/pgn_googlemaps.php', 3);
 
 -- --------------------------------------------------------
 
@@ -4962,7 +4945,6 @@ INSERT INTO `modules` (`MODULE_ID`, `MODULE_NAME`, `DESCRIPTION`, `VERSION`, `MT
 -- Tabellenstruktur für Tabelle `pgn_adsense`
 -- 
 
-DROP TABLE IF EXISTS `pgn_adsense`;
 CREATE TABLE `pgn_adsense` (
   `FKID` bigint(20) NOT NULL default '0',
   `ADTEXT` text collate latin1_general_ci,
@@ -4988,7 +4970,6 @@ INSERT INTO `pgn_adsense` (`FKID`, `ADTEXT`, `IMPRESSIONS`, `CLICKS`) VALUES (10
 -- Tabellenstruktur für Tabelle `pgn_boolean`
 -- 
 
-DROP TABLE IF EXISTS `pgn_boolean`;
 CREATE TABLE `pgn_boolean` (
   `FKID` bigint(20) NOT NULL default '0',
   `VALUE` int(1) NOT NULL default '0',
@@ -5002,6 +4983,7 @@ CREATE TABLE `pgn_boolean` (
 
 INSERT INTO `pgn_boolean` (`FKID`, `VALUE`) VALUES (100071, 1);
 INSERT INTO `pgn_boolean` (`FKID`, `VALUE`) VALUES (100116, 1);
+INSERT INTO `pgn_boolean` (`FKID`, `VALUE`) VALUES (100670, 1);
 
 -- --------------------------------------------------------
 
@@ -5009,7 +4991,6 @@ INSERT INTO `pgn_boolean` (`FKID`, `VALUE`) VALUES (100116, 1);
 -- Tabellenstruktur für Tabelle `pgn_config_store`
 -- 
 
-DROP TABLE IF EXISTS `pgn_config_store`;
 CREATE TABLE `pgn_config_store` (
   `CLTI_ID` bigint(20) NOT NULL default '0',
   `TEXT1` varchar(255) default NULL,
@@ -5109,6 +5090,8 @@ INSERT INTO `pgn_config_store` (`CLTI_ID`, `TEXT1`, `TEXT2`, `TEXT3`, `TEXT4`, `
 INSERT INTO `pgn_config_store` (`CLTI_ID`, `TEXT1`, `TEXT2`, `TEXT3`, `TEXT4`, `TEXT5`, `TEXT6`, `TEXT7`, `TEXT8`, `TEXT9`, `TEXT10`, `TEXT11`, `TEXT12`, `TEXT13`, `TEXT14`, `TEXT15`, `NUMBER1`, `NUMBER2`, `NUMBER3`, `NUMBER4`, `NUMBER5`, `NUMBER6`, `NUMBER7`, `NUMBER8`, `NUMBER9`, `NUMBER10`, `NUMBER11`, `NUMBER12`, `NUMBER13`, `NUMBER14`, `NUMBER15`, `DATE1`, `DATE2`, `DATE3`, `DATE4`, `DATE5`) VALUES (100278, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `pgn_config_store` (`CLTI_ID`, `TEXT1`, `TEXT2`, `TEXT3`, `TEXT4`, `TEXT5`, `TEXT6`, `TEXT7`, `TEXT8`, `TEXT9`, `TEXT10`, `TEXT11`, `TEXT12`, `TEXT13`, `TEXT14`, `TEXT15`, `NUMBER1`, `NUMBER2`, `NUMBER3`, `NUMBER4`, `NUMBER5`, `NUMBER6`, `NUMBER7`, `NUMBER8`, `NUMBER9`, `NUMBER10`, `NUMBER11`, `NUMBER12`, `NUMBER13`, `NUMBER14`, `NUMBER15`, `DATE1`, `DATE2`, `DATE3`, `DATE4`, `DATE5`) VALUES (100276, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `pgn_config_store` (`CLTI_ID`, `TEXT1`, `TEXT2`, `TEXT3`, `TEXT4`, `TEXT5`, `TEXT6`, `TEXT7`, `TEXT8`, `TEXT9`, `TEXT10`, `TEXT11`, `TEXT12`, `TEXT13`, `TEXT14`, `TEXT15`, `NUMBER1`, `NUMBER2`, `NUMBER3`, `NUMBER4`, `NUMBER5`, `NUMBER6`, `NUMBER7`, `NUMBER8`, `NUMBER9`, `NUMBER10`, `NUMBER11`, `NUMBER12`, `NUMBER13`, `NUMBER14`, `NUMBER15`, `DATE1`, `DATE2`, `DATE3`, `DATE4`, `DATE5`) VALUES (100429, 'head1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `pgn_config_store` (`CLTI_ID`, `TEXT1`, `TEXT2`, `TEXT3`, `TEXT4`, `TEXT5`, `TEXT6`, `TEXT7`, `TEXT8`, `TEXT9`, `TEXT10`, `TEXT11`, `TEXT12`, `TEXT13`, `TEXT14`, `TEXT15`, `NUMBER1`, `NUMBER2`, `NUMBER3`, `NUMBER4`, `NUMBER5`, `NUMBER6`, `NUMBER7`, `NUMBER8`, `NUMBER9`, `NUMBER10`, `NUMBER11`, `NUMBER12`, `NUMBER13`, `NUMBER14`, `NUMBER15`, `DATE1`, `DATE2`, `DATE3`, `DATE4`, `DATE5`) VALUES (100564, 'head1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `pgn_config_store` (`CLTI_ID`, `TEXT1`, `TEXT2`, `TEXT3`, `TEXT4`, `TEXT5`, `TEXT6`, `TEXT7`, `TEXT8`, `TEXT9`, `TEXT10`, `TEXT11`, `TEXT12`, `TEXT13`, `TEXT14`, `TEXT15`, `NUMBER1`, `NUMBER2`, `NUMBER3`, `NUMBER4`, `NUMBER5`, `NUMBER6`, `NUMBER7`, `NUMBER8`, `NUMBER9`, `NUMBER10`, `NUMBER11`, `NUMBER12`, `NUMBER13`, `NUMBER14`, `NUMBER15`, `DATE1`, `DATE2`, `DATE3`, `DATE4`, `DATE5`) VALUES (100616, 'head1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -5116,7 +5099,6 @@ INSERT INTO `pgn_config_store` (`CLTI_ID`, `TEXT1`, `TEXT2`, `TEXT3`, `TEXT4`, `
 -- Tabellenstruktur für Tabelle `pgn_gallery`
 -- 
 
-DROP TABLE IF EXISTS `pgn_gallery`;
 CREATE TABLE `pgn_gallery` (
   `GALLERY_ID` bigint(20) NOT NULL,
   `NAME` varchar(64) collate latin1_general_ci NOT NULL,
@@ -5137,56 +5119,9 @@ INSERT INTO `pgn_gallery` (`GALLERY_ID`, `NAME`, `DESCRIPTION`, `IMAGE_FOLDER_ID
 -- --------------------------------------------------------
 
 -- 
--- Tabellenstruktur für Tabelle `pgn_googlemaps`
--- 
-
-DROP TABLE IF EXISTS `pgn_googlemaps`;
-CREATE TABLE `pgn_googlemaps` (
-  `FKID` bigint(20) NOT NULL default '0',
-  `APIKEY` varchar(128) collate utf8_unicode_ci default NULL,
-  `HEIGHT` int(8) default NULL,
-  `WIDTH` int(8) default NULL,
-  `ZOOMLEVEL` int(8) default NULL,
-  `CONTROL` varchar(32) collate utf8_unicode_ci default NULL,
-  `VIEWTYPE` varchar(32) collate utf8_unicode_ci default NULL,
-  PRIMARY KEY  (`FKID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- 
--- Daten für Tabelle `pgn_googlemaps`
--- 
-
-
--- --------------------------------------------------------
-
--- 
--- Tabellenstruktur für Tabelle `pgn_googlemaps_poi`
--- 
-
-DROP TABLE IF EXISTS `pgn_googlemaps_poi`;
-CREATE TABLE `pgn_googlemaps_poi` (
-  `GUID` bigint(20) NOT NULL default '0',
-  `FKID` bigint(20) NOT NULL default '0',
-  `POSITION` bigint(20) NOT NULL default '0',
-  `XCOORD` double NOT NULL default '0',
-  `YCOORD` double NOT NULL default '0',
-  `ADDRESS` varchar(255) collate utf8_unicode_ci default NULL,
-  `HTML` text collate utf8_unicode_ci NOT NULL,
-  PRIMARY KEY  (`GUID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- 
--- Daten für Tabelle `pgn_googlemaps_poi`
--- 
-
-
--- --------------------------------------------------------
-
--- 
 -- Tabellenstruktur für Tabelle `pgn_image`
 -- 
 
-DROP TABLE IF EXISTS `pgn_image`;
 CREATE TABLE `pgn_image` (
   `FKID` bigint(20) NOT NULL default '0',
   `FILENAME` varchar(32) default NULL,
@@ -5211,7 +5146,6 @@ INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGH
 -- Tabellenstruktur für Tabelle `pgn_label`
 -- 
 
-DROP TABLE IF EXISTS `pgn_label`;
 CREATE TABLE `pgn_label` (
   `FKID` bigint(20) NOT NULL default '0',
   `CONTENT` varchar(255) default NULL,
@@ -5316,6 +5250,10 @@ INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100494, 'test');
 INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100514, 'Test Feed');
 INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100515, 'This is a n/x test feed.');
 INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100516, 'test');
+INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100591, 'test 1234');
+INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100667, 'Arrival via Car');
+INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100669, '10 Market St, San Francisco, CA 94111');
+INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100672, '');
 
 -- --------------------------------------------------------
 
@@ -5323,7 +5261,6 @@ INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100516, 'test');
 -- Tabellenstruktur für Tabelle `pgn_link`
 -- 
 
-DROP TABLE IF EXISTS `pgn_link`;
 CREATE TABLE `pgn_link` (
   `FKID` bigint(20) NOT NULL default '0',
   `LABEL` varchar(255) default NULL,
@@ -5344,6 +5281,7 @@ INSERT INTO `pgn_link` (`FKID`, `LABEL`, `EXTERNAL`, `HREF`, `SPID`, `TARGET`) V
 INSERT INTO `pgn_link` (`FKID`, `LABEL`, `EXTERNAL`, `HREF`, `SPID`, `TARGET`) VALUES (100421, '', 0, '', 100256, '');
 INSERT INTO `pgn_link` (`FKID`, `LABEL`, `EXTERNAL`, `HREF`, `SPID`, `TARGET`) VALUES (100539, 'rssfeed', 0, '', 100415, '');
 INSERT INTO `pgn_link` (`FKID`, `LABEL`, `EXTERNAL`, `HREF`, `SPID`, `TARGET`) VALUES (100544, '', 0, '', 100500, '');
+INSERT INTO `pgn_link` (`FKID`, `LABEL`, `EXTERNAL`, `HREF`, `SPID`, `TARGET`) VALUES (100593, '', 0, 'http://www.bild.de', 0, '');
 
 -- --------------------------------------------------------
 
@@ -5351,7 +5289,6 @@ INSERT INTO `pgn_link` (`FKID`, `LABEL`, `EXTERNAL`, `HREF`, `SPID`, `TARGET`) V
 -- Tabellenstruktur für Tabelle `pgn_text`
 -- 
 
-DROP TABLE IF EXISTS `pgn_text`;
 CREATE TABLE `pgn_text` (
   `FKID` bigint(20) NOT NULL default '0',
   `CONTENT` longtext,
@@ -5379,6 +5316,9 @@ INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100361, '');
 INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100380, '');
 INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100412, 'Latest news');
 INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100442, 'test');
+INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100592, 'test324');
+INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100668, 'Learn, how to drive to us.');
+INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100671, 'Description of this <strong>place</strong>');
 
 -- --------------------------------------------------------
 
@@ -5386,7 +5326,6 @@ INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100442, 'test');
 -- Tabellenstruktur für Tabelle `pot_accesslog`
 -- 
 
-DROP TABLE IF EXISTS `pot_accesslog`;
 CREATE TABLE `pot_accesslog` (
   `accesslog_id` int(11) NOT NULL default '0',
   `timestamp` int(10) unsigned NOT NULL default '0',
@@ -5439,7 +5378,6 @@ INSERT INTO `pot_accesslog` (`accesslog_id`, `timestamp`, `document_id`, `exit_t
 -- Tabellenstruktur für Tabelle `pot_add_data`
 -- 
 
-DROP TABLE IF EXISTS `pot_add_data`;
 CREATE TABLE `pot_add_data` (
   `accesslog_id` int(11) NOT NULL default '0',
   `data_field` varchar(32) NOT NULL default '',
@@ -5458,7 +5396,6 @@ CREATE TABLE `pot_add_data` (
 -- Tabellenstruktur für Tabelle `pot_documents`
 -- 
 
-DROP TABLE IF EXISTS `pot_documents`;
 CREATE TABLE `pot_documents` (
   `data_id` int(11) NOT NULL default '0',
   `string` varchar(255) NOT NULL default '',
@@ -5485,7 +5422,6 @@ INSERT INTO `pot_documents` (`data_id`, `string`, `document_url`) VALUES (-14802
 -- Tabellenstruktur für Tabelle `pot_exit_targets`
 -- 
 
-DROP TABLE IF EXISTS `pot_exit_targets`;
 CREATE TABLE `pot_exit_targets` (
   `data_id` int(11) NOT NULL default '0',
   `string` varchar(255) NOT NULL default '',
@@ -5503,7 +5439,6 @@ CREATE TABLE `pot_exit_targets` (
 -- Tabellenstruktur für Tabelle `pot_hostnames`
 -- 
 
-DROP TABLE IF EXISTS `pot_hostnames`;
 CREATE TABLE `pot_hostnames` (
   `data_id` int(11) NOT NULL default '0',
   `string` varchar(255) NOT NULL default '',
@@ -5522,7 +5457,6 @@ INSERT INTO `pot_hostnames` (`data_id`, `string`) VALUES (-1631451101, 'localhos
 -- Tabellenstruktur für Tabelle `pot_nxlog`
 -- 
 
-DROP TABLE IF EXISTS `pot_nxlog`;
 CREATE TABLE `pot_nxlog` (
   `accesslog_id` int(11) NOT NULL default '0',
   `weekday` int(1) NOT NULL default '0',
@@ -5551,7 +5485,6 @@ INSERT INTO `pot_nxlog` (`accesslog_id`, `weekday`, `hour`, `starttime`, `endtim
 -- Tabellenstruktur für Tabelle `pot_operating_systems`
 -- 
 
-DROP TABLE IF EXISTS `pot_operating_systems`;
 CREATE TABLE `pot_operating_systems` (
   `data_id` int(11) NOT NULL default '0',
   `string` varchar(255) NOT NULL default '',
@@ -5570,7 +5503,6 @@ INSERT INTO `pot_operating_systems` (`data_id`, `string`) VALUES (-114077417, 'W
 -- Tabellenstruktur für Tabelle `pot_referers`
 -- 
 
-DROP TABLE IF EXISTS `pot_referers`;
 CREATE TABLE `pot_referers` (
   `data_id` int(11) NOT NULL default '0',
   `string` varchar(255) NOT NULL default '',
@@ -5588,7 +5520,6 @@ CREATE TABLE `pot_referers` (
 -- Tabellenstruktur für Tabelle `pot_search_engines`
 -- 
 
-DROP TABLE IF EXISTS `pot_search_engines`;
 CREATE TABLE `pot_search_engines` (
   `accesslog_id` int(11) NOT NULL default '0',
   `search_engine` varchar(64) NOT NULL default '',
@@ -5607,7 +5538,6 @@ CREATE TABLE `pot_search_engines` (
 -- Tabellenstruktur für Tabelle `pot_user_agents`
 -- 
 
-DROP TABLE IF EXISTS `pot_user_agents`;
 CREATE TABLE `pot_user_agents` (
   `data_id` int(11) NOT NULL default '0',
   `string` varchar(255) NOT NULL default '',
@@ -5628,7 +5558,6 @@ INSERT INTO `pot_user_agents` (`data_id`, `string`) VALUES (-516513586, 'MS Inte
 -- Tabellenstruktur für Tabelle `pot_visitors`
 -- 
 
-DROP TABLE IF EXISTS `pot_visitors`;
 CREATE TABLE `pot_visitors` (
   `accesslog_id` int(11) NOT NULL default '0',
   `visitor_id` int(11) NOT NULL default '0',
@@ -5663,7 +5592,6 @@ INSERT INTO `pot_visitors` (`accesslog_id`, `visitor_id`, `client_id`, `operatin
 -- Tabellenstruktur für Tabelle `registry`
 -- 
 
-DROP TABLE IF EXISTS `registry`;
 CREATE TABLE `registry` (
   `REGID` bigint(20) NOT NULL default '0',
   `REGNAME` varchar(32) NOT NULL default '',
@@ -5698,7 +5626,6 @@ INSERT INTO `registry` (`REGID`, `REGNAME`, `VALUE`, `PARENTREGID`) VALUES (1000
 -- Tabellenstruktur für Tabelle `role_sys_functions`
 -- 
 
-DROP TABLE IF EXISTS `role_sys_functions`;
 CREATE TABLE `role_sys_functions` (
   `ROLE_ID` bigint(20) NOT NULL default '0',
   `FUNCTION_ID` char(16) NOT NULL default '',
@@ -5839,7 +5766,6 @@ INSERT INTO `role_sys_functions` (`ROLE_ID`, `FUNCTION_ID`) VALUES (100329, 'TRA
 -- Tabellenstruktur für Tabelle `roles`
 -- 
 
-DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
   `ROLE_ID` bigint(20) NOT NULL default '0',
   `ROLE_NAME` varchar(32) NOT NULL default '',
@@ -5865,7 +5791,6 @@ INSERT INTO `roles` (`ROLE_ID`, `ROLE_NAME`, `DESCRIPTION`) VALUES (100255, 'Com
 -- Tabellenstruktur für Tabelle `sequences`
 -- 
 
-DROP TABLE IF EXISTS `sequences`;
 CREATE TABLE `sequences` (
   `seq` varchar(32) NOT NULL default '',
   `val` bigint(20) NOT NULL default '1000'
@@ -5875,7 +5800,7 @@ CREATE TABLE `sequences` (
 -- Daten für Tabelle `sequences`
 -- 
 
-INSERT INTO `sequences` (`seq`, `val`) VALUES ('GUID', 100549);
+INSERT INTO `sequences` (`seq`, `val`) VALUES ('GUID', 100711);
 INSERT INTO `sequences` (`seq`, `val`) VALUES ('log', 100082);
 
 -- --------------------------------------------------------
@@ -5884,7 +5809,6 @@ INSERT INTO `sequences` (`seq`, `val`) VALUES ('log', 100082);
 -- Tabellenstruktur für Tabelle `sessions`
 -- 
 
-DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE `sessions` (
   `SESSKEY` varchar(32) NOT NULL default '',
   `EXPIRY` int(11) unsigned NOT NULL default '0',
@@ -5896,7 +5820,7 @@ CREATE TABLE `sessions` (
 -- Daten für Tabelle `sessions`
 -- 
 
-INSERT INTO `sessions` (`SESSKEY`, `EXPIRY`, `DATA`) VALUES ('150c0c4e9897cc72dd8827cc759736f5', 1155468586, '_phpOpenTracker_Config%7Ca%3A37%3A%7Bs%3A7%3A%22db_port%22%3Bs%3A7%3A%22default%22%3Bs%3A9%3A%22db_socket%22%3Bs%3A7%3A%22default%22%3Bs%3A21%3A%22additional_data_table%22%3Bs%3A12%3A%22pot_add_data%22%3Bs%3A15%3A%22accesslog_table%22%3Bs%3A13%3A%22pot_accesslog%22%3Bs%3A15%3A%22documents_table%22%3Bs%3A13%3A%22pot_documents%22%3Bs%3A18%3A%22exit_targets_table%22%3Bs%3A16%3A%22pot_exit_targets%22%3Bs%3A15%3A%22hostnames_table%22%3Bs%3A13%3A%22pot_hostnames%22%3Bs%3A23%3A%22operating_systems_table%22%3Bs%3A21%3A%22pot_operating_systems%22%3Bs%3A14%3A%22referers_table%22%3Bs%3A12%3A%22pot_referers%22%3Bs%3A17%3A%22user_agents_table%22%3Bs%3A15%3A%22pot_user_agents%22%3Bs%3A14%3A%22visitors_table%22%3Bs%3A12%3A%22pot_visitors%22%3Bs%3A16%3A%22document_env_var%22%3Bs%3A11%3A%22REQUEST_URI%22%3Bs%3A20%3A%22clean_referer_string%22%3Bs%3A1%3A%221%22%3Bs%3A18%3A%22clean_query_string%22%3Bs%3A1%3A%221%22%3Bs%3A20%3A%22get_parameter_filter%22%3Ba%3A0%3A%7B%7Ds%3A16%3A%22resolve_hostname%22%3Bs%3A1%3A%221%22%3Bs%3A15%3A%22group_hostnames%22%3Bs%3A1%3A%221%22%3Bs%3A17%3A%22group_user_agents%22%3Bs%3A1%3A%221%22%3Bs%3A24%3A%22track_returning_visitors%22%3Bs%3A1%3A%221%22%3Bs%3A25%3A%22returning_visitors_cookie%22%3Bs%3A14%3A%22pot_visitor_id%22%3Bs%3A34%3A%22returning_visitors_cookie_lifetime%22%3Bs%3A3%3A%22365%22%3Bs%3A7%3A%22locking%22%3Bs%3A0%3A%22%22%3Bs%3A10%3A%22log_reload%22%3Bs%3A0%3A%22%22%3Bs%3A12%3A%22jpgraph_path%22%3Bs%3A29%3A%22C%3A%5CWeb%5Ccorps%2Fcms%2Fext%2Fjpgraph%2F%22%3Bs%3A22%3A%22merge_tables_threshold%22%3Bs%3A1%3A%226%22%3Bs%3A22%3A%22logging_engine_plugins%22%3Ba%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22nxlog%22%3Bi%3A1%3Bs%3A14%3A%22search_engines%22%3B%7Ds%3A11%3A%22query_cache%22%3Bs%3A0%3A%22%22%3Bs%3A15%3A%22query_cache_dir%22%3Bs%3A5%3A%22%2Ftmp%2F%22%3Bs%3A20%3A%22query_cache_lifetime%22%3Bs%3A4%3A%223600%22%3Bs%3A11%3A%22debug_level%22%3Bs%3A1%3A%221%22%3Bs%3A20%3A%22exit_on_fatal_errors%22%3Bs%3A0%3A%22%22%3Bs%3A10%3A%22log_errors%22%3Bs%3A0%3A%22%22%3Bs%3A7%3A%22db_type%22%3Bs%3A5%3A%22mysql%22%3Bs%3A7%3A%22db_host%22%3Bs%3A9%3A%22localhost%22%3Bs%3A7%3A%22db_user%22%3Bs%3A4%3A%22root%22%3Bs%3A11%3A%22db_password%22%3Bs%3A0%3A%22%22%3Bs%3A11%3A%22db_database%22%3Bs%3A4%3A%22demo%22%3B%7D_phpOpenTracker_Container%7Ca%3A21%3A%7Bs%3A13%3A%22first_request%22%3Bb%3A1%3Bs%3A9%3A%22client_id%22%3Bi%3A1%3Bs%3A12%3A%22accesslog_id%22%3Bi%3A-1229904442%3Bs%3A10%3A%22ip_address%22%3Bs%3A9%3A%22127.0.0.1%22%3Bs%3A9%3A%22host_orig%22%3Bs%3A9%3A%22localhost%22%3Bs%3A4%3A%22host%22%3Bs%3A9%3A%22localhost%22%3Bs%3A15%3A%22user_agent_orig%22%3Bs%3A87%3A%22Mozilla%2F4.0%20%28compatible%3B%20MSIE%206.0%3B%20Windows%20NT%205.1%3B%20SV1%3B%20InfoPath.1%3B%20.NET%20CLR%202.0.50727%29%22%3Bs%3A16%3A%22operating_system%22%3Bs%3A10%3A%22Windows%20XP%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A24%3A%22MS%20Internet%20Explorer%206.0%22%3Bs%3A7%3A%22host_id%22%3Bi%3A-1631451101%3Bs%3A19%3A%22operating_system_id%22%3Bi%3A-114077417%3Bs%3A13%3A%22user_agent_id%22%3Bi%3A-520828167%3Bs%3A12%3A%22referer_orig%22%3Bs%3A0%3A%22%22%3Bs%3A7%3A%22referer%22%3Bs%3A0%3A%22%22%3Bs%3A10%3A%22referer_id%22%3Bi%3A0%3Bs%3A12%3A%22document_url%22%3Bs%3A35%3A%22http%3A%2F%2Flocalhost%2Fcorps%2Fwww%2Fen%2Ftest%2F%22%3Bs%3A8%3A%22document%22%3Bs%3A6%3A%22100031%22%3Bs%3A11%3A%22document_id%22%3Bi%3A-1372539626%3Bs%3A9%3A%22timestamp%22%3Bi%3A1155466272%3Bs%3A10%3A%22visitor_id%22%3Bs%3A9%3A%22196928006%22%3Bs%3A17%3A%22returning_visitor%22%3Bb%3A1%3B%7D');
+INSERT INTO `sessions` (`SESSKEY`, `EXPIRY`, `DATA`) VALUES ('150c0c4e9897cc72dd8827cc759736f5', 1155470084, '_phpOpenTracker_Config%7Ca%3A37%3A%7Bs%3A7%3A%22db_port%22%3Bs%3A7%3A%22default%22%3Bs%3A9%3A%22db_socket%22%3Bs%3A7%3A%22default%22%3Bs%3A21%3A%22additional_data_table%22%3Bs%3A12%3A%22pot_add_data%22%3Bs%3A15%3A%22accesslog_table%22%3Bs%3A13%3A%22pot_accesslog%22%3Bs%3A15%3A%22documents_table%22%3Bs%3A13%3A%22pot_documents%22%3Bs%3A18%3A%22exit_targets_table%22%3Bs%3A16%3A%22pot_exit_targets%22%3Bs%3A15%3A%22hostnames_table%22%3Bs%3A13%3A%22pot_hostnames%22%3Bs%3A23%3A%22operating_systems_table%22%3Bs%3A21%3A%22pot_operating_systems%22%3Bs%3A14%3A%22referers_table%22%3Bs%3A12%3A%22pot_referers%22%3Bs%3A17%3A%22user_agents_table%22%3Bs%3A15%3A%22pot_user_agents%22%3Bs%3A14%3A%22visitors_table%22%3Bs%3A12%3A%22pot_visitors%22%3Bs%3A16%3A%22document_env_var%22%3Bs%3A11%3A%22REQUEST_URI%22%3Bs%3A20%3A%22clean_referer_string%22%3Bs%3A1%3A%221%22%3Bs%3A18%3A%22clean_query_string%22%3Bs%3A1%3A%221%22%3Bs%3A20%3A%22get_parameter_filter%22%3Ba%3A0%3A%7B%7Ds%3A16%3A%22resolve_hostname%22%3Bs%3A1%3A%221%22%3Bs%3A15%3A%22group_hostnames%22%3Bs%3A1%3A%221%22%3Bs%3A17%3A%22group_user_agents%22%3Bs%3A1%3A%221%22%3Bs%3A24%3A%22track_returning_visitors%22%3Bs%3A1%3A%221%22%3Bs%3A25%3A%22returning_visitors_cookie%22%3Bs%3A14%3A%22pot_visitor_id%22%3Bs%3A34%3A%22returning_visitors_cookie_lifetime%22%3Bs%3A3%3A%22365%22%3Bs%3A7%3A%22locking%22%3Bs%3A0%3A%22%22%3Bs%3A10%3A%22log_reload%22%3Bs%3A0%3A%22%22%3Bs%3A12%3A%22jpgraph_path%22%3Bs%3A29%3A%22C%3A%5CWeb%5Ccorps%2Fcms%2Fext%2Fjpgraph%2F%22%3Bs%3A22%3A%22merge_tables_threshold%22%3Bs%3A1%3A%226%22%3Bs%3A22%3A%22logging_engine_plugins%22%3Ba%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22nxlog%22%3Bi%3A1%3Bs%3A14%3A%22search_engines%22%3B%7Ds%3A11%3A%22query_cache%22%3Bs%3A0%3A%22%22%3Bs%3A15%3A%22query_cache_dir%22%3Bs%3A5%3A%22%2Ftmp%2F%22%3Bs%3A20%3A%22query_cache_lifetime%22%3Bs%3A4%3A%223600%22%3Bs%3A11%3A%22debug_level%22%3Bs%3A1%3A%221%22%3Bs%3A20%3A%22exit_on_fatal_errors%22%3Bs%3A0%3A%22%22%3Bs%3A10%3A%22log_errors%22%3Bs%3A0%3A%22%22%3Bs%3A7%3A%22db_type%22%3Bs%3A5%3A%22mysql%22%3Bs%3A7%3A%22db_host%22%3Bs%3A9%3A%22localhost%22%3Bs%3A7%3A%22db_user%22%3Bs%3A4%3A%22root%22%3Bs%3A11%3A%22db_password%22%3Bs%3A0%3A%22%22%3Bs%3A11%3A%22db_database%22%3Bs%3A4%3A%22demo%22%3B%7D_phpOpenTracker_Container%7Ca%3A21%3A%7Bs%3A13%3A%22first_request%22%3Bb%3A1%3Bs%3A9%3A%22client_id%22%3Bi%3A1%3Bs%3A12%3A%22accesslog_id%22%3Bi%3A-1229904442%3Bs%3A10%3A%22ip_address%22%3Bs%3A9%3A%22127.0.0.1%22%3Bs%3A9%3A%22host_orig%22%3Bs%3A9%3A%22localhost%22%3Bs%3A4%3A%22host%22%3Bs%3A9%3A%22localhost%22%3Bs%3A15%3A%22user_agent_orig%22%3Bs%3A87%3A%22Mozilla%2F4.0%20%28compatible%3B%20MSIE%206.0%3B%20Windows%20NT%205.1%3B%20SV1%3B%20InfoPath.1%3B%20.NET%20CLR%202.0.50727%29%22%3Bs%3A16%3A%22operating_system%22%3Bs%3A10%3A%22Windows%20XP%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A24%3A%22MS%20Internet%20Explorer%206.0%22%3Bs%3A7%3A%22host_id%22%3Bi%3A-1631451101%3Bs%3A19%3A%22operating_system_id%22%3Bi%3A-114077417%3Bs%3A13%3A%22user_agent_id%22%3Bi%3A-520828167%3Bs%3A12%3A%22referer_orig%22%3Bs%3A0%3A%22%22%3Bs%3A7%3A%22referer%22%3Bs%3A0%3A%22%22%3Bs%3A10%3A%22referer_id%22%3Bi%3A0%3Bs%3A12%3A%22document_url%22%3Bs%3A35%3A%22http%3A%2F%2Flocalhost%2Fcorps%2Fwww%2Fen%2Ftest%2F%22%3Bs%3A8%3A%22document%22%3Bs%3A6%3A%22100031%22%3Bs%3A11%3A%22document_id%22%3Bi%3A-1372539626%3Bs%3A9%3A%22timestamp%22%3Bi%3A1155466272%3Bs%3A10%3A%22visitor_id%22%3Bs%3A9%3A%22196928006%22%3Bs%3A17%3A%22returning_visitor%22%3Bb%3A1%3B%7Dupload%7Cs%3A1736%3A%22%3C%3Fxml%20version%3D%221.0%22%3F%3E%0A%3CNX%3ASYNDICATION%20VERSION%3D%221.0%22%20PROVIDER%3D%22localhost%22%3E%0A%20%20%3CNX%3AREQUIRE%20PLUGIN%3D%22TEXT%22%2F%3E%0A%20%20%3CNX%3AREQUIRE%20PLUGIN%3D%22LABEL%22%2F%3E%0A%20%20%3CNX%3AMETATEMPLATE%20ID%3D%222%22%20NAME%3D%22-%22%20DESCRIPTION%3D%22%22%2F%3E%0A%20%20%3CNX%3ACLUSTERTEMPLATE%20ID%3D%22101177%22%20NAME%3D%22Inline%2BFrame%22%20DESCRIPTION%3D%22%22%20METATEMPLATE%3D%222%22%3E%0A%20%20%20%20%3CNX%3ALAYOUT%2F%3E%0A%20%20%20%20%3CNX%3ACLUSTERTEMPLATEITEM%20NAME%3D%22Menu%22%20POSITION%3D%224%22%20TYPE%3D%223%22%20MINCARD%3D%221%22%20MAXCARD%3D%221%22%20CONFIGURATION%3D%22%22%2F%3E%0A%20%20%20%20%3CNX%3ACLUSTERTEMPLATEITEM%20NAME%3D%22Address%22%20POSITION%3D%223%22%20TYPE%3D%222%22%20MINCARD%3D%221%22%20MAXCARD%3D%221%22%20CONFIGURATION%3D%22LABEL%22%2F%3E%0A%20%20%20%20%3CNX%3ACLUSTERTEMPLATEITEM%20NAME%3D%22Body%22%20POSITION%3D%222%22%20TYPE%3D%222%22%20MINCARD%3D%221%22%20MAXCARD%3D%221%22%20CONFIGURATION%3D%22TEXT%22%2F%3E%0A%20%20%20%20%3CNX%3ACLUSTERTEMPLATEITEM%20NAME%3D%22Headline%22%20POSITION%3D%221%22%20TYPE%3D%222%22%20MINCARD%3D%221%22%20MAXCARD%3D%221%22%20CONFIGURATION%3D%22LABEL%22%2F%3E%0A%20%20%3C%2FNX%3ACLUSTERTEMPLATE%3E%0A%20%20%3CNX%3ASITEPAGEMASTER%20ID%3D%22101182%22%20NAME%3D%22Inline%2BFrame%22%20DESCRIPTION%3D%22%22%20TYPE%3D%221%22%20FILENAME%3D%22inline.php%22%20CLUSTERTEMPLATE%3D%22101177%22%3E%253C%253FPHP%2B%2B%250D%250A%2B%2Brequire_once%2B%2522nxheader.inc.php%2522%253B%250D%250A%2B%2B%2524cds-%253Elayout-%253EaddStyleSheet%2528%2522css%252Fstyles.css%2522%2529%253B%250D%250A%2B%2Binclude%2B%2522modules%252Fsiteheader.php%2522%253B%250D%250A%2B%250D%250A%2B%2BcoCenter%2528%2B%2524cds-%253Econtent-%253Eget%2528%2522Body%2522%2529%2529%253B%250D%250A%250D%250A%2B%2Becho%2B%2527%253Cdiv%2Bclass%253D%2522bigcontent%2522%2Bstlye%253D%2522height%253A400px%253B%2522%253E%2527%253B%250D%250A%2B%2Becho%2B%2527%253Ciframe%2B%2Bframeborder%253D%25220%2522%2Bwidth%253D%2522100%2525%2522%2Bheight%253D%2522400%2522%2Bsrc%253D%2522%2527.%2524cds-%253Econtent-%253Eget%2528%2522Address%2522%2529.%2527%2522%253E%253C%252Fiframe%253E%2527%253B%250D%250A%2B%2Becho%2B%2527%253C%252Fdiv%253E%2527%253B%250D%250A%2B%2B%2B%250D%250A%2B%2Binclude%2B%2522modules%252Fsitefooter.php%2522%253B%250D%250A%2B%2Brequire_once%2B%2522nxfooter.inc.php%2522%253B%250D%250A%253F%253E%3C%2FNX%3ASITEPAGEMASTER%3E%0A%20%20%3CNX%3ATYPE%20TYPE%3D%22PAGETEMPLATE%22%2F%3E%0A%20%20%3CNX%3ADESCRIPTION%3EDisplay%2Ba%2Bframe%3C%2FNX%3ADESCRIPTION%3E%0A%20%20%3CNX%3AINFO%20WWW%3D%22www.nxsystems.org%22%20MAIL%3D%22info%40nxsystems.org%22%2F%3E%0A%3C%2FNX%3ASYNDICATION%3E%22%3Blabel%7CN%3B');
 INSERT INTO `sessions` (`SESSKEY`, `EXPIRY`, `DATA`) VALUES ('ac59adeaaa1472a66fbfbba512010fc6', 1155469038, '_phpOpenTracker_Config%7Ca%3A37%3A%7Bs%3A7%3A%22db_port%22%3Bs%3A7%3A%22default%22%3Bs%3A9%3A%22db_socket%22%3Bs%3A7%3A%22default%22%3Bs%3A21%3A%22additional_data_table%22%3Bs%3A12%3A%22pot_add_data%22%3Bs%3A15%3A%22accesslog_table%22%3Bs%3A13%3A%22pot_accesslog%22%3Bs%3A15%3A%22documents_table%22%3Bs%3A13%3A%22pot_documents%22%3Bs%3A18%3A%22exit_targets_table%22%3Bs%3A16%3A%22pot_exit_targets%22%3Bs%3A15%3A%22hostnames_table%22%3Bs%3A13%3A%22pot_hostnames%22%3Bs%3A23%3A%22operating_systems_table%22%3Bs%3A21%3A%22pot_operating_systems%22%3Bs%3A14%3A%22referers_table%22%3Bs%3A12%3A%22pot_referers%22%3Bs%3A17%3A%22user_agents_table%22%3Bs%3A15%3A%22pot_user_agents%22%3Bs%3A14%3A%22visitors_table%22%3Bs%3A12%3A%22pot_visitors%22%3Bs%3A16%3A%22document_env_var%22%3Bs%3A11%3A%22REQUEST_URI%22%3Bs%3A20%3A%22clean_referer_string%22%3Bs%3A1%3A%221%22%3Bs%3A18%3A%22clean_query_string%22%3Bs%3A1%3A%221%22%3Bs%3A20%3A%22get_parameter_filter%22%3Ba%3A0%3A%7B%7Ds%3A16%3A%22resolve_hostname%22%3Bs%3A1%3A%221%22%3Bs%3A15%3A%22group_hostnames%22%3Bs%3A1%3A%221%22%3Bs%3A17%3A%22group_user_agents%22%3Bs%3A1%3A%221%22%3Bs%3A24%3A%22track_returning_visitors%22%3Bs%3A1%3A%221%22%3Bs%3A25%3A%22returning_visitors_cookie%22%3Bs%3A14%3A%22pot_visitor_id%22%3Bs%3A34%3A%22returning_visitors_cookie_lifetime%22%3Bs%3A3%3A%22365%22%3Bs%3A7%3A%22locking%22%3Bs%3A0%3A%22%22%3Bs%3A10%3A%22log_reload%22%3Bs%3A0%3A%22%22%3Bs%3A12%3A%22jpgraph_path%22%3Bs%3A29%3A%22C%3A%5CWeb%5Ccorps%2Fcms%2Fext%2Fjpgraph%2F%22%3Bs%3A22%3A%22merge_tables_threshold%22%3Bs%3A1%3A%226%22%3Bs%3A22%3A%22logging_engine_plugins%22%3Ba%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22nxlog%22%3Bi%3A1%3Bs%3A14%3A%22search_engines%22%3B%7Ds%3A11%3A%22query_cache%22%3Bs%3A0%3A%22%22%3Bs%3A15%3A%22query_cache_dir%22%3Bs%3A5%3A%22%2Ftmp%2F%22%3Bs%3A20%3A%22query_cache_lifetime%22%3Bs%3A4%3A%223600%22%3Bs%3A11%3A%22debug_level%22%3Bs%3A1%3A%221%22%3Bs%3A20%3A%22exit_on_fatal_errors%22%3Bs%3A0%3A%22%22%3Bs%3A10%3A%22log_errors%22%3Bs%3A0%3A%22%22%3Bs%3A7%3A%22db_type%22%3Bs%3A5%3A%22mysql%22%3Bs%3A7%3A%22db_host%22%3Bs%3A9%3A%22localhost%22%3Bs%3A7%3A%22db_user%22%3Bs%3A4%3A%22root%22%3Bs%3A11%3A%22db_password%22%3Bs%3A0%3A%22%22%3Bs%3A11%3A%22db_database%22%3Bs%3A4%3A%22demo%22%3B%7D_phpOpenTracker_Container%7Ca%3A22%3A%7Bs%3A13%3A%22first_request%22%3Bb%3A0%3Bs%3A9%3A%22client_id%22%3Bi%3A1%3Bs%3A12%3A%22accesslog_id%22%3Bi%3A1237274194%3Bs%3A10%3A%22ip_address%22%3Bs%3A9%3A%22127.0.0.1%22%3Bs%3A9%3A%22host_orig%22%3Bs%3A9%3A%22localhost%22%3Bs%3A4%3A%22host%22%3Bs%3A9%3A%22localhost%22%3Bs%3A15%3A%22user_agent_orig%22%3Bs%3A87%3A%22Mozilla%2F5.0%20%28Windows%3B%20U%3B%20Windows%20NT%205.1%3B%20de%3B%20rv%3A1.8.0.6%29%20Gecko%2F20060728%20Firefox%2F1.5.0.6%22%3Bs%3A16%3A%22operating_system%22%3Bs%3A10%3A%22Windows%20XP%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A22%3A%22compatible%20Mozilla%2F5.0%22%3Bs%3A7%3A%22host_id%22%3Bi%3A-1631451101%3Bs%3A19%3A%22operating_system_id%22%3Bi%3A-114077417%3Bs%3A13%3A%22user_agent_id%22%3Bi%3A-795004555%3Bs%3A12%3A%22referer_orig%22%3Bs%3A0%3A%22%22%3Bs%3A7%3A%22referer%22%3Bs%3A0%3A%22%22%3Bs%3A10%3A%22referer_id%22%3Bi%3A0%3Bs%3A12%3A%22document_url%22%3Bs%3A35%3A%22http%3A%2F%2Flocalhost%2Fcorps%2Fwww%2Fen%2Ftest%2F%22%3Bs%3A8%3A%22document%22%3Bs%3A6%3A%22100031%22%3Bs%3A11%3A%22document_id%22%3Bi%3A-1372539626%3Bs%3A9%3A%22timestamp%22%3Bi%3A1155466978%3Bs%3A10%3A%22visitor_id%22%3Bi%3A1237274194%3Bs%3A17%3A%22returning_visitor%22%3Bb%3A0%3Bs%3A13%3A%22last_document%22%3Bs%3A6%3A%22100031%22%3B%7D');
 
 -- --------------------------------------------------------
@@ -5905,7 +5829,6 @@ INSERT INTO `sessions` (`SESSKEY`, `EXPIRY`, `DATA`) VALUES ('ac59adeaaa1472a66f
 -- Tabellenstruktur für Tabelle `shop_tax`
 -- 
 
-DROP TABLE IF EXISTS `shop_tax`;
 CREATE TABLE `shop_tax` (
   `TAX_ID` bigint(20) NOT NULL default '0',
   `NAME` varchar(128) collate latin1_general_ci NOT NULL default '',
@@ -5924,7 +5847,6 @@ CREATE TABLE `shop_tax` (
 -- Tabellenstruktur für Tabelle `sitemap`
 -- 
 
-DROP TABLE IF EXISTS `sitemap`;
 CREATE TABLE `sitemap` (
   `MENU_ID` bigint(20) NOT NULL default '0',
   `PARENT_ID` bigint(20) NOT NULL default '0',
@@ -5970,6 +5892,8 @@ INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS
 INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100437, 0, 100436, 'Gallery', 6, 0, 0, 0, 1, 1, 0, NULL);
 INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100517, 100518, 100501, 'Create', 2, 0, 0, 10, 1, 1, 0, NULL);
 INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100518, 100042, 100103, 'RSS', 5, 0, 0, 10, 1, 1, 0, NULL);
+INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100587, 100437, 101182, 'test in frame', 1, 0, 0, 0, 1, 1, 0, NULL);
+INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100663, 0, 100639, 'Map', 7, 0, 0, 0, 1, 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -5977,7 +5901,6 @@ INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS
 -- Tabellenstruktur für Tabelle `sitepage`
 -- 
 
-DROP TABLE IF EXISTS `sitepage`;
 CREATE TABLE `sitepage` (
   `SPID` bigint(20) NOT NULL default '0',
   `SPM_ID` bigint(20) NOT NULL default '0',
@@ -6025,6 +5948,8 @@ INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNC
 INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100438, 100436, 100437, 1, 100439, NULL, NULL, 0, 0, 0);
 INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100500, 100501, 100517, 1, 100507, NULL, NULL, 0, 0, 10);
 INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100526, 100103, 100518, 1, 100527, NULL, NULL, 0, 0, 10);
+INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100588, 101182, 100587, 1, 100589, NULL, NULL, 0, 0, 0);
+INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100664, 100639, 100663, 1, 100665, NULL, NULL, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -6032,7 +5957,6 @@ INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNC
 -- Tabellenstruktur für Tabelle `sitepage_master`
 -- 
 
-DROP TABLE IF EXISTS `sitepage_master`;
 CREATE TABLE `sitepage_master` (
   `SPM_ID` bigint(20) NOT NULL default '0',
   `NAME` varchar(32) NOT NULL default '',
@@ -6069,6 +5993,8 @@ INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`,
 INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (101212, 'RSS Reader', 'Load a RSS feed and display it on the homepage.', 'rssdisp.php', 101177, 1, 0, 'default.png', 0);
 INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100436, 'Gallery', 'Template for creating image galleries', 'gallery.php', 100428, 1, 0, 'default.png', 0);
 INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100501, 'RSS Creator', 'Create a RSS-Feed out of a channel.', 'rss.php', 100502, 1, 0, NULL, 10);
+INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (101182, 'Show In Frame', 'Use this template, to show the content of an URL in an embedded frame (iframe).', 'inline.php', 100560, 1, 0, 'default.png', 0);
+INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100639, 'Map', 'View a address with Google Maps.', 'map.php', 100612, 1, 0, 'default.png', 0);
 
 -- --------------------------------------------------------
 
@@ -6076,7 +6002,6 @@ INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`,
 -- Tabellenstruktur für Tabelle `sitepage_names`
 -- 
 
-DROP TABLE IF EXISTS `sitepage_names`;
 CREATE TABLE `sitepage_names` (
   `SPID` bigint(20) NOT NULL default '0',
   `VARIATION_ID` bigint(20) NOT NULL default '0',
@@ -6118,6 +6043,8 @@ INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HEL
 INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100438, 1, 'Gallery', NULL, '', 0, 0);
 INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100500, 1, 'Create', '', '', 0, 10);
 INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100526, 1, 'RSS', '', '', 0, 10);
+INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100588, 1, 'test in frame', NULL, '', 0, 0);
+INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100664, 1, 'Map', NULL, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -6125,7 +6052,6 @@ INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HEL
 -- Tabellenstruktur für Tabelle `sitepage_owner`
 -- 
 
-DROP TABLE IF EXISTS `sitepage_owner`;
 CREATE TABLE `sitepage_owner` (
   `SPID` bigint(20) NOT NULL default '0',
   `GROUP_ID` bigint(20) NOT NULL default '0'
@@ -6142,7 +6068,6 @@ CREATE TABLE `sitepage_owner` (
 -- Tabellenstruktur für Tabelle `sitepage_types`
 -- 
 
-DROP TABLE IF EXISTS `sitepage_types`;
 CREATE TABLE `sitepage_types` (
   `SPMTYPE_ID` bigint(20) NOT NULL default '0',
   `NAME` varchar(16) NOT NULL default ''
@@ -6162,7 +6087,6 @@ INSERT INTO `sitepage_types` (`SPMTYPE_ID`, `NAME`) VALUES (3, 'PORTAL');
 -- Tabellenstruktur für Tabelle `sitepage_variations`
 -- 
 
-DROP TABLE IF EXISTS `sitepage_variations`;
 CREATE TABLE `sitepage_variations` (
   `SPM_ID` bigint(20) NOT NULL default '0',
   `VARIATION_ID` bigint(20) NOT NULL default '0'
@@ -6191,6 +6115,8 @@ INSERT INTO `sitepage_variations` (`SPM_ID`, `VARIATION_ID`) VALUES (100513, 1);
 INSERT INTO `sitepage_variations` (`SPM_ID`, `VARIATION_ID`) VALUES (101212, 1);
 INSERT INTO `sitepage_variations` (`SPM_ID`, `VARIATION_ID`) VALUES (100436, 1);
 INSERT INTO `sitepage_variations` (`SPM_ID`, `VARIATION_ID`) VALUES (100501, 1);
+INSERT INTO `sitepage_variations` (`SPM_ID`, `VARIATION_ID`) VALUES (101182, 1);
+INSERT INTO `sitepage_variations` (`SPM_ID`, `VARIATION_ID`) VALUES (100639, 1);
 
 -- --------------------------------------------------------
 
@@ -6198,7 +6124,6 @@ INSERT INTO `sitepage_variations` (`SPM_ID`, `VARIATION_ID`) VALUES (100501, 1);
 -- Tabellenstruktur für Tabelle `state_translation`
 -- 
 
-DROP TABLE IF EXISTS `state_translation`;
 CREATE TABLE `state_translation` (
   `IN_ID` bigint(20) NOT NULL default '0',
   `OUT_ID` bigint(20) NOT NULL default '0',
@@ -6350,7 +6275,6 @@ INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRE
 -- Tabellenstruktur für Tabelle `syndication`
 -- 
 
-DROP TABLE IF EXISTS `syndication`;
 CREATE TABLE `syndication` (
   `IN_ID` bigint(20) NOT NULL default '0',
   `OUT_ID` bigint(20) NOT NULL default '0',
@@ -6372,7 +6296,6 @@ INSERT INTO `syndication` (`IN_ID`, `OUT_ID`, `PROVIDER`) VALUES (101237, 100572
 -- Tabellenstruktur für Tabelle `sys_functions`
 -- 
 
-DROP TABLE IF EXISTS `sys_functions`;
 CREATE TABLE `sys_functions` (
   `FUNCTION_ID` varchar(16) NOT NULL default '',
   `PARENT_ID` varchar(16) NOT NULL default '0',
@@ -6491,7 +6414,6 @@ INSERT INTO `sys_functions` (`FUNCTION_ID`, `PARENT_ID`, `NAME`, `DESCRIPTION`) 
 -- Tabellenstruktur für Tabelle `temp_vars`
 -- 
 
-DROP TABLE IF EXISTS `temp_vars`;
 CREATE TABLE `temp_vars` (
   `NAME` varchar(128) NOT NULL default '',
   `USER_ID` varchar(16) NOT NULL default '',
@@ -6523,7 +6445,7 @@ INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('edit_template.phpf
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('mid', '1', '0');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('sitepagebrowser.phpview', '1', '1');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('panelmenu', '1', '1x-1');
-INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('menu', '1', '1x1');
+INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('menu', '1', '1x0');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('variations.phpfilter_rule', '1', '');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('variations.phpfilter_page', '1', '1');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('compound_groups.phpfilter_rule', '1', '');
@@ -6540,7 +6462,7 @@ INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('chsel', '1', '1001
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('quickpanel', '1', '');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('edit.phpview', '1', '1');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('clusterbrowser.phpview', '1', '1');
-INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('lastaction', '1', 'Publish');
+INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('lastaction', '1', 'editobject');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('metascheme.phpfilter_rule', '1', '');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('metascheme.phpfilter_page', '1', '1');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('meta.phpfilter_rule', '1', '');
@@ -6552,7 +6474,6 @@ INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('meta.phpfilter_pag
 -- Tabellenstruktur für Tabelle `tickets`
 -- 
 
-DROP TABLE IF EXISTS `tickets`;
 CREATE TABLE `tickets` (
   `subject` text collate latin1_general_ci,
   `name` text collate latin1_general_ci,
@@ -6583,7 +6504,6 @@ INSERT INTO `tickets` (`subject`, `name`, `email`, `phone`, `status`, `rate`, `r
 -- Tabellenstruktur für Tabelle `tickets_answers`
 -- 
 
-DROP TABLE IF EXISTS `tickets_answers`;
 CREATE TABLE `tickets_answers` (
   `ID` int(7) NOT NULL auto_increment,
   `ticket` varchar(20) collate latin1_general_ci default NULL,
@@ -6605,7 +6525,6 @@ CREATE TABLE `tickets_answers` (
 -- Tabellenstruktur für Tabelle `tickets_categories`
 -- 
 
-DROP TABLE IF EXISTS `tickets_categories`;
 CREATE TABLE `tickets_categories` (
   `id` int(5) NOT NULL auto_increment,
   `name` varchar(100) collate latin1_general_ci NOT NULL default '',
@@ -6633,7 +6552,6 @@ CREATE TABLE `tickets_categories` (
 -- Tabellenstruktur für Tabelle `tickets_messages`
 -- 
 
-DROP TABLE IF EXISTS `tickets_messages`;
 CREATE TABLE `tickets_messages` (
   `ID` int(7) NOT NULL auto_increment,
   `ticket` varchar(20) collate latin1_general_ci default NULL,
@@ -6656,7 +6574,6 @@ INSERT INTO `tickets_messages` (`ID`, `ticket`, `message`, `timestamp`) VALUES (
 -- Tabellenstruktur für Tabelle `tickets_textblocks`
 -- 
 
-DROP TABLE IF EXISTS `tickets_textblocks`;
 CREATE TABLE `tickets_textblocks` (
   `BLOCK_ID` bigint(20) NOT NULL default '0',
   `NAME` varchar(32) collate latin1_general_ci NOT NULL default '',
@@ -6676,7 +6593,6 @@ CREATE TABLE `tickets_textblocks` (
 -- Tabellenstruktur für Tabelle `user_permissions`
 -- 
 
-DROP TABLE IF EXISTS `user_permissions`;
 CREATE TABLE `user_permissions` (
   `GROUP_ID` bigint(20) default NULL,
   `ROLE_ID` bigint(20) default NULL,
@@ -6695,7 +6611,6 @@ INSERT INTO `user_permissions` (`GROUP_ID`, `ROLE_ID`, `USER_ID`) VALUES (1, 1, 
 -- Tabellenstruktur für Tabelle `user_session`
 -- 
 
-DROP TABLE IF EXISTS `user_session`;
 CREATE TABLE `user_session` (
   `USER_ID` varchar(16) NOT NULL default '',
   `LAST_LOGIN` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
@@ -6716,7 +6631,6 @@ INSERT INTO `user_session` (`USER_ID`, `LAST_LOGIN`, `SESSION_ID`, `REMOTE_ADDRE
 -- Tabellenstruktur für Tabelle `users`
 -- 
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `USER_ID` bigint(20) NOT NULL default '0',
   `USER_NAME` varchar(16) NOT NULL default '',
@@ -6744,7 +6658,6 @@ INSERT INTO `users` (`USER_ID`, `USER_NAME`, `FULL_NAME`, `PASSWORD`, `EMAIL`, `
 -- Tabellenstruktur für Tabelle `var_log`
 -- 
 
-DROP TABLE IF EXISTS `var_log`;
 CREATE TABLE `var_log` (
   `NAME` varchar(32) NOT NULL default '',
   PRIMARY KEY  (`NAME`)
@@ -6761,7 +6674,6 @@ CREATE TABLE `var_log` (
 -- Tabellenstruktur für Tabelle `variations`
 -- 
 
-DROP TABLE IF EXISTS `variations`;
 CREATE TABLE `variations` (
   `VARIATION_ID` bigint(20) NOT NULL default '0',
   `NAME` varchar(32) NOT NULL default '',

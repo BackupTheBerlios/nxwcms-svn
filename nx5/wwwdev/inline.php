@@ -1,24 +1,24 @@
 <?PHP  
   require_once "nxheader.inc.php";
-  $cds->layout->addStyleSheet("css/styles.css");
-  $cds->layout->htmlHeader(); 
-  include "modules/siteheader.php";
+  include $cds->path."inc/header.php";
   $headline = $cds->content->get("Headline");
   $body = $cds->content->get("Body");
   
   if ($headline != "") {
     echo $headline;
-    br();
-    br();
+    br();  
   }
   
   if ($body !="") {
   	echo $cds->content->get("Body");
+  	br();
+  	br();
   }
  
-  br();
-  echo '<iframe  frameborder="0" width="100%" height="70%" src="'.$cds->content->get("Address").'"></iframe>';
+  
+  $url = $cds->content->get("URL", "ALL");
+  echo '<iframe  frameborder="0" width="100%" height="900" src="'.$url["HREF"].'"></iframe>';
    
-  include "modules/sitefooter.php";
+  include $cds->path.'inc/footer.php';
   require_once "nxfooter.inc.php";
 ?>
