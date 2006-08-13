@@ -39,6 +39,7 @@
 	var $menu = null;
 	var $searchengine = NULL;
     var $plugins = NULL;
+    var $servername = '';
 	
  	/**
  	 * Constructor for creating the CDS API interface
@@ -89,6 +90,7 @@
  		$this->menu = new Menu($this);
  		$this->searchengine = new CDSSearchengine();
         $this->plugins = new CDSPlugins();
+        $this->servername = $c["host"];
  	}
  	
  		/**

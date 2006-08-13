@@ -482,8 +482,7 @@ class FeedDate {
 If not specified, the current date and time is used. 
      */ 
     function FeedDate($dateString="") { 
-        if ($dateString=="") $dateString = date("r"); 
-         
+        if ($dateString=="") $dateString = date("r");          
         if (is_integer($dateString)) { 
             $this->unix = $dateString; 
             return; 

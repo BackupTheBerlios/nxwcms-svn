@@ -4,6 +4,14 @@
   // Add CSS and JS to the Header, Setup the Title of the homepage
   $cds->layout->addStyleSheet('css/styles.css');
   $cds->layout->setStaticTitle($cds->content->getByAccessKey("HomepageTitle"));
+  
+  // Check, if an rss-link is defined and set if.
+  $rss = $cds->content->getByAccessKey("rssfeed", "ALL");  
+  $rsslink = $rss["HREF"];
+  if (strlen($rsslink) > 0 ) {
+  	$cds->layout->addRSSFeed($cds->servername.$rsslink);
+  }
+  
   // Draw the HTML Header with title tags, js, css.... 
   $cds->layout->htmlHeader(); 
   

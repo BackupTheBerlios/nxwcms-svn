@@ -48,7 +48,7 @@
 			$rss->useCached();
 			$rss->title = "Made with N/X"; 
 			$rss->description = "set this->title and this->description"; 
-			$rss->link = $c["livedocroot"];
+			$rss->link = $c["host"].$c["livedocroot"];
 			$rss->syndicationURL = $c["livedocroot"].$_SERVER["PHP_SELF"]; 
 			return $rss;			
 			
@@ -82,16 +82,16 @@
 		 * @param string $description
 		 * @param string $baselink
 		 */
-		function addArticles($clnids, $titlename, $descriptionname, $baselink) {
-		  global $cds;
+		function addArticles($clnids, $titlename, $descriptionname, $baselink="") {
+		  global $cds, $c;
 		  foreach( $clnids as $clnid) {
 		  	$cl = $cds->cluster->getById($clnid);		  		     	        
 	     	        $item = new FeedItem(); 
     			$item->title = $cl->content->get($titlename);
-    			$item->link = $baselink."article=".$cl->pageClusterId; 
+    			$item->link = $c["host"].$cds->channel->getLink($clnid);    			
     			$item->description = $cl->content->get($descriptionname);
-    			$item->date = $cl->cluster->getClusterDate();    			
-    			$item->author = "John Doe"; 
+    			$item->date = $cds->channel->getArticleDate($clnid, '%a, %d %b %Y %H:%i:%s +00:00');		    			    			
+    			$item->author = ""; 
     			$this->addItem($item); 
 		  } 	
 		}

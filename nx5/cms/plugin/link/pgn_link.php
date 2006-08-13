@@ -101,7 +101,7 @@
 			$spid = $query->field("SPID");
 			$target = $query->field("TARGET");
 			$query->free();
-			
+
 			//if (is_object($cds)) {
 			//	if ($cds->level == _LIVE) {
 			//		$tmp = getDBCell("state_translation", "OUT_ID", "IN_ID = ".$spid." AND LEVEL = 10");	
@@ -110,7 +110,7 @@
 			//}
 			
 			if ($href == "") {
-				if (!isSPExpired($spid, $v)) {
+				if (!isSPExpired($spid, $v) || $cds->is_development) {					
 					if (function_exists("getMenuLink")) {
 						$href = getMenuLink($spid, $v);
 					} else if (is_object($cds)) {

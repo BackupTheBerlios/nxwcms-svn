@@ -188,8 +188,9 @@
 				$checked = false;
 			    if (value("newitem", "NUMERIC") == $pk) $checked = true;
 				$container->add(new Radio("newitem", $pk, $stdStyle, $checked));
-				$container->add(new Label("name", "<b>".$query->field($this->new_name)."</b>", $stdStyle));
-				$container->add(new Label("desc", $query->field($this->new_description), $stdStyle));
+				$container->add(new Label("name", $query->field($this->new_name), "standard", 2));
+				$container->add(new Cell("clc", "standard", 1));
+				$container->add(new Label("desc", $query->field($this->new_description), "description", 2));
 			}
 			
 			$nameinput = new TextInput($lang->get("name"), $this->item_table, $this->item_name, "1", "type:text,size:32,width:200", "UNIQUE&MANDATORY");

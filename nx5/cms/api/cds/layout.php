@@ -182,6 +182,15 @@
 		  	 array_push($this->jsArray, $js);
 		  }
 		  
+		  /**
+		   * Add a link to an RSS feed, so that browsers automatically detect the RSS-Source
+		   * @param link to the rss feed.
+		   */
+		  function addRSSFeed($link) {
+		    $add = '<link rel="alternate" type="application/rss+xml" title="RSS" href="'.$link.'" />';			  
+		    $this->header = $this->header."\n".$add;
+		  }
+		  
 		/**
 		 * Add attributes to body-tag
 		 * @param string Line you want to add

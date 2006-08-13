@@ -72,10 +72,14 @@
          * @param integer id of article
          * @param string format of date-output
          */
-         function getArticleDate($articleId="", $dateformat="%d.%m.%Y") {
+         function getArticleDate($articleId="", $dateformat="%Y-%m-%d") {
          	global $db;
 	  		if ($articleId == "") $articleId = $this->pageClusterNodeId;
-         	$sql = "SELECT DATE_FORMAT(ARTICLE_DATE, '$dateformat') as d FROM channel_articles WHERE ARTICLE_ID = $articleId";
+         	if ($dateformat == "") {
+			  $sql = "SELECT ARTICLE_DATE as d FROM channel_articles WHERE ARTICLE_ID = $articleId";         		
+         	} else {
+	  		  $sql = "SELECT DATE_FORMAT(ARTICLE_DATE, '$dateformat') as d FROM channel_articles WHERE ARTICLE_ID = $articleId";
+         	}
 	  		$query = new query($db, $sql);
 	  		if ($query->getrow()) {
 				$datum = $query->field("d");

@@ -74,6 +74,13 @@ h3, .h3 {
   padding:4px;
 }
 
+.description {
+  color: #333333;
+  font-size:11px;
+  background-color:#e8f1fa;
+  padding:0px 4px 6px 4px;
+}
+  
 .error {
   padding:4px;
   font-weight:bold;
