@@ -44,10 +44,10 @@
   	 * @param boolean can this field not be left empty?
   	 */
   	function WZUploadArchive($name) {
-  	  global $c, $errors, $lang;
-  	  WZO::WZO($name);
-  	  if ($_FILES[$this->name]['name'] !="") { 	  	
-  	  	if  ( ! (stristr($_FILES[$this->name]['type'], "ZIP") > 0)) {
+  	  global $c, $errors, $lang, $_FILES;
+  	  WZO::WZO($name);  	  
+  	  if ($_FILES[$this->name]['name'] !="") { 	  	  	  	
+  	  	if  ( stristr(strtoupper($_FILES[$this->name]['type']), "ZIP") === false) {
   	      $this->errortext= "<br/>".$lang->get("no_archive", "The file you uploaded is not an zip-archive or your browser does not send the file correct!");	
   	      $errors.="-NOZIP";
   	      $this->css = "error";
@@ -55,8 +55,7 @@
   	    	$this->value="";
   	    	mt_srand ((double)microtime()*1000000);
   	      $tmpfilename =  md5(uniqid(mt_rand())).".zip";
-  	      move_uploaded_file($_FILES[$this->name]['tmp_name'], $c["path"]."cache/".$tmpfilename);
-  	      
+  	      move_uploaded_file($_FILES[$this->name]['tmp_name'], $c["path"]."cache/".$tmpfilename);  	      
   	      $tmpFolder =  $c['path']."cache/".md5(uniqid(mt_rand()));
   	      mkdir($tmpFolder);	        		
      	  nxunzip($c["path"]."cache/".$tmpfilename, $tmpFolder."/");
@@ -73,7 +72,7 @@
   	  global $errors, $lang;
   	  if ($this->errortext != "") {
   	  	 $this->css="error";
-  	  	 $this->errortext = "<br/>".$lang->get("must_upload", "You must upload a file to proceed!");
+  	  	 $this->errortext.= "<br/>".$lang->get("must_upload", "You must upload a file to proceed!");
   	  	 $errors.="-MANDATORY";
   	  }	
   	}

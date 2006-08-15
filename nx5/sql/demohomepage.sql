@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Erstellungszeit: 13. August 2006 um 15:39
+-- Erstellungszeit: 15. August 2006 um 20:12
 -- Server Version: 5.0.18
 -- PHP-Version: 5.1.1
 -- 
@@ -16,6 +16,7 @@
 -- Tabellenstruktur für Tabelle `acl_management`
 -- 
 
+DROP TABLE IF EXISTS `acl_management`;
 CREATE TABLE `acl_management` (
   `GUID` bigint(20) NOT NULL default '0',
   `TYPE_ID` bigint(20) default NULL,
@@ -43,6 +44,7 @@ INSERT INTO `acl_management` (`GUID`, `TYPE_ID`, `SYSTEM`, `INTERNAL`, `DISABLED
 -- Tabellenstruktur für Tabelle `acl_relations`
 -- 
 
+DROP TABLE IF EXISTS `acl_relations`;
 CREATE TABLE `acl_relations` (
   `GUID` bigint(20) NOT NULL default '0',
   `ACCESSOR_GUID` bigint(20) NOT NULL default '0',
@@ -63,6 +65,7 @@ INSERT INTO `acl_relations` (`GUID`, `ACCESSOR_GUID`, `ROLE_ID`) VALUES (0, 1015
 -- Tabellenstruktur für Tabelle `address`
 -- 
 
+DROP TABLE IF EXISTS `address`;
 CREATE TABLE `address` (
   `GGUID` bigint(20) NOT NULL default '0',
   `Name` varchar(64) collate latin1_general_ci default NULL,
@@ -98,6 +101,7 @@ CREATE TABLE `address` (
 -- Tabellenstruktur für Tabelle `categories`
 -- 
 
+DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `CATEGORY_ID` bigint(20) NOT NULL default '0',
   `CATEGORY_NAME` varchar(32) NOT NULL default '',
@@ -118,6 +122,8 @@ INSERT INTO `categories` (`CATEGORY_ID`, `CATEGORY_NAME`, `PARENT_CATEGORY_ID`, 
 INSERT INTO `categories` (`CATEGORY_ID`, `CATEGORY_NAME`, `PARENT_CATEGORY_ID`, `DELETED`) VALUES (100001, 'Header', 100000, 0);
 INSERT INTO `categories` (`CATEGORY_ID`, `CATEGORY_NAME`, `PARENT_CATEGORY_ID`, `DELETED`) VALUES (100000, 'Layout', 0, 0);
 INSERT INTO `categories` (`CATEGORY_ID`, `CATEGORY_NAME`, `PARENT_CATEGORY_ID`, `DELETED`) VALUES (100045, 'Sidebar', 100000, 0);
+INSERT INTO `categories` (`CATEGORY_ID`, `CATEGORY_NAME`, `PARENT_CATEGORY_ID`, `DELETED`) VALUES (100893, 'test', 11, 0);
+INSERT INTO `categories` (`CATEGORY_ID`, `CATEGORY_NAME`, `PARENT_CATEGORY_ID`, `DELETED`) VALUES (100960, 'Pictures', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -125,6 +131,7 @@ INSERT INTO `categories` (`CATEGORY_ID`, `CATEGORY_NAME`, `PARENT_CATEGORY_ID`, 
 -- Tabellenstruktur für Tabelle `categories_info`
 -- 
 
+DROP TABLE IF EXISTS `categories_info`;
 CREATE TABLE `categories_info` (
   `CATEGORY_ID` bigint(20) NOT NULL default '0',
   `VARIATION_ID` bigint(20) NOT NULL default '0',
@@ -141,6 +148,7 @@ CREATE TABLE `categories_info` (
 -- Daten für Tabelle `categories_info`
 -- 
 
+INSERT INTO `categories_info` (`CATEGORY_ID`, `VARIATION_ID`, `IMAGE`, `HEADER`, `FOOTER`, `TITLE`, `SORT_ORDER`, `DATE_ADDED`) VALUES (100893, 1, 0, '', '', '', 0, '2006-08-13 20:04:49');
 
 -- --------------------------------------------------------
 
@@ -148,6 +156,7 @@ CREATE TABLE `categories_info` (
 -- Tabellenstruktur für Tabelle `centerstage`
 -- 
 
+DROP TABLE IF EXISTS `centerstage`;
 CREATE TABLE `centerstage` (
   `STAGE_ID` bigint(20) NOT NULL default '0',
   `CHID` bigint(20) default NULL,
@@ -178,6 +187,7 @@ INSERT INTO `centerstage` (`STAGE_ID`, `CHID`, `CH_CAT_ID`, `SORT_ALGORITHM`, `M
 -- Tabellenstruktur für Tabelle `channel_articles`
 -- 
 
+DROP TABLE IF EXISTS `channel_articles`;
 CREATE TABLE `channel_articles` (
   `ARTICLE_ID` bigint(20) NOT NULL default '0',
   `CHID` bigint(20) NOT NULL default '0',
@@ -207,6 +217,7 @@ INSERT INTO `channel_articles` (`ARTICLE_ID`, `CHID`, `CH_CAT_ID`, `CLT_ID`, `PO
 -- Tabellenstruktur für Tabelle `channel_categories`
 -- 
 
+DROP TABLE IF EXISTS `channel_categories`;
 CREATE TABLE `channel_categories` (
   `CH_CAT_ID` bigint(20) NOT NULL default '0',
   `CHID` bigint(20) NOT NULL default '0',
@@ -228,6 +239,7 @@ INSERT INTO `channel_categories` (`CH_CAT_ID`, `CHID`, `PAGE_ID`, `NAME`) VALUES
 -- Tabellenstruktur für Tabelle `channel_cluster_templates`
 -- 
 
+DROP TABLE IF EXISTS `channel_cluster_templates`;
 CREATE TABLE `channel_cluster_templates` (
   `CHID` bigint(20) NOT NULL default '0',
   `CLT_ID` bigint(20) NOT NULL default '0',
@@ -246,6 +258,7 @@ INSERT INTO `channel_cluster_templates` (`CHID`, `CLT_ID`, `POSITION`) VALUES (1
 -- Tabellenstruktur für Tabelle `channels`
 -- 
 
+DROP TABLE IF EXISTS `channels`;
 CREATE TABLE `channels` (
   `CHID` bigint(20) NOT NULL default '0',
   `NAME` varchar(32) NOT NULL default '',
@@ -264,6 +277,7 @@ INSERT INTO `channels` (`CHID`, `NAME`) VALUES (100154, 'News');
 -- Tabellenstruktur für Tabelle `cluster_content`
 -- 
 
+DROP TABLE IF EXISTS `cluster_content`;
 CREATE TABLE `cluster_content` (
   `CLCID` bigint(20) NOT NULL default '0',
   `CLID` bigint(20) NOT NULL default '0',
@@ -408,6 +422,10 @@ INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, 
 INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100670, 100666, 100622, 1, '', 0, 0);
 INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100671, 100666, 100647, 1, '', 0, 0);
 INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100672, 100666, 100645, 1, '', 0, 0);
+INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100759, 100758, 100720, 1, '', 0, 0);
+INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100760, 100758, 100722, 1, '', 0, 0);
+INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100761, 100758, 100724, 1, '', 0, 0);
+INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, `FKID`, `DELETED`) VALUES (100762, 100758, 100726, 1, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -415,6 +433,7 @@ INSERT INTO `cluster_content` (`CLCID`, `CLID`, `CLTI_ID`, `POSITION`, `TITLE`, 
 -- Tabellenstruktur für Tabelle `cluster_node`
 -- 
 
+DROP TABLE IF EXISTS `cluster_node`;
 CREATE TABLE `cluster_node` (
   `CLNID` bigint(20) NOT NULL default '0',
   `CLT_ID` bigint(20) NOT NULL default '0',
@@ -428,12 +447,12 @@ CREATE TABLE `cluster_node` (
 -- Daten für Tabelle `cluster_node`
 -- 
 
-INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100020, 100014, 'test', 0, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100020, 100014, 'test', 1, 0);
 INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100037, 100033, 'test', 0, 10);
-INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100055, 100050, 'Forum', 0, 0);
-INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100068, 100063, 'Sitemap', 0, 0);
-INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100074, 100014, 'Profiles', 0, 0);
-INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100082, 100078, 'Serivepages', 0, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100055, 100050, 'Forum', 1, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100068, 100063, 'Sitemap', 1, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100074, 100014, 'Profiles', 1, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100082, 100078, 'Serivepages', 1, 0);
 INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100090, 100088, 'Forum', 0, 10);
 INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100096, 100033, 'Profiles', 0, 10);
 INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100105, 100104, 'Serivepages', 0, 10);
@@ -441,23 +460,24 @@ INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VAL
 INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100156, 100134, 'Welcome', 0, 0);
 INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100175, 100171, 'News', 0, 10);
 INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100197, 100183, 'Articles', 0, 10);
-INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100238, 100138, 'News (2)', 0, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100238, 100138, 'News (2)', 1, 0);
 INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100244, 100171, 'News (2)', 0, 10);
-INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100257, 100167, 'Article (2)', 0, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100257, 100167, 'Article (2)', 1, 0);
 INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100261, 100183, 'Article (2)', 0, 10);
 INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100161, 100162, 'Welcome', 0, 10);
-INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100288, 100554, 'Contact', 0, 0);
-INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100315, 100554, 'Contact Mailinga', 0, 0);
-INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100356, 100335, 'Contact new', 0, 0);
-INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100376, 100554, 'Contact New', 0, 0);
-INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100405, 100078, 'RSS', 0, 0);
-INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100409, 101177, 'Read', 0, 0);
-INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100416, 100511, 'Create', 0, 0);
-INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100439, 100428, 'Gallery', 0, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100288, 100554, 'Contact', 1, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100315, 100554, 'Contact Mailinga', 1, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100356, 100335, 'Contact new', 1, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100376, 100554, 'Contact New', 1, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100405, 100078, 'RSS', 1, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100409, 101177, 'Read', 1, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100416, 100511, 'Create', 1, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100439, 100428, 'Gallery', 1, 0);
 INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100507, 100502, 'Create', 0, 10);
 INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100527, 100104, 'RSS', 0, 10);
-INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100589, 100560, 'test in frame', 0, 0);
-INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100665, 100612, 'Map', 0, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100589, 100560, 'test in frame', 1, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100665, 100612, 'Map', 1, 0);
+INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VALUES (100757, 100716, 'Search', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -465,6 +485,7 @@ INSERT INTO `cluster_node` (`CLNID`, `CLT_ID`, `NAME`, `DELETED`, `VERSION`) VAL
 -- Tabellenstruktur für Tabelle `cluster_template_item_types`
 -- 
 
+DROP TABLE IF EXISTS `cluster_template_item_types`;
 CREATE TABLE `cluster_template_item_types` (
   `CLTITYPE_ID` tinyint(4) NOT NULL default '0',
   `NAME` varchar(32) NOT NULL default '',
@@ -492,6 +513,7 @@ INSERT INTO `cluster_template_item_types` (`CLTITYPE_ID`, `NAME`, `DESCRIPTION`)
 -- Tabellenstruktur für Tabelle `cluster_template_items`
 -- 
 
+DROP TABLE IF EXISTS `cluster_template_items`;
 CREATE TABLE `cluster_template_items` (
   `CLTI_ID` bigint(20) NOT NULL default '0',
   `CLT_ID` bigint(20) NOT NULL default '0',
@@ -593,6 +615,10 @@ INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `
 INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100622, 100612, 'ShowControls', 4, 1, 1, 100062, 2, 0, 0, 0);
 INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100645, 100612, 'Google-API-Key', 6, 1, 1, 100018, 2, 0, 0, 0);
 INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100647, 100612, 'Address Description', 5, 1, 1, 100024, 2, 0, 0, 0);
+INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100720, 100716, 'Headline', 1, 1, 1, 100018, 2, 0, 0, 0);
+INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100722, 100716, 'Body', 2, 1, 1, 100024, 2, 0, 0, 0);
+INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100724, 100716, 'Search Button', 3, 1, 1, 100018, 2, 0, 0, 0);
+INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `MINCARD`, `MAXCARD`, `FKID`, `CLTITYPE_ID`, `EXCLUSIVE`, `DELETED`, `VERSION`) VALUES (100726, 100716, 'No Results Text', 4, 1, 1, 100018, 2, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -600,6 +626,7 @@ INSERT INTO `cluster_template_items` (`CLTI_ID`, `CLT_ID`, `NAME`, `POSITION`, `
 -- Tabellenstruktur für Tabelle `cluster_templates`
 -- 
 
+DROP TABLE IF EXISTS `cluster_templates`;
 CREATE TABLE `cluster_templates` (
   `CLT_ID` bigint(20) NOT NULL default '0',
   `MT_ID` bigint(20) NOT NULL default '0',
@@ -641,6 +668,7 @@ INSERT INTO `cluster_templates` (`CLT_ID`, `MT_ID`, `CATEGORY_ID`, `NAME`, `DESC
 INSERT INTO `cluster_templates` (`CLT_ID`, `MT_ID`, `CATEGORY_ID`, `NAME`, `DESCRIPTION`, `CLT_TYPE_ID`, `TEMPLATE`, `DELETED`, `VERSION`) VALUES (100502, 100034, 100011, 'RSS Creator', '', 0, '', 0, 10);
 INSERT INTO `cluster_templates` (`CLT_ID`, `MT_ID`, `CATEGORY_ID`, `NAME`, `DESCRIPTION`, `CLT_TYPE_ID`, `TEMPLATE`, `DELETED`, `VERSION`) VALUES (100560, 2, 100011, 'Internal Frame', '', 0, '', 0, 0);
 INSERT INTO `cluster_templates` (`CLT_ID`, `MT_ID`, `CATEGORY_ID`, `NAME`, `DESCRIPTION`, `CLT_TYPE_ID`, `TEMPLATE`, `DELETED`, `VERSION`) VALUES (100612, 100432, 100011, 'Map Page', '', 0, '', 0, 0);
+INSERT INTO `cluster_templates` (`CLT_ID`, `MT_ID`, `CATEGORY_ID`, `NAME`, `DESCRIPTION`, `CLT_TYPE_ID`, `TEMPLATE`, `DELETED`, `VERSION`) VALUES (100716, 2, 100011, 'Search engine', 'Content definition for the search page.', 0, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -648,6 +676,7 @@ INSERT INTO `cluster_templates` (`CLT_ID`, `MT_ID`, `CATEGORY_ID`, `NAME`, `DESC
 -- Tabellenstruktur für Tabelle `cluster_variations`
 -- 
 
+DROP TABLE IF EXISTS `cluster_variations`;
 CREATE TABLE `cluster_variations` (
   `CLNID` bigint(20) NOT NULL default '0',
   `VARIATION_ID` bigint(20) NOT NULL default '0',
@@ -696,6 +725,7 @@ INSERT INTO `cluster_variations` (`CLNID`, `VARIATION_ID`, `CLID`, `DELETED`, `L
 INSERT INTO `cluster_variations` (`CLNID`, `VARIATION_ID`, `CLID`, `DELETED`, `LAST_CHANGED`, `CREATED_AT`, `LAST_USER`, `CREATE_USER`, `LAUNCHED_AT`, `LAUNCH_USER`) VALUES (100527, 1, 100528, 0, NULL, 20060811234340, NULL, NULL, NULL, NULL);
 INSERT INTO `cluster_variations` (`CLNID`, `VARIATION_ID`, `CLID`, `DELETED`, `LAST_CHANGED`, `CREATED_AT`, `LAST_USER`, `CREATE_USER`, `LAUNCHED_AT`, `LAUNCH_USER`) VALUES (100589, 1, 100590, 0, 20060813132859, 20060813132507, 'Administrator', 'Administrator', NULL, NULL);
 INSERT INTO `cluster_variations` (`CLNID`, `VARIATION_ID`, `CLID`, `DELETED`, `LAST_CHANGED`, `CREATED_AT`, `LAST_USER`, `CREATE_USER`, `LAUNCHED_AT`, `LAUNCH_USER`) VALUES (100665, 1, 100666, 0, 20060813153808, 20060813145308, 'Administrator', 'Administrator', NULL, NULL);
+INSERT INTO `cluster_variations` (`CLNID`, `VARIATION_ID`, `CLID`, `DELETED`, `LAST_CHANGED`, `CREATED_AT`, `LAST_USER`, `CREATE_USER`, `LAUNCHED_AT`, `LAUNCH_USER`) VALUES (100757, 1, 100758, 0, 20060813170814, 20060813170738, 'Administrator', 'Administrator', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -703,6 +733,7 @@ INSERT INTO `cluster_variations` (`CLNID`, `VARIATION_ID`, `CLID`, `DELETED`, `L
 -- Tabellenstruktur für Tabelle `compound_group_members`
 -- 
 
+DROP TABLE IF EXISTS `compound_group_members`;
 CREATE TABLE `compound_group_members` (
   `CGID` bigint(20) NOT NULL default '0',
   `CGMID` bigint(20) NOT NULL default '0',
@@ -721,6 +752,7 @@ CREATE TABLE `compound_group_members` (
 -- Tabellenstruktur für Tabelle `compound_groups`
 -- 
 
+DROP TABLE IF EXISTS `compound_groups`;
 CREATE TABLE `compound_groups` (
   `CGID` bigint(20) NOT NULL default '0',
   `NAME` varchar(64) NOT NULL default '',
@@ -741,6 +773,7 @@ CREATE TABLE `compound_groups` (
 -- Tabellenstruktur für Tabelle `content`
 -- 
 
+DROP TABLE IF EXISTS `content`;
 CREATE TABLE `content` (
   `CID` bigint(20) NOT NULL default '0',
   `MODULE_ID` bigint(20) NOT NULL default '0',
@@ -777,6 +810,25 @@ INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, 
 INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100128, 100007, 100045, 100034, 'side1', 'SideAd1', '', '', '2006-08-11 15:07:16', '0000-00-00 00:00:00', 'Administrator', 0, 10);
 INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100538, 100048, 100001, 2, 'rssfeed', 'Standard RSS Feed', '', '', '2006-08-13 12:58:23', '2006-08-13 12:58:15', 'Administrator', 0, 0);
 INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100543, 100048, 100001, 100034, 'rssfeed', 'Standard RSS Feed', '', '', '2006-08-13 12:58:29', '0000-00-00 00:00:00', 'Administrator', 0, 10);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100968, 100012, 100960, 0, '', 'Clouds.jpg', NULL, '', '2006-08-15 20:05:33', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100970, 100012, 100960, 0, '', 'DenMark.jpg', NULL, '', '2006-08-15 20:06:03', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100972, 100012, 100960, 0, '', 'Entre.jpg', NULL, '', '2006-08-15 20:06:36', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100974, 100012, 100960, 0, '', 'FieldsOfGold.jpg', NULL, '', '2006-08-15 20:06:54', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100976, 100012, 100960, 0, '', 'Flower.jpg', NULL, '', '2006-08-15 20:07:13', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100978, 100012, 100960, 0, '', 'Kids.jpg', NULL, '', '2006-08-15 20:07:33', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100980, 100012, 100960, 0, '', 'Lighthouse.jpg', NULL, '', '2006-08-15 20:08:29', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100982, 100012, 100960, 0, '', 'MintMunchkin.jpg', NULL, '', '2006-08-15 20:08:50', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100984, 100012, 100960, 0, '', 'Moon.jpg', NULL, '', '2006-08-15 20:09:08', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100986, 100012, 100960, 0, '', 'OldHouse.jpg', NULL, '', '2006-08-15 20:09:32', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100988, 100012, 100960, 0, '', 'RainbowWeb.jpg', NULL, '', '2006-08-15 20:10:00', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100990, 100012, 100960, 0, '', 'Rippled.jpg', NULL, '', '2006-08-15 20:10:23', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100992, 100012, 100960, 0, '', 'Shallow.jpg', NULL, '', '2006-08-15 20:10:33', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100994, 100012, 100960, 0, NULL, 'SideView.jpg', NULL, NULL, '2006-08-15 20:04:35', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100996, 100012, 100960, 0, '', 'Solitude.jpg', NULL, '', '2006-08-15 20:10:59', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (100998, 100012, 100960, 0, '', 'TakeASeat.jpg', NULL, '', '2006-08-15 20:11:14', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (101000, 100012, 100960, 0, '', 'Towering.jpg', NULL, '', '2006-08-15 20:11:59', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (101002, 100012, 100960, 0, '', 'Tranquility.jpg', NULL, '', '2006-08-15 20:11:35', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, `NAME`, `DESCRIPTION`, `KEYWORDS`, `CREATED`, `LAST_MOD_DATE`, `LAST_MODIFIER`, `DELETED`, `VERSION`) VALUES (101004, 100012, 100960, 0, '', 'WideWeb.jpg', NULL, '', '2006-08-15 20:11:25', '0000-00-00 00:00:00', NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -784,6 +836,7 @@ INSERT INTO `content` (`CID`, `MODULE_ID`, `CATEGORY_ID`, `MT_ID`, `ACCESSKEY`, 
 -- Tabellenstruktur für Tabelle `content_variations`
 -- 
 
+DROP TABLE IF EXISTS `content_variations`;
 CREATE TABLE `content_variations` (
   `CID` bigint(20) NOT NULL default '0',
   `VARIATION_ID` bigint(20) NOT NULL default '0',
@@ -810,6 +863,25 @@ INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VAL
 INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100122, 1, 100123, 0);
 INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100538, 1, 100539, 0);
 INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100543, 1, 100544, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100968, 1, 100967, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100970, 1, 100969, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100972, 1, 100971, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100974, 1, 100973, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100976, 1, 100975, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100978, 1, 100977, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100980, 1, 100979, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100982, 1, 100981, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100984, 1, 100983, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100986, 1, 100985, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100988, 1, 100987, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100990, 1, 100989, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100992, 1, 100991, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100994, 1, 100993, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100996, 1, 100995, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (100998, 1, 100997, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (101000, 1, 100999, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (101002, 1, 101001, 0);
+INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VALUES (101004, 1, 101003, 0);
 
 -- --------------------------------------------------------
 
@@ -817,6 +889,7 @@ INSERT INTO `content_variations` (`CID`, `VARIATION_ID`, `FK_ID`, `DELETED`) VAL
 -- Tabellenstruktur für Tabelle `dig_clicks`
 -- 
 
+DROP TABLE IF EXISTS `dig_clicks`;
 CREATE TABLE `dig_clicks` (
   `c_num` mediumint(9) NOT NULL default '0',
   `c_url` varchar(255) collate latin1_general_ci NOT NULL default '',
@@ -835,6 +908,7 @@ CREATE TABLE `dig_clicks` (
 -- Tabellenstruktur für Tabelle `dig_engine`
 -- 
 
+DROP TABLE IF EXISTS `dig_engine`;
 CREATE TABLE `dig_engine` (
   `spider_id` mediumint(9) NOT NULL default '0',
   `key_id` mediumint(9) NOT NULL default '0',
@@ -846,6 +920,10 @@ CREATE TABLE `dig_engine` (
 -- Daten für Tabelle `dig_engine`
 -- 
 
+INSERT INTO `dig_engine` (`spider_id`, `key_id`, `weight`) VALUES (1, 1, 1);
+INSERT INTO `dig_engine` (`spider_id`, `key_id`, `weight`) VALUES (1, 2, 1);
+INSERT INTO `dig_engine` (`spider_id`, `key_id`, `weight`) VALUES (1, 3, 1);
+INSERT INTO `dig_engine` (`spider_id`, `key_id`, `weight`) VALUES (1, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -853,6 +931,7 @@ CREATE TABLE `dig_engine` (
 -- Tabellenstruktur für Tabelle `dig_excludes`
 -- 
 
+DROP TABLE IF EXISTS `dig_excludes`;
 CREATE TABLE `dig_excludes` (
   `ex_id` mediumint(11) NOT NULL auto_increment,
   `ex_site_id` mediumint(9) NOT NULL default '0',
@@ -872,6 +951,7 @@ CREATE TABLE `dig_excludes` (
 -- Tabellenstruktur für Tabelle `dig_includes`
 -- 
 
+DROP TABLE IF EXISTS `dig_includes`;
 CREATE TABLE `dig_includes` (
   `in_id` mediumint(11) NOT NULL auto_increment,
   `in_site_id` mediumint(9) NOT NULL default '0',
@@ -891,6 +971,7 @@ CREATE TABLE `dig_includes` (
 -- Tabellenstruktur für Tabelle `dig_keywords`
 -- 
 
+DROP TABLE IF EXISTS `dig_keywords`;
 CREATE TABLE `dig_keywords` (
   `key_id` int(9) NOT NULL auto_increment,
   `twoletters` char(2) collate latin1_general_ci NOT NULL default '',
@@ -898,12 +979,16 @@ CREATE TABLE `dig_keywords` (
   PRIMARY KEY  (`key_id`),
   UNIQUE KEY `keyword` (`keyword`),
   KEY `twoletters` (`twoletters`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=5 ;
 
 -- 
 -- Daten für Tabelle `dig_keywords`
 -- 
 
+INSERT INTO `dig_keywords` (`key_id`, `twoletters`, `keyword`) VALUES (1, 'ho', 'home');
+INSERT INTO `dig_keywords` (`key_id`, `twoletters`, `keyword`) VALUES (2, 'ti', 'title');
+INSERT INTO `dig_keywords` (`key_id`, `twoletters`, `keyword`) VALUES (3, 'pa', 'page');
+INSERT INTO `dig_keywords` (`key_id`, `twoletters`, `keyword`) VALUES (4, 'de', 'demotext');
 
 -- --------------------------------------------------------
 
@@ -911,6 +996,7 @@ CREATE TABLE `dig_keywords` (
 -- Tabellenstruktur für Tabelle `dig_logs`
 -- 
 
+DROP TABLE IF EXISTS `dig_logs`;
 CREATE TABLE `dig_logs` (
   `l_id` mediumint(9) NOT NULL auto_increment,
   `l_includes` varchar(255) collate latin1_general_ci NOT NULL default '',
@@ -922,12 +1008,18 @@ CREATE TABLE `dig_logs` (
   PRIMARY KEY  (`l_id`),
   KEY `l_includes` (`l_includes`),
   KEY `l_excludes` (`l_excludes`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=7 ;
 
 -- 
 -- Daten für Tabelle `dig_logs`
 -- 
 
+INSERT INTO `dig_logs` (`l_id`, `l_includes`, `l_excludes`, `l_num`, `l_mode`, `l_ts`, `l_time`) VALUES (1, 'sven', '', 0, 'a', '2006-08-13 17:08:25', 0);
+INSERT INTO `dig_logs` (`l_id`, `l_includes`, `l_excludes`, `l_num`, `l_mode`, `l_ts`, `l_time`) VALUES (2, 'sven', '', 0, 'a', '2006-08-13 17:10:31', 0);
+INSERT INTO `dig_logs` (`l_id`, `l_includes`, `l_excludes`, `l_num`, `l_mode`, `l_ts`, `l_time`) VALUES (3, 'sven', '', 0, 'a', '2006-08-13 17:10:34', 0);
+INSERT INTO `dig_logs` (`l_id`, `l_includes`, `l_excludes`, `l_num`, `l_mode`, `l_ts`, `l_time`) VALUES (4, 'sven', '', 0, 'a', '2006-08-13 17:10:35', 0);
+INSERT INTO `dig_logs` (`l_id`, `l_includes`, `l_excludes`, `l_num`, `l_mode`, `l_ts`, `l_time`) VALUES (5, '', '', 0, 'a', '2006-08-13 17:10:58', 0);
+INSERT INTO `dig_logs` (`l_id`, `l_includes`, `l_excludes`, `l_num`, `l_mode`, `l_ts`, `l_time`) VALUES (6, 'home', '', 1, 'a', '2006-08-13 17:12:26', 0.01);
 
 -- --------------------------------------------------------
 
@@ -935,6 +1027,7 @@ CREATE TABLE `dig_logs` (
 -- Tabellenstruktur für Tabelle `dig_site_page`
 -- 
 
+DROP TABLE IF EXISTS `dig_site_page`;
 CREATE TABLE `dig_site_page` (
   `site_id` int(4) NOT NULL default '0',
   `days` int(4) NOT NULL default '0',
@@ -947,6 +1040,7 @@ CREATE TABLE `dig_site_page` (
 -- Daten für Tabelle `dig_site_page`
 -- 
 
+INSERT INTO `dig_site_page` (`site_id`, `days`, `links`, `depth`) VALUES (1, 0, 0, 20);
 
 -- --------------------------------------------------------
 
@@ -954,6 +1048,7 @@ CREATE TABLE `dig_site_page` (
 -- Tabellenstruktur für Tabelle `dig_sites`
 -- 
 
+DROP TABLE IF EXISTS `dig_sites`;
 CREATE TABLE `dig_sites` (
   `site_id` mediumint(9) NOT NULL auto_increment,
   `site_url` varchar(127) collate latin1_general_ci NOT NULL default '',
@@ -964,12 +1059,13 @@ CREATE TABLE `dig_sites` (
   `locked` tinyint(1) NOT NULL default '0',
   `stopped` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`site_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
 
 -- 
 -- Daten für Tabelle `dig_sites`
 -- 
 
+INSERT INTO `dig_sites` (`site_id`, `site_url`, `upddate`, `username`, `password`, `port`, `locked`, `stopped`) VALUES (1, 'http://localhost/', '2006-08-13 17:13:05', '', '', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -977,6 +1073,7 @@ CREATE TABLE `dig_sites` (
 -- Tabellenstruktur für Tabelle `dig_spider`
 -- 
 
+DROP TABLE IF EXISTS `dig_spider`;
 CREATE TABLE `dig_spider` (
   `spider_id` mediumint(9) NOT NULL auto_increment,
   `file` varchar(127) collate latin1_general_ci NOT NULL default '',
@@ -990,12 +1087,13 @@ CREATE TABLE `dig_spider` (
   `filesize` int(11) NOT NULL default '0',
   PRIMARY KEY  (`spider_id`),
   KEY `site_id` (`site_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
 
 -- 
 -- Daten für Tabelle `dig_spider`
 -- 
 
+INSERT INTO `dig_spider` (`spider_id`, `file`, `first_words`, `upddate`, `md5`, `site_id`, `path`, `num_words`, `last_modified`, `filesize`) VALUES (1, '', 'test\n Home Title of this page This is a demotext ...', '2006-08-20 17:11:41', 'a2b2d66938b1f023dec6394f12b782b5_4169', 1, 'corps/www/en/test/', 5, '2006-08-13 17:11:41', 4169);
 
 -- --------------------------------------------------------
 
@@ -1003,6 +1101,7 @@ CREATE TABLE `dig_spider` (
 -- Tabellenstruktur für Tabelle `dig_tempspider`
 -- 
 
+DROP TABLE IF EXISTS `dig_tempspider`;
 CREATE TABLE `dig_tempspider` (
   `file` text collate latin1_general_ci NOT NULL,
   `id` mediumint(11) NOT NULL auto_increment,
@@ -1014,7 +1113,7 @@ CREATE TABLE `dig_tempspider` (
   `error` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `site_id` (`site_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
 
 -- 
 -- Daten für Tabelle `dig_tempspider`
@@ -1027,6 +1126,7 @@ CREATE TABLE `dig_tempspider` (
 -- Tabellenstruktur für Tabelle `groups`
 -- 
 
+DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
   `GROUP_ID` bigint(20) NOT NULL default '0',
   `GROUP_NAME` varchar(32) NOT NULL default '',
@@ -1046,6 +1146,7 @@ INSERT INTO `groups` (`GROUP_ID`, `GROUP_NAME`, `DESCRIPTION`) VALUES (1, 'Syste
 -- Tabellenstruktur für Tabelle `internal_resources`
 -- 
 
+DROP TABLE IF EXISTS `internal_resources`;
 CREATE TABLE `internal_resources` (
   `RESID` varchar(32) NOT NULL default '',
   `LANGID` char(3) NOT NULL default '',
@@ -4607,6 +4708,27 @@ INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES 
 INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('LAST_MOD', 'EN', 'Last Modified', '');
 INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('NO_PREVIEW', 'EN', 'No preview available.', '');
 INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('FLASHGAL', 'EN', 'Flash Gallery', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('CONFIG_SHOP', 'EN', 'Configure Shop', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('CATALOG', 'EN', 'Catalog', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('TAXES', 'EN', 'Tax Setup', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('SHOPCAT', 'EN', 'Shop Categories', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('SHOPOVERVIEW', 'EN', 'Shop Categoy Overview', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('NEW_PRODUCT', 'EN', 'New Product', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('NEW_CATEGORY', 'EN', 'New Category', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('EDIT_CAT', 'EN', 'Edit Category', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('AVAIL_SUBCAT', 'EN', 'Subcategories in this category', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('DEL_CAT', 'EN', 'Delete Category', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('PARENT_CAT', 'EN', 'Parent Category', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('DISPTITLE', 'EN', 'Display Name', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('SEL_IMAGE', 'EN', 'Select image', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('HEADER', 'EN', 'Header', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('FOOTER', 'EN', 'Footer', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('TAX', 'EN', 'Tax', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('EDIT_TAX', 'EN', 'Edit tax', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('NEWSLETTERS', 'EN', 'Newsletters', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('SUBSCRIPTIONS', 'EN', 'Subscriptions', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('NO_ARCHIVE', 'EN', 'The file you uploaded is not an zip-archive or your browser does not send the file correct!', '');
+INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES ('ARCHEMPTY', 'EN', 'The archive seems to empty or could not be unzipped successfully.', '');
 
 -- --------------------------------------------------------
 
@@ -4614,6 +4736,7 @@ INSERT INTO `internal_resources` (`RESID`, `LANGID`, `VALUE`, `TOOLTIP`) VALUES 
 -- Tabellenstruktur für Tabelle `internal_resources_languages`
 -- 
 
+DROP TABLE IF EXISTS `internal_resources_languages`;
 CREATE TABLE `internal_resources_languages` (
   `LANGID` char(3) NOT NULL default '',
   `NAME` varchar(32) NOT NULL default '',
@@ -4641,6 +4764,7 @@ INSERT INTO `internal_resources_languages` (`LANGID`, `NAME`, `AGENT_LANGID`, `A
 -- Tabellenstruktur für Tabelle `log`
 -- 
 
+DROP TABLE IF EXISTS `log`;
 CREATE TABLE `log` (
   `LOG_ID` bigint(20) NOT NULL default '0',
   `CATEGORY` varchar(16) NOT NULL default '',
@@ -4657,88 +4781,6 @@ CREATE TABLE `log` (
 -- Daten für Tabelle `log`
 -- 
 
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100000, 'LAUNCH', 'C:Webcorps/www/text.php could not be deleted.', 1, NULL, NULL, '2006-08-09 22:05:37');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100001, 'LAUNCH', 'C:Webcorps/www/std/index.php could not be deleted.', 1, NULL, NULL, '2006-08-09 22:05:37');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100002, 'LAUNCH', 'C:Webcorps/www/std/index.html could not be deleted.', 1, NULL, NULL, '2006-08-09 22:05:37');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100003, 'LAUNCH', 'C:Webcorps/www/std/test/index.php could not be deleted.', 1, NULL, NULL, '2006-08-09 22:07:46');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100004, 'LAUNCH', 'C:Webcorps/www/std/test/index.html could not be deleted.', 1, NULL, NULL, '2006-08-09 22:07:46');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100005, 'LAUNCH', 'C:Webcorps/www/std/test/index.html could not be deleted.', 1, NULL, NULL, '2006-08-09 22:07:47');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100006, 'LAUNCH', 'C:Web\nx5/www/en/test/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 11:17:07');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100007, 'LAUNCH', 'C:Web\nx5/www/en/test/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 11:17:07');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100008, 'LAUNCH', 'C:Web\nx5/www/en/test/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 11:17:08');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100009, 'LAUNCH', 'C:Web\nx5/www/en/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 11:17:08');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100010, 'LAUNCH', 'C:Web\nx5/www/en/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 11:17:08');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100011, 'LAUNCH', 'C:Web\nx5/www/en/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 11:17:08');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100012, 'LAUNCH', 'C:Web\nx5/www/en/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 11:17:08');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100013, 'LAUNCH', 'C:Web\nx5/www/en/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 11:17:08');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100014, 'LAUNCH', 'C:Web\nx5/www/en/test/forum/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 11:18:29');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100015, 'LAUNCH', 'C:Web\nx5/www/en/test/forum/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 11:18:29');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100016, 'LAUNCH', 'C:Web\nx5/www/en/serivepages/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 11:19:19');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100017, 'LAUNCH', 'C:Web\nx5/www/en/serivepages/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 11:19:19');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100018, 'LAUNCH', 'C:Web\nx5/www/en/serivepages/sitemap/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 11:19:57');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100019, 'LAUNCH', 'C:Web\nx5/www/en/serivepages/sitemap/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 11:19:57');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100020, 'LAUNCH', 'C:Web\nx5/www/en/serivepages/sitemap/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 11:19:58');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100021, 'LAUNCH', 'C:Web\nx5/www/en/test/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 11:21:09');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100022, 'LAUNCH', 'C:Web\nx5/www/en/test/forum/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 11:21:09');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100023, 'LAUNCH', 'C:Web\nx5/www/en/test/forum/profiles/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 11:21:10');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100024, 'LAUNCH', 'C:Web\nx5/www/en/test/forum/profiles/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 11:21:10');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100025, 'LAUNCH', 'C:Web\nx5/www/en/serivepages/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 11:21:10');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100026, 'LAUNCH', 'C:Web\nx5/www/en/serivepages/sitemap/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 11:21:10');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100027, 'LAUNCH', 'C:Web\nx5/www/images/100125.gif could not be deleted.', 1, NULL, NULL, '2006-08-11 11:23:22');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100028, 'LAUNCH', 'C:Web\nx5/www/images/t100125.gif could not be deleted.', 1, NULL, NULL, '2006-08-11 11:23:22');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100029, 'LAUNCH', 'C:Web\nx5/www/The URL will be displayed after the linked template was launched./index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 14:06:47');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100030, 'LAUNCH', 'C:Web\nx5/www/The URL will be displayed after the linked template was launched./index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 14:06:47');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100031, 'LAUNCH', 'C:Web\nx5/www/The URL will be displayed after the linked template was launched./index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 14:27:45');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100032, 'LAUNCH', 'C:Web\nx5/www/The URL will be displayed after the linked template was launched./index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 14:27:52');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100033, 'LAUNCH', 'C:Web\nx5/www/The URL will be displayed after the linked template was launched./index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 14:27:54');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100034, 'LAUNCH', 'C:Web\nx5/www/The URL will be displayed after the linked template was launched./index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 14:28:01');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100035, 'LAUNCH', 'C:Web\nx5/www/The URL will be displayed after the linked template was launched./index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 14:28:34');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100036, 'LAUNCH', 'C:Web\nx5/www/article_overview.php could not be deleted.', 1, NULL, NULL, '2006-08-11 14:29:11');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100037, 'LAUNCH', 'C:Web\nx5/www/en/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 14:29:11');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100038, 'LAUNCH', 'C:Web\nx5/www/article.php could not be deleted.', 1, NULL, NULL, '2006-08-11 14:29:11');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100039, 'LAUNCH', 'C:Web\nx5/www/en/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 14:29:11');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100040, 'LAUNCH', 'C:Web\nx5/www/en/news/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 14:30:47');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100041, 'LAUNCH', 'C:Web\nx5/www/en/news/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 14:30:47');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100042, 'LAUNCH', 'C:Web\nx5/www/en/news/article/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 14:30:52');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100043, 'LAUNCH', 'C:Web\nx5/www/en/news/article/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 14:30:52');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100044, 'LAUNCH', 'C:Web\nx5/www/en/news/article/general_news/welcome/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 14:48:00');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100045, 'LAUNCH', 'C:Web\nx5/www/en/news/article/general_news/welcome/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 14:48:00');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100046, 'LAUNCH', 'C:Web\nx5/www/en/news/article/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 14:51:14');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100047, 'LAUNCH', 'C:Web\nx5/www/en/news/article/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 14:53:11');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100048, 'LAUNCH', 'C:Web\nx5/www/en/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 15:05:11');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100049, 'LAUNCH', 'C:Web\nx5/www/en/news/articles/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 15:05:33');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100050, 'LAUNCH', 'C:Web\nx5/www/en/news/articles/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 15:05:33');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100051, 'LAUNCH', 'C:Web\nx5/www/en/news/articles/general_news/welcome/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 15:05:40');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100052, 'LAUNCH', 'C:Web\nx5/www/en/news/articles/general_news/welcome/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 15:05:40');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100053, 'LAUNCH', 'C:Web\nx5/www/en/news/articles/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 15:06:18');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100054, 'LAUNCH', 'C:Web\nx5/www/en/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 15:16:15');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100055, 'LAUNCH', 'C:Web\nx5/www/en/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 15:24:00');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100056, 'LAUNCH', 'C:Web\nx5/www/en/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 15:24:54');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100057, 'LAUNCH', 'C:Web\nx5/www/en/news/article/general_news/welcome/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 15:26:01');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100058, 'LAUNCH', 'C:Webcorps/www/en/test/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 20:06:03');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100059, 'LAUNCH', 'C:Webcorps/www/en/test/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 20:06:03');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100060, 'LAUNCH', 'C:Webcorps/www/en/test/forum/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 20:06:03');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100061, 'LAUNCH', 'C:Webcorps/www/en/test/forum/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 20:06:03');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100062, 'LAUNCH', 'C:Webcorps/www/en/test/forum/profiles/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 20:06:03');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100063, 'LAUNCH', 'C:Webcorps/www/en/test/forum/profiles/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 20:06:03');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100064, 'LAUNCH', 'C:Webcorps/www/en/serivepages/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 20:06:03');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100065, 'LAUNCH', 'C:Webcorps/www/en/serivepages/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 20:06:03');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100066, 'LAUNCH', 'C:Webcorps/www/en/serivepages/sitemap/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 20:06:03');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100067, 'LAUNCH', 'C:Webcorps/www/en/serivepages/sitemap/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 20:06:03');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100068, 'LAUNCH', 'C:Webcorps/www/en/news/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 20:06:03');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100069, 'LAUNCH', 'C:Webcorps/www/en/news/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 20:06:03');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100070, 'LAUNCH', 'C:Webcorps/www/en/news/article/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 20:06:03');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100071, 'LAUNCH', 'C:Webcorps/www/en/news/article/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 20:06:03');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100072, 'LAUNCH', 'C:Webcorps/www/en/news/article/general_news/welcome/index.php could not be deleted.', 1, NULL, NULL, '2006-08-11 20:06:03');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100073, 'LAUNCH', 'C:Webcorps/www/en/news/article/general_news/welcome/index.html could not be deleted.', 1, NULL, NULL, '2006-08-11 20:06:03');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100074, 'AUTH', 'Login failed for user Administrator with IP 127.0.0.1', 0, NULL, NULL, '2006-08-13 12:46:17');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100075, 'LAUNCH', 'C:Webcorps/www/en/index.php could not be deleted.', 1, NULL, NULL, '2006-08-13 12:48:36');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100076, 'LAUNCH', 'C:Webcorps/www/en/index.html could not be deleted.', 1, NULL, NULL, '2006-08-13 12:48:36');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100077, 'LAUNCH', 'C:Webcorps/www/en/index.html could not be deleted.', 1, NULL, NULL, '2006-08-13 12:49:58');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100078, 'LAUNCH', 'C:Webcorps/www/en/rss/index.php could not be deleted.', 1, NULL, NULL, '2006-08-13 12:51:32');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100079, 'LAUNCH', 'C:Webcorps/www/en/rss/index.html could not be deleted.', 1, NULL, NULL, '2006-08-13 12:51:32');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100080, 'LAUNCH', 'C:Webcorps/www/en/rss/create/index.php could not be deleted.', 1, NULL, NULL, '2006-08-13 12:51:38');
-INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TARGET2_ID`, `LOG_TIME`) VALUES (100081, 'LAUNCH', 'C:Webcorps/www/en/rss/create/index.html could not be deleted.', 1, NULL, NULL, '2006-08-13 12:51:38');
 
 -- --------------------------------------------------------
 
@@ -4746,6 +4788,7 @@ INSERT INTO `log` (`LOG_ID`, `CATEGORY`, `MESSAGE`, `USER_ID`, `TARGET1_ID`, `TA
 -- Tabellenstruktur für Tabelle `mailinglist`
 -- 
 
+DROP TABLE IF EXISTS `mailinglist`;
 CREATE TABLE `mailinglist` (
   `MAILINGLIST_ID` bigint(20) NOT NULL default '0',
   `NAME` varchar(128) collate latin1_general_ci NOT NULL default '',
@@ -4768,6 +4811,7 @@ CREATE TABLE `mailinglist` (
 -- Tabellenstruktur für Tabelle `messaging`
 -- 
 
+DROP TABLE IF EXISTS `messaging`;
 CREATE TABLE `messaging` (
   `GUID` bigint(20) NOT NULL default '0',
   `SENDER_NAME` varchar(64) default NULL,
@@ -4793,6 +4837,7 @@ CREATE TABLE `messaging` (
 -- Tabellenstruktur für Tabelle `meta`
 -- 
 
+DROP TABLE IF EXISTS `meta`;
 CREATE TABLE `meta` (
   `MID` bigint(20) NOT NULL default '0',
   `MTI_ID` bigint(20) NOT NULL default '0',
@@ -4813,6 +4858,7 @@ CREATE TABLE `meta` (
 -- Tabellenstruktur für Tabelle `meta_datatypes`
 -- 
 
+DROP TABLE IF EXISTS `meta_datatypes`;
 CREATE TABLE `meta_datatypes` (
   `MTYPE_ID` mediumint(9) NOT NULL default '0',
   `NAME` varchar(16) NOT NULL default '',
@@ -4835,6 +4881,7 @@ INSERT INTO `meta_datatypes` (`MTYPE_ID`, `NAME`, `DESCRIPTION`) VALUES (3, 'Col
 -- Tabellenstruktur für Tabelle `meta_template_items`
 -- 
 
+DROP TABLE IF EXISTS `meta_template_items`;
 CREATE TABLE `meta_template_items` (
   `MTI_ID` bigint(20) NOT NULL default '0',
   `MT_ID` bigint(20) NOT NULL default '0',
@@ -4860,6 +4907,7 @@ INSERT INTO `meta_template_items` (`MTI_ID`, `MT_ID`, `NAME`, `POSITION`, `MTYPE
 -- Tabellenstruktur für Tabelle `meta_templates`
 -- 
 
+DROP TABLE IF EXISTS `meta_templates`;
 CREATE TABLE `meta_templates` (
   `MT_ID` bigint(20) NOT NULL default '0',
   `NAME` varchar(32) NOT NULL default '',
@@ -4885,6 +4933,7 @@ INSERT INTO `meta_templates` (`MT_ID`, `NAME`, `DESCRIPTION`, `INTERNAL`, `VERSI
 -- Tabellenstruktur für Tabelle `module_type`
 -- 
 
+DROP TABLE IF EXISTS `module_type`;
 CREATE TABLE `module_type` (
   `MODULE_TYPE_ID` tinyint(4) NOT NULL default '0',
   `NAME` varchar(32) NOT NULL default '',
@@ -4907,6 +4956,7 @@ INSERT INTO `module_type` (`MODULE_TYPE_ID`, `NAME`) VALUES (4, 'Textfilter Exte
 -- Tabellenstruktur für Tabelle `modules`
 -- 
 
+DROP TABLE IF EXISTS `modules`;
 CREATE TABLE `modules` (
   `MODULE_ID` bigint(20) NOT NULL default '0',
   `MODULE_NAME` varchar(32) NOT NULL default '',
@@ -4945,6 +4995,7 @@ INSERT INTO `modules` (`MODULE_ID`, `MODULE_NAME`, `DESCRIPTION`, `VERSION`, `MT
 -- Tabellenstruktur für Tabelle `pgn_adsense`
 -- 
 
+DROP TABLE IF EXISTS `pgn_adsense`;
 CREATE TABLE `pgn_adsense` (
   `FKID` bigint(20) NOT NULL default '0',
   `ADTEXT` text collate latin1_general_ci,
@@ -4970,6 +5021,7 @@ INSERT INTO `pgn_adsense` (`FKID`, `ADTEXT`, `IMPRESSIONS`, `CLICKS`) VALUES (10
 -- Tabellenstruktur für Tabelle `pgn_boolean`
 -- 
 
+DROP TABLE IF EXISTS `pgn_boolean`;
 CREATE TABLE `pgn_boolean` (
   `FKID` bigint(20) NOT NULL default '0',
   `VALUE` int(1) NOT NULL default '0',
@@ -4991,6 +5043,7 @@ INSERT INTO `pgn_boolean` (`FKID`, `VALUE`) VALUES (100670, 1);
 -- Tabellenstruktur für Tabelle `pgn_config_store`
 -- 
 
+DROP TABLE IF EXISTS `pgn_config_store`;
 CREATE TABLE `pgn_config_store` (
   `CLTI_ID` bigint(20) NOT NULL default '0',
   `TEXT1` varchar(255) default NULL,
@@ -5092,6 +5145,7 @@ INSERT INTO `pgn_config_store` (`CLTI_ID`, `TEXT1`, `TEXT2`, `TEXT3`, `TEXT4`, `
 INSERT INTO `pgn_config_store` (`CLTI_ID`, `TEXT1`, `TEXT2`, `TEXT3`, `TEXT4`, `TEXT5`, `TEXT6`, `TEXT7`, `TEXT8`, `TEXT9`, `TEXT10`, `TEXT11`, `TEXT12`, `TEXT13`, `TEXT14`, `TEXT15`, `NUMBER1`, `NUMBER2`, `NUMBER3`, `NUMBER4`, `NUMBER5`, `NUMBER6`, `NUMBER7`, `NUMBER8`, `NUMBER9`, `NUMBER10`, `NUMBER11`, `NUMBER12`, `NUMBER13`, `NUMBER14`, `NUMBER15`, `DATE1`, `DATE2`, `DATE3`, `DATE4`, `DATE5`) VALUES (100429, 'head1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `pgn_config_store` (`CLTI_ID`, `TEXT1`, `TEXT2`, `TEXT3`, `TEXT4`, `TEXT5`, `TEXT6`, `TEXT7`, `TEXT8`, `TEXT9`, `TEXT10`, `TEXT11`, `TEXT12`, `TEXT13`, `TEXT14`, `TEXT15`, `NUMBER1`, `NUMBER2`, `NUMBER3`, `NUMBER4`, `NUMBER5`, `NUMBER6`, `NUMBER7`, `NUMBER8`, `NUMBER9`, `NUMBER10`, `NUMBER11`, `NUMBER12`, `NUMBER13`, `NUMBER14`, `NUMBER15`, `DATE1`, `DATE2`, `DATE3`, `DATE4`, `DATE5`) VALUES (100564, 'head1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `pgn_config_store` (`CLTI_ID`, `TEXT1`, `TEXT2`, `TEXT3`, `TEXT4`, `TEXT5`, `TEXT6`, `TEXT7`, `TEXT8`, `TEXT9`, `TEXT10`, `TEXT11`, `TEXT12`, `TEXT13`, `TEXT14`, `TEXT15`, `NUMBER1`, `NUMBER2`, `NUMBER3`, `NUMBER4`, `NUMBER5`, `NUMBER6`, `NUMBER7`, `NUMBER8`, `NUMBER9`, `NUMBER10`, `NUMBER11`, `NUMBER12`, `NUMBER13`, `NUMBER14`, `NUMBER15`, `DATE1`, `DATE2`, `DATE3`, `DATE4`, `DATE5`) VALUES (100616, 'head1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `pgn_config_store` (`CLTI_ID`, `TEXT1`, `TEXT2`, `TEXT3`, `TEXT4`, `TEXT5`, `TEXT6`, `TEXT7`, `TEXT8`, `TEXT9`, `TEXT10`, `TEXT11`, `TEXT12`, `TEXT13`, `TEXT14`, `TEXT15`, `NUMBER1`, `NUMBER2`, `NUMBER3`, `NUMBER4`, `NUMBER5`, `NUMBER6`, `NUMBER7`, `NUMBER8`, `NUMBER9`, `NUMBER10`, `NUMBER11`, `NUMBER12`, `NUMBER13`, `NUMBER14`, `NUMBER15`, `DATE1`, `DATE2`, `DATE3`, `DATE4`, `DATE5`) VALUES (100720, 'head1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -5099,6 +5153,7 @@ INSERT INTO `pgn_config_store` (`CLTI_ID`, `TEXT1`, `TEXT2`, `TEXT3`, `TEXT4`, `
 -- Tabellenstruktur für Tabelle `pgn_gallery`
 -- 
 
+DROP TABLE IF EXISTS `pgn_gallery`;
 CREATE TABLE `pgn_gallery` (
   `GALLERY_ID` bigint(20) NOT NULL,
   `NAME` varchar(64) collate latin1_general_ci NOT NULL,
@@ -5122,6 +5177,7 @@ INSERT INTO `pgn_gallery` (`GALLERY_ID`, `NAME`, `DESCRIPTION`, `IMAGE_FOLDER_ID
 -- Tabellenstruktur für Tabelle `pgn_image`
 -- 
 
+DROP TABLE IF EXISTS `pgn_image`;
 CREATE TABLE `pgn_image` (
   `FKID` bigint(20) NOT NULL default '0',
   `FILENAME` varchar(32) default NULL,
@@ -5139,6 +5195,25 @@ CREATE TABLE `pgn_image` (
 
 INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100003, '100003.gif', 'Logo', 120, 60, '');
 INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100125, '100125.gif', 'Logo', 120, 60, '');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100967, '100967.jpg', '', 500, 365, 'rick.harris from flickr.com');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100969, '100969.jpg', '', 500, 375, 'josef.stuefer from flickr.com');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100971, '100971.jpg', '', 500, 375, 'ruurmo from flickr.com');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100973, '100973.jpg', '', 375, 500, 'spiralz from flickr.com');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100975, '100975.jpg', '', 500, 375, 'michgm from flickr.com');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100977, '100977.jpg', '', 500, 376, 'little.jaffa from flickr.com');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100979, '100979.jpg', '', 500, 375, 'flickr.com');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100981, '100981.jpg', '', 500, 377, 'zenera from flickr.com');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100983, '100983.jpg', '', 500, 351, 'michgm from flickr.com');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100985, '100985.jpg', '', 375, 500, 'josef.stuefer from flickr.com');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100987, '100987.jpg', '', 500, 375, 'josef.stuefer from flickr.com');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100989, '100989.jpg', '', 500, 361, 'Binary Code from flickr.com');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100991, '100991.jpg', '', 500, 364, 'Binary Code from flickr.com');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100993, '100993.jpg', '', 500, 375, '');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100995, '100995.jpg', '', 500, 375, 'josef.stuefer from flickr.com');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100997, '100997.jpg', '', 500, 375, 'josef.stuefer from flickr.com');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (100999, '100999.jpg', '', 500, 388, 'Binary Code from Flickr.com');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (101001, '101001.jpg', '', 500, 375, 'josef.stuefer from flickr.com');
+INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGHT`) VALUES (101003, '101003.jpg', '', 500, 500, 'josef.stuefer from flickr.com');
 
 -- --------------------------------------------------------
 
@@ -5146,6 +5221,7 @@ INSERT INTO `pgn_image` (`FKID`, `FILENAME`, `ALT`, `WIDTH`, `HEIGHT`, `COPYRIGH
 -- Tabellenstruktur für Tabelle `pgn_label`
 -- 
 
+DROP TABLE IF EXISTS `pgn_label`;
 CREATE TABLE `pgn_label` (
   `FKID` bigint(20) NOT NULL default '0',
   `CONTENT` varchar(255) default NULL,
@@ -5157,7 +5233,7 @@ CREATE TABLE `pgn_label` (
 -- Daten für Tabelle `pgn_label`
 -- 
 
-INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100022, '<DIV class=head1>Title of this page</DIV>');
+INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100022, '<DIV class=head1>Title of this page5478</DIV>');
 INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100039, '<DIV class=head1>Title of this page</DIV>');
 INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100070, 'Sitemap');
 INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100076, 'Profiles');
@@ -5254,6 +5330,9 @@ INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100591, 'test 1234');
 INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100667, 'Arrival via Car');
 INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100669, '10 Market St, San Francisco, CA 94111');
 INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100672, '');
+INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100759, 'Search engine');
+INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100761, 'Search now');
+INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100762, 'No results found.');
 
 -- --------------------------------------------------------
 
@@ -5261,6 +5340,7 @@ INSERT INTO `pgn_label` (`FKID`, `CONTENT`) VALUES (100672, '');
 -- Tabellenstruktur für Tabelle `pgn_link`
 -- 
 
+DROP TABLE IF EXISTS `pgn_link`;
 CREATE TABLE `pgn_link` (
   `FKID` bigint(20) NOT NULL default '0',
   `LABEL` varchar(255) default NULL,
@@ -5289,6 +5369,7 @@ INSERT INTO `pgn_link` (`FKID`, `LABEL`, `EXTERNAL`, `HREF`, `SPID`, `TARGET`) V
 -- Tabellenstruktur für Tabelle `pgn_text`
 -- 
 
+DROP TABLE IF EXISTS `pgn_text`;
 CREATE TABLE `pgn_text` (
   `FKID` bigint(20) NOT NULL default '0',
   `CONTENT` longtext,
@@ -5301,7 +5382,7 @@ CREATE TABLE `pgn_text` (
 -- Daten für Tabelle `pgn_text`
 -- 
 
-INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100023, 'This is a demotext');
+INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100023, '<P>This is a demotext.</P>\r\n<P>Nevertheless we think it is cool, that one can edit the text in a Wysiwyg online mode.</P>\r\n<P>12345679821564</P>');
 INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100040, 'This is a demotext');
 INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100077, 'test test test');
 INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100099, 'test test test');
@@ -5319,6 +5400,7 @@ INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100442, 'test');
 INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100592, 'test324');
 INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100668, 'Learn, how to drive to us.');
 INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100671, 'Description of this <strong>place</strong>');
+INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100760, 'search here');
 
 -- --------------------------------------------------------
 
@@ -5326,6 +5408,7 @@ INSERT INTO `pgn_text` (`FKID`, `CONTENT`) VALUES (100671, 'Description of this 
 -- Tabellenstruktur für Tabelle `pot_accesslog`
 -- 
 
+DROP TABLE IF EXISTS `pot_accesslog`;
 CREATE TABLE `pot_accesslog` (
   `accesslog_id` int(11) NOT NULL default '0',
   `timestamp` int(10) unsigned NOT NULL default '0',
@@ -5371,6 +5454,8 @@ INSERT INTO `pot_accesslog` (`accesslog_id`, `timestamp`, `document_id`, `exit_t
 INSERT INTO `pot_accesslog` (`accesslog_id`, `timestamp`, `document_id`, `exit_target_id`, `entry_document`) VALUES (196928006, 1155319720, -1480284757, 0, 0);
 INSERT INTO `pot_accesslog` (`accesslog_id`, `timestamp`, `document_id`, `exit_target_id`, `entry_document`) VALUES (-1229904442, 1155466272, -1372539626, 0, 1);
 INSERT INTO `pot_accesslog` (`accesslog_id`, `timestamp`, `document_id`, `exit_target_id`, `entry_document`) VALUES (1237274194, 1155466337, -1372539626, 0, 1);
+INSERT INTO `pot_accesslog` (`accesslog_id`, `timestamp`, `document_id`, `exit_target_id`, `entry_document`) VALUES (1695662651, 1155481956, -1372539626, 0, 1);
+INSERT INTO `pot_accesslog` (`accesslog_id`, `timestamp`, `document_id`, `exit_target_id`, `entry_document`) VALUES (1153418208, 1155492450, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -5378,6 +5463,7 @@ INSERT INTO `pot_accesslog` (`accesslog_id`, `timestamp`, `document_id`, `exit_t
 -- Tabellenstruktur für Tabelle `pot_add_data`
 -- 
 
+DROP TABLE IF EXISTS `pot_add_data`;
 CREATE TABLE `pot_add_data` (
   `accesslog_id` int(11) NOT NULL default '0',
   `data_field` varchar(32) NOT NULL default '',
@@ -5396,6 +5482,7 @@ CREATE TABLE `pot_add_data` (
 -- Tabellenstruktur für Tabelle `pot_documents`
 -- 
 
+DROP TABLE IF EXISTS `pot_documents`;
 CREATE TABLE `pot_documents` (
   `data_id` int(11) NOT NULL default '0',
   `string` varchar(255) NOT NULL default '',
@@ -5422,6 +5509,7 @@ INSERT INTO `pot_documents` (`data_id`, `string`, `document_url`) VALUES (-14802
 -- Tabellenstruktur für Tabelle `pot_exit_targets`
 -- 
 
+DROP TABLE IF EXISTS `pot_exit_targets`;
 CREATE TABLE `pot_exit_targets` (
   `data_id` int(11) NOT NULL default '0',
   `string` varchar(255) NOT NULL default '',
@@ -5439,6 +5527,7 @@ CREATE TABLE `pot_exit_targets` (
 -- Tabellenstruktur für Tabelle `pot_hostnames`
 -- 
 
+DROP TABLE IF EXISTS `pot_hostnames`;
 CREATE TABLE `pot_hostnames` (
   `data_id` int(11) NOT NULL default '0',
   `string` varchar(255) NOT NULL default '',
@@ -5457,6 +5546,7 @@ INSERT INTO `pot_hostnames` (`data_id`, `string`) VALUES (-1631451101, 'localhos
 -- Tabellenstruktur für Tabelle `pot_nxlog`
 -- 
 
+DROP TABLE IF EXISTS `pot_nxlog`;
 CREATE TABLE `pot_nxlog` (
   `accesslog_id` int(11) NOT NULL default '0',
   `weekday` int(1) NOT NULL default '0',
@@ -5478,6 +5568,8 @@ INSERT INTO `pot_nxlog` (`accesslog_id`, `weekday`, `hour`, `starttime`, `endtim
 INSERT INTO `pot_nxlog` (`accesslog_id`, `weekday`, `hour`, `starttime`, `endtime`, `pi`, `duration`) VALUES (196928006, 5, 20, 1155319569, 1155319720, 6, 151);
 INSERT INTO `pot_nxlog` (`accesslog_id`, `weekday`, `hour`, `starttime`, `endtime`, `pi`, `duration`) VALUES (-1229904442, 0, 12, 1155466272, 1155466272, 1, 0);
 INSERT INTO `pot_nxlog` (`accesslog_id`, `weekday`, `hour`, `starttime`, `endtime`, `pi`, `duration`) VALUES (1237274194, 0, 12, 1155466337, 1155466337, 1, 0);
+INSERT INTO `pot_nxlog` (`accesslog_id`, `weekday`, `hour`, `starttime`, `endtime`, `pi`, `duration`) VALUES (1695662651, 0, 17, 1155481956, 1155481956, 1, 0);
+INSERT INTO `pot_nxlog` (`accesslog_id`, `weekday`, `hour`, `starttime`, `endtime`, `pi`, `duration`) VALUES (1153418208, 0, 20, 1155492450, 1155492450, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -5485,6 +5577,7 @@ INSERT INTO `pot_nxlog` (`accesslog_id`, `weekday`, `hour`, `starttime`, `endtim
 -- Tabellenstruktur für Tabelle `pot_operating_systems`
 -- 
 
+DROP TABLE IF EXISTS `pot_operating_systems`;
 CREATE TABLE `pot_operating_systems` (
   `data_id` int(11) NOT NULL default '0',
   `string` varchar(255) NOT NULL default '',
@@ -5503,6 +5596,7 @@ INSERT INTO `pot_operating_systems` (`data_id`, `string`) VALUES (-114077417, 'W
 -- Tabellenstruktur für Tabelle `pot_referers`
 -- 
 
+DROP TABLE IF EXISTS `pot_referers`;
 CREATE TABLE `pot_referers` (
   `data_id` int(11) NOT NULL default '0',
   `string` varchar(255) NOT NULL default '',
@@ -5520,6 +5614,7 @@ CREATE TABLE `pot_referers` (
 -- Tabellenstruktur für Tabelle `pot_search_engines`
 -- 
 
+DROP TABLE IF EXISTS `pot_search_engines`;
 CREATE TABLE `pot_search_engines` (
   `accesslog_id` int(11) NOT NULL default '0',
   `search_engine` varchar(64) NOT NULL default '',
@@ -5538,6 +5633,7 @@ CREATE TABLE `pot_search_engines` (
 -- Tabellenstruktur für Tabelle `pot_user_agents`
 -- 
 
+DROP TABLE IF EXISTS `pot_user_agents`;
 CREATE TABLE `pot_user_agents` (
   `data_id` int(11) NOT NULL default '0',
   `string` varchar(255) NOT NULL default '',
@@ -5558,6 +5654,7 @@ INSERT INTO `pot_user_agents` (`data_id`, `string`) VALUES (-516513586, 'MS Inte
 -- Tabellenstruktur für Tabelle `pot_visitors`
 -- 
 
+DROP TABLE IF EXISTS `pot_visitors`;
 CREATE TABLE `pot_visitors` (
   `accesslog_id` int(11) NOT NULL default '0',
   `visitor_id` int(11) NOT NULL default '0',
@@ -5585,6 +5682,8 @@ INSERT INTO `pot_visitors` (`accesslog_id`, `visitor_id`, `client_id`, `operatin
 INSERT INTO `pot_visitors` (`accesslog_id`, `visitor_id`, `client_id`, `operating_system_id`, `user_agent_id`, `host_id`, `referer_id`, `timestamp`, `returning_visitor`) VALUES (196928006, 196928006, 1, -114077417, -516513586, -1631451101, 0, 1155319569, 0);
 INSERT INTO `pot_visitors` (`accesslog_id`, `visitor_id`, `client_id`, `operating_system_id`, `user_agent_id`, `host_id`, `referer_id`, `timestamp`, `returning_visitor`) VALUES (-1229904442, 196928006, 1, -114077417, -520828167, -1631451101, 0, 1155466272, 1);
 INSERT INTO `pot_visitors` (`accesslog_id`, `visitor_id`, `client_id`, `operating_system_id`, `user_agent_id`, `host_id`, `referer_id`, `timestamp`, `returning_visitor`) VALUES (1237274194, 1237274194, 1, -114077417, -795004555, -1631451101, 0, 1155466337, 0);
+INSERT INTO `pot_visitors` (`accesslog_id`, `visitor_id`, `client_id`, `operating_system_id`, `user_agent_id`, `host_id`, `referer_id`, `timestamp`, `returning_visitor`) VALUES (1695662651, 196928006, 1, -114077417, -520828167, -1631451101, 0, 1155481956, 1);
+INSERT INTO `pot_visitors` (`accesslog_id`, `visitor_id`, `client_id`, `operating_system_id`, `user_agent_id`, `host_id`, `referer_id`, `timestamp`, `returning_visitor`) VALUES (1153418208, 196928006, 1, -114077417, -520828167, -1631451101, 0, 1155492450, 1);
 
 -- --------------------------------------------------------
 
@@ -5592,6 +5691,7 @@ INSERT INTO `pot_visitors` (`accesslog_id`, `visitor_id`, `client_id`, `operatin
 -- Tabellenstruktur für Tabelle `registry`
 -- 
 
+DROP TABLE IF EXISTS `registry`;
 CREATE TABLE `registry` (
   `REGID` bigint(20) NOT NULL default '0',
   `REGNAME` varchar(32) NOT NULL default '',
@@ -5626,6 +5726,7 @@ INSERT INTO `registry` (`REGID`, `REGNAME`, `VALUE`, `PARENTREGID`) VALUES (1000
 -- Tabellenstruktur für Tabelle `role_sys_functions`
 -- 
 
+DROP TABLE IF EXISTS `role_sys_functions`;
 CREATE TABLE `role_sys_functions` (
   `ROLE_ID` bigint(20) NOT NULL default '0',
   `FUNCTION_ID` char(16) NOT NULL default '',
@@ -5766,6 +5867,7 @@ INSERT INTO `role_sys_functions` (`ROLE_ID`, `FUNCTION_ID`) VALUES (100329, 'TRA
 -- Tabellenstruktur für Tabelle `roles`
 -- 
 
+DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
   `ROLE_ID` bigint(20) NOT NULL default '0',
   `ROLE_NAME` varchar(32) NOT NULL default '',
@@ -5791,6 +5893,7 @@ INSERT INTO `roles` (`ROLE_ID`, `ROLE_NAME`, `DESCRIPTION`) VALUES (100255, 'Com
 -- Tabellenstruktur für Tabelle `sequences`
 -- 
 
+DROP TABLE IF EXISTS `sequences`;
 CREATE TABLE `sequences` (
   `seq` varchar(32) NOT NULL default '',
   `val` bigint(20) NOT NULL default '1000'
@@ -5800,7 +5903,7 @@ CREATE TABLE `sequences` (
 -- Daten für Tabelle `sequences`
 -- 
 
-INSERT INTO `sequences` (`seq`, `val`) VALUES ('GUID', 100711);
+INSERT INTO `sequences` (`seq`, `val`) VALUES ('GUID', 101062);
 INSERT INTO `sequences` (`seq`, `val`) VALUES ('log', 100082);
 
 -- --------------------------------------------------------
@@ -5809,6 +5912,7 @@ INSERT INTO `sequences` (`seq`, `val`) VALUES ('log', 100082);
 -- Tabellenstruktur für Tabelle `sessions`
 -- 
 
+DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE `sessions` (
   `SESSKEY` varchar(32) NOT NULL default '',
   `EXPIRY` int(11) unsigned NOT NULL default '0',
@@ -5820,8 +5924,7 @@ CREATE TABLE `sessions` (
 -- Daten für Tabelle `sessions`
 -- 
 
-INSERT INTO `sessions` (`SESSKEY`, `EXPIRY`, `DATA`) VALUES ('150c0c4e9897cc72dd8827cc759736f5', 1155470084, '_phpOpenTracker_Config%7Ca%3A37%3A%7Bs%3A7%3A%22db_port%22%3Bs%3A7%3A%22default%22%3Bs%3A9%3A%22db_socket%22%3Bs%3A7%3A%22default%22%3Bs%3A21%3A%22additional_data_table%22%3Bs%3A12%3A%22pot_add_data%22%3Bs%3A15%3A%22accesslog_table%22%3Bs%3A13%3A%22pot_accesslog%22%3Bs%3A15%3A%22documents_table%22%3Bs%3A13%3A%22pot_documents%22%3Bs%3A18%3A%22exit_targets_table%22%3Bs%3A16%3A%22pot_exit_targets%22%3Bs%3A15%3A%22hostnames_table%22%3Bs%3A13%3A%22pot_hostnames%22%3Bs%3A23%3A%22operating_systems_table%22%3Bs%3A21%3A%22pot_operating_systems%22%3Bs%3A14%3A%22referers_table%22%3Bs%3A12%3A%22pot_referers%22%3Bs%3A17%3A%22user_agents_table%22%3Bs%3A15%3A%22pot_user_agents%22%3Bs%3A14%3A%22visitors_table%22%3Bs%3A12%3A%22pot_visitors%22%3Bs%3A16%3A%22document_env_var%22%3Bs%3A11%3A%22REQUEST_URI%22%3Bs%3A20%3A%22clean_referer_string%22%3Bs%3A1%3A%221%22%3Bs%3A18%3A%22clean_query_string%22%3Bs%3A1%3A%221%22%3Bs%3A20%3A%22get_parameter_filter%22%3Ba%3A0%3A%7B%7Ds%3A16%3A%22resolve_hostname%22%3Bs%3A1%3A%221%22%3Bs%3A15%3A%22group_hostnames%22%3Bs%3A1%3A%221%22%3Bs%3A17%3A%22group_user_agents%22%3Bs%3A1%3A%221%22%3Bs%3A24%3A%22track_returning_visitors%22%3Bs%3A1%3A%221%22%3Bs%3A25%3A%22returning_visitors_cookie%22%3Bs%3A14%3A%22pot_visitor_id%22%3Bs%3A34%3A%22returning_visitors_cookie_lifetime%22%3Bs%3A3%3A%22365%22%3Bs%3A7%3A%22locking%22%3Bs%3A0%3A%22%22%3Bs%3A10%3A%22log_reload%22%3Bs%3A0%3A%22%22%3Bs%3A12%3A%22jpgraph_path%22%3Bs%3A29%3A%22C%3A%5CWeb%5Ccorps%2Fcms%2Fext%2Fjpgraph%2F%22%3Bs%3A22%3A%22merge_tables_threshold%22%3Bs%3A1%3A%226%22%3Bs%3A22%3A%22logging_engine_plugins%22%3Ba%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22nxlog%22%3Bi%3A1%3Bs%3A14%3A%22search_engines%22%3B%7Ds%3A11%3A%22query_cache%22%3Bs%3A0%3A%22%22%3Bs%3A15%3A%22query_cache_dir%22%3Bs%3A5%3A%22%2Ftmp%2F%22%3Bs%3A20%3A%22query_cache_lifetime%22%3Bs%3A4%3A%223600%22%3Bs%3A11%3A%22debug_level%22%3Bs%3A1%3A%221%22%3Bs%3A20%3A%22exit_on_fatal_errors%22%3Bs%3A0%3A%22%22%3Bs%3A10%3A%22log_errors%22%3Bs%3A0%3A%22%22%3Bs%3A7%3A%22db_type%22%3Bs%3A5%3A%22mysql%22%3Bs%3A7%3A%22db_host%22%3Bs%3A9%3A%22localhost%22%3Bs%3A7%3A%22db_user%22%3Bs%3A4%3A%22root%22%3Bs%3A11%3A%22db_password%22%3Bs%3A0%3A%22%22%3Bs%3A11%3A%22db_database%22%3Bs%3A4%3A%22demo%22%3B%7D_phpOpenTracker_Container%7Ca%3A21%3A%7Bs%3A13%3A%22first_request%22%3Bb%3A1%3Bs%3A9%3A%22client_id%22%3Bi%3A1%3Bs%3A12%3A%22accesslog_id%22%3Bi%3A-1229904442%3Bs%3A10%3A%22ip_address%22%3Bs%3A9%3A%22127.0.0.1%22%3Bs%3A9%3A%22host_orig%22%3Bs%3A9%3A%22localhost%22%3Bs%3A4%3A%22host%22%3Bs%3A9%3A%22localhost%22%3Bs%3A15%3A%22user_agent_orig%22%3Bs%3A87%3A%22Mozilla%2F4.0%20%28compatible%3B%20MSIE%206.0%3B%20Windows%20NT%205.1%3B%20SV1%3B%20InfoPath.1%3B%20.NET%20CLR%202.0.50727%29%22%3Bs%3A16%3A%22operating_system%22%3Bs%3A10%3A%22Windows%20XP%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A24%3A%22MS%20Internet%20Explorer%206.0%22%3Bs%3A7%3A%22host_id%22%3Bi%3A-1631451101%3Bs%3A19%3A%22operating_system_id%22%3Bi%3A-114077417%3Bs%3A13%3A%22user_agent_id%22%3Bi%3A-520828167%3Bs%3A12%3A%22referer_orig%22%3Bs%3A0%3A%22%22%3Bs%3A7%3A%22referer%22%3Bs%3A0%3A%22%22%3Bs%3A10%3A%22referer_id%22%3Bi%3A0%3Bs%3A12%3A%22document_url%22%3Bs%3A35%3A%22http%3A%2F%2Flocalhost%2Fcorps%2Fwww%2Fen%2Ftest%2F%22%3Bs%3A8%3A%22document%22%3Bs%3A6%3A%22100031%22%3Bs%3A11%3A%22document_id%22%3Bi%3A-1372539626%3Bs%3A9%3A%22timestamp%22%3Bi%3A1155466272%3Bs%3A10%3A%22visitor_id%22%3Bs%3A9%3A%22196928006%22%3Bs%3A17%3A%22returning_visitor%22%3Bb%3A1%3B%7Dupload%7Cs%3A1736%3A%22%3C%3Fxml%20version%3D%221.0%22%3F%3E%0A%3CNX%3ASYNDICATION%20VERSION%3D%221.0%22%20PROVIDER%3D%22localhost%22%3E%0A%20%20%3CNX%3AREQUIRE%20PLUGIN%3D%22TEXT%22%2F%3E%0A%20%20%3CNX%3AREQUIRE%20PLUGIN%3D%22LABEL%22%2F%3E%0A%20%20%3CNX%3AMETATEMPLATE%20ID%3D%222%22%20NAME%3D%22-%22%20DESCRIPTION%3D%22%22%2F%3E%0A%20%20%3CNX%3ACLUSTERTEMPLATE%20ID%3D%22101177%22%20NAME%3D%22Inline%2BFrame%22%20DESCRIPTION%3D%22%22%20METATEMPLATE%3D%222%22%3E%0A%20%20%20%20%3CNX%3ALAYOUT%2F%3E%0A%20%20%20%20%3CNX%3ACLUSTERTEMPLATEITEM%20NAME%3D%22Menu%22%20POSITION%3D%224%22%20TYPE%3D%223%22%20MINCARD%3D%221%22%20MAXCARD%3D%221%22%20CONFIGURATION%3D%22%22%2F%3E%0A%20%20%20%20%3CNX%3ACLUSTERTEMPLATEITEM%20NAME%3D%22Address%22%20POSITION%3D%223%22%20TYPE%3D%222%22%20MINCARD%3D%221%22%20MAXCARD%3D%221%22%20CONFIGURATION%3D%22LABEL%22%2F%3E%0A%20%20%20%20%3CNX%3ACLUSTERTEMPLATEITEM%20NAME%3D%22Body%22%20POSITION%3D%222%22%20TYPE%3D%222%22%20MINCARD%3D%221%22%20MAXCARD%3D%221%22%20CONFIGURATION%3D%22TEXT%22%2F%3E%0A%20%20%20%20%3CNX%3ACLUSTERTEMPLATEITEM%20NAME%3D%22Headline%22%20POSITION%3D%221%22%20TYPE%3D%222%22%20MINCARD%3D%221%22%20MAXCARD%3D%221%22%20CONFIGURATION%3D%22LABEL%22%2F%3E%0A%20%20%3C%2FNX%3ACLUSTERTEMPLATE%3E%0A%20%20%3CNX%3ASITEPAGEMASTER%20ID%3D%22101182%22%20NAME%3D%22Inline%2BFrame%22%20DESCRIPTION%3D%22%22%20TYPE%3D%221%22%20FILENAME%3D%22inline.php%22%20CLUSTERTEMPLATE%3D%22101177%22%3E%253C%253FPHP%2B%2B%250D%250A%2B%2Brequire_once%2B%2522nxheader.inc.php%2522%253B%250D%250A%2B%2B%2524cds-%253Elayout-%253EaddStyleSheet%2528%2522css%252Fstyles.css%2522%2529%253B%250D%250A%2B%2Binclude%2B%2522modules%252Fsiteheader.php%2522%253B%250D%250A%2B%250D%250A%2B%2BcoCenter%2528%2B%2524cds-%253Econtent-%253Eget%2528%2522Body%2522%2529%2529%253B%250D%250A%250D%250A%2B%2Becho%2B%2527%253Cdiv%2Bclass%253D%2522bigcontent%2522%2Bstlye%253D%2522height%253A400px%253B%2522%253E%2527%253B%250D%250A%2B%2Becho%2B%2527%253Ciframe%2B%2Bframeborder%253D%25220%2522%2Bwidth%253D%2522100%2525%2522%2Bheight%253D%2522400%2522%2Bsrc%253D%2522%2527.%2524cds-%253Econtent-%253Eget%2528%2522Address%2522%2529.%2527%2522%253E%253C%252Fiframe%253E%2527%253B%250D%250A%2B%2Becho%2B%2527%253C%252Fdiv%253E%2527%253B%250D%250A%2B%2B%2B%250D%250A%2B%2Binclude%2B%2522modules%252Fsitefooter.php%2522%253B%250D%250A%2B%2Brequire_once%2B%2522nxfooter.inc.php%2522%253B%250D%250A%253F%253E%3C%2FNX%3ASITEPAGEMASTER%3E%0A%20%20%3CNX%3ATYPE%20TYPE%3D%22PAGETEMPLATE%22%2F%3E%0A%20%20%3CNX%3ADESCRIPTION%3EDisplay%2Ba%2Bframe%3C%2FNX%3ADESCRIPTION%3E%0A%20%20%3CNX%3AINFO%20WWW%3D%22www.nxsystems.org%22%20MAIL%3D%22info%40nxsystems.org%22%2F%3E%0A%3C%2FNX%3ASYNDICATION%3E%22%3Blabel%7CN%3B');
-INSERT INTO `sessions` (`SESSKEY`, `EXPIRY`, `DATA`) VALUES ('ac59adeaaa1472a66fbfbba512010fc6', 1155469038, '_phpOpenTracker_Config%7Ca%3A37%3A%7Bs%3A7%3A%22db_port%22%3Bs%3A7%3A%22default%22%3Bs%3A9%3A%22db_socket%22%3Bs%3A7%3A%22default%22%3Bs%3A21%3A%22additional_data_table%22%3Bs%3A12%3A%22pot_add_data%22%3Bs%3A15%3A%22accesslog_table%22%3Bs%3A13%3A%22pot_accesslog%22%3Bs%3A15%3A%22documents_table%22%3Bs%3A13%3A%22pot_documents%22%3Bs%3A18%3A%22exit_targets_table%22%3Bs%3A16%3A%22pot_exit_targets%22%3Bs%3A15%3A%22hostnames_table%22%3Bs%3A13%3A%22pot_hostnames%22%3Bs%3A23%3A%22operating_systems_table%22%3Bs%3A21%3A%22pot_operating_systems%22%3Bs%3A14%3A%22referers_table%22%3Bs%3A12%3A%22pot_referers%22%3Bs%3A17%3A%22user_agents_table%22%3Bs%3A15%3A%22pot_user_agents%22%3Bs%3A14%3A%22visitors_table%22%3Bs%3A12%3A%22pot_visitors%22%3Bs%3A16%3A%22document_env_var%22%3Bs%3A11%3A%22REQUEST_URI%22%3Bs%3A20%3A%22clean_referer_string%22%3Bs%3A1%3A%221%22%3Bs%3A18%3A%22clean_query_string%22%3Bs%3A1%3A%221%22%3Bs%3A20%3A%22get_parameter_filter%22%3Ba%3A0%3A%7B%7Ds%3A16%3A%22resolve_hostname%22%3Bs%3A1%3A%221%22%3Bs%3A15%3A%22group_hostnames%22%3Bs%3A1%3A%221%22%3Bs%3A17%3A%22group_user_agents%22%3Bs%3A1%3A%221%22%3Bs%3A24%3A%22track_returning_visitors%22%3Bs%3A1%3A%221%22%3Bs%3A25%3A%22returning_visitors_cookie%22%3Bs%3A14%3A%22pot_visitor_id%22%3Bs%3A34%3A%22returning_visitors_cookie_lifetime%22%3Bs%3A3%3A%22365%22%3Bs%3A7%3A%22locking%22%3Bs%3A0%3A%22%22%3Bs%3A10%3A%22log_reload%22%3Bs%3A0%3A%22%22%3Bs%3A12%3A%22jpgraph_path%22%3Bs%3A29%3A%22C%3A%5CWeb%5Ccorps%2Fcms%2Fext%2Fjpgraph%2F%22%3Bs%3A22%3A%22merge_tables_threshold%22%3Bs%3A1%3A%226%22%3Bs%3A22%3A%22logging_engine_plugins%22%3Ba%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22nxlog%22%3Bi%3A1%3Bs%3A14%3A%22search_engines%22%3B%7Ds%3A11%3A%22query_cache%22%3Bs%3A0%3A%22%22%3Bs%3A15%3A%22query_cache_dir%22%3Bs%3A5%3A%22%2Ftmp%2F%22%3Bs%3A20%3A%22query_cache_lifetime%22%3Bs%3A4%3A%223600%22%3Bs%3A11%3A%22debug_level%22%3Bs%3A1%3A%221%22%3Bs%3A20%3A%22exit_on_fatal_errors%22%3Bs%3A0%3A%22%22%3Bs%3A10%3A%22log_errors%22%3Bs%3A0%3A%22%22%3Bs%3A7%3A%22db_type%22%3Bs%3A5%3A%22mysql%22%3Bs%3A7%3A%22db_host%22%3Bs%3A9%3A%22localhost%22%3Bs%3A7%3A%22db_user%22%3Bs%3A4%3A%22root%22%3Bs%3A11%3A%22db_password%22%3Bs%3A0%3A%22%22%3Bs%3A11%3A%22db_database%22%3Bs%3A4%3A%22demo%22%3B%7D_phpOpenTracker_Container%7Ca%3A22%3A%7Bs%3A13%3A%22first_request%22%3Bb%3A0%3Bs%3A9%3A%22client_id%22%3Bi%3A1%3Bs%3A12%3A%22accesslog_id%22%3Bi%3A1237274194%3Bs%3A10%3A%22ip_address%22%3Bs%3A9%3A%22127.0.0.1%22%3Bs%3A9%3A%22host_orig%22%3Bs%3A9%3A%22localhost%22%3Bs%3A4%3A%22host%22%3Bs%3A9%3A%22localhost%22%3Bs%3A15%3A%22user_agent_orig%22%3Bs%3A87%3A%22Mozilla%2F5.0%20%28Windows%3B%20U%3B%20Windows%20NT%205.1%3B%20de%3B%20rv%3A1.8.0.6%29%20Gecko%2F20060728%20Firefox%2F1.5.0.6%22%3Bs%3A16%3A%22operating_system%22%3Bs%3A10%3A%22Windows%20XP%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A22%3A%22compatible%20Mozilla%2F5.0%22%3Bs%3A7%3A%22host_id%22%3Bi%3A-1631451101%3Bs%3A19%3A%22operating_system_id%22%3Bi%3A-114077417%3Bs%3A13%3A%22user_agent_id%22%3Bi%3A-795004555%3Bs%3A12%3A%22referer_orig%22%3Bs%3A0%3A%22%22%3Bs%3A7%3A%22referer%22%3Bs%3A0%3A%22%22%3Bs%3A10%3A%22referer_id%22%3Bi%3A0%3Bs%3A12%3A%22document_url%22%3Bs%3A35%3A%22http%3A%2F%2Flocalhost%2Fcorps%2Fwww%2Fen%2Ftest%2F%22%3Bs%3A8%3A%22document%22%3Bs%3A6%3A%22100031%22%3Bs%3A11%3A%22document_id%22%3Bi%3A-1372539626%3Bs%3A9%3A%22timestamp%22%3Bi%3A1155466978%3Bs%3A10%3A%22visitor_id%22%3Bi%3A1237274194%3Bs%3A17%3A%22returning_visitor%22%3Bb%3A0%3Bs%3A13%3A%22last_document%22%3Bs%3A6%3A%22100031%22%3B%7D');
+INSERT INTO `sessions` (`SESSKEY`, `EXPIRY`, `DATA`) VALUES ('2b60239cac4d6140940cb2606e623a96', 1155666960, 'upload%7CN%3Bfolder%7Cs%3A6%3A%22100960%22%3Barchivefolder%7Cs%3A0%3A%22%22%3Blabel%7CN%3B');
 
 -- --------------------------------------------------------
 
@@ -5829,6 +5932,7 @@ INSERT INTO `sessions` (`SESSKEY`, `EXPIRY`, `DATA`) VALUES ('ac59adeaaa1472a66f
 -- Tabellenstruktur für Tabelle `shop_tax`
 -- 
 
+DROP TABLE IF EXISTS `shop_tax`;
 CREATE TABLE `shop_tax` (
   `TAX_ID` bigint(20) NOT NULL default '0',
   `NAME` varchar(128) collate latin1_general_ci NOT NULL default '',
@@ -5840,6 +5944,8 @@ CREATE TABLE `shop_tax` (
 -- Daten für Tabelle `shop_tax`
 -- 
 
+INSERT INTO `shop_tax` (`TAX_ID`, `NAME`, `PERCENT`) VALUES (100902, 'MwSt normal', 19);
+INSERT INTO `shop_tax` (`TAX_ID`, `NAME`, `PERCENT`) VALUES (100905, 'MWST Food', 7);
 
 -- --------------------------------------------------------
 
@@ -5847,6 +5953,7 @@ CREATE TABLE `shop_tax` (
 -- Tabellenstruktur für Tabelle `sitemap`
 -- 
 
+DROP TABLE IF EXISTS `sitemap`;
 CREATE TABLE `sitemap` (
   `MENU_ID` bigint(20) NOT NULL default '0',
   `PARENT_ID` bigint(20) NOT NULL default '0',
@@ -5869,31 +5976,16 @@ CREATE TABLE `sitemap` (
 -- Daten für Tabelle `sitemap`
 -- 
 
-INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100018, 0, 100017, 'test', 1, 0, 0, 0, 1, 1, 0, NULL);
 INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100041, 100042, 100032, 'test', 1, 0, 0, 10, 1, 1, 0, NULL);
-INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100053, 100018, 100052, 'Forum', 1, 1, 0, 0, 1, 1, 0, '');
-INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100066, 100080, 100058, 'Sitemap', 2, 0, 0, 0, 1, 1, 0, '');
-INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100072, 100053, 100017, 'Profiles', 1, 0, 0, 0, 1, 1, 0, NULL);
-INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100080, 0, 100079, 'Serivepages', 3, 0, 0, 0, 1, 1, 0, NULL);
 INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100093, 100041, 100087, 'Forum', 1, 1, 0, 10, 1, 1, 0, NULL);
 INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100100, 100093, 100032, 'Profiles', 1, 0, 0, 10, 1, 1, 0, NULL);
 INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100084, 100042, 100103, 'Serivepages', 3, 0, 0, 10, 1, 1, 0, NULL);
 INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100117, 100084, 100109, 'Sitemap', 2, 0, 0, 10, 1, 1, 0, NULL);
-INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100236, 0, 100142, 'News', 4, 0, 0, 0, 1, 1, 0, NULL);
 INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100180, 100042, 100170, 'News', 4, 0, 0, 10, 1, 1, 0, NULL);
 INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100249, 100042, 100170, 'News', 4, 0, 0, 10, 1, 1, 0, NULL);
-INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100255, 100236, 100137, 'Article', 1, 0, 0, 0, 0, 1, 1, NULL);
 INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100264, 100249, 100182, 'Article', 1, 0, 0, 10, 0, 1, 0, NULL);
-INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100286, 100080, 100572, 'Contact', 3, 0, 0, 0, 1, 1, 0, NULL);
-INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100354, 100080, 100312, 'Contact new', 4, 0, 0, 0, 1, 1, 0, NULL);
-INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100403, 0, 100079, 'RSS', 5, 0, 0, 0, 1, 1, 0, NULL);
-INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100407, 100403, 101212, 'Read', 1, 0, 0, 0, 1, 1, 0, NULL);
-INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100414, 100403, 100513, 'Create', 2, 0, 0, 0, 1, 1, 0, NULL);
-INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100437, 0, 100436, 'Gallery', 6, 0, 0, 0, 1, 1, 0, NULL);
 INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100517, 100518, 100501, 'Create', 2, 0, 0, 10, 1, 1, 0, NULL);
 INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100518, 100042, 100103, 'RSS', 5, 0, 0, 10, 1, 1, 0, NULL);
-INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100587, 100437, 101182, 'test in frame', 1, 0, 0, 0, 1, 1, 0, NULL);
-INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS_POPUP`, `DELETED`, `VERSION`, `IS_DISPLAYED`, `IS_CACHED`, `IS_LOCKED`, `CC_ON_LAUNCH`) VALUES (100663, 0, 100639, 'Map', 7, 0, 0, 0, 1, 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -5901,6 +5993,7 @@ INSERT INTO `sitemap` (`MENU_ID`, `PARENT_ID`, `SPM_ID`, `NAME`, `POSITION`, `IS
 -- Tabellenstruktur für Tabelle `sitepage`
 -- 
 
+DROP TABLE IF EXISTS `sitepage`;
 CREATE TABLE `sitepage` (
   `SPID` bigint(20) NOT NULL default '0',
   `SPM_ID` bigint(20) NOT NULL default '0',
@@ -5922,12 +6015,7 @@ CREATE TABLE `sitepage` (
 -- Daten für Tabelle `sitepage`
 -- 
 
-INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100019, 100017, 100018, 1, 100020, NULL, NULL, 0, 0, 0);
 INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100031, 100032, 100041, 1, 100037, NULL, NULL, 0, 0, 10);
-INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100054, 100052, 100053, 1, 100055, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 0);
-INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100067, 100058, 100066, 1, 100068, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 0);
-INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100073, 100017, 100072, 1, 100074, NULL, NULL, 0, 0, 0);
-INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100081, 100079, 100080, 1, 100082, NULL, NULL, 0, 0, 0);
 INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100086, 100087, 100093, 1, 100090, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 10);
 INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100095, 100032, 100100, 1, 100096, NULL, NULL, 0, 0, 10);
 INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100102, 100103, 100084, 1, 100105, NULL, NULL, 0, 0, 10);
@@ -5936,20 +6024,10 @@ INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNC
 INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100196, 100182, 100200, 1, 100197, NULL, NULL, 0, 0, 10);
 INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100169, 100170, 100180, 1, 100175, NULL, NULL, 0, 0, 10);
 INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100192, 100137, 100191, 1, 100193, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 0);
-INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100237, 100142, 100236, 1, 100238, NULL, NULL, 0, 0, 0);
 INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100243, 100170, 100249, 1, 100244, NULL, NULL, 0, 0, 10);
-INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100256, 100137, 100255, 1, 100257, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 0);
 INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100260, 100182, 100264, 1, 100261, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 10);
-INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100287, 100572, 100286, 1, 100288, NULL, NULL, 0, 0, 0);
-INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100355, 100312, 100354, 1, 100376, NULL, NULL, 0, 0, 0);
-INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100404, 100079, 100403, 1, 100405, NULL, NULL, 0, 0, 0);
-INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100408, 101212, 100407, 1, 100409, NULL, NULL, 0, 0, 0);
-INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100415, 100513, 100414, 1, 100416, NULL, NULL, 0, 0, 0);
-INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100438, 100436, 100437, 1, 100439, NULL, NULL, 0, 0, 0);
 INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100500, 100501, 100517, 1, 100507, NULL, NULL, 0, 0, 10);
 INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100526, 100103, 100518, 1, 100527, NULL, NULL, 0, 0, 10);
-INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100588, 101182, 100587, 1, 100589, NULL, NULL, 0, 0, 0);
-INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNCH_DATE`, `EXPIRE_DATE`, `POPUP_WINDOW`, `DELETED`, `VERSION`) VALUES (100664, 100639, 100663, 1, 100665, NULL, NULL, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -5957,6 +6035,7 @@ INSERT INTO `sitepage` (`SPID`, `SPM_ID`, `MENU_ID`, `POSITION`, `CLNID`, `LAUNC
 -- Tabellenstruktur für Tabelle `sitepage_master`
 -- 
 
+DROP TABLE IF EXISTS `sitepage_master`;
 CREATE TABLE `sitepage_master` (
   `SPM_ID` bigint(20) NOT NULL default '0',
   `NAME` varchar(32) NOT NULL default '',
@@ -5975,26 +6054,27 @@ CREATE TABLE `sitepage_master` (
 -- Daten für Tabelle `sitepage_master`
 -- 
 
-INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100017, 'Text', '- Headline\r\n- HTML-Text', 'text.php', 100014, 1, 0, 'image_top_left.png', 0);
+INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100017, 'Text', '- Headline\r\n- HTML-Text', 'text.php', 100014, 1, 0, 'HTML_Page.png', 0);
 INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100032, 'Text', '- Headline\r\n- HTML-Text', 'text.php', 100033, 1, 0, NULL, 10);
-INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100052, 'External Page', 'Opens a new window and displays the URL which is stored in the template.', 'external.php', 100050, 1, 0, 'default.png', 0);
-INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100058, 'Sitemap', 'Draws a sitemap for your homepage.', 'sitemap.php', 100063, 1, 0, 'default.png', 0);
-INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100079, 'Menu Separator', 'Use for creating menu-sections with no content. If the page is clicked, the system does an automatic forwarding to the first childpage.', 'separator.php', 100078, 1, 0, 'default.png', 0);
+INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100052, 'External Page', 'Opens a new window and displays the URL which is stored in the template.', 'external.php', 100050, 1, 0, 'Popup.png', 0);
+INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100058, 'Sitemap', 'Draws a sitemap for your homepage.', 'sitemap.php', 100063, 1, 0, 'Sitemap.png', 0);
+INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100079, 'Menu Separator', 'Use for creating menu-sections with no content. If the page is clicked, the system does an automatic forwarding to the first childpage.', 'separator.php', 100078, 1, 0, 'X.png', 0);
 INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100087, 'External Page', 'Opens a new window and displays the URL which is stored in the template.', 'external.php', 100088, 1, 0, NULL, 10);
 INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100103, 'Menu Separator', 'Use for creating menu-sections with no content. If the page is clicked, the system does an automatic forwarding to the first childpage.', 'separator.php', 100104, 1, 0, NULL, 10);
 INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100109, 'Sitemap', 'Draws a sitemap for your homepage.', 'sitemap.php', 100110, 1, 0, NULL, 10);
-INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100137, 'Article Page', 'Special Template for displaying an article. Articles are grouped in channels. When you setup a channel, you can define a output page for each channel category. Output pages are based on this template', 'article.php', 100167, 1, 0, 'default.png', 0);
-INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100142, 'Article Overview', 'Displays a list with the selected articles from a channel. Use this template to create a overview page for News and other articles.', 'article_overview.php', 100138, 1, 0, 'default.png', 0);
+INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100137, 'Article Page', 'Special Template for displaying an article. Articles are grouped in channels. When you setup a channel, you can define a output page for each channel category. Output pages are based on this template', 'article.php', 100167, 1, 0, 'Article.png', 0);
+INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100142, 'Article Overview', 'Displays a list with the selected articles from a channel. Use this template to create a overview page for News and other articles.', 'article_overview.php', 100138, 1, 0, 'Overview.png', 0);
 INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100170, 'Article Overview', 'Displays a list with the selected articles from a channel. Use this template to create a overview page for News and other articles.', 'article_overview.php', 100171, 1, 0, NULL, 10);
 INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100182, 'Article Page', 'Special Template for displaying an article. Articles are grouped in channels. When you setup a channel, you can define a output page for each channel category. Output pages are based on this template', 'article.php', 100183, 1, 0, NULL, 10);
-INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100572, 'Contact (Send Email)', 'Contact form. The form is send to you by email.', 'contact.php', 100335, 1, 0, 'default.png', 0);
-INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100312, 'Contact  (Mailing System)', 'Contact form. The request are written to the database and can be anwered in E-Services/Mailings.', 'contact2.php', 100554, 1, 0, 'default.png', 0);
-INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100513, 'RSS Creator', 'Create a RSS-Feed out of a channel.', 'rss.php', 100511, 1, 0, 'default.png', 0);
-INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (101212, 'RSS Reader', 'Load a RSS feed and display it on the homepage.', 'rssdisp.php', 101177, 1, 0, 'default.png', 0);
-INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100436, 'Gallery', 'Template for creating image galleries', 'gallery.php', 100428, 1, 0, 'default.png', 0);
+INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100572, 'Contact (Send Email)', 'Contact form. The form is send to you by email.', 'contact.php', 100335, 1, 0, 'Form.png', 0);
+INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100312, 'Contact  (Mailing System)', 'Contact form. The request are written to the database and can be anwered in E-Services/Mailings.', 'contact2.php', 100554, 1, 0, 'Form.png', 0);
+INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100513, 'RSS Creator', 'Create a RSS-Feed out of a channel.', 'rss.php', 100511, 1, 0, 'XML.png', 0);
+INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (101212, 'RSS Reader', 'Load a RSS feed and display it on the homepage.', 'rssdisp.php', 101177, 1, 0, 'Overview2.png', 0);
+INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100436, 'Gallery', 'Template for creating image galleries', 'gallery.php', 100428, 1, 0, 'Gallery.png', 0);
 INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100501, 'RSS Creator', 'Create a RSS-Feed out of a channel.', 'rss.php', 100502, 1, 0, NULL, 10);
-INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (101182, 'Show In Frame', 'Use this template, to show the content of an URL in an embedded frame (iframe).', 'inline.php', 100560, 1, 0, 'default.png', 0);
-INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100639, 'Map', 'View a address with Google Maps.', 'map.php', 100612, 1, 0, 'default.png', 0);
+INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (101182, 'Show In Frame', 'Use this template, to show the content of an URL in an embedded frame (iframe).', 'inline.php', 100560, 1, 0, 'IFrame.png', 0);
+INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100639, 'Map', 'View a address with Google Maps.', 'map.php', 100612, 1, 0, 'Map.png', 0);
+INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`, `CLT_ID`, `SPMTYPE_ID`, `DELETED`, `THUMBNAIL`, `VERSION`) VALUES (100743, 'Search Engine', 'This page implements a search engine in your website. You must run the spiders before you can use the integrated searchengine. Therefore go to Maintenance/Search Indexing.', 'search.php', 100716, 1, 0, 'Search.png', 0);
 
 -- --------------------------------------------------------
 
@@ -6002,6 +6082,7 @@ INSERT INTO `sitepage_master` (`SPM_ID`, `NAME`, `DESCRIPTION`, `TEMPLATE_PATH`,
 -- Tabellenstruktur für Tabelle `sitepage_names`
 -- 
 
+DROP TABLE IF EXISTS `sitepage_names`;
 CREATE TABLE `sitepage_names` (
   `SPID` bigint(20) NOT NULL default '0',
   `VARIATION_ID` bigint(20) NOT NULL default '0',
@@ -6017,34 +6098,19 @@ CREATE TABLE `sitepage_names` (
 -- Daten für Tabelle `sitepage_names`
 -- 
 
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100019, 1, 'test', NULL, '', 0, 0);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100031, 1, 'test', '', '', 0, 10);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100054, 1, 'Forum', '', 'Shows the N/X forum.', 0, 0);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100067, 1, 'Sitemap', '', 'this page', 0, 0);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100073, 1, 'Profiles', '', 'Displays, which profiles are in the forum', 0, 0);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100081, 1, 'Servicepages', '', '', 0, 0);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100086, 1, 'Forum', '', 'Shows the N/X forum.', 0, 10);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100095, 1, 'Profiles', '', 'Displays, which profiles are in the forum', 0, 10);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100102, 1, 'Servicepages', '', '', 0, 10);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100108, 1, 'Sitemap', '', 'this page', 0, 10);
+INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100031, 1, 'test', '', '', 1, 10);
+INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100086, 1, 'Forum', '', 'Shows the N/X forum.', 1, 10);
+INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100095, 1, 'Profiles', '', 'Displays, which profiles are in the forum', 1, 10);
+INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100102, 1, 'Servicepages', '', '', 1, 10);
+INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100108, 1, 'Sitemap', '', 'this page', 1, 10);
 INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100144, 1, 'News', NULL, '', 0, 0);
 INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100196, 1, 'Articles', '', '', 0, 10);
 INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100169, 1, 'News', '', '', 0, 10);
 INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100192, 1, 'Articles', NULL, '', 0, 0);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100237, 1, 'News', NULL, '', 0, 0);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100243, 1, 'News', '', '', 0, 10);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100256, 1, 'Article', NULL, '', 0, 0);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100260, 1, 'Article', '', '', 0, 10);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100287, 1, 'Contact', NULL, '', 0, 0);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100355, 1, 'Contact new', NULL, '', 0, 0);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100404, 1, 'RSS', NULL, '', 0, 0);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100408, 1, 'Read', NULL, '', 0, 0);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100415, 1, 'Create', NULL, '', 0, 0);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100438, 1, 'Gallery', NULL, '', 0, 0);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100500, 1, 'Create', '', '', 0, 10);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100526, 1, 'RSS', '', '', 0, 10);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100588, 1, 'test in frame', NULL, '', 0, 0);
-INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100664, 1, 'Map', NULL, '', 0, 0);
+INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100243, 1, 'News', '', '', 1, 10);
+INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100260, 1, 'Article', '', '', 1, 10);
+INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100500, 1, 'Create', '', '', 1, 10);
+INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HELP`, `DELETED`, `VERSION`) VALUES (100526, 1, 'RSS', '', '', 1, 10);
 
 -- --------------------------------------------------------
 
@@ -6052,6 +6118,7 @@ INSERT INTO `sitepage_names` (`SPID`, `VARIATION_ID`, `NAME`, `DIRECT_URL`, `HEL
 -- Tabellenstruktur für Tabelle `sitepage_owner`
 -- 
 
+DROP TABLE IF EXISTS `sitepage_owner`;
 CREATE TABLE `sitepage_owner` (
   `SPID` bigint(20) NOT NULL default '0',
   `GROUP_ID` bigint(20) NOT NULL default '0'
@@ -6068,6 +6135,7 @@ CREATE TABLE `sitepage_owner` (
 -- Tabellenstruktur für Tabelle `sitepage_types`
 -- 
 
+DROP TABLE IF EXISTS `sitepage_types`;
 CREATE TABLE `sitepage_types` (
   `SPMTYPE_ID` bigint(20) NOT NULL default '0',
   `NAME` varchar(16) NOT NULL default ''
@@ -6087,6 +6155,7 @@ INSERT INTO `sitepage_types` (`SPMTYPE_ID`, `NAME`) VALUES (3, 'PORTAL');
 -- Tabellenstruktur für Tabelle `sitepage_variations`
 -- 
 
+DROP TABLE IF EXISTS `sitepage_variations`;
 CREATE TABLE `sitepage_variations` (
   `SPM_ID` bigint(20) NOT NULL default '0',
   `VARIATION_ID` bigint(20) NOT NULL default '0'
@@ -6117,6 +6186,7 @@ INSERT INTO `sitepage_variations` (`SPM_ID`, `VARIATION_ID`) VALUES (100436, 1);
 INSERT INTO `sitepage_variations` (`SPM_ID`, `VARIATION_ID`) VALUES (100501, 1);
 INSERT INTO `sitepage_variations` (`SPM_ID`, `VARIATION_ID`) VALUES (101182, 1);
 INSERT INTO `sitepage_variations` (`SPM_ID`, `VARIATION_ID`) VALUES (100639, 1);
+INSERT INTO `sitepage_variations` (`SPM_ID`, `VARIATION_ID`) VALUES (100743, 1);
 
 -- --------------------------------------------------------
 
@@ -6124,6 +6194,7 @@ INSERT INTO `sitepage_variations` (`SPM_ID`, `VARIATION_ID`) VALUES (100639, 1);
 -- Tabellenstruktur für Tabelle `state_translation`
 -- 
 
+DROP TABLE IF EXISTS `state_translation`;
 CREATE TABLE `state_translation` (
   `IN_ID` bigint(20) NOT NULL default '0',
   `OUT_ID` bigint(20) NOT NULL default '0',
@@ -6139,48 +6210,48 @@ CREATE TABLE `state_translation` (
 -- Daten für Tabelle `state_translation`
 -- 
 
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100019, 100031, 10, '2006-08-11 20:06:03', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100019, 100031, 10, '2006-08-13 19:01:52', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100017, 100032, 10, '2006-08-09 22:05:37', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100014, 100033, 10, '2006-08-11 20:06:03', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (2, 100034, 10, '2006-08-13 12:58:29', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100015, 100035, 10, '2006-08-11 20:06:03', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100016, 100036, 10, '2006-08-11 20:06:03', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100020, 100037, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100021, 100038, 10, '2006-08-09 22:05:37', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100021, 100038, 10, '2006-08-13 19:01:52', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100022, 100039, 10, '2006-08-11 20:06:03', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100023, 100040, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100018, 100041, 10, '2006-08-11 20:06:03', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100018, 100041, 10, '2006-08-13 19:01:52', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (0, 100042, 10, '2006-08-09 22:05:37', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100080, 100084, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100054, 100086, 10, '2006-08-11 20:06:03', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100080, 100084, 10, '2006-08-13 19:02:06', 1);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100054, 100086, 10, '2006-08-13 19:01:52', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100052, 100087, 10, '2006-08-11 11:17:08', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100050, 100088, 10, '2006-08-11 20:06:03', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100051, 100089, 10, '2006-08-11 20:06:03', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100055, 100090, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100056, 100091, 10, '2006-08-11 11:17:08', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100056, 100091, 10, '2006-08-13 19:01:52', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100057, 100092, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100053, 100093, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100073, 100095, 10, '2006-08-11 20:06:03', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100053, 100093, 10, '2006-08-13 19:01:52', 1);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100073, 100095, 10, '2006-08-13 19:01:52', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100074, 100096, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100075, 100097, 10, '2006-08-11 11:17:08', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100075, 100097, 10, '2006-08-13 19:01:52', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100076, 100098, 10, '2006-08-11 20:06:03', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100077, 100099, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100072, 100100, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100081, 100102, 10, '2006-08-11 20:06:03', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100072, 100100, 10, '2006-08-13 19:01:52', 1);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100081, 100102, 10, '2006-08-13 19:02:06', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100079, 100103, 10, '2006-08-11 11:17:08', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100078, 100104, 10, '2006-08-13 12:51:32', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100082, 100105, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100083, 100106, 10, '2006-08-11 11:17:08', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100067, 100108, 10, '2006-08-11 20:06:03', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100083, 100106, 10, '2006-08-13 19:02:06', 1);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100067, 100108, 10, '2006-08-13 19:02:06', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100058, 100109, 10, '2006-08-11 11:17:08', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100063, 100110, 10, '2006-08-11 20:06:03', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100064, 100111, 10, '2006-08-11 20:06:03', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100065, 100112, 10, '2006-08-11 20:06:03', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100068, 100113, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100069, 100114, 10, '2006-08-11 11:17:08', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100069, 100114, 10, '2006-08-13 19:02:06', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100070, 100115, 10, '2006-08-11 20:06:03', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100071, 100116, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100066, 100117, 10, '2006-08-11 20:06:03', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100066, 100117, 10, '2006-08-13 19:02:06', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100008, 100122, 10, '2006-08-11 15:07:05', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100009, 100123, 10, '2006-08-11 15:07:05', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100002, 100124, 10, '2006-08-11 15:07:09', 0);
@@ -6191,7 +6262,7 @@ INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRE
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100047, 100129, 10, '2006-08-11 15:07:16', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100130, 100132, 10, '2006-08-11 15:07:07', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100131, 100133, 10, '2006-08-11 15:07:07', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100157, 100160, 10, '2006-08-11 14:06:42', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100157, 100160, 10, '2006-08-13 19:04:29', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100156, 100161, 10, '2006-08-11 20:06:03', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100134, 100162, 10, '2006-08-11 20:06:03', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100135, 100163, 10, '2006-08-11 20:06:03', 0);
@@ -6229,20 +6300,20 @@ INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRE
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100205, 100210, 10, '2006-08-11 15:16:15', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100206, 100211, 10, '2006-08-11 15:16:15', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100201, 100212, 10, '2006-08-11 15:16:21', 1);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100237, 100243, 10, '2006-08-11 20:06:03', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100237, 100243, 10, '2006-08-13 19:02:19', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100238, 100244, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100239, 100245, 10, '2006-08-11 15:24:00', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100239, 100245, 10, '2006-08-13 19:02:19', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100240, 100246, 10, '2006-08-11 20:06:03', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100241, 100247, 10, '2006-08-11 20:06:03', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100242, 100248, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100236, 100249, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100256, 100260, 10, '2006-08-11 20:06:03', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100236, 100249, 10, '2006-08-13 19:02:19', 1);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100256, 100260, 10, '2006-08-13 19:02:19', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100257, 100261, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100258, 100262, 10, '2006-08-11 15:24:54', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100258, 100262, 10, '2006-08-13 19:02:19', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100259, 100263, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100255, 100264, 10, '2006-08-11 20:06:03', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100255, 100264, 10, '2006-08-13 19:02:19', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100234, 100265, 10, '2006-08-11 15:27:39', 1);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100415, 100500, 10, '2006-08-13 12:51:38', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100415, 100500, 10, '2006-08-13 19:02:35', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100513, 100501, 10, '2006-08-13 12:48:36', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100511, 100502, 10, '2006-08-13 12:51:38', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100487, 100503, 10, '2006-08-13 12:51:38', 0);
@@ -6250,7 +6321,7 @@ INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRE
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100454, 100505, 10, '2006-08-13 12:51:38', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100456, 100506, 10, '2006-08-13 12:51:38', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100416, 100507, 10, '2006-08-13 12:51:38', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100417, 100508, 10, '2006-08-13 12:48:36', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100417, 100508, 10, '2006-08-13 19:02:35', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100418, 100509, 10, '2006-08-13 12:51:38', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100397, 100510, 10, '2006-08-13 12:48:36', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100419, 100511, 10, '2006-08-13 12:51:38', 0);
@@ -6259,15 +6330,22 @@ INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRE
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100467, 100514, 10, '2006-08-13 12:51:38', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100468, 100515, 10, '2006-08-13 12:51:38', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100494, 100516, 10, '2006-08-13 12:51:38', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100414, 100517, 10, '2006-08-13 12:51:38', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100403, 100518, 10, '2006-08-13 12:51:32', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100407, 100519, 10, '2006-08-13 12:48:36', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100404, 100526, 10, '2006-08-13 12:51:32', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100414, 100517, 10, '2006-08-13 19:02:35', 1);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100403, 100518, 10, '2006-08-13 19:02:35', 1);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100407, 100519, 10, '2006-08-13 19:02:35', 1);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100404, 100526, 10, '2006-08-13 19:02:35', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100405, 100527, 10, '2006-08-13 12:51:32', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100406, 100528, 10, '2006-08-13 12:49:58', 0);
-INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100437, 100529, 10, '2006-08-13 12:49:58', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100406, 100528, 10, '2006-08-13 19:02:35', 1);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100437, 100529, 10, '2006-08-13 19:02:57', 1);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100538, 100543, 10, '2006-08-13 12:58:29', 0);
 INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100539, 100544, 10, '2006-08-13 12:58:29', 0);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100287, 100794, 10, '2006-08-13 19:02:06', 1);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100355, 100796, 10, '2006-08-13 19:02:06', 1);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100408, 100810, 10, '2006-08-13 19:02:35', 1);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100438, 100817, 10, '2006-08-13 19:02:57', 1);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100588, 100819, 10, '2006-08-13 19:02:57', 1);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100664, 100825, 10, '2006-08-13 19:03:10', 1);
+INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRED`) VALUES (100316, 100838, 10, '2006-08-13 19:03:52', 1);
 
 -- --------------------------------------------------------
 
@@ -6275,6 +6353,7 @@ INSERT INTO `state_translation` (`IN_ID`, `OUT_ID`, `LEVEL`, `MODIFIED`, `EXPIRE
 -- Tabellenstruktur für Tabelle `syndication`
 -- 
 
+DROP TABLE IF EXISTS `syndication`;
 CREATE TABLE `syndication` (
   `IN_ID` bigint(20) NOT NULL default '0',
   `OUT_ID` bigint(20) NOT NULL default '0',
@@ -6296,6 +6375,7 @@ INSERT INTO `syndication` (`IN_ID`, `OUT_ID`, `PROVIDER`) VALUES (101237, 100572
 -- Tabellenstruktur für Tabelle `sys_functions`
 -- 
 
+DROP TABLE IF EXISTS `sys_functions`;
 CREATE TABLE `sys_functions` (
   `FUNCTION_ID` varchar(16) NOT NULL default '',
   `PARENT_ID` varchar(16) NOT NULL default '0',
@@ -6414,6 +6494,7 @@ INSERT INTO `sys_functions` (`FUNCTION_ID`, `PARENT_ID`, `NAME`, `DESCRIPTION`) 
 -- Tabellenstruktur für Tabelle `temp_vars`
 -- 
 
+DROP TABLE IF EXISTS `temp_vars`;
 CREATE TABLE `temp_vars` (
   `NAME` varchar(128) NOT NULL default '',
   `USER_ID` varchar(16) NOT NULL default '',
@@ -6425,8 +6506,7 @@ CREATE TABLE `temp_vars` (
 -- Daten für Tabelle `temp_vars`
 -- 
 
-INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('pnode', '1', '100001');
-INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('linkset', '1', '');
+INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('pnode', '1', '100960');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('channels.phpfilter_rule', '1', '');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('channels.phpfilter_page', '1', '1');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('categories.phpfilter_rule', '1', '');
@@ -6445,7 +6525,7 @@ INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('edit_template.phpf
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('mid', '1', '0');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('sitepagebrowser.phpview', '1', '1');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('panelmenu', '1', '1x-1');
-INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('menu', '1', '1x0');
+INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('menu', '1', '1x1');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('variations.phpfilter_rule', '1', '');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('variations.phpfilter_page', '1', '1');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('compound_groups.phpfilter_rule', '1', '');
@@ -6462,11 +6542,15 @@ INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('chsel', '1', '1001
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('quickpanel', '1', '');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('edit.phpview', '1', '1');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('clusterbrowser.phpview', '1', '1');
-INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('lastaction', '1', 'editobject');
+INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('lastaction', '1', '0');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('metascheme.phpfilter_rule', '1', '');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('metascheme.phpfilter_page', '1', '1');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('meta.phpfilter_rule', '1', '');
 INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('meta.phpfilter_page', '1', '1');
+INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('linkset', '1', '');
+INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('snode', '1', '100893');
+INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('tax.phpfilter_rule', '1', '');
+INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('tax.phpfilter_page', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -6474,6 +6558,7 @@ INSERT INTO `temp_vars` (`NAME`, `USER_ID`, `VALUE`) VALUES ('meta.phpfilter_pag
 -- Tabellenstruktur für Tabelle `tickets`
 -- 
 
+DROP TABLE IF EXISTS `tickets`;
 CREATE TABLE `tickets` (
   `subject` text collate latin1_general_ci,
   `name` text collate latin1_general_ci,
@@ -6494,9 +6579,6 @@ CREATE TABLE `tickets` (
 -- Daten für Tabelle `tickets`
 -- 
 
-INSERT INTO `tickets` (`subject`, `name`, `email`, `phone`, `status`, `rate`, `rep`, `ID`, `cat`, `priority`, `tracking`, `INSERTTIMESTAMP`) VALUES ('Tet', 'Weih, Sven', 'sven.weih@gmail.com', '', 'open', NULL, NULL, 413320, 0, 1, NULL, '0000-00-00 00:00:00');
-INSERT INTO `tickets` (`subject`, `name`, `email`, `phone`, `status`, `rate`, `rep`, `ID`, `cat`, `priority`, `tracking`, `INSERTTIMESTAMP`) VALUES ('Wohnung', 'Weih, Sven', 'sven.weih@gmail.com', '', 'open', NULL, NULL, 367806, 0, 1, NULL, '0000-00-00 00:00:00');
-INSERT INTO `tickets` (`subject`, `name`, `email`, `phone`, `status`, `rate`, `rep`, `ID`, `cat`, `priority`, `tracking`, `INSERTTIMESTAMP`) VALUES ('Wohnung', 'Weih, Sven', 'sven.weih@gmail.com', '', 'open', NULL, NULL, 388501, 0, 1, NULL, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -6504,6 +6586,7 @@ INSERT INTO `tickets` (`subject`, `name`, `email`, `phone`, `status`, `rate`, `r
 -- Tabellenstruktur für Tabelle `tickets_answers`
 -- 
 
+DROP TABLE IF EXISTS `tickets_answers`;
 CREATE TABLE `tickets_answers` (
   `ID` int(7) NOT NULL auto_increment,
   `ticket` varchar(20) collate latin1_general_ci default NULL,
@@ -6525,6 +6608,7 @@ CREATE TABLE `tickets_answers` (
 -- Tabellenstruktur für Tabelle `tickets_categories`
 -- 
 
+DROP TABLE IF EXISTS `tickets_categories`;
 CREATE TABLE `tickets_categories` (
   `id` int(5) NOT NULL auto_increment,
   `name` varchar(100) collate latin1_general_ci NOT NULL default '',
@@ -6552,6 +6636,7 @@ CREATE TABLE `tickets_categories` (
 -- Tabellenstruktur für Tabelle `tickets_messages`
 -- 
 
+DROP TABLE IF EXISTS `tickets_messages`;
 CREATE TABLE `tickets_messages` (
   `ID` int(7) NOT NULL auto_increment,
   `ticket` varchar(20) collate latin1_general_ci default NULL,
@@ -6564,9 +6649,6 @@ CREATE TABLE `tickets_messages` (
 -- Daten für Tabelle `tickets_messages`
 -- 
 
-INSERT INTO `tickets_messages` (`ID`, `ticket`, `message`, `timestamp`) VALUES (1, '413320', '\n\n\nName:     Weih\nVorname:  Sven\nStrasse:  \nPLZ:      \nOrt:      \nTelefon:  0151-11267568\nFax:      \nE-Mail:   sven.weih@gmail.com\n\nso, jetzt eine Frage\r\n\n\n\n', 1155330452);
-INSERT INTO `tickets_messages` (`ID`, `ticket`, `message`, `timestamp`) VALUES (2, '367806', '\n\n\nName:     Weih\nVorname:  Sven\nStrasse:  \nPLZ:      \nOrt:      \nTelefon:  \nFax:      \nE-Mail:   sven.weih@gmail.com\n\nHallo, ich üwrde gerne bei euch einziehen. Geht das?\n\n\n', 1155331390);
-INSERT INTO `tickets_messages` (`ID`, `ticket`, `message`, `timestamp`) VALUES (3, '388501', '\n\n\nName:     Weih\nVorname:  Sven\nStrasse:  \nPLZ:      \nOrt:      \nTelefon:  \nFax:      \nE-Mail:   sven.weih@gmail.com\n\nHallo, ich üwrde gerne bei euch einziehen. Geht das?\n\n\n', 1155331475);
 
 -- --------------------------------------------------------
 
@@ -6574,6 +6656,7 @@ INSERT INTO `tickets_messages` (`ID`, `ticket`, `message`, `timestamp`) VALUES (
 -- Tabellenstruktur für Tabelle `tickets_textblocks`
 -- 
 
+DROP TABLE IF EXISTS `tickets_textblocks`;
 CREATE TABLE `tickets_textblocks` (
   `BLOCK_ID` bigint(20) NOT NULL default '0',
   `NAME` varchar(32) collate latin1_general_ci NOT NULL default '',
@@ -6593,6 +6676,7 @@ CREATE TABLE `tickets_textblocks` (
 -- Tabellenstruktur für Tabelle `user_permissions`
 -- 
 
+DROP TABLE IF EXISTS `user_permissions`;
 CREATE TABLE `user_permissions` (
   `GROUP_ID` bigint(20) default NULL,
   `ROLE_ID` bigint(20) default NULL,
@@ -6611,6 +6695,7 @@ INSERT INTO `user_permissions` (`GROUP_ID`, `ROLE_ID`, `USER_ID`) VALUES (1, 1, 
 -- Tabellenstruktur für Tabelle `user_session`
 -- 
 
+DROP TABLE IF EXISTS `user_session`;
 CREATE TABLE `user_session` (
   `USER_ID` varchar(16) NOT NULL default '',
   `LAST_LOGIN` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
@@ -6623,7 +6708,7 @@ CREATE TABLE `user_session` (
 -- Daten für Tabelle `user_session`
 -- 
 
-INSERT INTO `user_session` (`USER_ID`, `LAST_LOGIN`, `SESSION_ID`, `REMOTE_ADDRESS`) VALUES ('1', '2006-08-13 12:49:41', 'd92b07751f063af5d917f703ebdd2137', '127.0.0.1');
+INSERT INTO `user_session` (`USER_ID`, `LAST_LOGIN`, `SESSION_ID`, `REMOTE_ADDRESS`) VALUES ('1', '2006-08-15 19:41:27', '76edd5280f4e795dafe7788f408b395f', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -6631,6 +6716,7 @@ INSERT INTO `user_session` (`USER_ID`, `LAST_LOGIN`, `SESSION_ID`, `REMOTE_ADDRE
 -- Tabellenstruktur für Tabelle `users`
 -- 
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `USER_ID` bigint(20) NOT NULL default '0',
   `USER_NAME` varchar(16) NOT NULL default '',
@@ -6658,6 +6744,7 @@ INSERT INTO `users` (`USER_ID`, `USER_NAME`, `FULL_NAME`, `PASSWORD`, `EMAIL`, `
 -- Tabellenstruktur für Tabelle `var_log`
 -- 
 
+DROP TABLE IF EXISTS `var_log`;
 CREATE TABLE `var_log` (
   `NAME` varchar(32) NOT NULL default '',
   PRIMARY KEY  (`NAME`)
@@ -6674,6 +6761,7 @@ CREATE TABLE `var_log` (
 -- Tabellenstruktur für Tabelle `variations`
 -- 
 
+DROP TABLE IF EXISTS `variations`;
 CREATE TABLE `variations` (
   `VARIATION_ID` bigint(20) NOT NULL default '0',
   `NAME` varchar(32) NOT NULL default '',

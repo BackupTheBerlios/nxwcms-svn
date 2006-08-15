@@ -60,7 +60,7 @@
      /**
       * check the archive
       */
-     function execute() {
+     function check() {
        global $lang, $errors;
        
        $archfolder = $_SESSION["archivefolder"];

@@ -42,4 +42,5 @@
   $page->add($wizard);
   $page->draw();
   $db->close();
+  echo $errors;
 ?>
