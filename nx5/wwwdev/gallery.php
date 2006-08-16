@@ -12,7 +12,9 @@ if ($body != "") {
 	br();
 }
 
-echo $cds->content->get("Gallery", array("BODY", 800,600));
+echo '<div align="center">';
+echo $cds->content->get("Gallery", array("BODY", 640,480));
+echo '</div>';
 
 require_once $cds->path."inc/footer.php";
 require_once "nxfooter.inc.php";

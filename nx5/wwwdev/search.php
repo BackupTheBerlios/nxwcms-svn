@@ -3,13 +3,15 @@ require_once "nxheader.inc.php";
 $cds->layout->setStandardSearchEngineCSS();
 require_once $cds->path."inc/header.php";
 
+$headline = $cds->content->get("Headline");
 if ($headline != "") {
 	echo $headline;
 	br();
 }
 
+$body = $cds->content->get("Body");
 if ($body !="") {
-	echo $cds->content->get("Body");
+	echo $body;
 	br();
 }
 

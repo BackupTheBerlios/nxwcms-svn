@@ -115,7 +115,8 @@
 						$href = getMenuLink($spid, $v);
 					} else if (is_object($cds)) {
 						$obj = $cds->menu->getMenuById($spid);
-						$href = $obj->getLink();
+						if (is_object($obj))
+						  $href = $obj->getLink();
 						unset($obj);	
 					}
 				}
