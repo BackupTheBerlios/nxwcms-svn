@@ -125,9 +125,8 @@ class pgnGallery extends Plugin {
 				}
 				$impath = $c["host"].$impath;
 				$syspath = $c["host"]	.$cds->docroot. 'sys/';
-				$content = '
-	<link rel="stylesheet" href="'.$syspath.'gal.css" type="text/css">
-	<script type="text/JavaScript" charset="utf-8">
+				$content = '<link rel="stylesheet" href="'.$syspath.'gal.css" type="text/css"/>
+<script language="JavaScript" type="text/javascript">
 			
 	var photoDir = "'.$impath.'"; // Location of photos for gallery
 	var photoIndex = 0;
@@ -178,7 +177,7 @@ class pgnGallery extends Plugin {
 						$pgnIG["count"]++;
 
 						$content.= 'new Array("'.$filename.'", "'.$iwidth.'", "'.$iheight.'", "'.$alt.'",'.$owidth.','.$oheight.')';
-						if ($i+2 < count($imageList)) {
+						if ($i+1 < count($imageList)) {
 							$content.= ',';
 						}
 					}
@@ -186,18 +185,18 @@ class pgnGallery extends Plugin {
 				$pgnIG["count"]--;
 
 				$content.=");
-	// Number of photos in this gallery
+	
 	var photoNum = photoArray.length-1;
 	
 	function pgnIGNext() {
 	  photoIndex++;
-	  if (photoIndex >= photoNum) photoIndex = 0;
+	  if (photoIndex > photoNum) photoIndex = 0;
 	  showPhoto(photoIndex);
 	}
 	
 	function pgnIGPrev() {
 	  photoIndex--;
-	  if (photoIndex < 0 ) photoIndex = photoNum-1;	  
+	  if (photoIndex < 0 ) photoIndex = photoNum;	  
 	  showPhoto(photoIndex);
 	}
 	
