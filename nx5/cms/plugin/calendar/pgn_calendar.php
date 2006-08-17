@@ -102,10 +102,53 @@
 		 */
 		function CDS_Calendar	($calendar) {
 		  $this->calendar = strtoupper($calendar); 	
-		  $this->calendarId = getDBCell("pgn_cal_calendars", "CALID", "UPPER(NAME) = \"".$this->calendar."\"");
-		 
+		  if ($this->calendar != "") 
+		    $this->calendarId = getDBCell("pgn_cal_calendars", "CALID", "UPPER(NAME) = \"".$this->calendar."\"");		 
 		}
 		
+		
+		
+		/**
+		 * Returns a list with all the calendars in the system
+		 */
+		function getCalendars($orderBy="ORDER BY NAME DESC") {			
+			return createNameValueArrayEx("pgn_cal_calendars", "NAME", "CALID", "1", $orderBy);			
+		}
+		
+		/**
+		 * Draws a dropdown to select one calendar and tries to get the calendarId of the active Calendar.
+		 */
+		function drawCalendarSelector($selectButton = "Go") {
+			$calId = value("calendar", "NUMERIC", "0");
+			$calendars = $this->getCalendars();
+			
+			if ($calId == '0')
+			  $calId = $calendars[0][1];
+			  
+			echo '<form name="calendarform" method="POST">';
+			echo '<select name="calendar" id="calendar">';
+			for ($i=0; $i < count($calendars); $i++) {
+				if ($calId == $calendars[$i][1]) {
+					$selected = ' selected';
+				} else {
+					$selected = '';
+				}
+				echo '<option value="'.$calendars[$i][1].'" '.$selected.'>'.$calendars[$i][0].'</option>';
+			}
+			echo '</select>&nbsp;';						
+			echo '<input type="submit" name="setcal" value="'.$selectButton.'">';
+			echo '</form>';
+			$this->setCalendar($calId);
+			return $calId;
+		}
+		
+		/**
+		 * Set the ID of the actual calendar
+		 * @param integer ID of the actual calendar
+		 */
+		function setCalendar($calId) {
+			 $this->calendarId; 
+		}
 		
 		/**
 		 * Retrieve the Categories of the Calendar
@@ -242,6 +285,7 @@
 			   				
 			   		echo '<tr><td style="'.$color.'" valign="top">'."\n";
 			   		$dispTime = "";			   		
+			   		var_dump($data);
 			   		$startTS = strtotime($data["STARTDATE"]);
 					$endTS = strtotime($data["ENDDATE"]);
 			   		$startT = strtotime($data["STARTTIME"]);
