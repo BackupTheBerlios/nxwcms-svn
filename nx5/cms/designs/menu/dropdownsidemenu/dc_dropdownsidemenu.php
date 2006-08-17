@@ -23,36 +23,48 @@
 	 *	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	 **********************************************************************/
 
-	class DropdownMenu extends AbstractDesign {
+	class DropdownSideMenu extends AbstractDesign {
 		
 		var $pathToRoot;
+		var $pathToRootIds;
 		var $themeName;
+		var $activeMenuId;
+		var $sideMenu;
+
 		/**
 		 * Returns the name and the description of the DesignClass for Backoffice adjustments.
 		 *
 		 * @return string
 		 */
 		function getName() {
-			return "DropdownMenu";
+			return "DropdownSideMenu";
 		}
 		
 		/**
 		 *  Draw the menu
 		 *
 		 */
-		function getHeader() {
-		  return $this->draw();
+		function getFooter() {
+		  $out = '</td></tr></table></div>';
+		  return $out;
 		}
 
 	/**
   	 * Draw the menu.
   	 */
-  	function draw() {
-  	  global $cds;
+  	function getHeader() {
+  	  global $cds;  	  
+  	  
   	  // get the path of menues, e.g. if a thrid-level page is active you 
   	  // get the corresponding3rd/2nd/1st level menues
   	    	  
-  	  $this->pathToRoot = $this->cds->menu->getPathToRoot();
+  	  $this->pathToRoot = $this->cds->menu->getPathToRoot();  	   
+  	  // get the ids of the menuobjects
+  	  $this->pathToRootIds = array();
+  	  for ($i=0; $i<count($this->pathToRoot); $i++) {
+  	    array_push($this->pathToRootIds, $this->pathToRoot[$i]->menuId);	
+  	  }
+  	  
   	  // get the actice toplevelmenu
 	  // get the startpage
   	  $startMenu = $this->cds->menu->getMenuByPath("/");  	  
@@ -78,6 +90,12 @@
 
 	<SCRIPT type="text/javascript">cmDraw ("dsMenu", dsMenu, "hbr", cmTheme'.$this->themeName.', "Theme'.$this->themeName.'");</SCRIPT>';
     $out.= '</div><div id="mainmenuright"></div></div>';
+    $out.= '<br/>';
+    $out.= '<div style="display:block;clear:both;">';
+    $out.= '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
+    $out.= '<tr><td valign="top" width="150">';
+    $out.= $this->getSideMenu();
+    $out.= '</td><td width="20">&nbsp;</td><td valign="top">';
   	return $out;
   	}
   	
@@ -87,10 +105,10 @@
    *
    * @param menuObject $menuObject
    */
-  function drawMenu($menuObject) {
+  function drawMenu($menuObject, $level=0) {
     $title = $menuObject->getTitle();
- 	$link  = $menuObject->getLink();
- 	$isPopup = $menuObject->isPopup();
+ 	  $link  = $menuObject->getLink();
+ 	  $isPopup = $menuObject->isPopup();
 	
  	if ($isPopup)  {
 		$target = "'_blank'";
@@ -98,19 +116,31 @@
 		$target="null";
 	}
   	$out = "['', '$title', '$link', $target, ''";
-  	if ($menuObject->hasLowerLevel()) {
+  	
+  	if ($level<1) {
   	   $out.=',';
   		$lowerLevels = $menuObject->lowerLevel();
   	   for ($i=0; $i<count($lowerLevels); $i++)	{  	   	
-  	   	 $out.=$this->drawMenu($lowerLevels[$i]); 	
+  	   	 $out.=$this->drawMenu($lowerLevels[$i], $level+1); 	
 		 if (($i+1) < count($lowerLevels))  	  	
 		   $out.=',';
   	   }
+  	} else if ((in_array($menuObject->menuId, $this->pathToRootIds) && ($menuObject->hasLowerLevel()))) {
+  		  $this->sideMenu = $menuObject->lowerLevel();
   	}
   	
   	$out.= "]";
 	
     return $out;						   	
+   }
+   
+   
+   /**
+    *  Get the HTML for the sidemenu.
+    */
+   function getSideMenu() {
+   	 $out = "Sidemenu.";
+   	 return $out;
    }
   	
   	/**
