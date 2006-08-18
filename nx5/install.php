@@ -24,8 +24,8 @@
  require "_installer/classes_db.php";
  
  $installer = new Installer("_installer/styles.css");
- $installer->setTitle("N/X 4.1");
- $installer->setTitleHTML("N/X 4.1 Instalation");
+ $installer->setTitle("N/X 4.5");
+ $installer->setTitleHTML("N/X 4.5 Instalation");
  
  $page1 = new Page("Introduction");
  $page1->addWidget(new Information("", "./_installer/introduction.txt"));
