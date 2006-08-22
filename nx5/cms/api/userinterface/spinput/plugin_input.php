@@ -82,18 +82,19 @@
 			 	$ref->edit($this->form);		
 		   	}  
 		 } else {
-		     	$fkid=value("PGFK".$this->table.$this->column, "NUMERIC");
-			 if ($fkid=="0") { 
+		   	$fkid=value("PGFK".$this->table.$this->column, "NUMERIC");			
+		   	if ($fkid=="0") { 
 			   	$fkid = nextGUID();
-  			   	$ref = createPGNRef($this->pgntypeid, $fkid);		 	   
+  			   	$ref = createPGNRef($this->pgntypeid, $fkid);		 	     			   	
 			 } else {
-			    	$ref = createPGNRef($this->pgntypeid, $fkid);		 	   
+			    	$ref = createPGNRef($this->pgntypeid, $fkid);		 	   			    	
 			 }
 			 $ref->edit($this->form);
 			 $this->form->add(new Hidden("PGFK".$this->table.$this->column, $fkid));		
 			 global $page_state;
 			 if ($page_state == "processing") {
-			   	//addInsert($ref->management_table, $ref->pk_name, $fkid, "NUMBER");
+			   	// was commented out somewhat.
+			 	addInsert($ref->management_table, $ref->pk_name, $fkid, "NUMBER");
 			   	addInsert($table, $column, $fkid, "NUMBER");			 
 			 }
 		 }

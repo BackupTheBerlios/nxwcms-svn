@@ -48,9 +48,8 @@
 		   */
 		function draw($param = "") {
 			global $cds, $c;
-			require "phoogle.php";
-			$api = new PhoogleMap();
-			$api->setAPIkey($param);
+			require "nxgooglemapsapi.php";
+			$api = new NXGoogleMapsAPI($param);			
 			return $api;
 		}
 		
