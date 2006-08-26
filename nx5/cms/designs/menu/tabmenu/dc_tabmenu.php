@@ -154,7 +154,7 @@
   	 *
   	 * @param unknown_type $layout
   	 */
-  	function setupPage($layout)	{
+  	function setupPage(&$layout)	{
   			global $c;
   			
   			$acb  = reg_load('CDS/MENU/COLORACTIVE');

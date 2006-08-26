@@ -163,7 +163,7 @@
   	 *
   	 * @param unknown_type $layout
   	 */
-  	function setupPage($layout)	{
+  	function setupPage(&$layout)	{
   			global $c; 
   			$tag = '<link href="'.$layout->parent->docroot.'sys/designs/menu/standardmenu/menu.css" rel="stylesheet" type="text/css" media="screen, projection, print">'; 			  			
 			$layout->addToHeader($tag);

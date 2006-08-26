@@ -118,7 +118,7 @@
   	 *
   	 * @param unknown_type $layout
   	 */
-  	function setupPage($layout)	{ 
+  	function setupPage(&$layout)	{ 
   		global $cds; 						
   		$this->themeName = 'NX';
   		$out = '<SCRIPT type="text/javascript" LANGUAGE="JavaScript" SRC="'.$layout->parent->docroot.'sys/designs/menu/dropdownmenu/JSCookMenu.js"></SCRIPT>

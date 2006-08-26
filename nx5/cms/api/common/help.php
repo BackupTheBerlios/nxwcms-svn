@@ -183,6 +183,8 @@
        }
        zip_close($zip);
       }
+    } else {
+    	echo "php_zip extension is not installed.";
     }
   }
   
