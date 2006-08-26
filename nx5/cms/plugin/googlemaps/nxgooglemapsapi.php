@@ -289,7 +289,7 @@ function showGeopoint(longitude, latitude, htmlInfo, moveToPoint) {
 }
 
 function moveToGeopoint(index) {
-	map.panTo(geopoints[index][0], geopoints[index][1]);
+	map.panTo(new GLatLng(geopoints[index][0], geopoints[index][1]));
 }
 
 function moveToAddress(index) {
