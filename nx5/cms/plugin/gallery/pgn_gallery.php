@@ -82,6 +82,14 @@ class pgnGallery extends Plugin {
 			return $lang->get("no_preview", "No preview available.");
 		}
 	}
+	
+			/**
+		 * Checks if the record exists
+		 */		 
+		function exists() {	  	  
+		  $result = (getDBCell($this->management_table, "IMAGE_FOLDER_ID", $this->pk_name." = ".$this->fkid) > "100000");		    
+		  return $result;
+		}
 
 	/**
 		   * This function is used for drawing the html-code out to the templates.
@@ -90,13 +98,11 @@ class pgnGallery extends Plugin {
 		   * @return		string	HTML-CODE to be written into the template.
 		   */
 	function draw($param = "") {
-		global $c, $v, $variation, $cds, $pgnIG;
-
+		global $c, $v, $variation, $cds, $pgnIG;		
 		$flash = getDBCell("pgn_gallery", "GALLERYTYPE", "GALLERY_ID=".$this->fkid);
-		$imFolder = getDBCell("pgn_gallery", "IMAGE_FOLDER_ID", "GALLERY_ID=" .$this->fkid);
+		$imFolder = getDBCell("pgn_gallery", "IMAGE_FOLDER_ID", "GALLERY_ID=" .$this->fkid);		
 		$width = $param[1];
 		$height= $param[2];
-
 		if ($flash ==1) {
 
 			global $c, $splevel, $v;
@@ -139,6 +145,7 @@ class pgnGallery extends Plugin {
 
 				$imagePGNId = getDBCell("modules", "MODULE_ID", "UPPER(MODULE_NAME) ='IMAGE'");
 				$imageList = createDBCArray("content", "CID", "MODULE_ID = $imagePGNId AND CATEGORY_ID = $imFolder");
+				$drawn = false;
 				for ($i = 0; $i < count($imageList); $i++) {
 					$cid = $imageList[$i];
 
@@ -151,7 +158,6 @@ class pgnGallery extends Plugin {
 
 						$owidth = $iwidth;
 						$oheight = $iheight;
-
 						// Scaling down image.
 
 						$scale = 1;
@@ -176,10 +182,9 @@ class pgnGallery extends Plugin {
 						}
 						$pgnIG["count"]++;
 
+						if ($drawn) $content.=', ';
 						$content.= 'new Array("'.$filename.'", "'.$iwidth.'", "'.$iheight.'", "'.$alt.'",'.$owidth.','.$oheight.')';
-						if ($i+1 < count($imageList)) {
-							$content.= ',';
-						}
+						$drawn = true;
 					}
 				}
 				$pgnIG["count"]--;
@@ -234,13 +239,11 @@ class pgnGallery extends Plugin {
 			if (strtoupper($param[0]) == "BODY") {
 				// get first image.
 
-
-
 				$syspath = $c["host"].$cds->docroot.'sys/';
 				$content = '<div id="pgnIGContainer" style="width:'.$width.'px;height:'.$height.'px;">
+				<div id="pgnIGButtons" align="center"><a href="#" onClick="pgnIGPrev();return false;"/><img src="'.$syspath.'galprev.jpg" border="0" alt="prev"/></a>&nbsp;&nbsp;<a href="#" onClick="pgnIGNext(); return false;"/><img src="'.$syspath.'galnext.jpg" border="0" alt="next"/></a><br><br></div>
 			  <img onClick="popupImg();" style="cursor:pointer;" src="'.$pgnIG["src"].'" alt="'.$pgnIG["alt"].'" width="'.$pgnIG["width"].'" height="'.$pgnIG["height"].'" id="pgnIGImage"/>
-	          <div id="pgnIGDescription" align="center"><b>1/'.($pgnIG["count"]+1).'</b><br/>'.$pgnIG["alt"].'</div>
-			  <div id="pgnIGButtons" align="center"><a href="#" onClick="pgnIGPrev();return false;"/><img src="'.$syspath.'galprev.gif" border="0" alt="prev"/></a>&nbsp;&nbsp;<a href="#" onClick="pgnIGNext(); return false;"/><img src="'.$syspath.'galnext.gif" border="0" alt="next"/></a></div>
+	          <div id="pgnIGDescription" align="center"><b>1/'.($pgnIG["count"]+1).'</b><br/>'.$pgnIG["alt"].'</div>			  
 			  </div>';
 
 				return $content;
@@ -269,7 +272,6 @@ class pgnGallery extends Plugin {
 		  */
 	function createRecord() {
 		$createHandler = new ActionHandler("CREATE");
-
 		$createHandler->addDBAction("INSERT INTO $this->management_table ($this->pk_name, NAME) VALUES ($this->fkid, ' ')");
 		$createHandler->process("CREATE");
 	}

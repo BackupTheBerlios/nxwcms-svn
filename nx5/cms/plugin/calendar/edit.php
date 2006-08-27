@@ -1,6 +1,7 @@
 <?php
 
   require_once "../../config.inc.php";
+
   $auth = new auth("CALENDAR_EDIT");
   $page = new Page("Edit Calendars");
   $selcal = new SelectMenu($lang->get("calendar_select", "Select Calendar"), "calsel", "pgn_cal_calendars", "NAME", "CALID", "1");
@@ -24,9 +25,9 @@
 
 
         $addtext = ": " . getDBCell("pgn_cal_appointment", "TITLE", "APID = " . $oid);
-        $form = new stdEDForm($lang->get("cal_edit", "Edit Appointment"). $addtext);
-        $cond = $form->setExPK("pgn_cal_appointment", "APID");
-        $form->add(new LinkLabel("link1", $lang->get("cal_bto", "Back to Overview"), "plugin/calendar/edit.php?sid=$sid", "_self", "informationheader", 2));
+        $form = new stdEDForm($lang->get("cal_edit", "Edit Appointment"). $addtext);        
+        $form->addHeaderLink(crHeaderLink('Back', "plugin/calendar/edit.php?sid=$sid"));
+        $cond = $form->setExPK("pgn_cal_appointment", "APID");        
         $form->add(new TextInput($lang->get("title"), "pgn_cal_appointment", "TITLE", $cond, "type:text,width:300,size:64", "MANDATORY"));
         $form->add(new RichEditInput($lang->get("description"), "pgn_cal_appointment", "DESCRIPTION", $cond, "type:rich,width:350,size:6", ""));               
         $form->add(new DateInput($lang->get("startdate"), "pgn_cal_appointment", "STARTDATE", $cond, "param:form1", "MANDATORY"));
@@ -35,10 +36,9 @@
         $form->add(new TimeInput($lang->get("endtime"), "pgn_cal_appointment", "ENDTIME", $cond));
         $form->add(new SelectOneInput($lang->get("category"), "pgn_cal_appointment", "CATID", "pgn_cal_categories", "NAME","CATID", "CALID = ".$selcal->selected,  $cond));
         $form->add(new NonDisplayedValueOnInsert("pgn_cal_appointment", "CALID", $cond, $selcal->selected, "NUMBER"));
-        $form->add(new SubTitle("st", $lang->get("additional_link", "Additional Link"), 3));
-        $form->add(new PluginInput("", "pgn_cal_appointment", "LINK", $cond, "LINK", $form));
-        $form->add(new SubTitle("st", $lang->get("additional_image", "Additional Image"), 3)); 
-        $form->add(new LibrarySelect("pgn_cal_appointment", "IMAGE", $cond, "IMAGE", 3));
+        $form->add(new SubTitle("st", $lang->get("Report", "Veranstaltungsbericht"), 3));        
+        $form->add(new RichEditInput($lang->get("report"), "pgn_cal_appointment", "REPORT", $cond, "type:rich,width:350,size:6", ""));           
+        $form->add(new PluginInput("", "pgn_cal_appointment", "GALLERY", $cond, "GALLERY", $form));
         $form->registerActionHandler($deleteHandler);
     }
     $page->add($form);
@@ -48,4 +48,5 @@
   $page->addMenu($selcal);
   $page->addMenu($filtermenu);
   $page->draw();
+  echo $errors;
 ?>

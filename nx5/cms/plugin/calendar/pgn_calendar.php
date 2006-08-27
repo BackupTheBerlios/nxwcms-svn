@@ -100,7 +100,8 @@
 		 * Standard constructor
 		 * @param string name of the caleder
 		 */
-		function CDS_Calendar	($calendar) {
+		function CDS_Calendar	($calendar) {		  
+		  session_register("calendarid");
 		  $this->calendar = strtoupper($calendar); 	
 		  if ($this->calendar != "") 
 		    $this->calendarId = getDBCell("pgn_cal_calendars", "CALID", "UPPER(NAME) = \"".$this->calendar."\"");		 
@@ -119,12 +120,20 @@
 		 * Draws a dropdown to select one calendar and tries to get the calendarId of the active Calendar.
 		 */
 		function drawCalendarSelector($selectButton = "Go") {
+			global $calendarid;
 			$calId = value("calendar", "NUMERIC", "0");
 			$calendars = $this->getCalendars();
 			
-			if ($calId == '0')
-			  $calId = $calendars[0][1];
+			if ($calId == '0') {
+			  if (isset($_SESSION["calendarid"])) {			  	
+			  	$calId = $_SESSION["calendarid"];
+			  } else {
+				$calId = $calendars[0][1];				
+			  }
+			}
 			  
+			$_SESSION["calendarid"] = $calId;
+			
 			echo '<form name="calendarform" method="POST">';
 			echo '<select name="calendar" id="calendar">';
 			for ($i=0; $i < count($calendars); $i++) {
@@ -147,7 +156,7 @@
 		 * @param integer ID of the actual calendar
 		 */
 		function setCalendar($calId) {
-			 $this->calendarId; 
+			 $this->calendarId = $calId; 
 		}
 		
 		/**
@@ -176,7 +185,7 @@
 		 * @param string endtime Endtime of the query or 23:59:59 if left empty
 		 * @param number limit of the events.
 		 */
-		function getEvents($categories = "ALL", $startdate="", $enddate="", $starttime="", $endtime="", $limit=20) {
+		function getEvents($categories = "ALL", $startdate="", $enddate="", $starttime="", $endtime="", $limit=50) {
 		  global $db, $cds;
 		  
 		  $result = array();
@@ -186,7 +195,11 @@
 		  if ($starttime=="") $starttime = "00:00:00";
 		  if ($endtime == "") $endtime = "23:59:00";
 		  
-		  $whereClause = "CALID = ".$this->calendarId." AND STARTDATE >= '$startdate' AND STARTTIME >= '$starttime' AND ENDTIME <= '$endtime'";
+		  $whereClause = "";
+		  if ($this->calendarId != -1)
+		    $whereClause.="CALID = ".$this->calendarId." AND ";
+		  
+		  $whereClause.= "STARTDATE >= '$startdate' AND STARTTIME >= '$starttime' AND ENDTIME <= '$endtime'";
 		  if ($enddate != "") $whereClause.= " AND ENDDATE <= '$enddate'";
 		  if ($categories != "ALL" && is_array($categories)) {
 		     $catsel = "";
@@ -196,23 +209,27 @@
 		     }	
 		     $whereClause.= " AND ($catsel)";
 		  }
+		  
+		 
 		  $whereClause.=" ORDER BY STARTDATE, STARTTIME ASC LIMIT 0,$limit";
 		  $sql = "SELECT * FROM pgn_cal_appointment WHERE ".$whereClause;
 		  $query = new query($db, $sql);
 		  $parser = new NX2HTML($variation);
 		  while ($query->getrow()) {
-		  	$event = array("TITLE" => $query->field("TITLE"), "DESCRIPTION" => applyFilterPlugins($parser->parseText($query->field("DESCRIPTION"))), "STARTDATE" => $query->field("STARTDATE"), "STARTTIME" => $query->field("STARTTIME"), "ENDDATE" => $query ->field("ENDDATE"), "ENDTIME" => $query->field("ENDTIME"), "APID" => $query->field("APID"), "IMAGE" => $query->field("IMAGE"), "LINK" => $query->field("LINK"), "CATID" => $query->field("CATID"));	
-		  	
-		  	
-		  	if ($event["IMAGE"] != "" && $event["IMAGE"] != "0") {
-		  		if ($cds->level == _LIVE) $event["IMAGE"] = getDBCell("state_translation", "OUT_ID", "IN_ID = ".$event["IMAGE"]." AND LEVEL=10");
-		  		$event["IMAGE"] = getLibraryContent($event["IMAGE"], $cds->variation, "ALL");
-		  	}
-		  	
-		  	if ($event["LINK"] != "" && $event["LINK"] != "0") {
-		  		$event["LINK"] = getPluginContent($event["LINK"], "LINK", "ALL");
-		  	}
-
+		  		$compareDate = date('Y-m-d', strtotime($query->field("STARTDATE")));
+			    $date = date('Y-m-d');
+			    $over = $compareDate < $date;
+		  		$event = array(	"TITLE" => $query->field("TITLE"), 
+		  					"DESCRIPTION" => applyFilterPlugins($parser->parseText($query->field("DESCRIPTION"))), 
+		  					"STARTDATE" => date('d.m.Y', strtotime($query->field("STARTDATE"))), 
+		  					"STARTTIME" => substr($query->field("STARTTIME"),0,5), 
+		  					"ENDDATE" => date('d.m.Y', strtotime($query ->field("ENDDATE"))), 
+		  					"ENDTIME" =>  substr($query->field("ENDTIME"),0,5), 
+		  					"APID" => $query->field("APID"), 
+		  					"REPORT" => applyFilterPlugins($parser->parseText($query->field("REPORT"))), 
+		  					"GALLERY" => $query->field("GALLERY"), 
+		  					"OVER" => $over,
+		  					"CATID" => $query->field("CATID"));	
 		  	array_push($result, $event);
 		  }
 		  $query->free();
@@ -246,19 +263,24 @@
 		  	$query = new query($db, $sql);
 		  	$parser= new NX2HTML($variation);
 		  	while ($query->getrow()) {
-		  		$event = array("TITLE" => $query->field("TITLE"), "DESCRIPTION" => applyFilterPlugins($parser->parseText($query->field("DESCRIPTION"))), "STARTDATE" => $query->field("STARTDATE"), "STARTTIME" => $query->field("STARTTIME"), "ENDDATE" => $query ->field("ENDDATE"), "ENDTIME" => $query->field("ENDTIME"), "APID" => $query->field("APID"), "IMAGE" => $query->field("IMAGE"), "LINK" => $query->field("LINK"), "CATID" => $query->field("CATID"));	
-		  	
-		  	
-		  		if ($event["IMAGE"] != "" && $event["IMAGE"] != "0") {
-		  			if ($cds->level == _LIVE) $event["IMAGE"] = getDBCell("state_translation", "OUT_ID", "IN_ID = ".$event["IMAGE"]." AND LEVEL=10");
-		  			$event["IMAGE"] = getLibraryContent($event["IMAGE"], $cds->variation, "ALL");
-		  		}
-		  	
-		  		if ($event["LINK"] != "" && $event["LINK"] != "0") {
-		  			$event["LINK"] = getPluginContent($event["LINK"], "LINK", "ALL");
-		  		}
-
+		  		$compareDate = date('Y-m-d', strtotime($query->field("STARTDATE")));
+			    $date = date('Y-m-d');
+			    $over = $compareDate < $date;
+		  		$event = array(	"TITLE" => $query->field("TITLE"), 
+		  					"DESCRIPTION" => applyFilterPlugins($parser->parseText($query->field("DESCRIPTION"))), 		  					
+		  					"STARTDATE" => date('d.m.Y', strtotime($query->field("STARTDATE"))), 
+		  					"STARTTIME" => substr($query->field("STARTTIME"),0,5), 
+		  					"ENDDATE" => date('d.m.Y', strtotime($query ->field("ENDDATE"))), 
+		  					"ENDTIME" =>  substr($query->field("ENDTIME"),0,5), 
+		  					"UNIXSTART" => $query->field("STARTDATE") .' '. $query->field("STARTTIME"), 
+		  					"UNIXEND" => $query->field("ENDDATE") .' '. $query->field("ENDTIME"), 
+		  					"APID" => $query->field("APID"), 
+		  					"REPORT" => applyFilterPlugins($parser->parseText($query->field("REPORT"))), 
+		  					"GALLERY" => $query->field("GALLERY"), 
+		  					"OVER" => $over,
+		  					"CATID" => $query->field("CATID"));			  					
 			  }
+			  			  
 			$query->free();
 			return $event;
 		 }
