@@ -34,6 +34,8 @@
  * GOverviewMapControl - a collapsible overview map in the corner of the screen
  */
  
+  define(GoogleMapsKey, 'ABQIAAAAI7EHEogbq95GR66oMlqy5xRCkSX4mlgNKHDfZux57JUW-i7ZVBStGy5XgGH0sbJhy_Jt97s1TD4-pQ'); 
+  
   define( GLargeMapControl 		, 'GLargeMapControl()');
   define( GSmallMapControl 		,	 'GSmallMapControl()');
   define( GSmallZoomControl 	, 'GSmallZoomControl()');
@@ -63,6 +65,10 @@ class NXGoogleMapsAPI {
   var $centerX;
   var $centerY;
   
+  // DragMarker
+  var $dragX;
+  var $dragY;
+  
   // Address Array
   var $addresses;
   
@@ -78,8 +84,10 @@ class NXGoogleMapsAPI {
    *
    * @param string $apiKey The Google Maps API-Key for your domain.
    */
-  function NXGoogleMapsAPI($apiKey) {
+  function NXGoogleMapsAPI($apiKey="") {
     $this->apiKey = $apiKey;
+    if ($this->apiKey == "") 
+      $this->apiKey = GoogleMapsKey;
     $this->_initialize();
   }
   
@@ -95,6 +103,17 @@ class NXGoogleMapsAPI {
   function addAddress($address, $htmlinfo, $setCenter=true) {
     $ar = array(addSlashes($address), addSlashes($htmlinfo), $setCenter);
     array_push($this->addresses, $ar);	
+  }
+  
+  /**
+   * Add a dragable marker to the map. Only one Drag-Marker is allowed!
+   *
+   * @param integer $longitude
+   * @param integer $latitude;
+   */
+  function addDragMarker($longitude, $latitude) {
+    $this->dragX = $longitude;
+    $this->dragY = $latitude;	
   }
   
   /**
@@ -130,6 +149,24 @@ class NXGoogleMapsAPI {
   	 if ($zoomFactor > -1 && $zoomFactor < 18) {
   	   $this->zoomFactor = $zoomFactor;
   	 }
+  }
+  
+  /**
+   * Set the width of the map
+   *
+   * @param integer $width The Height in pixels
+   */
+  function setWidth($width) {
+    $this->width = $width;
+  }
+  
+  /**
+   * Set the height of the map
+   *
+   * @param integer $height The Height in pixels
+   */
+  function setHeight($height) {
+  	  $this->height = $height;
   }
   
   /**
@@ -195,7 +232,11 @@ class NXGoogleMapsAPI {
 <script type="text/javascript">
 //<![CDATA[
 var map = null;
-var geocoder = null;';
+var geocoder = null;
+var center = null;
+var updateX = null;
+var updateY = null;
+var marker = null;';
       
 			 // Add Geopoints Array
 			 $out.="\n";
@@ -293,18 +334,63 @@ function moveToGeopoint(index) {
 }
 
 function moveToAddress(index) {
- if (geocoder) {
- 
+  moveToAddressEx(addresses[index][0]); 
+}
+
+function moveToAddressEx(addressString) {
+  if (geocoder) { 
    geocoder.getLatLng(
-     addresses[index][0],
-     function(point) {
+     addressString,
+     function(point) {       
        if (!point) {
-         alert("Location not found:" + address);
-       } else {              
-          map.panTo(point);                  
+         alert("Location not found:" + addressString);
+       } else {                                    
+          center = point;
+          map.panTo(point);           
        }
      });    
   }
+}
+
+function moveToAddressDMarker(addressString) {
+  if (geocoder) { 
+   geocoder.getLatLng(
+     addressString,
+     function(point) {       
+       if (!point) {
+         alert("Location not found:" + addressString);
+       } else {                                    
+          center = point;
+          setZoomFactor(14);
+          map.panTo(point);  
+          addDragableMarker();         
+       }
+     });    
+  }
+}
+
+function setZoomFactor(factor) {
+	  map.setZoom(factor);
+}
+
+function addDragableMarker() {
+  if (!marker) {
+    marker = new GMarker(center, {draggable: true});
+    map.addOverlay(marker);
+       
+    GEvent.addListener(marker, "dragend", function() {      
+      var tpoint =  marker.getPoint();      
+      document.getElementById(updateX).value = tpoint.lat();
+      document.getElementById(updateY).value = tpoint.lng();              
+  });
+
+  } else {
+  	marker.setPoint(center);  	 
+  }
+  
+  var tpoint =  marker.getPoint();      
+  document.getElementById(updateX).value = tpoint.lat();
+  document.getElementById(updateY).value = tpoint.lng();              
 }
     	
 function initNXGMap(mapElement) {
@@ -325,12 +411,30 @@ function initNXGMap(mapElement) {
       	$out.= '    map.setCenter(new GLatLng('.$this->centerX.', '.$this->centerY.'), '.$this->zoomFactor.');'."\n";      	
       }
       
+      $out.='updateX="coordX"; updateY="coordY";';
+      
+      // Draw Dragmarker
+      if (($this->dragX != 1000) && ($this->dragY != -1000)) {
+      	$out.='
+      	  center = new GLatLng('.$this->dragY.','.$this->dragX.');
+      	  map.setCenter(center, '.$this->zoomFactor.');
+      	  marker = new GMarker(center, {draggable: true});
+    			map.addOverlay(marker);
+       
+    			GEvent.addListener(marker, "dragend", function() {      
+      			var tpoint =  marker.getPoint();      
+      			document.getElementById(updateX).value = tpoint.lat();
+      			document.getElementById(updateY).value = tpoint.lng();              
+  				});
+      	';
+      }
+      
       // Add AddressPoints
 			$out.="    showAddresses();\n";  
 			// Add GeoPoints
 			$out.="    showGeopoints();\n";
           
-     $out.="\n";
+     $out.="\n";     
      $out.=' 	}
     	}
      //]]>
@@ -343,12 +447,14 @@ function initNXGMap(mapElement) {
    * Is automatically called by the constructor.
    */
   function _initialize() {
-  	$this->width 			= 600;
-  	$this->height 		= 450;
+  	$this->width 			= 800;
+  	$this->height 		= 600;
   	$this->divId    	= 'map';
   	$this->zoomFactor = 14;
   	$this->centerX    = -1000;
   	$this->centerY    = -1000;
+  	$this->dragX			= -1000;
+  	$this->dragY			= -1000;
   	$this->addresses  = array();
   	$this->geopoints  = array();
   	$this->controls   = array();

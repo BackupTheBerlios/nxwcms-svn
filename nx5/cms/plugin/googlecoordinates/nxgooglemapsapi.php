@@ -34,7 +34,7 @@
  * GOverviewMapControl - a collapsible overview map in the corner of the screen
  */
  
-  define(GoogleMapsKey, 'ABQIAAAA2WqJFnImEPybFaMuQHg6XBT2yXp_ZAY8_ufC3CFXhHIE1NvwkxRbKTOc4LxhqLxdaj9EL7ukGnz4zg'); 
+  define(GoogleMapsKey, 'ABQIAAAAI7EHEogbq95GR66oMlqy5xRCkSX4mlgNKHDfZux57JUW-i7ZVBStGy5XgGH0sbJhy_Jt97s1TD4-pQ'); 
   
   define( GLargeMapControl 		, 'GLargeMapControl()');
   define( GSmallMapControl 		,	 'GSmallMapControl()');
@@ -330,7 +330,7 @@ function showGeopoint(longitude, latitude, htmlInfo, moveToPoint) {
 }
 
 function moveToGeopoint(index) {
-	map.panTo(geopoints[index][0], geopoints[index][1]);
+	map.panTo(new GLatLng(geopoints[index][0], geopoints[index][1]));
 }
 
 function moveToAddress(index) {

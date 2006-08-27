@@ -50,6 +50,7 @@
 		var $onLoad="";
 		var $tipp="";
 		var $jsContainer="";
+		var $headerPayload = "";
 		
 		/**
 		   * standard constructor
@@ -412,7 +413,7 @@
 			echo '<link rel="stylesheet" type="text/css" href="' . $c["docroot"] . 'css/styles.css">';		
 			
 			echo $this->js_tag;			
-			
+			echo $this->headerPayload;
 			echo "</head>\n";
 			echo "<body leftmargin=\"5\" topmargin=\"5\" marginheight=\"0\" marginwidth=\"0\" onLoad=\"$this->onLoad\" $this->bodyAttributes>\n";
 
