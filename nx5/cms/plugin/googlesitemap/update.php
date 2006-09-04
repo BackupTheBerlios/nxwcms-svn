@@ -41,13 +41,13 @@
   /**
    * Add a page to the Sitemap and start adding the children
    */
-   function addWebsite($startNode, $map) {
+   function addWebsite($startNode, &$map) {
      global $c, $variations;          
      $childs = createDBCArray("sitemap", "MENU_ID", "PARENT_ID=".$startNode." AND VERSION=10 AND DELETED=0");     
      for ($i=0; $i < count($childs); $i++) {
        for ($j=0; $j< count($variations); $j++) {
          if (!isMenuExpired($childs[$i], $variations[$j])) {
-           $url = $c["host"].$c["docroothtml"].getPageURL($childs[$i], $variations[$j]);
+           $url = $c["livehost"].$c["livedocroot"].getPageURL($childs[$i], $variations[$j]);
            $map->AddURL($url);                   
          }
          addWebsite($childs[$i], $map);
