@@ -144,8 +144,11 @@ class pgnGallery extends Plugin {
 				$syspath = $c["host"].$cds->docroot.'sys/';
 
 				$imagePGNId = getDBCell("modules", "MODULE_ID", "UPPER(MODULE_NAME) ='IMAGE'");
-				$imageList = createDBCArray("content", "CID", "MODULE_ID = $imagePGNId AND CATEGORY_ID = $imFolder");
-				$drawn = false;
+				$version=0;
+				if (! $cds->is_development) $version=10;
+				$imageList = createDBCArray("content", "CID", "MODULE_ID = $imagePGNId AND CATEGORY_ID = $imFolder AND DELETED=0 AND VERSION=".$version);
+
+			$drawn = false;
 				for ($i = 0; $i < count($imageList); $i++) {
 					$cid = $imageList[$i];
 
@@ -241,7 +244,7 @@ class pgnGallery extends Plugin {
 
 				$syspath = $c["host"].$cds->docroot.'sys/';
 				$content = '<div id="pgnIGContainer" style="width:'.$width.'px;height:'.$height.'px;">
-				<div id="pgnIGButtons" align="center"><a href="#" onClick="pgnIGPrev();return false;"/><img src="'.$syspath.'galprev.jpg" border="0" alt="prev"/></a>&nbsp;&nbsp;<a href="#" onClick="pgnIGNext(); return false;"/><img src="'.$syspath.'galnext.jpg" border="0" alt="next"/></a><br><br></div>
+				<div id="pgnIGButtons" align="center"><a href="#" onClick="pgnIGPrev();return false;"/><img src="'.$syspath.'galprev.gif" border="0" alt="prev"/></a>&nbsp;&nbsp;<a href="#" onClick="pgnIGNext(); return false;"/><img src="'.$syspath.'galnext.gif" border="0" alt="next"/></a><br><br></div>
 			  <img onClick="popupImg();" style="cursor:pointer;" src="'.$pgnIG["src"].'" alt="'.$pgnIG["alt"].'" width="'.$pgnIG["width"].'" height="'.$pgnIG["height"].'" id="pgnIGImage"/>
 	          <div id="pgnIGDescription" align="center"><b>1/'.($pgnIG["count"]+1).'</b><br/>'.$pgnIG["alt"].'</div>			  
 			  </div>';
@@ -306,7 +309,7 @@ class pgnGallery extends Plugin {
 
 		// Launch Images.....
 		$mod = getDBCell("modules", "MODULE_ID", "UPPER(MODULE_NAME) = 'IMAGE'");
-		$images = createDBCArray("content", "CID", "CATEGORY_ID = " . $folder . " AND DELETED=0 AND MODULE_ID = $mod");
+		$images = createDBCArray("content", "CID", "CATEGORY_ID = " . $folder . " AND DELETED=0 AND AND VERSION=0 AND MODULE_ID = $mod");
 
 		for ($i = 0; $i < count($images); $i++) {
 			$image = $images[$i];
