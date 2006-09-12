@@ -34,7 +34,7 @@
  * GOverviewMapControl - a collapsible overview map in the corner of the screen
  */
  
-  define(GoogleMapsKey, 'ABQIAAAAI7EHEogbq95GR66oMlqy5xRCkSX4mlgNKHDfZux57JUW-i7ZVBStGy5XgGH0sbJhy_Jt97s1TD4-pQ'); 
+  define(GoogleMapsKey, '<your api key here>'); 
   
   define( GLargeMapControl 		, 'GLargeMapControl()');
   define( GSmallMapControl 		,	 'GSmallMapControl()');
@@ -108,8 +108,8 @@ class NXGoogleMapsAPI {
   /**
    * Add a dragable marker to the map. Only one Drag-Marker is allowed!
    *
-   * @param integer $longitude
-   * @param integer $latitude;
+   * @param integer $longitude Longitude of the point
+   * @param integer $latitude  Lattitude of the point
    */
   function addDragMarker($longitude, $latitude) {
     $this->dragX = $longitude;
@@ -132,7 +132,13 @@ class NXGoogleMapsAPI {
   /**
    * Adds a control to the map
    *
-   * @param control Control-Type. Allowed are the constants described in the header of this file.
+   * @param control Control-Type. Allowed are the constants 
+   * GLargeMapControl - a large pan/zoom control used on Google Maps. Appears in the top left corner of the map.
+   * GSmallMapControl - a smaller pan/zoom control used on Google Maps. Appears in the top left corner of the map.
+   * GSmallZoomControl - a small zoom control (no panning controls) used in the small map blowup windows used to display driving directions steps on Google Maps.
+   * GScaleControl - a map scale
+   * GMapTypeControl - buttons that let the user toggle between map types (such as Map and Satellite)
+   * GOverviewMapControl - a collapsible overview map in the corner of the screen
    *      
    */      
   function addControl($control) {
@@ -143,7 +149,7 @@ class NXGoogleMapsAPI {
    * Set the ZoomFactor
    * The ZoomFactor is a value between 0 and 17
    *
-   * @param integer $zoomFactor
+   * @param integer $zoomFactor Value of the Zoom-Factor
    */
   function setZoomFactor($zoomFactor) {
   	 if ($zoomFactor > -1 && $zoomFactor < 18) {
@@ -184,7 +190,7 @@ class NXGoogleMapsAPI {
   /**
    * Returns the HTML-Code, which must be placed within the <HEAD>-Tags of your page.
    *
-   * @returns string
+   * @returns string The Code for the <Head>-Tag
    */
   function getHeadCode() {
   	$out = '
@@ -201,7 +207,7 @@ class NXGoogleMapsAPI {
   /**
    * Get the BodyCode and draw the map.
    *
-   * @returns string
+   * @returns string Returns the code which is to be placed wight the <body>-tags.
    */
   function getBodyCode() {
   	$out = '<div id="'.$this->divId.'" style="width:'.$this->width.'px;height:'.$this->height.'px;"></div>';  	
@@ -211,7 +217,7 @@ class NXGoogleMapsAPI {
   /**
    * Get the code, which must be passed to the <body>-attribute onLoad.
    *
-   * @returns string
+   * @returns string The onload Code
    */
   function getOnLoadCode() {
   	$out = "initNXGMap(document.getElementById('$this->divId'));";
@@ -409,6 +415,8 @@ function initNXGMap(mapElement) {
       // Center the map
       if (($this->centerX != -1000) && ($this->centerY != -1000)) {      	
       	$out.= '    map.setCenter(new GLatLng('.$this->centerX.', '.$this->centerY.'), '.$this->zoomFactor.');'."\n";      	
+      } else {
+      	$out.= '    map.setCenter(new GLatLng(0,0),1);'."\n";      	
       }
       
       $out.='updateX="coordX"; updateY="coordY";';

@@ -22,16 +22,8 @@
 	  $title = "";	
 	}
 	
-	$form = new stdEDForm($lang->get("spm_edit")." - ".$title, "i_scheme.gif");
-	$cond = $form->setPK("sitepage_master", "SPM_ID");
-		
-	if ($oid != "") {
-		$form->addHeaderLink(crHeaderLink($lang->get("edit_spm", "Edit template properties"), "modules/pagetemplate/sitepage_master.php?sid=$sid&oid=$oid&go=update"));
-		$filename = getDBCell("sitepage_master", "TEMPLATE_PATH", "SPM_ID = $oid");
-		$form->add(new PHPEditor("phpedit", $filename, "standard"));
-	}
-
-	$form->forbidDelete(true);
+	$form = new MessageForm('Functionality Not Available in Demo', 'Because of security and safety concerns, this function is not available in the N/X WCMS Online Demo.', '');
+	
 
 	$page->addMenu($filtermenu);
 	$page->add($form);
