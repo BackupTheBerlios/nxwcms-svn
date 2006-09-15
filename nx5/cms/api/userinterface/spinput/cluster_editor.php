@@ -69,7 +69,7 @@ class ClusterEditor extends DBO {
 	 */
 	function initialize() {
 	  global $db, $auth, $aclf, $clusterEditState;
-		
+			
 		// switch wrappers to Editmode
 		$clusterEditState = true;
 		
@@ -146,7 +146,9 @@ class ClusterEditor extends DBO {
 	  
 	  // sync the cluster variation
 	  syncCluster($this->clid);	  
-	  	  
+	  
+	  // ensure correct CLT-ID
+	  $this->cltid = getDBCell("cluster_node", "CLT_ID", "CLNID=".$this->clnid);	  
 	}
 }
 	 
