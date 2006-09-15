@@ -79,7 +79,7 @@
 			global $errors, $page_state, $lang, $page_action, $oids, $oid, $filter_column, $filter_rule, $filter_page, $db, $sid;
 
 			$this->check();
-			if ($errors == "" && $page_state == "processing" && $page_action != "DELETE") {
+			if ($errors == "" && $page_state == "processing" && $page_action != "DELETE" && (value("changevariation") == "0" || value("changevariation") == "" )) {
 				for ($i = 0; $i < count($this->container); $i++) {
 					$this->container[$i]->process();
 				}

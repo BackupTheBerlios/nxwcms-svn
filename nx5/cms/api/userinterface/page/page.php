@@ -410,8 +410,7 @@
 			echo "<meta http-equiv=\"Expires\" content=\"0\">\n";
 			echo '<meta http-equiv="Content-Type" content="'.$c["standardencoding"].'">'."";		
 			$this->draw_tab_css();
-			echo '<link rel="stylesheet" type="text/css" href="' . $c["docroot"] . 'css/styles.css">';		
-			
+			echo '<link rel="stylesheet" type="text/css" href="' . $c["docroot"] . 'css/styles.css">';					
 			echo $this->js_tag;			
 			echo $this->headerPayload;
 			echo "</head>\n";

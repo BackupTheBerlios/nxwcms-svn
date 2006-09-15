@@ -77,7 +77,7 @@
 			$this->name = $query->field("NAME");
 			$this->plugin = $query->field("FKID");
 			$query->free();
-			$this->editState = (($this->action == $lang->get("edit_all")) || ($this->action == $lang->get("save") || $this->action == $lang->get("save_back") || $this->action == "editsingle" || value("status") == "editsingle") && $this->action != $lang->get("back")) || $isArticle;
+			$this->editState = (($this->action == $lang->get("edit_all")) || ($this->action == $lang->get("save") || $this->action == $lang->get("save_back") || $this->action == "editsingle" || value("status") == "editsingle") && $this->action != $lang->get("back")) || $isArticle || $forceEditAll;
 			if ($isExternal) {
 			  $this->developer = true;
 			  $this->editor    = true;	

@@ -43,4 +43,5 @@
     require_once $c["path"] . "api/userinterface/spinput/plugin_input_variation.php";
     require_once $c["path"] . "api/userinterface/spinput/iframeobject.php";  	
     require_once $c["path"] . "api/userinterface/spinput/subcategory_selector.php";  	
+    require_once $c["path"] . "api/userinterface/spinput/cluster_editor.php";  	
 ?>

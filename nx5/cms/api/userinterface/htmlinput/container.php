@@ -27,7 +27,7 @@
 	 * Base for all Widgets that need to use container functions.
 	 * @package WebUserInterface
 	 */
-	class Container {
+	class Container  extends WUIInterface{
 		var $columns;
 
 		var $container = null;

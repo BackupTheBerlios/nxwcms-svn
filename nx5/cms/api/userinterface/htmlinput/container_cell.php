@@ -26,7 +26,7 @@
 	 * Container in form of a table cell that can take other objects.
 	 * @package WebUserInterface
 	 */
-	class ContainerCell {
+	class ContainerCell extends WUIInterface {
 		var $columns;
 
 		var $container = null;

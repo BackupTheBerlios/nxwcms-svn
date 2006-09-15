@@ -92,8 +92,24 @@
 		function add(&$item) {
 			$next = count($this->container);
 			$this->container[$next] = &$item;
+			$item->setParent($this);
+			$item->initialize();
 		}
 
+		
+		/**
+		 * Add the variation(language)-selector to the form
+		 */
+		function enableVariationSelector() {
+			global $oid, $go, $page_action, $page_state;
+			$this->buttonbar->setVariationSelector(createNameValueArrayEx("variations", "NAME", "VARIATION_ID", "DELETED=0", "ORDER BY NAME ASC"), variation());
+			$this->add(new Hidden("goon", $page_action));
+			if (isset($oid)) {
+			  $this->add(new Hidden("oid", $oid));
+			}
+			if (value("changevariation") != "0") $page_state="";
+		}
+		
 		/**
 		 * Set the Primary Key and the table of one of the form objects.
 		 * As result you will get a where-condition, you can use as row_identifier

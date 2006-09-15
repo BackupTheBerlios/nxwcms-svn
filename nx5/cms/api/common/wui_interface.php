@@ -32,6 +32,9 @@
 	 * Basic interface all classes should implement who are drawing with the containers.
 	 */
 	class WUIInterface {
+		
+		var $parentForm = null;
+		
 		function WUIInterface() { }
 
 		/**
@@ -53,5 +56,19 @@
 		   * Call process. For compatibility only
 		   */
 		function proccess() { $this->proccess(); }
+		
+		/**
+		 * Set a backlink to the parent container form
+		 * @param object $par Parent Container Object
+		 */
+		 function setParent(&$par) {
+		   $this->parentForm = $par;			 	
+		 }
+		 
+		 /**
+		  * Initialize is called by the form directly after adding the
+		  * a WUIInterface based object to the form
+		  */
+		 function initialize() {}
 	}
 ?>

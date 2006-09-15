@@ -107,7 +107,7 @@
 			// load the data of the field.
 			global $page_state, $page_action;
 
-			if ($page_state == "processing" && (value("changevariation") != "GO") && ! ($forceLoadFromDB=="yes")) {
+			if ($page_state == "processing" && (value("changevariation") == "0") && ! ($forceLoadFromDB=="yes")) {
 				//$fieldname = $this->table."_".$this->column;
 				$fieldname = $this->name;
 
@@ -154,12 +154,12 @@
 		 * Saveset.
 		 */
 		function process() {
-			global $page_action;
+			global $page_action;			
 			if ($page_action == "INSERT")
 				addInsert($this->table, $this->column, $this->value, $this->datatype);
 
 			if ($page_action == "UPDATE") {
-				addUpdate($this->table, $this->column, $this->value, $this->row_identifier, $this->datatype);
+				addUpdate($this->table, $this->column, $this->value, $this->row_identifier, $this->datatype);				
 			}
 		}
 
