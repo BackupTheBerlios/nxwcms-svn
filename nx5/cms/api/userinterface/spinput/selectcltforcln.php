@@ -40,6 +40,7 @@ class SelectCLTForCLN extends DBO {
    * @param string $column
    * @param string $row_identifier
    * @param string $cltfilter Whereclause for selecting the clustertemplates
+   * @param string $namecolumn Column in database, where the title of the record ist stored. Used for setting name of object.
    */   
   function SelectCLTForCLN($label, $table, $column, $row_identifier, $cltFilter="1", $nameColumn="") {    
     DBO::DBO($label, $table, $column, $row_identifier, "", "NUMBER");

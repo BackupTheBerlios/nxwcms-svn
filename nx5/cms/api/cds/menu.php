@@ -228,6 +228,14 @@
 		}	
 		return $path;
 	}
+	
+	/**
+	 * Sets the menuobject of the startpage
+	 *
+	 */
+	function getStartPage() {
+		return $this->getMenuByPath("/");
+	}
 	 	
 	 	/**
 		 * Returns a menu-object with the menu corresponding to the pageId

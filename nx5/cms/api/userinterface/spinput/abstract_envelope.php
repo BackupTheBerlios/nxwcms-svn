@@ -57,8 +57,8 @@
 
 		function AbstractEnvelope($clti, $cl, $forceEditAll=false, $isExternal = false) {
 			global $db, $lang, $aclf, $isArticle;
-      $this->forceEditAll = $forceEditAll;
-      $this->clti = $clti;
+      		$this->forceEditAll = $forceEditAll;
+      		$this->clti = $clti;
 			$this->cl = $cl;
 			$this->action = value("action");
             $this->saction = value("saction");
@@ -250,7 +250,7 @@
 					$container = new HtmlContainer('box', 'headbox',2);
 					// Edit-Button
 
-					if ($this->editor) {
+					if ($this->editor && ! $this->editState) {
 					    $menuLabel = crLink($lang->get("edit"), $doc . "?sid=$sid&oid=$oid&action=editsingle&eid=" . $this->members[0][1], "box");
 					} else {
 						$menuLabel = '&nbsp;';						

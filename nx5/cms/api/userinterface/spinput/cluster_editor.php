@@ -74,12 +74,10 @@ class ClusterEditor extends DBO {
 		$clusterEditState = true;
 		
 		// disable acls
-		//if (!isset($aclf)) $aclf = $auth;
-	  
+		//if (!isset($aclf)) $aclf = $auth;	
 	  // GET CONTENT OF THE CLUSTER		  
 	  $plugins = null;
-	  $types = null;
-   
+	  $types = null;   
 	  // get the structure of the content.
 	  $sql = "SELECT CLTI_ID, CLTITYPE_ID FROM cluster_template_items WHERE CLT_ID = $this->cltid AND FKID<>0 ORDER BY POSITION ASC";	
 	  $query = new query($db, $sql);

@@ -51,13 +51,15 @@
 			$form->add($oname);
 			$form->add(new SelectOneInput($lang->get("metatemplate"), "cluster_templates", "MT_ID", "meta_templates", "NAME", "MT_ID", "INTERNAL=0 AND VERSION=0", "1", "type:dropdown,width:300", "MANDATORY"));
 			$form->add(new TextInput($lang->get("description"), "cluster_templates", "DESCRIPTION", $cond, "type:textarea,width:300,size:3", ""));
-
 			$tempbox = new CheckboxTxtInput($lang->get("is_compound","Compound Cluster with own Layout" ), "cluster_templates", "CLT_TYPE_ID", $cond, "1", "0");
 			$tempbox->setJSPayload("onClick='toggle(\"templ\");'");
 			$form->add($tempbox);
 			$show = ' style="display:none;" ';
 			$form->add(new IDWrapper("templ", new TextInput($lang->get("template", "Template"), "cluster_templates", "TEMPLATE", $cond, "type:textarea,width:400,size:20") ,"embedded", $show,2));	
 			
+			$form->add(new CheckboxTxtInput($lang->get('is_shop_cat_class','Enable for Use as Shop Category Template'), 'cluster_templates', 'IS_SHOP_CATEGORY', $cond));
+			$form->add(new CheckboxTxtInput($lang->get('is_shop_cat_product','Enable for Use as Shop Product Template'), 'cluster_templates', 'IS_SHOP_PRODUCT', $cond));
+
 			$form->add(new Hidden("action", "newobject"));
 			$form->add(new NonDisplayedValueOnInsert("cluster_templates", "CATEGORY_ID", $cond, $pnode, "NUMBER"));
 			$form->add(new NonDisplayedValueOnInsert("cluster_templates", "DELETED", $cond, 0, "NUMBER"));
@@ -86,6 +88,9 @@
 			  $show = ' style="display:none;" ';
 			} 			
 			$form->add(new IDWrapper("templ", new TextInput($lang->get("template", "Template"), "cluster_templates", "TEMPLATE", $cond, "type:textarea,width:400,size:20") ,"embedded", $show,2));	
+
+			$form->add(new CheckboxTxtInput($lang->get('is_shop_cat_class','Enable for Use as Shop Category Template'), 'cluster_templates', 'IS_SHOP_CATEGORY', $cond));
+			$form->add(new CheckboxTxtInput($lang->get('is_shop_cat_product','Enable for Use as Shop Product Template'), 'cluster_templates', 'IS_SHOP_PRODUCT', $cond));
 			
 			$form->add(new Hidden("action", "objectprop"));
 			$form->forbidDelete(true);
