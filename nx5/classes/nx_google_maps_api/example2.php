@@ -17,6 +17,10 @@ $api->addGeoPoint(50,10, "Somewhere in Germany", false);
 $api->setCenter(51,11);
 
 
+// set to hybrid mode
+$api->setMapType(VTHybrid);
+
+
 ?>
 <head>
 
@@ -26,7 +30,7 @@ $api->setCenter(51,11);
 
 <body onLoad="<?php echo $api->getOnLoadCode(); ?>">
 
-<h1> Adding Geopoints to the map </h1>
+<h1> Adding Geopoints to the map and view map in hybrid mode</h1>
 
 <?php echo $api->getBodyCode(); ?>
 

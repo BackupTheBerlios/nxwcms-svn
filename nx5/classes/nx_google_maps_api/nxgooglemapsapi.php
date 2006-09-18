@@ -34,7 +34,7 @@
  * GOverviewMapControl - a collapsible overview map in the corner of the screen
  */
  
-  define(GoogleMapsKey, '<add your api-key>'); 
+  define(GoogleMapsKey, 'ABQIAAAA2WqJFnImEPybFaMuQHg6XBT2yXp_ZAY8_ufC3CFXhHIE1NvwkxRbKTOc4LxhqLxdaj9EL7ukGnz4zg'); 
   
   define( GLargeMapControl 		, 'GLargeMapControl()');
   define( GSmallMapControl 		,	 'GSmallMapControl()');
@@ -42,6 +42,11 @@
   define( GScaleControl     	, 'GSCALEControl()');
   define( GMapTypeControl   	, 'GMapTypeControl()');
   define( GOverviewMapControl , 'GOverviewMapControl()');
+  
+  // viewtypes  
+  define (VTSatellite			,'Satellite');
+  define (VTMap						,'Map');
+  define (VTHybrid				,'Hybrid');
 
 /**
  * API-Class for accessing Google Maps 
@@ -78,6 +83,8 @@ class NXGoogleMapsAPI {
   // Arrays with the controls that will be displayed
   var $controls;
   
+  // View Mode
+  var $viewMode;
 
   /**
    * Constructor
@@ -157,6 +164,18 @@ class NXGoogleMapsAPI {
   	 }
   }
   
+  /**
+   * Set the map Mode. Allowed options are:
+   *
+   * @param string $mode		VTMap - View as Map
+   *												VTSatellite - View as Satellite 
+   *												VTHybrid - View as Hybrid mode (mixed Sat and Map)
+   */
+  function setMapType($mode="Map") {
+  	  $this->viewMode = $mode;
+  	  $this->addControl(GMapTypeControl);
+  }
+
   /**
    * Set the width of the map
    *
@@ -402,10 +421,10 @@ function addDragableMarker() {
 function initNXGMap(mapElement) {
  	if (GBrowserIsCompatible()) {
 		map = new GMap2(mapElement);        
-		geocoder = new GClientGeocoder();';
+		geocoder = new GClientGeocoder();'."\n";
       
-      // Add controls to the map
-   
+     
+      // Add controls to the map          
       if (count($this->controls) > 0) {
         for ($i=0; $i<count($this->controls); $i++) {
           $out.=" map.addControl(new ".$this->controls[$i].");\n";
@@ -416,6 +435,14 @@ function initNXGMap(mapElement) {
       if (($this->centerX != -1000) && ($this->centerY != -1000)) {      	
       	$out.= '    map.setCenter(new GLatLng('.$this->centerX.', '.$this->centerY.'), '.$this->zoomFactor.');'."\n";      	
       }
+      
+            // Set the viewmode;
+      if (strtoupper($this->viewMode) == "SAT") {
+        $out.="map.setMapType(G_SATELLITE_TYPE);\n";	
+      } else if (strtoupper($this->viewMode) == "HYBRID") {
+      	$out.="map.setMapType(G_HYBRID_TYPE);\n";	
+      }          
+      
       
       $out.='updateX="coordX"; updateY="coordY";';
       
@@ -439,7 +466,7 @@ function initNXGMap(mapElement) {
 			$out.="    showAddresses();\n";  
 			// Add GeoPoints
 			$out.="    showGeopoints();\n";
-          
+      
      $out.="\n";     
      $out.=' 	}
     	}
@@ -461,6 +488,7 @@ function initNXGMap(mapElement) {
   	$this->centerY    = -1000;
   	$this->dragX			= -1000;
   	$this->dragY			= -1000;
+  	$this->viewMode   = "Map";
   	$this->addresses  = array();
   	$this->geopoints  = array();
   	$this->controls   = array();
