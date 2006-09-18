@@ -38,6 +38,8 @@ if (!is_object($cds)) {
 // Add the libraries
 require_once $c["basepath"].'shop/tools.php';
 require_once $c["basepath"].'shop/draw_product_preview.php';
+require_once $c["basepath"].'shop/buttons_links_labels.php';
+require_once $c["basepath"].'shop/lists.php';
 
 
 ?>

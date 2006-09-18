@@ -48,7 +48,7 @@ class ProductViewer extends WUIInterface {
 		echo '<td colspan="2">';
 		echo '<table width="100%" cellpadding="0" cellspacing="0" border="0">';
 		echo '<tr><td colspan="2" class="headbox">'.getDBCell("shop_products", "PRODUCT_CODE", "PRODUCT_ID=".$this->id).'</td>';
-		echo '<td class="headbox" width="150" align="right">';
+		echo '<td class="headbox" align="right">';
 		echo crLink($lang->get("delete"), doc()."?sid=$sid&oid=$this->id&action=delete");
 		echo '&nbsp;&nbsp;';
 		echo crLink($lang->get("edit"), doc()."?sid=$sid&oid=$this->id&action=product_update");

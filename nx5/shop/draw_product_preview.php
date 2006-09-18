@@ -39,8 +39,15 @@ function drawProductPreview($productId) {
 	$productObject = $cds->cluster->getById($productClusterNodeId);			
 	
 	// format the output
-	$result.=$productObject->content->get("Name").$productObject->content->get("Description").$productObject->content->get("Image");
-	
+	$image = $productObject->content->get("Image", "ALL");
+	$result.='<table width="100%" border="0" cellpadding="0" cellspacing="0">';
+	$result.='<tr><td valign="top" width="120">';
+	$result.=$cds->layout->getImageTag($image, false);
+	$result.='</td><td>'.$cds->layout->spacer(10,1).'</td><td valign="top" width="100%"><b>';
+	$result.=$productObject->content->get("Name");
+	$result.='</b><br>'.$productObject->content->get("Description");	
+	$result.='<br>'.getPrice($productId);
+	$result.='</td></tr></table>';		
 	// return the output
 	return $result;
 }
