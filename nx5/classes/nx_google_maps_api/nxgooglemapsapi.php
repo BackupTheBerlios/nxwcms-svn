@@ -212,13 +212,12 @@ class NXGoogleMapsAPI {
    * @returns string The Code for the <Head>-Tag
    */
   function getHeadCode() {
-  	$out = '
- <style type="text/css">
-  	 v\:* {
+  	$out = '<style type="text/css">
+   v\:* {
        behavior:url(#default#VML);
-     }
-    </style>
-    <script src="http://maps.google.com/maps?file=api&v=2&key='.$this->apiKey.'"  type="text/javascript"></script>';
+   }
+</style>
+<script src="http://maps.google.com/maps?file=api&v=2&key='.$this->apiKey.'"  type="text/javascript"></script>';
    $out.= $this->_getGMapInitCode();
    return $out;
   }
@@ -253,20 +252,19 @@ class NXGoogleMapsAPI {
    * Is automatically called, so do not call yourself.
    */
   function _getGMapInitCode() {
-  	$out = '
-<script type="text/javascript">
-//<![CDATA[
-var map = null;
-var geocoder = null;
-var center = null;
-var updateX = null;
-var updateY = null;
-var marker = null;';
+  	$out = '  <script type="text/javascript">
+  //<![CDATA[
+  var map      = null;
+  var geocoder = null;
+  var center   = null;
+  var updateX  = null;
+  var updateY  = null;
+  var marker   = null;';
       
 			 // Add Geopoints Array
 			 $out.="\n";
       if ( count($this->geopoints) > 0 ) {      	
-      	$out.= 'var geopoints = new Array(';
+      	$out.= '  var geopoints = new Array(';
       	for ($i=0; $i < count($this->geopoints); $i++) {
       	  	$out.= ' new Array('.$this->geopoints[$i][0].','.$this->geopoints[$i][1].' ,"'.$this->geopoints[$i][2].'", ';
       	  	// move to this address?
@@ -280,13 +278,12 @@ var marker = null;';
       	}
       	$out.=");\n";
       } else {
-      	  $out.="var geopoints = new Array();\n";
+      	  $out.="  var geopoints = new Array();\n";
       }
       
-			 // Add Addresses Array      
-      $out.="\n";
+			 // Add Addresses Array            
       if ( count($this->addresses) > 0 ) {      	
-      	$out.= 'var addresses = new Array(';
+      	$out.= '  var addresses = new Array(';
       	for ($i=0; $i < count($this->addresses); $i++) {
       	  	$out.= ' new Array("'.$this->addresses[$i][0].'", "'.$this->addresses[$i][1].'", ';
       	  	// move to this address?
@@ -300,151 +297,149 @@ var marker = null;';
       	}
       	$out.=");\n";
       } else {
-      	  $out.="var addresses = new Array();\n";
+      	  $out.="  var addresses = new Array();\n";
       }
+    	$out.="\n";
     	
     	// Draw standard js-functions and initialization code.
-    	$out.='
-function showAddresses() {
-  for (i=0; i < addresses.length; i++) {
- 	  	showAddress(addresses[i][0], addresses[i][1], addresses[i][2]);
-  }	
-}
+    	$out.='  function showAddresses() {
+    for (i=0; i < addresses.length; i++) {
+      showAddress(addresses[i][0], addresses[i][1], addresses[i][2]);
+    }	
+  }
     	
-function showAddress(address, htmlInfo, moveToPoint) {
- if (geocoder) {
-   geocoder.getLatLng(
-     address,
-     function(point) {
-       if (!point) {
-         alert("Location not found:" + address);
-       } else {              
-         if (moveToPoint) {
-           map.setCenter(point, '.$this->zoomFactor.');
+  function showAddress(address, htmlInfo, moveToPoint) {
+   if (geocoder) {
+     geocoder.getLatLng(
+       address,
+       function(point) {
+         if (!point) {
+           alert("Location not found:" + address);
+         } else {              
+           if (moveToPoint) {
+             map.setCenter(point, '.$this->zoomFactor.');
+           }
+           var marker = new GMarker(point);
+           map.addOverlay(marker);
+           if (htmlInfo != "") {
+             GEvent.addListener(marker, "click", function() {
+                marker.openInfoWindowHtml(htmlInfo);
+             });              
+           }
          }
-         var marker = new GMarker(point);
-         map.addOverlay(marker);
-         if (htmlInfo != "") {
-           GEvent.addListener(marker, "click", function() {
-              marker.openInfoWindowHtml(htmlInfo);
-           });              
-         }
        }
-     }
-   );
+     );
+    }
   }
-}
 
-function showGeopoints() {
-  for (i=0; i < geopoints.length; i++) {
- 	  	showGeopoint(geopoints[i][0], geopoints[i][1], geopoints[i][2], geopoints[i][3]);
-  }	
-}
-
-function showGeopoint(longitude, latitude, htmlInfo, moveToPoint) {
-  if (moveToPoint) {
-    map.setCenter(new GLatLng(longitude, latitude), '.$this->zoomFactor.');
+  function showGeopoints() {
+    for (i=0; i < geopoints.length; i++) {
+ 	    	showGeopoint(geopoints[i][0], geopoints[i][1], geopoints[i][2], geopoints[i][3]);
+    }	
   }
-  var marker = new GMarker(new GLatLng(longitude, latitude));
-  map.addOverlay(marker);
-  if (htmlInfo != "") {
-    GEvent.addListener(marker, "click", function() {
-      marker.openInfoWindowHtml(htmlInfo);
-    });              
-     }   
-}
 
-function moveToGeopoint(index) {
-	map.panTo(new GLatLng(geopoints[index][0], geopoints[index][1]));
-}
-
-function moveToAddress(index) {
-  moveToAddressEx(addresses[index][0]); 
-}
-
-function moveToAddressEx(addressString) {
-  if (geocoder) { 
-   geocoder.getLatLng(
-     addressString,
-     function(point) {       
-       if (!point) {
-         alert("Location not found:" + addressString);
-       } else {                                    
-          center = point;
-          map.panTo(point);           
-       }
-     });    
-  }
-}
-
-function moveToAddressDMarker(addressString) {
-  if (geocoder) { 
-   geocoder.getLatLng(
-     addressString,
-     function(point) {       
-       if (!point) {
-         alert("Location not found:" + addressString);
-       } else {                                    
-          center = point;
-          setZoomFactor(14);
-          map.panTo(point);  
-          addDragableMarker();         
-       }
-     });    
-  }
-}
-
-function setZoomFactor(factor) {
-	  map.setZoom(factor);
-}
-
-function addDragableMarker() {
-  if (!marker) {
-    marker = new GMarker(center, {draggable: true});
+  function showGeopoint(longitude, latitude, htmlInfo, moveToPoint) {
+    if (moveToPoint) {
+      map.setCenter(new GLatLng(longitude, latitude), '.$this->zoomFactor.');
+    }
+    var marker = new GMarker(new GLatLng(longitude, latitude));
     map.addOverlay(marker);
-       
-    GEvent.addListener(marker, "dragend", function() {      
-      var tpoint =  marker.getPoint();      
-      document.getElementById(updateX).value = tpoint.lat();
-      document.getElementById(updateY).value = tpoint.lng();              
-  });
-
-  } else {
-  	marker.setPoint(center);  	 
+    if (htmlInfo != "") {
+      GEvent.addListener(marker, "click", function() {
+        marker.openInfoWindowHtml(htmlInfo);
+      });              
+       }   
   }
-  
-  var tpoint =  marker.getPoint();      
-  document.getElementById(updateX).value = tpoint.lat();
-  document.getElementById(updateY).value = tpoint.lng();              
-}
+
+  function moveToGeopoint(index) {
+	  map.panTo(new GLatLng(geopoints[index][0], geopoints[index][1]));
+  }
+
+  function moveToAddress(index) {
+    moveToAddressEx(addresses[index][0]); 
+  }
+
+  function moveToAddressEx(addressString) {
+    if (geocoder) { 
+     geocoder.getLatLng(
+       addressString,
+       function(point) {       
+         if (!point) {
+           alert("Location not found:" + addressString);
+         } else {                                    
+            center = point;
+            map.panTo(point);           
+         }
+       });    
+    }
+  }
+
+  function moveToAddressDMarker(addressString) {
+    if (geocoder) { 
+     geocoder.getLatLng(
+       addressString,
+       function(point) {       
+         if (!point) {
+           alert("Location not found:" + addressString);
+         } else {                                    
+            center = point;
+            setZoomFactor(14);
+            map.panTo(point);  
+            addDragableMarker();         
+         }
+       });    
+    }
+  }
+
+  function setZoomFactor(factor) {
+	    map.setZoom(factor);
+  }
+
+  function addDragableMarker() {
+    if (!marker) {
+      marker = new GMarker(center, {draggable: true});
+      map.addOverlay(marker);
+       
+      GEvent.addListener(marker, "dragend", function() {      
+        var tpoint =  marker.getPoint();      
+        document.getElementById(updateX).value = tpoint.lat();
+        document.getElementById(updateY).value = tpoint.lng();              
+      });
+    } else {
+  	  marker.setPoint(center);  	 
+    }  
+    var tpoint =  marker.getPoint();      
+    document.getElementById(updateX).value = tpoint.lat();
+    document.getElementById(updateY).value = tpoint.lng();              
+  }
     	
-function initNXGMap(mapElement) {
- 	if (GBrowserIsCompatible()) {
-		map = new GMap2(mapElement);        
-		geocoder = new GClientGeocoder();'."\n";
+  function initNXGMap(mapElement) {
+    if (GBrowserIsCompatible()) {
+      map = new GMap2(mapElement);        
+      geocoder = new GClientGeocoder();'."\n";
       
      
       // Add controls to the map          
       if (count($this->controls) > 0) {
         for ($i=0; $i<count($this->controls); $i++) {
-          $out.=" map.addControl(new ".$this->controls[$i].");\n";
+          $out.="      map.addControl(new ".$this->controls[$i].");\n";
         }
       }
       
       // Center the map
       if (($this->centerX != -1000) && ($this->centerY != -1000)) {      	
-      	$out.= '    map.setCenter(new GLatLng('.$this->centerX.', '.$this->centerY.'), '.$this->zoomFactor.');'."\n";      	
+      	$out.= '      map.setCenter(new GLatLng('.$this->centerX.', '.$this->centerY.'), '.$this->zoomFactor.');'."\n";      	
       }
       
             // Set the viewmode;
       if (strtoupper($this->viewMode) == "SAT") {
-        $out.="map.setMapType(G_SATELLITE_TYPE);\n";	
+        $out.="      map.setMapType(G_SATELLITE_TYPE);\n";	
       } else if (strtoupper($this->viewMode) == "HYBRID") {
-      	$out.="map.setMapType(G_HYBRID_TYPE);\n";	
+      	$out.="      map.setMapType(G_HYBRID_TYPE);\n";	
       }          
       
       
-      $out.='updateX="coordX"; updateY="coordY";';
+      $out.='      updateX="coordX"; updateY="coordY";'."\n";
       
       // Draw Dragmarker
       if (($this->dragX != 1000) && ($this->dragY != -1000)) {
@@ -458,20 +453,19 @@ function initNXGMap(mapElement) {
       			var tpoint =  marker.getPoint();      
       			document.getElementById(updateX).value = tpoint.lat();
       			document.getElementById(updateY).value = tpoint.lng();              
-  				});
-      	';
+  				});'."\n";
       }
       
       // Add AddressPoints
-			$out.="    showAddresses();\n";  
+			$out.="      showAddresses();\n";  
 			// Add GeoPoints
-			$out.="    showGeopoints();\n";
-      
-     $out.="\n";     
-     $out.=' 	}
-    	}
-     //]]>
-  	 </script>';
+			$out.="      showGeopoints();\n";
+           
+     $out.='
+    }
+  }
+  //]]>
+</script>';
   	return $out;
   }
   
