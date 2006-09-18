@@ -5,10 +5,10 @@
 require_once "../../config.inc.php";
 
 $auth = new auth("SHOP");
-
 $page = new page("Shop overview");
 include("logic/menudef.inc.php");
 include("logic/productviewer.php");
+include $c["basepath"]."shop/init_shop.php";
 
 $page->setJS("TREE");
 // initialize variables
@@ -21,6 +21,8 @@ $page_state = "";
 
 $handled = false;
 $pnode = value("pnode", "NUMERIC", "");
+if ($pnode != "") pushVar("shopcat", $pnode);
+if ($pnode == "") $pnode = getVar("shopcat");
 if ($pnode == "") $pnode = "11";
 
 // Kategoriebaum erstellen
@@ -32,6 +34,7 @@ $browser->rootTitle = $lang->get("shop", "Shop");
 $browser->action = $c["docroot"] . "modules/shop/overview.php";
 $page->addMenu($browser);
 require_once $c["path"] . "modules/shop/logic/shop_api.php";
+$shop->variation = variation();
 require_once $c["path"] . "modules/shop/logic/category_logic.php";
 require_once $c["path"] . "modules/shop/logic/products.php";
 
@@ -86,9 +89,8 @@ if (!$handled) {
 	$filtersql = "";
 
 	$content = createDBCArray("shop_products", "PRODUCT_ID", "CATEGORY_ID = " . $pnode . $filtersql, "ORDER BY PRODUCT_CODE");
-	includePGNSources();
-
-	for ($i = 0; $i < count($content); $i++) {
+	includePGNSources();  
+	for ($i = 0; $i < count($content); $i++) {		
 		$form->add(new ProductViewer($content[$i]));
 	}
 

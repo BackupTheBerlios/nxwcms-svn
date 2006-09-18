@@ -124,7 +124,7 @@
 				/** got rid of magic quotes! */
 				$this->oldvalue = getDBCell($table, $column, $row_identifier);
 			} else {
-				if (($page_action == "UPDATE" || $page_action == "DELETE") && $this->row_identifier != "1") {
+				if (($page_action == "UPDATE" || $page_action == "DELETE") && $this->row_identifier != "1") {					
 					$this->value = getDBCell($table, $column, $row_identifier);
 					if ($this->value == "0000-00-00 00:00:00")
 						$this->value = "";

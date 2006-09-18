@@ -53,6 +53,7 @@ class ProductViewer extends WUIInterface {
 		echo '&nbsp;&nbsp;';
 		echo crLink($lang->get("edit"), doc()."?sid=$sid&oid=$this->id&action=product_update");
 		echo '</td></tr>';		
+		echo '<tr><td colspan="3">'.drawProductPreview($this->id).'</td></tr>';
 		echo '<tr><td colspan="3">'.drawSpacer(1,20).'</td></tr>';
 		echo '</table>';
 		echo '</td>';

@@ -82,7 +82,9 @@
 		    			
 		// Initialize Management
 		$this->pageClusterNodeId = $clusterNodeId;
-		$this->pageClusterId = getDBCell("cluster_variations", "CLID", "CLNID = $clusterNodeId AND VARIATION_ID = ".$this->variation);
+		if ($this->pageClusterNodeId != "") {
+		  $this->pageClusterId = getDBCell("cluster_variations", "CLID", "CLNID = $clusterNodeId AND VARIATION_ID = ".$this->variation);
+		}
 		
 		// Initialize Content
 		$this->content = new Content($this);

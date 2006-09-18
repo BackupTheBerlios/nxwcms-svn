@@ -27,7 +27,15 @@ if (($action == $lang->get("new_product")) || ($action == "product_update")) {
 	$form->add(new NonDisplayedValueOnInsert("shop_products", "PERSON_ADDED", $cond,$auth->userName ,"TEXT"));
 	$form->forbidDelete(true);
 	$page->add($form);
-	$page->draw();
+	
+	// Workaround for draw-and-forward.
+	$go="CREATE";
+	
+	if ($page_action=="INSERT") {
+	  $page->drawAndForward("modules/shop/overview.php?sid=$sid&oid=<oid>&action=product_update&pnode=$pnode");
+	} else {		
+		 $page->drawAndForward("modules/shop/overview.php?sid=$sid&pnode=$pnode");
+	}
 	
 }
 ?>

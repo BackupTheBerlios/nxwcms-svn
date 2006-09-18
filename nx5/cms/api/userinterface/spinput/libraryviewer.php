@@ -27,7 +27,7 @@
 	 * new Library.
 	 * @package ContentManagement
 	 */
-	class LibraryViewer {
+	class LibraryViewer extends WUIInterface{
 		var $oid;
 
 		var $cells;
