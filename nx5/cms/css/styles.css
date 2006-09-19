@@ -237,7 +237,7 @@ div.activeTabText a, div.activeTabText a:visited {
   text-decoration:none;
 }
 
-div.activeTabText {
+a.activeTabText {
   border-left: 1px solid #cccccc;
   border-right: 1px solid #cccccc;
   padding: 0px 1em 2px;
@@ -265,10 +265,11 @@ a.thigh {
   white-space: nowrap;
 }
 
-#subTabs span.activeText {
+a.activeText, a.activeText:visited {
   font-weight: bold;
   color: #cbe5ff;
   display: inline;
+  text-decoration:none
 }
 
 #subTabs span.inactiveText {

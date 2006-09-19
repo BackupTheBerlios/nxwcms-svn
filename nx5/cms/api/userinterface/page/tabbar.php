@@ -131,8 +131,10 @@
   	  for ($i=0; $i < count($this->submenucontainer[$this->selectedMenu]); $i++) {  	 
   	    if ($this->selectedSubmenu == $i) {
   	    	// aktives Submenu
-  	    	$out.= '<span class="activeText">';
+  	    	$out.= '<span>';
+  	    	$out.= '<a class="activeText" href="' . $this->getHref($this->selectedMenu, $i) . '">';
   	    	$out.= $this->submenucontainer[$this->selectedMenu][$i][0];
+  	    	$out.='</a>';
   	    	$out.= '</span>';
   	    } else {
   	    	// inaktives Submenu
