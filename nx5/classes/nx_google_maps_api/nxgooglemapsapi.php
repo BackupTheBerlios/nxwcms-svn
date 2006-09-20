@@ -34,8 +34,16 @@
  * GOverviewMapControl - a collapsible overview map in the corner of the screen
  */
  
-  define(GoogleMapsKey, 'ABQIAAAA2WqJFnImEPybFaMuQHg6XBT2yXp_ZAY8_ufC3CFXhHIE1NvwkxRbKTOc4LxhqLxdaj9EL7ukGnz4zg'); 
+  define(GoogleMapsKey, '<your api key here>'); 
   
+  // Serverside geocoding
+  define(GeoCoderURI  , 'http://maps.google.com/maps/geo');
+  
+  // Use proxy-server for http-requests?
+  define( UseProxy, false);
+  define( ProxyServer, '127.0.0.1');
+  define( ProxyPort, '3128');
+
   define( GLargeMapControl 		, 'GLargeMapControl()');
   define( GSmallMapControl 		,	 'GSmallMapControl()');
   define( GSmallZoomControl 	, 'GSmallZoomControl()');
@@ -113,6 +121,46 @@ class NXGoogleMapsAPI {
   }
   
   /**
+   * Invokes the google geocoder to get the coordinates of the given address
+   *
+   * @param string $address Address you want to get the longitude and the lattitude of
+   * @return array format $array['longitude'], $array['lattitude'];
+   */
+  function geoCodeAddress($address) {
+    // initialization
+    $uri = GeoCoderURI.'?q='.urlencode($address).'&output=csv&key='.$this->apiKey;
+    $response = '0,0,0,0';
+  	if (UseProxy) { 	
+  	  $errno="";
+  		$errstr="";
+  		$file = fsockopen(ProxyServer, ProxyPort, &$errno, &$errstr,30); 
+  		if( !$file ) {
+   			fclose($file);    			
+ 		  } else { 
+   			$response = '';
+   			fputs($file,"GET $uri HTTP/1.0\n\n"); 
+   			while (!feof($file)) 
+   			{
+     				$response.=fread($file,4096);
+   			}
+   			fclose($file);
+  		}  		
+  		$response = substr($response,strpos($response,"\r\n\r\n")+4)  		;  		
+  	} else {
+  	  $response = file_get_contents($uri);
+  	}
+  	
+  	// compile result array
+  	$result = array('longitude' =>0, 'latitude' => 0);
+  	$tmpArray = @explode(',', $response);  	
+  	if (is_array($tmpArray)) {
+  		$result['latitude'] = $tmpArray[2];
+  		$result['longitude'] = $tmpArray[3];
+  	}
+  	return $result;  	
+  }
+  
+  /**
    * Add a dragable marker to the map. Only one Drag-Marker is allowed!
    *
    * @param integer $longitude Longitude of the point
@@ -132,7 +180,7 @@ class NXGoogleMapsAPI {
    * @param boolean Set the Center to this point(true) or not (false)
    */  
   function addGeoPoint($longitude, $latitude, $htmlinfo, $setCenter) {
-    $ar = array($longitude, $latitude, addSlashes($htmlinfo), $setCenter);
+    $ar = array($latitude, $longitude, addSlashes($htmlinfo), $setCenter);
     array_push($this->geopoints, $ar);	
   }
   
