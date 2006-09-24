@@ -32,8 +32,7 @@
 
 	$auth = new auth("ANY");
 	// Clear the store variable of last menu.
-  delVar ("menu");
-		
+
 	$db->close();
 
 	if ($auth->loggedIn) {

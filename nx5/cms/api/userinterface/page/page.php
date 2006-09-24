@@ -110,7 +110,7 @@
 		   **/
 		function draw() {
 			global $c, $auth, $lang, $pagemenu;
-			global $disableMenu;
+			global $disableMenu, $sid;
 			//load menu definitions
 	        if (!$disableMenu) {
 				include $c["path"] . "api/userinterface/page/menudef.php";	
@@ -120,6 +120,10 @@
 				}
 	        }
 	        
+	        if (doc() == "index.php") {        	
+	        	$forward=$pagemenu->tabbar->submenucontainer[$pagemenu->tabbar->selectedMenu][$pagemenu->tabbar->selectedSubmenu][1];
+	        	header("Location:".$c["host"].$forward."?sid=$sid");	        	
+	        }
 	        $this->process();
 	        $this->draw_header();
 			if (!$disableMenu) {
