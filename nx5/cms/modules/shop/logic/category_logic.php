@@ -8,8 +8,6 @@
 	 * @package InternalLogic
 	 */
 
-
-	
 	// initialize
 	$action = value("action");
 	$oid = value("oid", "NUMERIC");
@@ -34,9 +32,11 @@
 			$form->add(new Hidden("pnode", $pnode));
 			$form->add(new NonDisplayedValueOnInsert("categories", "PARENT_CATEGORY_ID", $cond, $pnode, "NUMBER"));
 			$form->add(new NonDisplayedValueOnInsert("categories", "DELETED", $cond, 0, "NUMBER"));			
+			$form->add(new ClusterInput($lang->get("cattemp", "Category Template"), "categories", "CLNID", $cond, "IS_SHOP_CATEGORY=1", variation(), "CATEGORY_NAME"));
 			$form->forbidDelete(true);
 			$page->add($form);
 			$handled = true;
+			$page->drawAndForward("modules/shop/overview.php?sid=$sid&oid=<oid>&action=".$lang->get("edit_cat")."&pnode=$pnode");
 		
 		// Delete existing Category
 		
@@ -90,19 +90,17 @@
 					$delform = new MessageForm($lang->get("del_cat"). " $title", $lang->get("r_catnotempty", "The category you want to delete is not empty."), doc(). "?" . $auth->getSid());
 					$page->add($delform);
 					$handled = true;
-				}
+					$page->draw();
+				}				
 			}
 	
 		
 		// Edit existing category.
 	
 		} else if ($action == $lang->get("edit_cat")) {
-			$go = "UPDATE";
-
+			$page_action = "UPDATE";
 			$isFolder = true;
 			$oid = $pnode;
-			if (! categoryInfoExists($oid, $variation)) 
-			  createCategoryInfo($oid, $variation);
 			$page_action = "UPDATE";
 			$form = new EditForm($lang->get("r_editfolder"), "i_folderproperties.gif");
 			$cond = $form->setExPK("categories", "CATEGORY_ID");
@@ -115,26 +113,18 @@
 			}
 			
 			$form->headerlink = crHeaderLink($lang->get("back"), "modules/shop/overview.php?sid=$sid&pnode=$oid");
-			$form->buttonbar->setVariationSelector(createNameValueArrayEx("variations", "NAME", "VARIATION_ID", "1", "ORDER BY NAME ASC"), $variation);			
+			$form->enableVariationSelector();
 			$form->add(new Hidden("pnode", $pnode));
 			$form->add(new Hidden("action", $lang->get("edit_cat")));
-			$cond2 = $cond." AND VARIATION_ID=$variation";
-			
-			
-			$specialID = $variation;
-			// label
-			
-			$form->add(new TextInput($lang->get("disptitle", "Display Name"), "categories_info", "TITLE", $cond2, "type:text,width:350,size:255", "MANDATORY"));
-			$form->add(new SubTitle("st", $lang->get("sel_image", "Select image"),2));
-			$form->add(new LibrarySelect("categories_info", "IMAGE", $cond, "IMAGE"));
-			
-			$form->add(new SubTitle("st", $lang->get("header")));
-			$form->add(new RicheditInput($lang->get("header", "Header"), "categories_info", "HEADER", $cond2, "type:rich,width:580,size:6", ""));		
-			$form->add(new SubTitle("st", $lang->get("footer")));
-			$form->add(new RicheditInput($lang->get("footer", "Footer"), "categories_info", "FOOTER", $cond2, "type:rich,width:580,size:6", ""));		
-
+			$cond2 = $cond." AND VARIATION_ID=$variation";			
+			$specialID = $variation;			
+			$form->add(new ClusterInput($lang->get("cattemp", "Category Template"), "categories", "CLNID", $cond, "IS_SHOP_CATEGORY=1", variation(), "CATEGORY_NAME"));
+						
 			$page->add($form);
-			$handled = true;				
+			$handled = true;	
+			// Workaround for draw-and-forward.
+			$go="CREATE";
+			$page->drawAndForward("modules/shop/overview.php?sid=$sid&pnode=$pnode");		
 		} 
 	} // end isset($action)
 

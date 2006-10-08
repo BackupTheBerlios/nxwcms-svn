@@ -25,7 +25,7 @@
 
 	// Database variables.
 	$c["dbhost"] = "localhost";  				// name of the mysql-Database. Standard-port is used.
-	$c["database"] = "demo";   					// name of the database. 
+	$c["database"] = "hanmee";   					// name of the database. 
 	$c["dbuser"] = "root";       				// name of the database user.
 	$c["dbpasswd"] = "";         			// password of the database user.
 	$c["dbdriver"] = "mysql";    				// type of your database. Do not change.
@@ -36,8 +36,6 @@
 	// Backend language
 	$c_lang = "EN";                				// Set default backend-language to English! 
 												// Recommended even if you use other languages
-	//$c["smarttranslate"]	= 'EN'												;
-												
 	//Page after Login
 	$c["pageAfterLogin"] = "modules/sitepages/sitepagebrowser.php"; // Page which will be displayed after login.
 												
@@ -53,7 +51,7 @@
 	$c["renderstatichtml"] = false;              // enable Rendering of Static HTML-Code (Caching)
 
 	// Dynamic Cache
-	$JPCACHE_ON = false;    					// Turn dynamic page caching on/off
+	$JPCACHE_ON = true;    					// Turn dynamic page caching on/off
 	$JPCACHE_TIME = 3600;   						// Default number of seconds to cache a page
 	$JPCACHE_USE_GZIP = 0; 						// Whether or not to use GZIP for transmission of the page to a browser
 
@@ -77,9 +75,7 @@
 	
 	// AUTH
 	$c["disalbehostchecking"] = true; 			 // Disabled auth-check, if user still has same IP or host-address. 
-																						 // Required for some firewalls and proxy servers.
-
-    $c["classicurls"] = false;		// do not show urls with paths but with query-parameters.
+												 // Required for some firewalls and proxy servers.
 
 	// ImageMagic Configuration
 	$c["useimagemagick"] = false;				 // switch image-magick on or off. Switch on only, if you set the correct path!
@@ -88,7 +84,11 @@
 	// User-Interface;
 	$c["disableClustersInTree"] = false;		 // Disable cluster-node-view in the tree in Content->Cluster. Set to true for bigger sites.
 	
-	// Backup											    // to use a directory, which is not accessible from the webserver!!!!
+	$c["theme"] = "grey";					 // Take look into the cms/api/userinterface/themes-folder for available backend themes.
+   // other installed themes are "standard" and "light" and "grey"
+    
+
+											    // to use a directory, which is not accessible from the webserver!!!!
 	$c["storeBackupFTP"] = false;                // Enable, if backup should be stored via ftp.
 	$c["ftpUsername"] = '';
 	$c["ftpPassword"] = '';
@@ -110,12 +110,12 @@
 	// base paths
 	// attention: please read the readme file to know, which paths must be set writable! 
 	// (all www and wwwdev + subfolders)
-	$c["basepath"] = "C:\\Web\\corps/";				// path of your nx-home-folder on harddrive. ends with slash.
-	$c["basedocroot"] = "/corps/";		// docroot on your webserver, which corresponds 
+	$c["basepath"] = "C:\\Web\\hanmee/";				// path of your nx-home-folder on harddrive. ends with slash.
+	$c["basedocroot"] = "/hanmee/";		// docroot on your webserver, which corresponds 
 											// to the path you just entered. starts and ends with a slash!
 	$c["host"] = "http://localhost"; 				// address of your web-server. Ends without slash
 	$c["cmsfolder"] = "cms";					// name or relative path of the folder cms, if renamed.
-  $c["temphomepage"] = "wwwdev";				// name of relative path the folder wwwdev, if renamed.	
+    $c["temphomepage"] = "wwwdev";				// name of relative path the folder wwwdev, if renamed.	
 	$c["livehomepage"] = "www";					// name of relative path the folder www, if renamed.	
 												// set to "" if you moved all www-files to the nx-homefolder
 
@@ -146,7 +146,8 @@
 	$c["cachedocroot"] = $c["livedocroot"]."pages/";                     
 	$c["tmpcachepath"] = $c["cachepath"] . "tmp/";
 	$c["dyncachepath"] = $c["cachepath"] . "tmp/"; 
-	
+	$c["themepath"] = $c["path"] . "api/userinterface/themes/".$c["theme"]."/";
+	$c["themedocroot"] = $c["docroot"] . "api/userinterface/themes/".$c["theme"]."/";      	          
 	// end auto config.
 	/**
 	 * End of simple config
@@ -194,6 +195,8 @@
    	$c["hostlivedocroot"] = $c["livehost"].$c["livedocroot"];
    	$c["spmthumbpath"] = $c["cmspath"] . "modules/sitepages/thumbnails/";
 	$c["spmthumbdocroot"] = $c["cmsdocroot"] . "modules/sitepages/thumbnails/";
+	$c["themepath"] = $c["cmspath"] ."api/userinterface/themes/".$c["theme"]."/";
+	$c["themedocroot"] = $c["cmsdocroot"] .	"api/userinterface/themes/".$c["theme"]."/";	
 	//// End of Autoconfig.
 		
     /**
@@ -201,8 +204,8 @@
      */	
 	
 	// Backup
-	$c["backupPath"] = "c:/Web/nx5/";	       // Folder where the backup script shall start. Use your nx-root-folder for standard installation
-	$c["backupStore"] = "c:/backup/"; // Directory, where backups shall be stored. You should stronly consider
+	$c["backupPath"] = "c:/web/nxhp/";	       // Folder where the backup script shall start. Use your nx-root-folder for standard installation
+	$c["backupStore"] = "c:/backups/"; // Directory, where backups shall be stored. You should stronly consider
 	
 	
 	/*************************************************************************************************
@@ -210,18 +213,9 @@
 	 *************************************************************************************************/
 	if (!$c["checkconfig"]) {
 		
-	
 	require_once $c["path"]."deployment.inc.php";	
 	
-	// check database connection	
-	$con = @mysql_pconnect($c["dbhost"], $c["dbuser"], $c["dbpasswd"]);
-	if ($con === false) {
-		echo "Could not connect to database. Please check the settings in config.inc.php.";
-		die();		
-	}
-	
-	
-	// Server configuration
+	 // Server configuration
 	set_magic_quotes_runtime(0);
 	$c_magic_quotes_gpc = get_magic_quotes_gpc(); //disable magic quotes.
 
@@ -231,18 +225,18 @@
 	require_once $c["path"] . "api/database/lib.inc.php";
 	require_once $c["path"] . "ext/adodb/adodb-session.php";
 	require_once $c["path"] . "api/auth/lib.inc.php";
-	require_once $c["path"] . "api/common/lib.inc.php";
 	require_once $c["path"] . "api/userinterface/form/pagestate.php";
+	require_once $c["path"] . "api/common/lib.inc.php";
 	require_once $c["path"] . "api/common/initialize.php";	
 	require_once $c["path"] . "plugin/plugin.inc.php";
-	require_once $c["path"] . "api/tools/lib.inc.php";	
+	require_once $c["path"] . "api/tools/lib.inc.php";
+	require_once $c["path"] . "api/userinterface/lib.inc.php";
 	require_once $c["path"] . "api/cms/lib.inc.php";
 	require_once $c["path"] . "api/common/prepare.php";
-    require_once $c["path"] . "api/xml/lib.inc.php";
-    require_once $c["path"] . "api/parser/lib.inc.php";
-    require_once $c["path"] . "api/userinterface/lib.inc.php";	
+   	require_once $c["path"] . "api/xml/lib.inc.php";
+   	require_once $c["path"] . "api/parser/lib.inc.php";
 	
-	//setup language translation for backoffice.
+
 	$lang = new lang();
 	
 	} // permitconfig

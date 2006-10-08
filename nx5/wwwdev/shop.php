@@ -25,31 +25,17 @@
 
 // Purpose of this script:
 //
-// draw the preview of one product. Used in products overview.
+// Dispatch ALL request to the shop. Therefore the shop dispatcher is used.
+
+require_once "nxheader.inc.php";
+require_once '../shop/init_shop.php';
+require_once $cds->path.'inc/header.php';
 
 
-function drawProductPreview($productId) {
-	global $cds;
-	
-	// initialize the output
-	$result = '';
-	
-	// get the product object
-	$productClusterNodeId = getClusterNodeIdFromProductId($productId);
-	$productObject = $cds->cluster->getById($productClusterNodeId);			
-	
-	// format the output
-	$image = $productObject->content->get("Image", "ALL");
-	$result.='<table width="100%" border="0" cellpadding="0" cellspacing="0">';
-	$result.='<tr><td valign="top" width="120">';
-	$result.=$cds->layout->getImageTag($image, false);
-	$result.='</td><td>'.$cds->layout->spacer(10,1).'</td><td valign="top" width="100%"><b>';
-	$result.=$productObject->content->get("Name");
-	$result.='</b><br>'.$productObject->content->get("Description");	
-	$result.='<br>'.getPrice($productId);
-	$result.='</td></tr></table>';		
-	// return the output
-	return $result;
-}
+$dispatcher->execute();
+
+require_once $cds->path.'inc/footer.php';
+require_once "nxfooter.inc.php";
+
 
 ?>

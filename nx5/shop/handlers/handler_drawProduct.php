@@ -20,22 +20,31 @@
  *	You should have received a copy of the GNU General Public License
  *	along with N/X; if not, write to the Free Software
  *	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- **********************************************************************/
+ */
 
-
-// Purpose of this script:
-//
-// draw the lists for displaying products and categories.
+  
+$dispatcher->registerHandler('draw_product', 'doDrawProduct');
 
 
 /**
- * Enter description here...
+ * Draw the Product Preview in the list of a product.
  *
- * @param unknown_type $categoryId
+ * @param ShopDispatcher $dispatcher
  */
-function drawProductList($categoryId) {
-  $products = createDBCArray("shop_products", "PRODUCT_ID", "CATEGORY_ID=$categoryId", "ORDER BY PRODUCT_CODE ASC");
-	
+function doDrawProduct(&$dispatcher) {	
+	$obj = $dispatcher->getProductObject();
+	echo '<table width="100%" cellpadding="2" cellspacing="2" border="0">';
+	echo '<tr><td width="100">&nbsp;</td>';
+	echo '<td width="30">&nbsp;</td>';
+	echo '<td width="600" style="font-weight:bold;">'.$obj->content->get("name").'</td>';
+	echo '<td width="50">&nbsp;</td>';
+	echo '</tr>';
+	echo '<tr><td valign="top" align="center">'.$obj->content->get("Image").'</td>';
+	echo '<td width="30">&nbsp;</td>';
+	echo '<td valign="top">'.$obj->content->get("Description").'</td>';
+	echo '<td width="50">&nbsp;</td>';
+	echo '</tr>';
+	echo '</table>';
 }
 
 ?>

@@ -13,6 +13,7 @@ if (($action == $lang->get("new_product")) || ($action == "product_update")) {
 	}
 	$form = new stdEDForm($title,"");	
 	$form->enableVariationSelector();
+	$form->headerlink = crHeaderLink($lang->get("back"), "modules/shop/overview.php?sid=$sid&pnode=$pnode");
 	$cond = $form->setPK("shop_products", "PRODUCT_ID");
 	$oname = new TextInput($lang->get("productcode", "Product Code"), "shop_products", "PRODUCT_CODE", $cond, "type:text,width:300,size:64", "MANDATORY");
 	$form->add($oname);

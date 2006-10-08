@@ -25,7 +25,7 @@
 
 // Purpose of this script:
 //
-// Initialize the variables for the integrated shopping-system of N/X WCMS
+// Tool functions for developing the online shop.
 
 /**
  * Return the ID of the content-object which is linked to a product
@@ -35,6 +35,34 @@
  */
 function getClusterNodeIdFromProductId($productId) {
 	return getDBCell('shop_products', 'CLNID', 'PRODUCT_ID = '.$productId);
+}
+
+/**
+ * Return the ID of the content-object which is linked with a category.
+ *
+ * @param integer $categoryId ID of the Category
+ * @return integer ID of the ClusterNode
+ */
+function getClusterNodeIdFromCategoryId($categoryId) {
+	return getDBCell("categories", "CLNID", "CATEGORY_ID = ".$categoryId);
+}
+
+/**
+ * Get all child categories of the given category ID
+ *
+ * @param integer $categoryId ID of the category, you want to get the childs of.
+ */
+function getChildCategories($categoryId=11) {
+  return createDBCArray("categories", "CATEGORY_ID", "PARENT_CATEGORY_ID = ".$categoryId, "ORDER BY CATEGORY_NAME ASC");
+}
+
+/**
+ * Returns an array with the product-ids of the products in the given category. Ordered by product code.
+ *
+ * @param integer $categoryId ID of the shop category
+ */
+function getProducts($categoryId) {
+ return createDBCArray("shop_products", "PRODUCT_ID", "CATEGORY_ID=$categoryId", "ORDER BY PRODUCT_CODE ASC");	
 }
 
 

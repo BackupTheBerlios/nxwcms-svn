@@ -20,26 +20,37 @@
  *	You should have received a copy of the GNU General Public License
  *	along with N/X; if not, write to the Free Software
  *	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- **********************************************************************/
+ */
+
+  
+$dispatcher->registerHandler('draw_product_list', 'doDrawProductList');
 
 
-// Purpose of this script:
-//
-// Initialize the variables for the integrated shopping-system of N/X WCMS
-
-require_once $c["path"]."api/cds/lib.inc.php";
-
-// Check, whether the output handler is initialized or not.
-if (!is_object($cds)) {
-	$cds = new CDSApi(true,0,variation());	
+/**
+ * Draw the Product Preview in the list of a product.
+ *
+ * @param ShopDispatcher $dispatcher
+ */
+function doDrawProductList(&$dispatcher) {
+  global $cds;
+  $products = getProducts($dispatcher->categoryId);
+  $categoryColor = $dispatcher->getCategoryObject()->content->get("ProductColor"); 
+  br();
+  br();
+  
+  echo '<table width="100%" cellpadding="0" cellspacing="0" border="0">';
+  for ($i=0; $i < count($products); $i++) {
+  	echo '<tr><td style="background-color:'.$categoryColor.';">';
+  	$dispatcher->productId = $products[$i];
+  	$dispatcher->execute("draw_product");
+  	echo '</td></tr>';
+  	echo '<tr><td style="height:4px;">';
+  	echo $cds->layout->spacer(10,4);
+  	echo '</td></tr>';  	
+  	
+  }
+  
+  echo '</table>'; 
 }
-
-
-// Add the libraries
-require_once $c["basepath"].'shop/shop_dispatcher.php';
-require_once $c["basepath"].'shop/tools.php';
-
-// create the shop-dispatcher 
-$dispatcher = new ShopDispatcher();
 
 ?>

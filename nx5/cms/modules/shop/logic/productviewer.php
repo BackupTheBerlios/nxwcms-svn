@@ -44,7 +44,8 @@ class ProductViewer extends WUIInterface {
 	 *
 	 */
 	function draw() {
-		global $sid, $lang;
+		global $sid, $lang, $dispatcher;
+		$dispatcher->productId = $this->id;
 		echo '<td colspan="2">';
 		echo '<table width="100%" cellpadding="0" cellspacing="0" border="0">';
 		echo '<tr><td colspan="2" class="headbox">'.getDBCell("shop_products", "PRODUCT_CODE", "PRODUCT_ID=".$this->id).'</td>';
@@ -53,7 +54,7 @@ class ProductViewer extends WUIInterface {
 		echo '&nbsp;&nbsp;';
 		echo crLink($lang->get("edit"), doc()."?sid=$sid&oid=$this->id&action=product_update");
 		echo '</td></tr>';		
-		echo '<tr><td colspan="3">'.drawProductPreview($this->id).'</td></tr>';
+		echo '<tr><td colspan="3">'.$dispatcher->execute("view_product").'</td></tr>';
 		echo '<tr><td colspan="3">'.drawSpacer(1,20).'</td></tr>';
 		echo '</table>';
 		echo '</td>';

@@ -31,7 +31,7 @@
 	 * all mechanisms for upload the image.
 	 * @package DatabaseConnectedInput
 	 */
-	class ImageUpload {
+	class ImageUpload3 {
 		var $v_label;
 
 		var $v_wuiobject;
@@ -54,7 +54,7 @@
 		  * file will be detected and addes automatically. No manipulation to the database is 
 		  * done.
 		  */
-		function ImageUpload($label, $fieldname, $file_id, &$pgnref) {
+		function ImageUpload3($label, $fieldname, $file_id, &$pgnref) {
 			global $specialID;
 
 			$this->fieldname = $fieldname;

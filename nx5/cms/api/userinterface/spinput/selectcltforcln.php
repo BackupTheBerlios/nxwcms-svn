@@ -58,7 +58,7 @@ class SelectCLTForCLN extends DBO {
   function process() {
     global $page_action, $specialID;
     if ($page_action == "INSERT") {      
-      $this->value = createClusterNode($this->table . "_" . $this->nameColumn . $specialID, $this->value);	     	
+      $this->value = createClusterNode(value($this->table . "_" . $this->nameColumn, "", "Object") . $specialID, $this->value);	     	
       DBO::process();
     }
   }

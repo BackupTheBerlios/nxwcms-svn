@@ -48,8 +48,8 @@
 			global $lang, $c;
 	  		require_once $c["path"] . "plugin/mouseoverimage/imageupload.inc.php";
 	  		$condition = "FKID = $this->fkid";
-	  		$form->add(new ImageUpload($lang->get("ChooseLowLight", 'Choose lowlight image'), 'FILENAME1', $this->fkid, $this));								
-	  		$form->add(new ImageUpload($lang->get("ChooseHighLight", 'Choose highlight image'), 'FILENAME2', $this->fkid, $this));								
+	  		$form->add(new ImageUpload3($lang->get("ChooseLowLight", 'Choose lowlight image'), 'FILENAME1', $this->fkid, $this));								
+	  		$form->add(new ImageUpload3($lang->get("ChooseHighLight", 'Choose highlight image'), 'FILENAME2', $this->fkid, $this));								
 			$form->add(new TextInput($lang->get("o_alt"), "pgn_mouseoverimage", "ALT", $condition, "type:text,width:300,size:64", ""));
 			$form->add(new TextInput($lang->get("o_copyright"), "pgn_mouseoverimage", "COPYRIGHT", $condition, "type:text,width:300,size:64", ""));
 		}
