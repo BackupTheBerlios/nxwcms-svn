@@ -35,10 +35,9 @@ function doDrawProductList(&$dispatcher) {
   global $cds;
   $products = getProducts($dispatcher->categoryId);
   $categoryColor = $dispatcher->getCategoryObject()->content->get("ProductColor"); 
-  br();
-  br();
+  br();  
   
-  echo '<table width="100%" cellpadding="0" cellspacing="0" border="0">';
+  echo '<table width="560" cellpadding="0" cellspacing="0" border="0">';
   for ($i=0; $i < count($products); $i++) {
   	echo '<tr><td style="background-color:'.$categoryColor.';">';
   	$dispatcher->productId = $products[$i];

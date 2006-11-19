@@ -24,6 +24,7 @@
 
   
 $dispatcher->registerHandler('draw_category', 'doDrawCategory');
+$dispatcher->registerHandler('draw_header', 'drawCategoryHeader');
 
 
 /**
@@ -33,10 +34,9 @@ $dispatcher->registerHandler('draw_category', 'doDrawCategory');
  */
 function doDrawCategory(&$dispatcher) {
 	global $cds;	
-	$categoryObject = $dispatcher->getCategoryObject();
-	
+		
 	// Draw the layout.
-	drawCategoryHeader($categoryObject);	
+	drawCategoryHeader($dispatcher);	
 	drawCategory($dispatcher);
 }
 
@@ -45,13 +45,19 @@ function doDrawCategory(&$dispatcher) {
  *
  * @param Cluster $categoryObject Content-Object, which is linked to the category.
  */
-function drawCategoryHeader($categoryObject) {
+function drawCategoryHeader(&$dispatcher) {
 	global $cds;
+	$categoryObject = $dispatcher->getCategoryObject();
 	echo '<table width="100%" cellpadding="0" cellspacing="0" border="0">';
 	echo '<tr><td align="right" style="border-bottom:1px solid #333333;">';
 	echo $categoryObject->content->get("Visual");
 	echo '</td></tr>';
 	echo '</table>';		
+	br();
+    $categoryObject = $dispatcher->getCategoryObject();
+    echo '<div style="padding-left:10px;">';
+    echo $categoryObject->content->get("Headline");
+    echo '</div>'; 
 }
 
 /**
@@ -61,9 +67,6 @@ function drawCategoryHeader($categoryObject) {
  */
 function drawCategory(&$dispatcher) {
   echo '<div style="width:649px; height:354px; padding-left:10px;overflow:auto;">';
-  br();
-  $categoryObject = $dispatcher->getCategoryObject();
-  echo $categoryObject->content->get("Headline");
   $dispatcher->execute("draw_product_list");
   echo '</div>';
 }

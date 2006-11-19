@@ -91,6 +91,38 @@ class ShopDispatcher {
 	
 	
 	/**
+	 * Return the logical product name (product code)
+	 *
+	 */
+	function getProductName() {
+		return getDBCell('shop_prodcuts', 'PRODUCT_CODE', 'PRODUCT_ID='.$this->productId);
+	}
+	
+	/**
+	 * Return the name of a category.
+	 *	 
+	 */
+	function getCategoryName() {
+		return getDBCell("categories", "CATEGORY_NAME", "CATEGORY_ID=".$this->categoryId);
+	}
+	
+	/**
+	 * Create a URL which can be used to link to products and categories with a given action
+	 *
+	 * @param string $action Action-handler that will be called, if a user clicks on the url. e.g. draw_product_details.
+	 * @return unknown
+	 */
+	 function getShopURL($action="") {
+		global $cds;
+		$url = $cds->docroot;
+		$url.= 'shop.php?do='.$action;
+		if ($this->productId != 0) $url.="&amp;product=".$this->productId;
+		if ($this->categoryId != 0) $url.="&amp;category=".$this->categoryId;
+		return $url;
+	}
+	
+	
+	/**
 	 * Heart of the dispatcher. Analyses the given paramters and 
 	 * calls the draw-functions. You can optionally pass an do-job
 	 * to make the dispatcher running a given action
@@ -108,6 +140,7 @@ class ShopDispatcher {
 	  } else {	  	
 	  	$action = $certainAction;
 	  }
+
 	  // try to find an action and run it.
 	  for ($i=0; $i<count($this->handlers); $i++) {
 	  	if ($action == $this->handlers[$i][0]) {

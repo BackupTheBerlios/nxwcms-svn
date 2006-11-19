@@ -53,12 +53,12 @@
       * @parsm string CSS-Class to use
       * @param integer width of the iframe
       */
-      function IFrameObject($name, $value, $callscript, $css="standard", $width="250", $heigth="250", $columns="1") {        
+      function IFrameObject($name, $value, $callscript, $css="standard", $width="250", $height="250", $columns="1") {        
         $this->name = $name;
         $this->frame = "f".$this->name;
         $this->callscript=$callscript;
         $this->width = $width;
-        $this->height = $heigt;
+        $this->height = $height;
         $this->value = $value;
         $this->css = $css;
         $this->columns = $columns;

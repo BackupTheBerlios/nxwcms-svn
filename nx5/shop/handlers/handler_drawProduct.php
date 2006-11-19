@@ -44,6 +44,9 @@ function doDrawProduct(&$dispatcher) {
 	echo '<td valign="top">'.$obj->content->get("Description").'</td>';
 	echo '<td width="50">&nbsp;</td>';
 	echo '</tr>';
+	echo '<tr><td colspan="4" align="right">';
+	$dispatcher->execute("draw_product_buttons");
+	echo '</td></tr>';
 	echo '</table>';
 }
 
