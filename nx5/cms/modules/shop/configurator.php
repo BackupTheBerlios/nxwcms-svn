@@ -43,7 +43,7 @@
 	$form->add(new TextInput($lang->get("name"), "shop_configurator", "NAME", $cond, "type:text,width:300,size:64", "MANDATORY&UNIQUE"));
 	$form->add(new TextInput($lang->get("description"), "shop_configurator", "DESCRIPTION", $cond, "type:textarea,width:300,size:4"));
 	if ($page_action == "UPDATE") {
-	  $form->add(new IFrameObject("itemlist", $oid, "configurator_item_editor.php", '', 720,400,2));
+	  $form->add(new IFrameObject("itemlist", $oid, "configurator_item_editor.php", 'white', 720,400,2));
 	}
 	$form->registerActionHandler($deleteHandler);
 	 

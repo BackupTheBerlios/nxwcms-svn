@@ -94,11 +94,11 @@
    /**
     * Draw the header for an Iframe-Object
     */
-   function drawIFOHeader() {
+   function drawIFOHeader($stdstyle = "standardlight", $noform=false) {
 			global $c, $callback, $sid, $error, $style;
 			$error = value("error");
 			if ($error=="0") {
-				$style="standardlight";
+				$style=$stdstyle;
 			} else {
 			   $style = "error";	
 			}
@@ -119,21 +119,25 @@
 						
 			echo "</head>\n";
 			echo "<body leftmargin=\"0\" topmargin=\"0\" marginheight=\"0\" marginwidth=\"0\" class=\"$style\">\n";
-			echo "<form name=\"ifoform\" method=\"POST\" action=\"".doc()."\" enctype=\"multipart/form-data\">";
-			$sid = value("sid", "NOSPACES");
-			$callback = value("callback", "NOSPACES");
-			retain("sid", $sid);
-			retain("callback", $callback);
-			echo tableStart();
+			if (! $noform) {
+			  echo "<form name=\"ifoform\" method=\"POST\" action=\"".doc()."\" enctype=\"multipart/form-data\">";
+			  $sid = value("sid", "NOSPACES");
+			  $callback = value("callback", "NOSPACES");
+			  retain("sid", $sid);
+			  retain("callback", $callback);
+			  echo tableStart();
+			}
    }
    
    
    /**
     * Draw the footer for an IFrame-Object
     */
-   function drawIFOFooter() {
-   	echo tableEnd();
-   	echo "</form>";
+   function drawIFOFooter($noform=false) {
+   	if (! $noform) {   	
+   	  echo tableEnd();
+   	  echo "</form>";
+   	}
    	echo "</body>";
    	echo "</html>";
    }

@@ -35,21 +35,42 @@
 
  $width = value("width", "NUMERIC", 600);
  if ($width < 200) $width = 200;
- drawIFOHeader();
- $configuratorId = value("value", "NUMERIC", 0);
+ drawIFOHeader('', true);
+ $configuratorId = value("value", "NUMERIC", LoadFromSession("configuratorId"));
  br();
  if ($configuratorId != 0) {
-   $action = value("action", "NOSPACES", 0);
-    
-   
-   // draw list with all items.
-    $page = new page("foo"); // dummy page with no use.
-    $form = new MenuForm($lang->get("configurator_settings", "Configurator Settings"), array($lang->get("position0", 'Position'), $lang->get("name","Name"), $lang->get("value", "Value")), "shop_configurator_item", "GUID", array("POSITION","TITLE", "VALUE"), "1", 10); 
- 	$form->addFilterRule($lang->get("name"), "TITLE");
- 	$form->width=700;
- 	$form->newAction = doc().'&action=create';
- 	$form->editAction = doc();
- 	echo $form->draw();	
+    SaveToSession("configuratorId");
+ 	$action = value("go", "NOSPACES", 0);
+    $ar = array();
+    $ar[] = array("Checkbox", 0);
+    $ar[] = array("Dropdown", 1);
+    $ar[] = array("Textinput", 2);
+    if (sameText($action, "create")) {    	
+    	don();
+    	$form = new stdEDForm("Create configurator item");
+    	$form->width = 700;
+    	$cond = $form->setPK("shop_configurator_item", "GUID");
+    	$form->add(new NonDisplayedValueOnInsert("shop_configurator_item", "CONFIGURATOR_ID", $cond, $configuratorId, "NUMBER"));
+    	$form->add(new TextInput($lang->get("title", "Title"), "shop_configurator_item", "TITLE", $cond, "type:text,size:255,width:300", "MANDATORY", "TEXT"));
+    	$form->add(new TextInput($lang->get("position", "Position"), "shop_configurator_item", "POSITION", $cond, "type:text,size:2,width:40", "MANDATORY&NUMBER", "NUMBER"));
+    	$form->add(new SelectOneInputFixed($lang->get("conf_type", "Configurator Type"), "shop_configurator_item", "TYPE", $ar, $cond, "type:dropdown,width:150", "MANDATORY", "NUMBER"));
+    	$form->add(new TextInput($lang->get("configuration", "Configuration"), "shop_configurator_item", "VALUE", $cond, "type:text,size:1024,width:300", "MANDATORY", "TEXT"));    	
+    	$form->add(new Hidden("go", "CREATE"));
+    	$form->check();
+    	$form->process();
+    	echo $form->draw();
+    } else if (sameText($action, "update")) {
+    	echo $action;
+    } else { 	
+      // draw list with all items.
+      $page = new page("foo"); // dummy page with no use.
+      $form = new MenuForm($lang->get("configurator_settings", "Configurator Settings"), array($lang->get("position0", 'Position'), $lang->get("name","Name"), $lang->get("value", "Value")), "shop_configurator_item", "GUID", array("POSITION","TITLE", "VALUE"), "1", 10); 
+ 	  $form->addFilterRule($lang->get("name"), "TITLE");
+ 	  $form->width=700;
+ 	  $form->newAction = "api/userinterface/spinput/".doc().'?go=create&sid='.$sid;
+   	  $form->editAction = doc();
+ 	  echo $form->draw();	
+    }
  }
  
  /**
@@ -83,5 +104,5 @@
  }
  */
  echo $errros;
- drawIFOFooter();
+ drawIFOFooter(true);
  ?>

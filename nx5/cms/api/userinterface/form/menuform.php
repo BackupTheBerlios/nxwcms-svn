@@ -37,15 +37,15 @@
       	var $newAction="";
       	var $order = "";
       	var $orderdir ="";
-				var $page=1;
-				var $recordsPerPage = 20;
-				var $filterColumns;
-				var $currentFilterColumn;
-				var $searchphrase;
-				var $searchdrawn;
-				var $searchcolumn;
-				var $buttonbar;
-				var $showall;
+		var $page=1;
+		var $recordsPerPage = 20;
+		var $filterColumns;
+		var $currentFilterColumn;
+		var $searchphrase;
+		var $searchdrawn;
+		var $searchcolumn;
+		var $buttonbar;
+		var $showall;
       
       /**
        * Standard constuctor
