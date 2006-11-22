@@ -45,7 +45,7 @@
     $ar[] = array("Checkbox", 0);
     $ar[] = array("Dropdown", 1);
     $ar[] = array("Textinput", 2);
-    if (sameText($action, "create")) {    	
+    if (sameText($action, "create") || sameText($action, "update")) {    	
     	don();
     	$form = new stdEDForm("Create configurator item");
     	$form->width = 700;
@@ -54,8 +54,8 @@
     	$form->add(new TextInput($lang->get("title", "Title"), "shop_configurator_item", "TITLE", $cond, "type:text,size:255,width:300", "MANDATORY", "TEXT"));
     	$form->add(new TextInput($lang->get("position", "Position"), "shop_configurator_item", "POSITION", $cond, "type:text,size:2,width:40", "MANDATORY&NUMBER", "NUMBER"));
     	$form->add(new SelectOneInputFixed($lang->get("conf_type", "Configurator Type"), "shop_configurator_item", "TYPE", $ar, $cond, "type:dropdown,width:150", "MANDATORY", "NUMBER"));
-    	$form->add(new TextInput($lang->get("configuration", "Configuration"), "shop_configurator_item", "VALUE", $cond, "type:text,size:1024,width:300", "MANDATORY", "TEXT"));    	
-    	$form->add(new Hidden("go", "CREATE"));
+    	$form->add(new TextInput($lang->get("configuration", "Configuration"), "shop_configurator_item", "VALUE", $cond, "type:text,size:1024,width:300", "", "TEXT"));    	
+    	$form->add(new Hidden("go", $action));
     	$form->check();
     	$form->process();
     	echo $form->draw();
