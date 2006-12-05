@@ -81,80 +81,21 @@
   	  	$out.= '<br>';
   	  	
   	  	// submenu
+  	  	$this->pathToRoot = $this->cds->menu->getPathToRoot();
+  	  	$topMenu = array_pop($this->pathToRoot);
+        if ($topMenu == null) $topMenu = $startMenu; 
   	  	$out.= '<table width="" cellpadding="0" cellspacing="0" border="0">';
-  	  	$out.= '<tr><td width="150" class="cellsubmenu">';
-  	  	
-  	  	$out.= drawSpacer(150,1);
+  	  	$out.= '<tr><td width="180" height="400" class="cellsubmenu" valign="top">'; 	  	  	  	
+  	  	$out.= '<table width="100%" border="0" cellpadding="0" cellspacing="1">';
+  	  	// submenu malen.
+  	  	$out.= $this->drawSubMenu($topMenu);
+  	  	$out.= '</table>';
   	  	$out.= '</td><td>';
-  	  	
-  	  	
-  	  	
+  	  		  	
   	  	 $out.= "</td></tr></table>";
   	  	return $out;
-  		
-  		
-  		/**
-  		// draw a table around the menu
-  	  $out = '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
-  	  $out.= '<tr><td colspan="3" id="navheader">&nbsp;</td></tr>';
-  	  $out.= '<tr><td valign="top" width="180" align="left" id="navbox">';
-  		
-  	  // get the path of menues, e.g. if a thrid-level page is active you 
-  	  // get the corresponding3rd/2nd/1st level menues
-  	    	  
-  	  $this->pathToRoot = $this->cds->menu->getPathToRoot();
-  	  // get the actice toplevelmenu
-	  // get the startpage
-  	  $startMenu = $this->cds->menu->getMenuByPath("/");  	  
-      // get the first menu level.
-  	  $firstLevelMenues = $startMenu->sameLevel();
-
-  	  $topMenu = array_pop($this->pathToRoot);
-      if ($topMenu == null) $topMenu = $startMenu;
-			
-			$this->prefix = '&rsaquo;'."&nbsp;";
-			
-			// Draw the menu
-			//$out.= '<div id="navbox" align="left"><ul>';
-			$out.='<ul>';
- 			for ($i=0; $i < count($firstLevelMenues); $i++) {			
- 				$title = $firstLevelMenues[$i]->getTitle();
- 				$link  = $firstLevelMenues[$i]->getLink();
- 				$isPopup = $firstLevelMenues[$i]->isPopup();
- 				
- 				// setup formating for active menu
- 				$add="";
- 				if ($firstLevelMenues[$i]->pageId == $topMenu->pageId) 
- 				  $add = ' class="menuactive" ';
- 				
- 				// build a-tag
- 				
- 				$tag = '<a '.$add.'href="'.$link.'" ';
- 				if ($isPopup) {
- 				  $tag.= ' target="_blank"'; 				  
- 				} 				
- 				$tag.='>'.$this->prefix.$title.'</a>'; 				
- 				
- 				
- 				$out.= '<li>'.$tag;
- 				
- 				// draw submenu
- 				if ($firstLevelMenues[$i]->pageId == $topMenu->pageId) {
- 				  $out.='<ul>';
- 				  $out.= $this->drawSubMenu($firstLevelMenues[$i], 1);
- 				  $out.='</ul>';
- 				 }
- 				
- 				 // close menu
- 				 $out.="</li>";
- 			}
-			$out.='</ul>';
-  			
-			// close the menu cell and open the output cell.
-			$out.='</td><td width="10">&nbsp;&nbsp;</td><td valign="top" style="padding-top:5px;">';
-  	  return $out;
-  		*/
-  	}
+  	
+    	}
   	
 
 		/**
@@ -163,8 +104,8 @@
 		 * @param object $startPage Menu-Object
 		 * @param integer $level depth of menu
 		 */
-	function drawSubMenu($mainmenu, $level) {
-		/**
+	function drawSubMenu($mainmenu, $level=1) {
+		
 	  $menues = $mainmenu->lowerLevel();  	 
   	  if (is_array($this->pathToRoot))
   	    $submenu = array_pop($this->pathToRoot);
@@ -175,32 +116,24 @@
   	      $href    = $menues[$i]->getLink();
   	      $title   = $menues[$i]->getTitle();
   	      $isPopup = $menues[$i]->isPopup();
-  	      $add = "";
 
-  	      if ($i == $max) {
-  	      	$add2 = 'class="bottom"';
-  	      }
-  	      if ( $activeSubmenu == $menues[$i]->pageId)
-  	    	$add = 'class="menuactive"';
-  	    	// inaktives Submenu
 
-  	      $out.= '<li '.$add2.'>';
+		  $out.= '<tr><td class="submenu'.$level.'">';  	      
   	      $out.= '<a '.$add.' href="' . $href . '"';
   	      if ($isPopup)
   	    	  $out.=' target="_blank"';
-  	      $out.=' '.$add.'>';
+  	      $out.=' '.$add.' class="submenu'.$level.'">';
   	      $out.= $this->prefix.$title;
   	      $out.= '</a>';
-  	      if ($activeSubmenu == $menues[$i]->pageId && $level < 3) {
-  	    		$out.= '<ul>';
-  	    		$out.= $this->drawSubMenu($menues[$i], $level+1);  	    		
-  	    		$out.= '</ul>';
+
+  	      if ($activeSubmenu == $menues[$i]->pageId && $level < 3) {	
+  	    	 $out.= $this->drawSubMenu($menues[$i], $level+1);  	    		
   	      }
-  	      $out.= '</li>';	    	
+  	      $out.= '</td></tr>';	    	
   	    
 		}
 		return $out;
-		*/
+		
 	 }
   	
   	
