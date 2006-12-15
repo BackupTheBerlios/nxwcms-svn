@@ -41,7 +41,7 @@
 		var $isSingleConfig = false;
 		var $pluginType = 4; // 1= Content Plugin, 2= System Extension
 
-		var $globalConfigPage = "plugin/recipe/recipe.php";
+		var $globalConfigPage = "plugin/recipe/overview.php";
 		var $globalConfigRoles = "ADMINISTRATOR";
 		var $name = "Recipe";
 
