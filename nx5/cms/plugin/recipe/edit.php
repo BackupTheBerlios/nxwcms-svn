@@ -24,6 +24,7 @@
 
   require_once "../../config.inc.php";
   require_once "ingredient_editor.php";
+  require_once "tag_selector.php";
   
   $auth = new auth("ADMINISTRATOR");
   $page = new Page("Edit Recipe");
@@ -32,12 +33,22 @@
   $cond = $form->setPK("pgn_recipes", "ID");
   
   $form->addHeaderLink(crHeaderLink($lang->get("back"), "plugin/recipe/overview.php?sid=".$sid));
-  
   $form->add(new TextInput($lang->get("name", "NAME"), "pgn_recipes", "NAME", $cond, "type:text,size:64,width:200", "MANDATORY"));
-  $form->add(new SubTitle("st", $lang->get("preparation", "Preparation"), 2));        
-  $form->add(new RichEditInput($lang->get("description"), "pgn_recipes", "DESCRIPTION", $cond, "type:rich,width:350,size:6", ""));               
-  $form->add(new TextInput($lang->get("preparation", "Preparation"), "pgn_recipes", "PREPARATION", $cond, "type:textarea,size:6,width:300", "")); 
+  if ($page_action == "UPDATE") {
+  	$values = createNameValueArrayEx("pgn_recipes_tags", "TAG", "TAG_ID", "1", "ORDER BY TAG ASC");  	
+    $form->add(new TagEditor("Tags", "pgn_recipes_tag_relation", "REC_ID", $oid, "TAG_ID", $values));
+  }
+  $form->add(new SubTitle("st", $lang->get("ingredients", "Ingredients"), 2));        
   $form->add(new IngredientEditor("pgn_recipes", $cond));
+  $form->add(new SubTitle("st", $lang->get("preparation", "Preparation"), 2));        
+  $form->add(new TextInput($lang->get("preparation", "Preparation"), "pgn_recipes", "PREPARATION", $cond, "type:textarea,size:6,width:300", "")); 
+  $form->add(new TextInput($lang->get("description", "Description"), "pgn_recipes", "DESCRIPTION", $cond, "type:textarea,size:6,width:300", ""));   
+  
+  $deleteHandler = new ActionHandler("DELETE");
+  $deleteHandler->addDbAction("DELETE FROM pgn_recipes WHERE ID=$oid ");
+  $deleteHandler->addDbAction("DELETE FROM pgn_recipes_tag_relation WHERE REC_ID=$oid ");
+  $form->registerActionHandler($deleteHandler);
+	
   $page->add($form);
   $page->draw();
 ?>

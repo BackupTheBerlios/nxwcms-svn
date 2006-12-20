@@ -25,14 +25,17 @@
   require_once "../../config.inc.php";
   $auth = new auth("ADMINISTRATOR");
   $page = new Page("Edit Recipes");
+  $filtermenu = new StdMenu("Recipe Editor");
+  $filtermenu->addMenuEntry("Recipes", "overview.php");
+  $filtermenu->addMenuEntry("Tags", "tags.php");
   
-  $form = new MenuForm($lang->get("recipes_overview", "Recipes Overview"), array('ID', $lang->get("name","Name") ), "pgn_recipes", "ID", array("ID", "NAME"), "1", $rows=40); 	
+    $form = new MenuForm($lang->get("recipes_overview", "Recipes Overview"), array($lang->get("name","Name"), "ID" ), "pgn_recipes", "ID", array("NAME", "ID"), "1", $rows=40); 	
  	$form->addFilterRule($lang->get("name"), "NAME");
  	$form->addFilterRule("ID", "ID");
  	$form->width="700";
  	$form->newAction = "plugin/recipe/edit.php?go=create&sid=".$sid;
  	$form->editAction = "edit.php";
  	$page->add($form);
-
-  $page->draw();
+	$page->addMenu($filtermenu);
+    $page->draw();
 ?>
