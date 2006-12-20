@@ -232,7 +232,7 @@
 		   	 $menuType = reg_load('CDS/MENU');
 		   	 if ($menuType != "")
 		   	   $this->menuRef = createDCRef($c["path"]."designs/menu/".$menuType);
-		   }
+		   }		   
 		   echo $this->menuRef->getFooter();
 		 }
 		 
