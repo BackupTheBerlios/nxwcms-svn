@@ -28,7 +28,7 @@
   $filtermenu = new StdMenu("Recipe Editor");
   $filtermenu->addMenuEntry("Recipes", "overview.php");
   $filtermenu->addMenuEntry("Tags", "tags.php");
-  
+    
     $form = new MenuForm($lang->get("recipes_overview", "Recipes Overview"), array($lang->get("name","Name"), "ID" ), "pgn_recipes", "ID", array("NAME", "ID"), "1", $rows=40); 	
  	$form->addFilterRule($lang->get("name"), "NAME");
  	$form->addFilterRule("ID", "ID");

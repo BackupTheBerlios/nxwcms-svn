@@ -19,7 +19,7 @@
 	$filtermenu->addMenuEntry($lang->get("user_link"), "user_general.php", "user_premissions.php");
 	$filtermenu->addMenuEntry($lang->get("group_link"), "group_general.php");
 	$filtermenu->addMenuEntry($lang->get("role_link"), "role_general.php");    
-  $filtermenu->addMenuEntry($lang->get("test", 'test'), "test.php");  
+ 
 	
 	$deleteHandler = new ActionHandler("DELETE");
 	$deleteHandler->addDbAction("DELETE FROM users where user_id=$oid and user_id > 999");

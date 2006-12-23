@@ -189,8 +189,9 @@
 			$query->getrow();
 			$content = $query->field("SNIPLET");
 			$content = addslashes($content);			
+			$snt = $query->field("SNIPLETTYPE");
 			$query->free();
-			$sql = "INSERT INTO $this->management_table ($this->pk_name, SNIPLET) VALUES ($newid, '$content')";
+			$sql = "INSERT INTO $this->management_table ($this->pk_name, SNIPLET, SNIPLETTYPE) VALUES ($newid, '$content', $snt)";
 			return $sql;
 		}
 

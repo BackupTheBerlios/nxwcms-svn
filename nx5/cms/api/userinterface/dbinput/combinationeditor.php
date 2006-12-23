@@ -28,7 +28,7 @@
 	 * use for creating n:n assosiasations of two tables in a third table.
 	 * @package DatabaseConnectedInput
 	 */
-	class CombinationEditor {
+	class CombinationEditor extends WUIInterface {
 		var $inlist1;
 
 		var $outlist1;

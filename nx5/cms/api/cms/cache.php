@@ -28,8 +28,9 @@
 	  *
 	  * @param integer SPID of the SitePage to render
 	  * @param integer Variation-ID of the SitePage to render
+	  * @param string Additional Parameters of URL.
 	  */
-	function renderSitePage($spid, $variation) {
+	function renderSitePage($spid, $variation, $addparam="") {
 		global $c, $db;		
 		if ($c["renderstatichtml"] && !checkCC($spid)) {
 			global $cc, $deploy;
@@ -42,7 +43,7 @@
 				$content_array = file($filename);
 				$content_string = implode("", $content_array);
 				forceDirectories ($c["cachepath"]);
-				$full_url = $c["hostlivedocroot"] . $template . "?page=" . $spid . "&v=" . $variation;
+				$full_url = $c["hostlivedocroot"] . $template . "?page=" . $spid . "&v=" . $variation.$addparam;
 				$fp = fopen($full_url, "r");
 				if ($fp != "") {
 					while (!feof($fp)) $content .= fgets($fp, 128);
