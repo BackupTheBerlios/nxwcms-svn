@@ -57,6 +57,17 @@
 		   */
 		function proccess() { $this->proccess(); }
 		
+		
+		/**
+		 * Will be called before process is called and after check
+		 */
+		function beforeProcess() { }
+		
+		/**
+		 * Will be called after process is called and the data is written!
+		 */
+		function afterProcess()   { }
+		
 		/**
 		 * Set a backlink to the parent container form
 		 * @param object $par Parent Container Object

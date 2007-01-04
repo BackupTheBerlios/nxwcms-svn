@@ -113,11 +113,25 @@
 			global $savemeta, $errors, $lang, $page_action, $updatevariation;
 
 			if ($errors == "" && (isset($savemeta) || isset($updatevariation))) {
+								
+				// before process
+				for ($i = 0; $i < count($this->container); $i++) {
+					$this->container[$i]->beforeProcess();
+				}
+				processSaveSets();
+
+				
 				for ($i = 0; $i < count($this->container); $i++) {
 					$this->container[$i]->process();
 				}
-
 				processSaveSets();
+
+			  // after process
+				for ($i = 0; $i < count($this->container); $i++) {
+					$this->container[$i]->afterProcess();
+				}
+				processSaveSets();
+
 
 				if ($errors != "") {
 					$this->addToTopText($lang->get("saveerror"));
