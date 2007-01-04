@@ -50,6 +50,7 @@
 	 	 * @param string Name of the Startpage.
 	 	 */
 		function breadcrumb($menu=null, $delimiter="&nbsp;&gt;&nbsp;", $css="breadcrumb", $home="Home" ) {
+	 		global $cds;
 	 		$result = "";
 			if ($menu==null) $menu = $this->parent->menu;
 			$start= new Menu(null, $this->parent->management->getStartPage(), $this->variation, $this->parent->level);
@@ -59,7 +60,7 @@
 				  $result = $delimiter.$this->getLinkIndividual($object->getLink(), $object->getTitle(), $css).$result;
 	 		}	
 	 				
-	 		$result = $this->getLinkIndividual($start->getLink(), $home, $css).$result;
+	 		$result = $this->getLinkIndividual($cds->docroot, $home, $css).$result;
 	 		return $result;
 	 	}
 	 	
