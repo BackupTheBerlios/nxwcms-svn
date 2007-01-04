@@ -122,7 +122,8 @@
 	        
 	        if (doc() == "index.php") {        	
 	        	$forward=$pagemenu->tabbar->submenucontainer[$pagemenu->tabbar->selectedMenu][$pagemenu->tabbar->selectedSubmenu][1];
-	        	header("Location:".$c["host"].$forward."?sid=$sid");	        	
+	        	if ($forward != "") 
+	        	  header("Location:".$c["host"].$forward."?sid=$sid");	        	
 	        }
 	        $this->process();
 	        $this->draw_header();
@@ -430,6 +431,7 @@
 		function draw_footer() {	
 			if ($this->base_target != "")
 			  echo '</base>';
+			  echo $errors;
 			echo "</body></html>";
 		}
 	}
