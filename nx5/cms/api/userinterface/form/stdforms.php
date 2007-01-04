@@ -80,14 +80,7 @@
 
 			$this->check();
 			if ($errors == "" && $page_state == "processing" && $page_action != "DELETE" && (value("changevariation") == "0" || value("changevariation") == "" )) {
-			  
-			  // before process
-			  for ($i = 0; $i < count($this->container); $i++) {
-					$this->container[$i]->beforeProcess();			
-				}
-			  if ((!$this->forbidUpdate && $page_action == "UPDATE") || $page_action == "INSERT")
-			    processSaveSets();
-			
+			  			  
 				for ($i = 0; $i < count($this->container); $i++) {
 					$this->container[$i]->process();
 				}

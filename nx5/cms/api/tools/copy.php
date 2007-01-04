@@ -181,13 +181,14 @@
 
 	/**
 	 * Copies a row an replaces specified values
+	 * if translate is specified as value, the given id will be translated to a live id.
 	 *
 	 * @param string Name of table in which row shall be copied
 	 * @param string Filter to apply on table to select record(s)
 	 * @param array array[n]["column"]: Column to replace, array[n]["value"]: Value to set, array[n]["datatype"]: type of data (NUMBER|CHAR|DATE)
 	 */
 	function copyRow($table, $filter, $values) {
-		global $db, $c_datatypes, $panic;
+		global $db, $c_datatypes, $panic;		
 		$sql = "SELECT * FROM $table WHERE $filter";
 		$query = new query($db, $sql);
 
@@ -202,14 +203,19 @@
 				$value[$n] = $query->field($name);
 				foreach ($values as $vcol => $vval) {
 					if ($name == $vcol) {
-						$value[$n] = $vval;
+						if (sameText($vval, "translate")) {
+							if (is_numeric($value[$n]) && ($value[$n] != "0"))
+							  $value[$n] = translateState($value[$n], 10, false);
+						} else {
+						  $value[$n] = $vval;
+						}
 					}
 				}
 				$column[$n] = $name;
 				$newRec->add($column[$n], $value[$n], $c_datatypes[$table][$name]);
 			}
 			$newRec->execute();			
-		}
+		}		
 	}
 
 	/**

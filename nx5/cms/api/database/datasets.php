@@ -99,24 +99,24 @@
 		for ($i = 0; $i < count($deletestatements); $i++) {
 			$deletestatements[$i]->execute();
 		}
-		$deletestatements = array();
+		$deletestatements = null;;
 
-		for ($j = 0; $j < count($insertstatements); $j++) {
+		for ($j = 0; $j < count($insertstatements); $j++) {			
 			$oids[$j] = $insertstatements[$j]->execute();
 		}
-		$insertstatements = array();
+		$insertstatements = null;
 
 		for ($k = 0; $k < count($updatestatements); $k++) {
 			$updatestatements[$k]->execute();
 		}
-		$updatestatements = array();
+		$updatestatements = null;
 
 		for ($l = 0; $l < count($rawstatements); $l++) {
 			$query = new query($db, $rawstatements[$l]);
 			$query->free();
 		}
 		
-		$rawstatements = array();
+		$rawstatements = null;
 	}
 	/** For Down-Grade-Compatibility only **/
 	function proccessSaveSets() { processSaveSets(); }

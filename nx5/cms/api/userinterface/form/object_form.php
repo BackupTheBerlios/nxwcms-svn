@@ -114,12 +114,6 @@
 
 			if ($errors == "" && (isset($savemeta) || isset($updatevariation))) {
 								
-				// before process
-				for ($i = 0; $i < count($this->container); $i++) {
-					$this->container[$i]->beforeProcess();
-				}
-				processSaveSets();
-
 				
 				for ($i = 0; $i < count($this->container); $i++) {
 					$this->container[$i]->process();

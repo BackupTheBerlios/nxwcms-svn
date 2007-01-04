@@ -103,11 +103,6 @@
 			$this->check();
 			if ($errors == "" && $page_state == "processing" && $page_action != "DELETE" && value("action") != $lang->get("back") && (value("changevariation") == "0" || value("changevariation") == "" ) && (value("changetranslation") == "0" || value("changetranslation") == "" )) {
 			
-			// before process
-			  for ($i = 0; $i < count($this->container); $i++) {
-					$this->container[$i]->beforeProcess();			
-				}
-			  processSaveSets();
 			
 				for ($i = 0; $i < count($this->container); $i++) {
 					$this->container[$i]->process();

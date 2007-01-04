@@ -224,7 +224,11 @@
 		 *               properties are usually applied when drawing in dev-state or when launching.
 		 */
 		function createVersion($newid, $applyProperties=true) {
-			// fill with own code!
+		  global $db;
+			$change[$this->pk_name] = $newid;
+			copyRow($this->management_table, "$this->pk_name = $this->fkid", $change);								
+			return '';
+			
 		} // function createVersion($newid)
 
 		/**
@@ -241,7 +245,12 @@
 		 * Copy this record and all its data to new id.
 		 * @param integer id which is used as PK for new record.
 		 */
-		function copyRecord($newid) { return $this->createVersion($newid, false); }
+		function copyRecord($newid) { 
+			global $db;
+			$change[$this->pk_name] = $newid;
+			copyRow($this->management_table, "$this->pk_name = $this->fkid", $change);								
+			return '';
+		}
 
 		/**
 		 * returns array with names, which need to be deployed when the plugin is installed
