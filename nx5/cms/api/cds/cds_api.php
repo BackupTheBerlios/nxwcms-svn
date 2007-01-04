@@ -139,8 +139,7 @@
 		 * @param integer PageID, you want to set as menu start node.
 		 */
 		function getPageById($pageId) {												
-			if (countRows("sitepage", "SPID", "SPID=$pageId") < 1) {
-				echo countRows("sitepage", "SPID", "SPID=$pageId");
+			if (countRows("sitepage", "SPID", "SPID=$pageId") < 1) {				
 				return null;				
 			} else {				
 			  return $this->createInstance($this->is_development, $pageId, $this->variation);
