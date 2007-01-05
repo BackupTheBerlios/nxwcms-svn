@@ -24,6 +24,12 @@
 	 **********************************************************************/
 	require "../../config.inc.php";
 	$auth = new auth("EDIT_OBJECT|OBJECT_PROPS");
+	if (value("resetfilter") == '1') {		
+		delVar ("filter");
+		delVar ("sname");
+		pushVar("linkset", '');		
+	}
+	
 	$page = new page("Edit Object");
 	$page->setJS("TREE");	
 	if (strlen(getVar("linkset")) > 1) $disableMenu = true;
@@ -60,7 +66,7 @@
 				$sql = "INSERT INTO content_variations (CID, FK_ID, VARIATION_ID, DELETED) VALUES ( $oid, $fkid, $variation, 0)";
 				$query = new query($db, $sql);				
 				$PGNRef = createPGNRef($content_MODULE_ID, $fkid);
-                $PGNRef->sync();
+        $PGNRef->sync();
 			}			
 			
 			$page_state = "start";			
@@ -90,7 +96,7 @@
         		$oname->setFilter("CATEGORY_ID = $category_id");
         		$editpanel->add($oname);
         		$editpanel->add(new TextInput($lang->get('access_key', 'Access Key', 'Key-Value with which you can access this content from the editor by typing [key].'), 'content', 'ACCESSKEY', $cond, "type:text,width:100,size:16",'UNIQUE'));        		
-        		$editpanel->backto = $c["docroot"] . "modules/content/objectbrowser.php?sid=$sid";
+        		$editpanel->backto = $c["docroot"] . "modules/content/objectbrowser.php?sid=$sid&resetfilter=1&pnode=$category_id";
         
         		// Edit
         		$editpanel->add(new Subtitle("st", $lang->get("edit_content")));
@@ -108,6 +114,7 @@
         		//$editpanel->add(new TextInput($lang->get("description"), "content", "DESCRIPTION", $cond, "type:textarea,width:300,size:3", ""));
         		$editpanel->add(new TextInput($lang->get("keywords"), "content", "KEYWORDS", $cond, "type:textarea,width:300,size:3", ""));
         		// MetaData 
+        		$editpanel->add(new Hidden("resetfilter", '1'));        		
         		$editpanel->add(new MetaDataEditor($oid, $template, 2));
         		$editpanel->add(new FormButtons());
         

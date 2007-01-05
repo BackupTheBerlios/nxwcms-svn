@@ -35,7 +35,7 @@
 
 	$db->close();
 
-	if ($auth->loggedIn) {
+	if ($auth->loggedIn) {		
 		header ("Location: " . $c["docroot"] . "index.php?sid=" . $auth->session);
 
 		exit;

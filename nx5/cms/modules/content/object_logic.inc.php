@@ -28,7 +28,6 @@
 
 			if ($go == "insert")
 				$page_action = "INSERT";
-
 			$form = new stdEDForm($lang->get("o_new"), "i_edit.gif");
 			$cond = $form->setPK("content", "CID");
 			$oname = new TextInput($lang->get("o_name"), "content", "NAME", $cond, "type:text,width:200,size:32", "MANDATORY&UNIQUE");

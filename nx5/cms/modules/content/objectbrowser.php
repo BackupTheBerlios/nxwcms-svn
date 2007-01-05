@@ -5,7 +5,7 @@
 	require_once "../../config.inc.php";
 
 	$auth = new auth("OBJECT_BROWSER");
-	if (value("resetfilter") == '1') {
+	if (value("resetfilter") == '1') {		
 		delVar ("filter");
 		delVar ("sname");
 		pushVar("linkset", '');		

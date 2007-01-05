@@ -381,8 +381,7 @@ class auth {
 	 * @return boolean true if check was successful or false if not.
 	 */
 	function checkLogin($login, $passwd) {
-		global $db, $c;
-		sleep(4);
+		global $db, $c;		
 		$sql = "SELECT USER_ID FROM users WHERE USER_NAME='$login' AND PASSWORD = '$passwd'";
 		$query = new query($db, $sql);
 		if ($query->count()==1) {
