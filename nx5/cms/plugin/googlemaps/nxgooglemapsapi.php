@@ -34,7 +34,7 @@
  * GOverviewMapControl - a collapsible overview map in the corner of the screen
  */
  
-  define(GoogleMapsKey, '<your api key here>'); 
+  define(GoogleMapsKey, $c['googlemapskey']); 
   
   define( GLargeMapControl 		, 'GLargeMapControl()');
   define( GSmallMapControl 		,	 'GSmallMapControl()');
