@@ -121,9 +121,10 @@
 	        }
 	        
 	        if (doc() == "index.php") {        	
-	        	$forward=$pagemenu->tabbar->submenucontainer[$pagemenu->tabbar->selectedMenu][$pagemenu->tabbar->selectedSubmenu][1];
+	        	$forward=$pagemenu->tabbar->submenucontainer[$pagemenu->tabbar->selectedMenu][$pagemenu->tabbar->selectedSubmenu][1];	        	
 	        	if ($forward != "") 
-	        	  header("Location:".$c["host"].$forward."?sid=$sid");	        	
+	        	  $forward = addParam($forward, "sid=$sid");
+	        	  header("Location:".$c["host"].$forward);	        	
 	        }
 	        $this->process();
 	        $this->draw_header();

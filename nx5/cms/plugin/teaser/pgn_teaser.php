@@ -75,7 +75,8 @@
 		   */
 		function draw($param = "") {
 			global $db, $cds;
-      return $content;			
+      require_once $cds->path."sys/draw_teaser.php";      
+      return drawPGNTeaser($this->fkid);
 		}
 
 		/**

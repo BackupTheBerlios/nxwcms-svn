@@ -5,6 +5,21 @@
 	 */
 
 
+/** 
+ * adds a parameter to a given url whether with ? or &
+ * @param string URL
+ * @param string Parameter in format paramname=value
+ */
+  function addParam($url, $paramstring) {
+	  if (strstr($url, '?') === FALSE) {
+	  	$url = $url . '?' . $paramstring;
+	  } else {
+	  	 $url = $url . '&' . $paramstring;
+	  }
+	  return $url;
+  }
+
+
 /**
  * Fix for php4.
  */
