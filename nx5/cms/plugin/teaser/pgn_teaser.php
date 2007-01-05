@@ -64,6 +64,7 @@
 		  */
 		function preview() {
 			global $variation, $c;
+			$content = getDBCell("pgn_teaser", "HEADLINE", "FKID=".$this->fkid);
 			return $content;
 		}
 
@@ -87,6 +88,10 @@
 			$createHandler = new ActionHandler("CREATE");
 			$createHandler->addDBAction("INSERT INTO $this->management_table ($this->pk_name) VALUES ($this->fkid)");
 			$createHandler->process("CREATE");
+		}
+		
+		function getInstallationFiles() {
+			return "draw_teaser.php";
 		}
 
 		/**
