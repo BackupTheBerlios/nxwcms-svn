@@ -359,6 +359,18 @@
 	}
 	
 	/**
+	 * Creates an a-tag with the complete  link to the page
+	 * @param string $addParams Additional payload (e.g. attributes) which will be passed in the a-tag
+	 */
+	function getTag($addParams="") {
+		$result = '<a href="'.$this->getLink().'"';
+		if ($this->isPopup()) $result.= ' target="_blank"';
+		if ($addParams != "") $result.= ' '.$addparams;
+		$result.='>'.$this->getTitle().'</a>';
+		return $result;
+	}
+	
+	/**
 	 * Gets the Title of a Multipage
 	 */
 	 function getTitleMultipage() {
