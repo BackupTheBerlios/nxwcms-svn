@@ -2,11 +2,16 @@
 	/*
 	 * Include this file in your page-templates
 	 */
-	 if (isset($c["path"])) {
+    if (isset($_GET["c"]) || isset ($_POST["c"]) || isset($_SESSION["c"])) {    	
+    	exit;
+    }
+    
+	if (isset($c["path"])) {
 	 	require_once $c["path"]."config.inc.php";
 	 } else {
 	   require_once "../cms/config.inc.php";
 	 }
+
 	 include_once $c["path"]."api/cds/track_exit_pages.php";
 	 require_once $c["path"]."api/cds/lib.inc.php";
 	
@@ -31,6 +36,8 @@
 	    include_once $c["path"].'modules/stats/phpOpenTracker.php';
 	    @phpOpenTracker::log(array('document' => $page));	
 	 }
+	 if (! (isset($disableCache) || isset($disableCaching)))
+	   require_once $c["path"]."ext/jpcache/jpcache.php";
 	 
 	 require_once $c["path"]."ext/jpcache/jpcache.php";
 	 includePGNISources();		
