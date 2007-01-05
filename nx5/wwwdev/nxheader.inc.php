@@ -2,7 +2,10 @@
 	/*
 	 * Include this file in your page-templates
 	 */	 
-	 if (!isset($c)) require_once "../cms/config.inc.php";
+	if (isset($_GET["c"]) || isset ($_POST["c"]) || isset($_SESSION["c"])) {    	
+    	exit;
+    }
+	 if (! isset($c)) require_once "../cms/config.inc.php";
 	 require_once $c["path"]."api/cds/lib.inc.php";
 	 includePGNISources();
 
