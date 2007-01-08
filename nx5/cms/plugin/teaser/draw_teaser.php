@@ -39,8 +39,7 @@
         $linktext = $query->field("LINKTEXT");
         if ($linktext == "") $linktext = "read more";
         $result =  '<div class="teaser">';
-        if ($headline != "") $result.=  '<b>'.$headline.'</b><br>';
-        if 
+        if ($headline != "") $result.=  '<b>'.$headline.'</b><br>';        
         if ($imageid != "0") $result.= $aTag.$cds->content->getById($imageid).'</a><br>';      	
         if ($body !="") $result.= $body;
         if (($query->field("RESOLVECHILDS") != "1") || (($spid == "0") && ($href==""))) {
