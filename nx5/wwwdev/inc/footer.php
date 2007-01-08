@@ -1,5 +1,10 @@
 <?php
   // close the content cell and include the sidebar.
+  br();
+  br();
+  echo '<center>';
+  echo $cds->layout->menu->getPrevForwardLinks();
+  echo '</center>';
   echo '</td>';
   echo '<td valign="top" id="sidebar">';
   include "sidebar.php";

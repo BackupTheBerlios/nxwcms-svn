@@ -90,5 +90,35 @@
 	 	   return $result;	
 	 	 }
 	 	
-	 }
+	/**
+	 * Draws forward and previous page links.
+	 * @param string $forward Text or symbols for forward links
+	 * @param string $backward Text or symbols for backward links
+	 * @param string $attributes Additional link attributes like style or class
+	 **/
+	function getPrevForwardLinks($forward='&nbsp;&raquo;', $backward='&laquo;&nbsp;', $attributes="") {
+	 	global $cds;
+	 	$out = '';
+	 	$nextPage = $cds->menu->getNextPage();
+	 	$lastPage = $cds->menu->getPreviousPage();
+	 	if (is_object($lastPage)) {
+	 		$out.= '<a href="'.$lastPage->getLink().'" '.$attributes;
+	 		if ($lastPage->isPopup())
+	 		  $out.=' target="_blank"';
+	 		$out.='>';
+	 		$out.=$backward.$lastPage->getTitle();
+	 		$out.='</a>';
+	 	}
+	 	$out.='&nbsp;&nbsp;&nbsp;';
+	 	if (is_object($nextPage)) {
+	 		$out.= '<a href="'.$nextPage->getLink().'" '.$attributes;
+	 		if ($nextPage->isPopup())
+	 		  $out.=' target="_blank"';
+	 		$out.='>';
+	 		$out.=$nextPage->getTitle().$forward;
+	 		$out.='</a>';
+	 	}
+	 	return $out;
+	}
+}
 ?>
