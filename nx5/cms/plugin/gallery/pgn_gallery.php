@@ -221,7 +221,7 @@ class pgnGallery extends Plugin {
 	  img.alt = alt;
 	  
 	  desc = document.getElementById('pgnIGDescription');
-	  desc.innerHTML = '<b>' + (imgNum+1).toString() + '/' + (photoNum+1).toString() + '</b><br>' + alt;
+	  desc.innerHTML = '<b>' + (imgNum+1).toString() + '/' + (photoNum+1).toString() + '<\/b><br>' + alt;
 	}
 	
 	function popupImg() {
@@ -244,7 +244,7 @@ class pgnGallery extends Plugin {
 
 				$syspath = $c["host"].$cds->docroot.'sys/';
 				$content = '<div id="pgnIGContainer" style="width:'.$width.'px;height:'.$height.'px;">
-				<div id="pgnIGButtons" align="center"><a href="#" onClick="pgnIGPrev();return false;"/><img src="'.$syspath.'galprev.gif" border="0" alt="prev"/></a>&nbsp;&nbsp;<a href="#" onClick="pgnIGNext(); return false;"/><img src="'.$syspath.'galnext.gif" border="0" alt="next"/></a><br><br></div>
+				<div id="pgnIGButtons" align="center"><a href="#" onClick="pgnIGPrev();return false;"><img src="'.$syspath.'galprev.gif" border="0" alt="prev"/></a>&nbsp;&nbsp;<a href="#" onClick="pgnIGNext(); return false;"><img src="'.$syspath.'galnext.gif" border="0" alt="next"></a><br><br></div>
 			  <img onClick="popupImg();" style="cursor:pointer;" src="'.$pgnIG["src"].'" alt="'.$pgnIG["alt"].'" width="'.$pgnIG["width"].'" height="'.$pgnIG["height"].'" id="pgnIGImage"/>
 	          <div id="pgnIGDescription" align="center"><b>1/'.($pgnIG["count"]+1).'</b><br/>'.$pgnIG["alt"].'</div>			  
 			  </div>';

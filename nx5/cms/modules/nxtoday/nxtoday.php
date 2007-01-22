@@ -38,27 +38,8 @@
 	$nxtoday->QuickLinks->add(new NXToday_SPLink(100083));
 	$nxtoday->QuickLinks->add(new NXToday_ChannelLink("test"));
 
+
+$page = new Page('N/X Today');
+$page->add($nxtoday);
+$page->draw();
 ?>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-
-<html>
-	
-<head>
-<title>N/X Web Content Management System 2004</title>
-<?
-						
-		?>
-<META HTTP-EQUIV = "Pragma" content = "no-cache">
-<META HTTP-EQUIV = "Cache-Control" content = "no-cache, must-revalidate">
-<META HTTP-EQUIV = "Expires" content = "0">
-<link href="../../api/userinterface/themes/standard/theme.css" rel="stylesheet" type="text/css">
-</head>
-
-	<body>
-<?
-	echo $nxtoday->draw();
-?>
-	</body>	
-	
-</html>	

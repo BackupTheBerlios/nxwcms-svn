@@ -30,7 +30,7 @@
 	 
 	 require_once "../../config.inc.php";
 	 
-	class NXToday {
+	class NXToday extends WUIInterface {
 		var $QuickLinks;
 		var $untranslatedPages;
 		
@@ -43,57 +43,38 @@
 		 * draws NXToday-Output
 		 */
 		function draw() {
-			$output = "		<table border=\"0\" width=\"100%\" align=\"left\" class=\"nxtoday_frame\">\n";
-			$output .= "		<tr>\n";
-			$output .= "			<td width=\"25%\" class=\"nxtoday_frame\">\n";
-			$output .= $this->QuickLinks->draw();
-			$output .= "			</td>\n";
+			echo '<table width="1000" cellpadding="4" cellspacing="2" broder="0">';
+			echo '<tr>';
+			// 1. Spalte
+			echo '<td width="33%" valign="top">';
 			
-			$output .= $this->drawVLine();
-			/**
-			// Here comes draft-output of Message-Part.
-			$output .= "			<td width = \"25%\" class=\"nxtoday_frame\">\n";
-			$output .= "				<table width=\"100%\">\n";
-			$output .= "					<tr>\n";
-			$output .= "						<td class=\"nxtoday_category\">Messages</td>\n";
-			$output .= "					</tr>\n";
-			$output .= "				</table>\n";
-			$output .= "			</td>\n";
-			
-			$output .= $this->drawVLine();
-			
-			// Here comes draft-output of ToDo-Part.			
-			$output .= "			<td width=\"25%\" class=\"nxtoday_frame\">\n";
-			$output .= "				<table width=\"100%\">\n";
-			$output .= "					<tr>\n";
-			$output .= "						<td class=\"nxtoday_category\">ToDo</td>\n";
-			$output .= "					</tr>\n";
-			$output .= "				</table>\n";
-			$output .= "			</td>\n";
-			$output .= $this->drawVLine();
-			
-			// Here comes draft-output of ToDo-Part.			
-			$output .= "			<td width=\"25%\" class=\"nxtoday_frame\">\n";
-			$output .= "				<table width=\"100%\">\n";
-			$output .= "					<tr>\n";
-			$output .= "						<td class=\"nxtoday_category\">Potentially Untranslated Pages</td>\n";
-			$output .= "					</tr>\n";
-			$output .= "					<tr><td>\n";
-			$output .= $this->untranslatedPages->draw();
-			$output .= "					</td></tr>\n";
-			
-			$output .= "				</table>\n";
-			$output .= "			</td>\n";
-			*/
-			$output .= "		</tr>\n";
-			$output .= "	</table>\n";
-			
-			return $output;
+			echo '</td>';
+			// 2. Spalte
+			echo '<td width="33%" valign="top">';
+			echo $this->drawABox('Bookmarks', $this->QuickLinks->draw());
+			echo '</td>';
+			// 3.Spalte
+			echo '<td width="33%" valign="top">';
+			  // Datum.
+			  
+			  echo '<h2>'.date('D Y-M-d H:i').'</h2>';
+			  echo 'Week: '.date('W');
+			echo '</td>';
+			echo '</tr>';
+			echo '</table>';
 		}
 		
-		function drawVLine() {
-			return  "			<td class=\"nxtoday_vline\">&nbsp;</td>\n";		
-		}
+   
+  /**
+   * Get the HTML Output for a box in the cockpit.
+   */
+  function drawABox($headline, $content) {
+    echo getFormHeadline($headline);
+    echo $content;
+    echo getFormFooterLine();
+    br();
+    br();    
+  }
 		
 	}
 	
@@ -216,9 +197,6 @@
 					break;
 				case "":
 					$output = "<table border=\"0\" width=\"100%\">\n";
-					$output .= "	<tr>\n";
-					$output .= "		<td class=\"nxtoday_category\">Quick-Links</td>\n";
-					$output .= "	</tr>\n";
 					$output .= $this->draw("SPLink");
 					$output .= $this->draw("ChannelLink");
 					$output .= "</table>\n";

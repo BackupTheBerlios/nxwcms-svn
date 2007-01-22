@@ -48,6 +48,13 @@
 }
 	
 	
+/**
+ * echos a carriage return linefeed
+ */
+function crlf() {
+  echo "\n";
+}	
+	
 	/**
 	 * Reverse htmlspecialchars
 	 *

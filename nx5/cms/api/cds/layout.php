@@ -44,6 +44,7 @@
 		var $docType = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
 		var $contentType='text/html; charset=iso-8859-1';
 		var $menuRef;
+		var $images;
 		
 		/**
 		* Standard constructor.
@@ -51,6 +52,7 @@
 		function Layout(&$parent) { 
 			global $c;
 			$this->parent = &$parent; 
+			$this->images = array();
 			$this->menu = new MenuLayout($this->parent);
 			$this->dhtml = new DHTMLLayout($this->parent);
 			$this->media = new MediaLayout($this->parent);
@@ -117,7 +119,7 @@
 	 	*/
 		function drawSMAEntry() {
 			global $c;
-			$out = '<a href="' . $c["docroot"] . 'modules/sma/sma.php?page=' . $this->parent->pageId . '&v=' . $this->parent->variation . '" target=_blank><img src="'.$c["devdocroot"].'sys/sma_start.gif" border="0" alt=""></a>';
+			$out = '<a href="' . $c["docroot"] . 'modules/sma/sma.php?page=' . $this->parent->pageId . '&amp;v=' . $this->parent->variation . '" target=_blank><img src="'.$c["devdocroot"].'sys/sma_start.gif" border="0" alt=""></a>';
 			return $out;
 		}
 		
@@ -236,6 +238,34 @@
 		   echo $this->menuRef->getFooter();
 		 }
 		 
+		/**
+		 * preload images by href
+		 * @param string SRC of the image to preload
+		 */
+		 function preloadImage($src) {
+		   $this->images[] = $src;	
+		 }
+		 
+		 /**
+		  * Preload an image by a given access key
+		  * @param string AccessKey
+		  */
+		 function preloadImageByAccessKey($accessKey) {
+		   global $cds;
+		   $obj = $cds->content->getByAccessKey($accessKey, 'ALL');
+		   $this->images[] = $obj["path"];	
+		 }
+		 
+		 /**
+		  * Preload an image by Name in actual class.
+		  * @param string figure name in class
+		  */
+		 function preloadImageByName($name) {
+		 	 global $cds;
+		   $obj = $cds->content->get($name, 'ALL');
+		   $this->images[] = $obj["path"];	
+		 }
+		 
 		  
 		/**
 		  * Draw a header for the HTML-Page
@@ -268,6 +298,23 @@
 		 	// add js
 		 	for ($i=0; $i<count($this->jsArray); $i++) {
 		 		echo '  <script language="javascript" type="text/javascript" src="'.$cds->docroot.$this->jsArray[$i].'"></script>'."\n";
+		 	}
+		 	
+		 	// add preloader
+		 	if (count($this->images) > 0) {
+		 		echo '<script language="javascript" type="text/javascript">';
+		 		crlf();
+		 		echo '  if (document.images) {';
+		 		crlf();
+		 		for ($i=0; $i< count($this->images); $i++) {
+		 		  echo '    $img'.$i.' = new Image(100,100);';
+		 		  crlf();
+		 		  echo '    $img'.$i.'.src="'.$this->images[$i].'";'; 	
+		 			crlf();
+		 		}		 		
+		 		echo '  }';
+		 		crlf();
+		 		echo '</script>';		 				 		
 		 	}
 		 	
 			echo $this->header;

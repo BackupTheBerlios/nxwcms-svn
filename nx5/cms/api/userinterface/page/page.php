@@ -125,6 +125,7 @@
 	        	if ($forward != "") 
 	        	  $forward = addParam($forward, "sid=$sid");
 	        	  header("Location:".$c["host"].$forward);	        	
+	        	  //header("Location:".$c["docroot"].'modules/nxtoday/nxtoday.php?sid='.$sid);
 	        }
 	        $this->process();
 	        $this->draw_header();
