@@ -1,0 +1,22 @@
+<div align="left">{$lang_login_to_your_account}</div>
+
+<div align="left">
+<form action="login.php?type=2{if $smarty.get.dest != ""}&amp;dest={$smarty.get.dest}{/if}" method="post">
+<table border="0">
+<tr>
+<td>{$lang_username}:</td>
+<td><input type="text" name="username" maxlength="32" /></td>
+</tr>
+<tr>
+<td>{$lang_password}:</td>
+<td><input type="password" name="password" maxlength="32" /></td>
+</tr>
+<tr>
+<td>{$lang_remember_me}:</td>
+<td><input type="checkbox" name="remember" value="1" /></td>
+</tr>
+</table>
+<br />
+<input type="submit" value="{$lang_go}" />
+</form>
+</div>

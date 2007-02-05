@@ -1,0 +1,18 @@
+<div align="left">{$lang_activate_your_account}</div>
+
+<div align="left">
+<form action="activate.php" method="get">
+<table border="0">
+<tr>
+<td>{$lang_user_id}:</td>
+<td><input type="text" name="userid" value="{$smarty.get.userid}" maxlength="8" /></td>
+</tr>
+<tr>
+<td>{$lang_code}:</td>
+<td><input type="text" name="code" value="{$smarty.get.code}" maxlength="8" /></td>
+</tr>
+</table>
+<br />
+<input type="submit" value="{$lang_go}" />
+</form>
+</div>

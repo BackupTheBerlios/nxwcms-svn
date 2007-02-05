@@ -1,0 +1,15 @@
+<div align="left">{$lang_delete_a_user}</div>
+
+<div align="left">
+<form action="admin.php?type=deleteuser" method="post">
+<input type="hidden" name="process" value="yes" />
+<table border="0">
+<tr>
+<td>{$lang_username}:</td>
+<td><input type="text" name="username" maxlength="32" /></td>
+</tr>
+</table>
+<br />
+<input type="button" value="{$lang_go}" onclick="javascript:if(confirm('{$lang_are_you_sure}')){ldelim}document.forms[0].submit();{rdelim}else{ldelim}return false;{rdelim}" />
+</form>
+</div>

@@ -1,0 +1,52 @@
+<div align="left">{$lang_complete_member_list}</div>
+
+<div align="left">
+{$admin_memberlist_top}<br />
+<table border="0" cellpadding="5" cellspacing="2">
+<tr>
+<th>{$lang_username}</th>
+<th>{$lang_email}</th>
+<th>{$lang_joined}</th>
+</tr>
+{foreach from=$member_info item=member}
+<tr>
+<td><a href="profile.php?type=view&amp;id={$member.id}" class="inline" target="_blank">{$member.username}</a></td>
+<td><a href="mailto:{$member.email}" class="inline">{$member.email}</a></td>
+<td><b>{$member.joined}</b></td>
+</tr>
+{/foreach}
+</table>
+
+<br />
+
+<form action="admin.php" method="get">
+<input type="hidden" name="type" value="memberlist" />
+<table border="0">
+<tr>
+<td>{$lang_items_per_page}</td>
+<td>
+<select name="pp">
+<option value="{$current_perpage}">{$current_perpage}</option>
+<option value="10">10</option>
+<option value="20">20</option>
+<option value="30">30</option>
+<option value="40">40</option>
+<option value="50">50</option>
+<option value="{$total_members}">{$lang_all}</option>
+</select>
+</td>
+<td>{$lang_page}</td>
+<td>
+<select name="page">
+<option value="{$current_page}">{$current_page}</option>
+{foreach from=$pages item=pagenumber}
+<option value="{$pagenumber}">{$pagenumber}</option>
+{/foreach}
+</select>
+</td>
+</tr>
+</table>
+<br />
+<input type="submit" value="{$lang_go}" />
+</form>
+</div>

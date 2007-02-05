@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+<title>{$PAGE_TITLE}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="Douglas Rennehan" />
+<style type="text/css">
+<!--
+body {ldelim}
+	background: #afafaf url('templates/{$TEMPLATE}/images/bg.png') repeat-x;
+{rdelim}
+
+.main {ldelim}
+	padding-left: 5px;
+	background-color: #e5e5e5;
+	font-size: 12pt;
+	color: #000000;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	border: 2px dashed #000;
+{rdelim}
+
+.headertext {ldelim}
+	font-size: 22pt;
+	font-weight: bold;
+	color: #000000;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+{rdelim}
+
+a {ldelim}
+	color: #000000;
+	font-weight: bold;
+	text-decoration: underline;
+	font-size: 12pt;
+{rdelim}
+
+a:hover {ldelim}
+	color: #000000;
+	font-weight: bold;
+	font-style: italic;
+	text-decoration: underline;
+{rdelim}
+-->
+</style>
+</head>
+
+<body>
+
+<div align="center" class="main">
+<h1 class="headertext">{$SITE_NAME}</h1><br />
+<table border="0" cellpadding="5">
+<tr>
+{if $IS_LOGGED == true}
+<td><a href="index.php">{$lang_menu_main}</a></td>
+<td><a href="logout.php">{$lang_menu_logout}</a></td>
+<td><a href="profile.php?type=edit">{$lang_menu_edit_your_profile}</a></td>
+<td><a href="profile.php?type=view&amp;id={$USERID}">{$lang_menu_view_your_profile}</a></td>
+{else}
+<td><a href="login.php">{$lang_menu_login}</a></td>
+<td><a href="register.php">{$lang_menu_register}</a></td>
+<td><a href="activate.php">{$lang_menu_activate_your_account}</a></td>
+{/if}
+</tr>
+</table>

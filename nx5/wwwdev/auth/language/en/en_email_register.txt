@@ -1,0 +1,12 @@
+Charset:iso-8859-1||
+Subject:Congratulations .username.! :: .site_name.||
+Message:Congratulations you have successfully registered for .site_name.! Here is your info:
+
+User id: .userid.
+Username: .username.
+Password: .password.
+Code: .code.
+
+Your password is encrypted in our database and cannot be retrieved, so please keep this email!
+
+.email_signature.
