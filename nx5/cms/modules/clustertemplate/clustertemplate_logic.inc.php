@@ -56,10 +56,7 @@
 			$form->add($tempbox);
 			$show = ' style="display:none;" ';
 			$form->add(new IDWrapper("templ", new TextInput($lang->get("template", "Template"), "cluster_templates", "TEMPLATE", $cond, "type:textarea,width:400,size:20") ,"embedded", $show,2));	
-			
-			$form->add(new CheckboxTxtInput($lang->get('is_shop_cat_class','Enable for Use as Shop Category Template'), 'cluster_templates', 'IS_SHOP_CATEGORY', $cond));
-			$form->add(new CheckboxTxtInput($lang->get('is_shop_cat_product','Enable for Use as Shop Product Template'), 'cluster_templates', 'IS_SHOP_PRODUCT', $cond));
-
+						
 			$form->add(new Hidden("action", "newobject"));
 			$form->add(new NonDisplayedValueOnInsert("cluster_templates", "CATEGORY_ID", $cond, $pnode, "NUMBER"));
 			$form->add(new NonDisplayedValueOnInsert("cluster_templates", "DELETED", $cond, 0, "NUMBER"));
