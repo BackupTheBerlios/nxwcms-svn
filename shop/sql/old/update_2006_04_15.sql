@@ -1,0 +1,1 @@
+ALTER TABLE `channel_categories` ADD `PAGE_ID` BIGINT NULL AFTER `CHID` ;

@@ -1,0 +1,1390 @@
+<html>
+<head>
+<title>N/X 4.1 Installation Manual</title>
+<link rel="stylesheet" href="format.css" type="text/css">
+</head>
+
+<body>
+
+<div style="margin-left: 100px;">
+
+<p style="font-size: 12pt;">&nbsp;</p>
+
+<p style="font-size: 16pt;"><b>N/X 4.1<br />
+Installation Manual</b></p>
+
+<p>&nbsp;</p>
+
+<p>Author: Sven Weih<br />
+&lt;sven [at] nxsystems org&gt;</p>
+
+<p>&nbsp;</p>
+
+</div>
+
+<hr />
+
+<h1>Table of Contents</h1>
+       
+<p class="toc1"><a href="#toc1">1. Installation</a></p>
+<p class="toc2"><a href="#toc1-1">1.1. System requirements</a></p>
+<p class="toc2"><a href="#toc1-2">1.2. PHP configuration</a></p>
+<p class="toc2"><a href="#toc1-3">1.3. Extracting the package</a></p>
+<p class="toc2"><a href="#toc1-4">1.4. Creating the database</a></p>
+<p class="toc2"><a href="#toc1-5">1.5. The configuration files of N/X 4.1</a></p>
+<p class="toc3"><a href="#toc1-5-1">1.5.1. Customization of config.inc.php</a></p>
+<p class="toc3"><a href="#toc1-5-2">1.5.2. Customization of settings.inc.php</a></p>
+<p class="toc4"><a href="#toc1-5-2-1">1.5.2.1. Configuring paths and URLs</a></p>
+<p class="toc4"><a href="#toc1-5-2-2">1.5.2.2. Extended configuration</a></p>
+<p class="toc5"><a href="#toc1-5-2-2-1">1.5.2.2.1. Standard paths</a></p>
+<p class="toc5"><a href="#toc1-5-2-2-2">1.5.2.2.2. Caching I</a></p>
+<p class="toc5"><a href="#toc1-5-2-2-3">1.5.2.2.3. Where to go with photos?</a></p>
+<p class="toc5"><a href="#toc1-5-2-2-4">1.5.2.2.4. Caching II</a></p>
+<p class="toc5"><a href="#toc1-5-2-2-5">1.5.2.2.5. Internal directories</a></p>
+<p class="toc4"><a href="#toc1-5-2-3">1.5.2.3. Configuration of the database</a></p>
+<p class="toc4"><a href="#toc1-5-2-4">1.5.2.4. Setting the default language (variation)</a></p>
+<p class="toc4"><a href="#toc1-5-2-5">1.5.2.5. Generating static HTML pages -- static caching</a></p>
+<p class="toc4"><a href="#toc1-5-2-6">1.5.2.6. Localizing the backend</a></p>
+<p class="toc4"><a href="#toc1-5-2-7">1.5.2.7. Page statistics</a></p>
+<p class="toc4"><a href="#toc1-5-2-8">1.5.2.8. Exchanging data -- N/X Syndication</a></p>
+<p class="toc4"><a href="#toc1-5-2-9">1.5.2.9. Firewalls and IP locking</a></p>
+<p class="toc4"><a href="#toc1-5-2-10">1.5.2.10. Dynamic caching</a></p>
+<p class="toc4"><a href="#toc1-5-2-11">1.5.2.11. When no cache fits -- the Query Cache</a></p>
+<p class="toc4"><a href="#toc1-5-2-12">1.5.2.12. When the websites gets too big</a></p>
+<p class="toc4"><a href="#toc1-5-2-13">1.5.2.13. Backup</a></p>
+<p class="toc2"><a href="#toc1-6">1.6. The first logon</a></p>
+<p class="toc1"><a href="#toc2">2. Security</a></p>
+<p class="toc2"><a href="#toc2-1">2.1. Protection of directories</a></p>
+<p class="toc2"><a href="#toc2-2">2.2. Secured connections with SSL (Windows)</a></p>
+<p class="toc2"><a href="#toc2-3">2.3. Secured connections with SSL (Linux)</a></p>
+<p class="toc2"><a href="#toc2-4">2.4. Authentification with certificates</a></p>
+<p class="toc2"><a href="#toc2-5">2.5. Check list for proper installation</a></p>
+<p class="toc1"><a href="#toc3">3. Deployment</a></p>
+<p class="toc2"><a href="#toc3-1">3.1. Setting up slave servers</a></p>
+<p class="toc2"><a href="#toc3-2">3.2. Setting up the master server</a></p>
+<p class="toc3"><a href="#toc3-2-1">3.2.1. Configuration for FTP deployment</a></p>
+<p class="toc3"><a href="#toc3-2-2">3.2.2. Deployment with network shares</a></p>
+<p class="toc3"><a href="#toc3-2-3">3.2.3. Hints</a></p>
+
+<hr />
+
+<h1><a name="toc1"></a>1. Installation</h1>
+
+<h2><a name="toc1-1"></a>1.1. System requirements</h2>
+
+<p class="block">To install N/X 4.1, you need the following software:</p>
+
+<ul>
+  <li>Apache web server</li>
+  <li>PHP 4.3.0 or up</li>
+  <li>MySQL database</li>
+  <li>about 10 MB webspace for base system and webpage storage</li>
+</ul>
+
+<p class="block">In addition, the following modules and add-ons are
+recommended:</p>
+
+<ul>
+  <li>PHP ZIP extension</li>
+  <li>PHP GD/GD2 extension</li>
+  <li>PHP ImageMagick extension</li>
+</ul>
+
+<p class="block">The choice of the operating system does not matter, since N/X
+was developed with open standards. Yet, we recommend</p>
+
+<ul>
+  <li>Linux</li>
+  <li>Windows</li>
+  <li>Unix or similar derivatives</li>
+  <li>Mac OS X</li>
+</ul>
+
+<p class="block">To test N/X you can choose any operating system, however, we
+strongly recommend a Linux, Unix or Windows server for a production environment
+due to performance issues. Windows server are especially then meaningful, if
+you want to access and process data with N/X over a COM server.</p>
+
+<h2><a name="toc1-2"></a>1.2. PHP configuration</h2>
+
+<p class="block">For a good functional system, an optimal configuration of the
+PHP language is necessary. We recommend to use the included
+<tt>php.ini-dist</tt> file. If you should decide for
+<tt>php.ini-recommended</tt>, make sure the following entry is contained in
+it:</p>
+
+<p class="cmd"><tt>error_reporting = E_ALL &amp; ~E_NOTICE</tt></p>
+
+<p class="block">While N/X 2002 needed the option <tt>register_globals</tt>
+activated, this is no longer the case with N/X 4.1. We even recommend to set
+<tt>register_globals=off</tt> to increase system security.</p>
+
+<p class="block">PHP offers a so-called "<b>safe mode</b>" on servers used by
+multiple users simultaneously to secure your files of unauthorized access. On
+Windows, the Safe Mode usually does not rise any problems, however not so
+within Linux. Make sure that all files and directories belong to the same owner
+with which PHP is run. Ask your provider for further details and use the
+<tt>chown</tt> command to set the file ownerships. Depending on the
+configuration of the Apache server, you may also directly set some options
+within the <tt>.htaccess</tt> files.</p>
+
+<h2><a name="toc1-3"></a>1.3. Extracting the package</h2>
+
+<p class="block">Look for one of the available distributions from our
+SourceForge project page (<a href="http://sourceforge.net/projects/nxwcms/"
+target="_blank">http://sf.net/projects/nxwcms/</a>). Afterwards, unpack the
+archive into a directory on the web server. If you chose the <tt>tar.bz2</tt>
+pack for Linux, use the <tt>tar -jxf nx4.1_xxx.tbz2</tt> command to extract
+it.</p>
+
+<p class="block">Afterwards, <b>directory permissions have to be set
+correctly</b>, for one, to protect your data, for two, to enable access to N/X
+for others. First, check the N/X file tree for completeness:</p>
+
+<table class="bordered">
+  <tr>
+    <td><tt>/cms</tt></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><tt>/cms/api</tt></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><tt>/cms/cache</tt></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><tt>/cms/ext</tt></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><tt>/cms/help</tt></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><tt>/cms/modules</tt></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><tt>/cms/plugins</tt></td>
+    <td>(Copy new plugins there)</td>
+  </tr>
+  <tr>
+    <td><tt>/sql</tt></td>
+    <td>(Delete this directory after installation)</td>
+  </tr>
+  <tr>
+    <td><tt>/wwwdev</tt></td>
+    <td>(This folder contains only the development version of the
+      homepage)</td>
+  </tr>
+  <tr>
+    <td><tt>/www</tt></td>
+    <td>(This folder contains the live version of the homepage)</td>
+  </tr>
+</table>
+
+<p class="block">Then the permissions have to be set under Linux. Use the
+<tt>chown</tt> and <tt>chmod</tt> commands to do so. Following ownerships and
+permissions should be set:</p>
+
+<table class="bordered">
+  <tr>
+    <td><tt>/</tt></td>
+    <td>(<tt>r-x</tt>, Read+Execute for all (sub-)folders,<br />
+      <tt>r--</tt>, Read-only for all files)</td>
+  </tr>
+  <tr>
+    <td><tt>/cms/cache</tt>,<br />
+      <tt>/wwwdev</tt>,<br />
+      <tt>/www</tt></td>
+    <td>(<tt>rwx</tt>, Read+Write+Execute for all (sub-)folders,<br />
+      <tt>rw-</tt>, Read+Write for all files)</td>
+  </tr>
+</table>
+
+<p class="cmd"><tt>cd /usr/www/htdocs/nx4.1/<br />
+chown -R wwwrun:nogroup .<br />
+find . -type d -print0 | xargs -0 chmod 700<br />
+find . -type f -print0 | xargs -0 chmod 600<br />
+chmod -R u+rwX {cms/cache,wwwdev,www}</tt></p>
+
+<p class="block">Where <tt>wwwrun</tt> is the user your webserver runs as. The
+files have been given to the group <tt>nogroup</tt> to go for uniqueness.
+(There are no group permissions anyway.)</p>
+
+<h2><a name="toc1-4"></a>1.4. Creating the database</h2>
+
+<p class="block">Within the <tt>sql</tt> subfolder, you will find the following
+files:</p>
+
+<table class="bordered">
+  <tr>
+    <td><tt>nx4.1_example.sql</tt></td>
+    <td>Use this file to install a new N/X system with the example
+      website.</td>
+  </tr>
+  <tr>
+    <td><tt>nx4.1_clean.sql</tt></td>
+    <td>Use this one to create a new N/X system with an empty database. The
+      system then does not contain any pages, graphics and texts anymore.</td>
+  </tr>
+  <tr>
+    <td><tt>update.sql</tt></td>
+    <td>Use this file to update from N/X 2002 to 4.1. Backup your old database
+      and system before an update.</td>
+  </tr>
+  <tr>
+    <td><tt>clean.sql</tt></td>
+    <td>Use this file to delete a complete N/X database and to re-begin with an
+      empty system. Random<!-- ? --> execution of this script will lead to the destruction of your website.</td>
+  </tr>
+  <tr>
+    <td><tt>clean_stats.sql</tt></td>
+    <td>Use this file to delete all statistics within N/X. They are then
+      lost.</td>
+  </tr>
+</table>
+
+<p class="block">Choose the right file for your needs. If running an update, do
+a backup of the database and the existing system by any means possible. We even
+recommend to copy the complete N/X system including your homepage to be copied
+to a temporary remote computer and running the update there. Only when
+everything went successful and all customizations have been done, copy the data
+back.</p>
+
+<p class="block">To create the database, it is best to use the
+<b>phpMyAdmin</b> script. If this is not installed yet, you can download it at
+<a href="http://phpmyadmin.net/"
+target="_blank">http://phpmyadmin.net/</a>.</p>
+
+<p class="block">Alternatively, you can use the command-line interface of MySQL
+to run the database creation script. Start the <tt>mysql</tt> program and
+execute the following commands (experts only!):</p>
+
+<p class="cmd"><tt>connect DATABASENAME<br />
+\. path.to.sql.file</tt></p>
+
+<h2><a name="toc1-5"></a>1.5. The configuration files of N/X 4.1</h2>
+
+<p class="block">To configure N/X, you need to change the
+<tt>config.inc.php</tt> and <tt>settings.inc.php</tt> files in the <tt>cms</tt>
+directory. The sole purpose of <tt>config.inc.php</tt> is the inclusion into
+the N/X API, while all relevant configuration options are changed in
+<tt>settings.inc.php</tt>.</p>
+
+<h3><a name="toc1-5-1"></a>1.5.1. Customization of config.inc.php</h3>
+
+<p class="block">Here you see an excerpt of an N/X 4.1
+<tt>config.inc.php</tt>. Minor modifications in its look can pop up in
+different versions.</p>
+
+<p class="cmd"><tt>$c["path"] = "c:/web/nx4.1/cms/";<br />
+require_once $c["path"] . "settings.inc.php";<br />
+<br />
+// Server configuration<br />
+set_magic_quotes_runtime(0);<br />
+$c_magic_quotes_gpc = get_magic_quotes_gpc();<br />
+<br />
+// load modules<br />
+require_once $c["path"] . "plugin/plugin.inc.php";<br />
+require_once $c["path"] . "api/database/lib.inc.php";<br />
+require_once $c["path"] . "ext/adodb/adodb-session.php";<br />
+require_once $c["path"] . "api/auth/lib.inc.php";<br />
+require_once $c["path"] . "api/common/initialize.php";<br />
+require_once $c["path"] . "api/common/lib.inc.php";<br />
+require_once $c["path"] . "api/tools/lib.inc.php";<br />
+require_once $c["path"] . "plugin/plugin.inc.php";<br />
+require_once $c["path"] . "api/userinterface/lib.inc.php";<br />
+require_once $c["path"] . "api/cms/lib.inc.php";<br />
+require_once $c["path"] . "api/common/prepare.php";<br />
+require_once $c["path"] . "api/xml/lib.inc.php";<br />
+require_once $c["path"] . "api/parser/lib.inc.php";<br />
+require_once $c["path"] . "api/tools/dump_get_post.php";<br />
+<br /> 
+$lang = new lang();</tt></p>
+
+<p class="block">The only line that you should ever change is:<br />
+
+<tt>$c["path"] = "c:/web/nx4.1/cms/";</tt></p>
+ 
+<p class="block">Put the right position of your N/X installation into the
+quotes. If it is located under Linux in <tt>/usr/www/htdocs/nx4.1</tt> for
+example, put <tt>/usr/www/htdocs/nx4.1/cms/</tt> in there. Pay attention to
+add a <b>trailing slash after <tt>cms</tt></b>!</p>
+
+<h3><a name="toc1-5-2"></a>1.5.2. Customization of settings.inc.php</h3>
+
+<p class="block">On the following pages, you will find an excerpt of a possible
+<tt>settings.inc.php</tt>. We will now discuss each configuration option in
+detail.</p>
+
+<p class="cmd"><tt>$c["basepath"] = "c:/web/nx4.1/";<br />
+$c["basedocroot"] = "/nx4.1/";<br />
+$c["host"] = "http://jupiter"; // address of your web-server<br />
+$c_lang = "EN"; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Set default language to English!<br />
+<br />
+// Database variables<br />
+$c["dbhost"] = "localhost";<br />
+$c["database"] = "nx4.1"; // name of the database<br />
+$c["dbuser"] = "root"; &nbsp; &nbsp; // name of the database user<br />
+$c["dbpasswd"] = ""; &nbsp; &nbsp; &nbsp; // password of the database user<br />
+$c["dbdriver"] = "mysql"; &nbsp;// type of your database<br />
+$c["dbnow"] = "NOW()";<br />
+$c["dbcode"] = "3dYqpm8UhF";<br />
+<br />
+// CDS Configuration<br />
+$c["stdvariation"] = 1;<br />
+$c["renderstatichtml"] = false;<br />
+$c["timeout"] = 180;<br />
+$c["standardencoding"] = "text/html; charset=iso-8859-1";<br />
+$c["pagetracking"] = true;<br />
+$c["usewebbug"] = true;<br />
+$c["trackexitpages"] = true;<br />
+$c["usettf"] = false;<br />
+<br />
+// Syndication<br />
+$c["provider"] = "www.nxsystems.org";<br />
+<br />
+// AUTH<br />
+$c["disablehostchecking"] = false;<br />
+<br />
+// Dynamic Cache<br />
+$JPCACHE_ON = false; &nbsp; // Turn caching on/off<br />
+$JPCACHE_TIME = 900;<br />
+$JPCACHE_USE_GZIP = 0; // Whether or not to use GZIP<br />
+<br />
+// CDS-Query-Cache<br />
+$QUERY_CACHE = false; // Cache database queries done in www<br />
+$QUERY_CACHE_TIME = 900;<br />
+<br />
+// User-Interface<br />
+$c["disableClustersInTree"] = false;<br />
+<br />
+// Backup<br />
+$c["backupStore"] = $c["basepath"] . "backup";<br />
+$c["storeBackupFTP"] = false;<br />
+$c["ftpUsername"] = "";<br />
+$c["ftpPassword"] = "";<br />
+$c["ftpServer"] = "";<br />
+$c["ftpDir"] = "/";<br />
+$c["ftpPort"] = 21;<br />
+$c["deleteAfterFTP"] = false;<br />
+<br />
+// Server paths of N/X. These are examples<br />
+// Note: except $c["host"] all variables must end with a slash!<br />
+$c["path"] = $c["basepath"] . "cms/";<br />
+$c["docroot"] = $c["basedocroot"] . "cms/";<br />
+$c["devpath"] = $c["basepath"] . "wwwdev/";<br />
+$c["devdocroot"] = $c["basedocroot"] . "wwwdev/";<br />
+$c["livepath"] = $c["basepath"] . "www/";<br />
+$c["livedocroot"] = $c["basedocroot"] . "www/";<br />
+$c["docroothtml"] = $c["livedocroot"];<br />
+<br />
+$c["devfilespath"] = $c["basepath"] . "wwwdev/images/";<br />
+$c["devfilesdocroot"] = $c["basedocroot"] . "wwwdev/images/";<br />
+$c["livefilespath"] = $c["basepath"] . "www/images/";<br />
+$c["livefilesdocroot"] = $c["livedocroot"] . "images/";<br />
+<br />
+$c["cachepath"] = $c["livepath"] . "pages/";<br />
+$c["cachedocroot"] = $c["livedocroot"] . "pages/";<br />
+$c["tmpcachepath"] = $c["cachepath"] . "tmp/";<br />
+$c["dyncachepath"] = $c["cachepath"] . "tmp/";<br />
+<br />
+$c["spmthumbpath"] = $c["path"] . "modules/sitepages/thumbnails/";<br />
+$c["spmthumbdocroot"] = $c["docroot"] . "modules/sitepages/thumbnails/";<br />
+<br />
+$c["themepath"] = $c["path"] . "api/userinterface/themes/standard/";<br />
+$c["themedocroot"] = $c["docroot"] . "api/userinterface/themes/standard/";</tt></p>
+
+<h4><a name="toc1-5-2-1"></a>1.5.2.1. Configuring paths and URLs</h4>
+
+<p class="block">To correctly configure the paths, you will need to adjust the
+following variables. Please note that <b>all paths except</b>
+<tt>$c["host"]</tt> <b>need to end with a trailing slash</b>.</p>
+
+<p class="cmd"><tt>$c["basepath"] = "c:/web/nx4.1/";<br />
+$c["basedocroot"] = "/nx4.1/";<br />
+$c["host"] = "http://jupiter";</tt></p>
+
+<p class="block">Remember the configuration option <tt>$c["path"]</tt> in
+<tt>config.inc.php</tt>. Strip the <tt>cms/</tt> and write the result to
+<tt>$c["basepath"]</tt>. The following rule holds true within N/X: all
+variables that describe the local filesystem, end with a trailing
+"<i>path</i>"; all which have to do with the description of URLs end in
+"<i>docroot</i>".</p>
+
+<p class="block">The variables <tt>$c["basedocroot"]</tt> and
+<tt>$c["host"]</tt> are kind of dependant on each other. Both added together
+result in the URL in which the content of the <tt>nx4.1</tt> directory can be
+found. If you have Apache already configured to access the NX4.1 directory
+based on hostname (i.e. through Apache's <tt>VirtualHosts</tt>), change the
+basedocroot to <tt>/</tt>. While setting both variables keep in mind that the
+host does not end with a slash, while the basedocroot always has a leading and
+a trailing slash.</p>
+
+<p class="block">Note: Should you mix up something with the slashes, the system
+may work. However, you will at least run into problems when using static
+caching.</p>
+
+<h4><a name="toc1-5-2-2"></a>1.5.2.2. Extended configuration</h4>
+
+<p class="cmd"><tt>$c["path"] = $c["basepath"] . "cms/";<br />
+$c["docroot"] = $c["basedocroot"] . "cms/";<br />
+$c["devpath"] = $c["basepath"] . "wwwdev/";<br />
+$c["devdocroot"] = $c["basedocroot"] . "wwwdev/";<br />
+$c["livepath"] = $c["basepath"] . "www/";<br />
+$c["livedocroot"] = $c["basedocroot"] . "www/";<br />
+$c["docroothtml"] = $c["livedocroot"];<br />
+<br />
+$c["devfilespath"] = $c["basepath"] . "wwwdev/images/";<br />
+$c["devfilesdocroot"] = $c["basedocroot"] . "wwwdev/images/";<br />
+$c["livefilespath"] = $c["basepath"] . "www/images/";<br />
+$c["livefilesdocroot"] =  $c["livedocroot"] . "images/";<br />
+<br />
+$c["cachepath"] = $c["livepath"] . "pages/";<br />
+$c["cachedocroot"] = $c["livedocroot"] . "pages/";<br />
+$c["tmpcachepath"] = $c["cachepath"] . "tmp/";<br />
+$c["dyncachepath"] = $c["cachepath"] . "tmp/";<br />
+<br />
+$c["spmthumbpath"] = $c["path"] . "modules/sitepages/thumbnails/";<br />
+$c["spmthumbdocroot"] = $c["docroot"] . "modules/sitepages/thumbnails/";<br />
+$c["themepath"] = $c["path"] . "api/userinterface/themes/standard/";<br />
+$c["themedocroot"] = $c["docroot"] . "api/userinterface/themes/standard/";</tt></p>
+
+<h5><a name="toc1-5-2-2-1"></a>1.5.2.2.1. Standard paths</h5>
+
+<p class="block">Under normal circumstances, you would not need to customize
+the above configuration. We even strongly recommend that you do not modify it
+at all if you are not sure what you are currently changing. In some special
+cases, manual changes are necessary, i.e. if you want to copy the <tt>www</tt>
+folder into the root of your webserver.</p>
+
+<p class="block">We walk through such a configuration step by step now. We
+assume that the content of the <tt>www</tt> folder has directly been moved into
+the root of the webserver and that <tt>wwwdev</tt> and <tt>cms</tt> now also
+reside directly under the root.</p>
+
+<p class="block">The variable <tt>$c["path"]</tt> you already know from
+<tt>config.inc.php</tt>. It must contain exactly the same content. Here, it is
+dynamically assembled, which works out-of-the-box in most configurations. Only
+change the path if the <tt>cms</tt> folder has been moved to another place
+relative to <tt>$c["basepath"]</tt>.</p>
+
+<p class="block">The pendant of <tt>$c["path"]</tt> as an URL on your webserver
+is kept in <tt>$c["docroot"]</tt>. The URL to the <tt>nx4.1/cms</tt> directory
+is stored there. When a login into the CMS fails, mostly a wrong <i>docroot</i>
+or <i>basedocroot</i> is the cause.</p>
+
+<p class="block">Next, we will discuss the path-on-hard-disk and corresponding
+URL in pairs.</p>
+
+<p class="cmd"><tt>$c["devpath"] = $c["basepath"] . "wwwdev/";
+$c["devdocroot"] = $c["basedocroot"] . "wwwdev/";</tt></p>
+
+<p class="block">Path to the <tt>wwwdev</tt> directory. Should you upload
+templates into the system, always load them into there. The system
+automatically copies the templates into the <tt>www</tt> folder upon a launch.
+An exception are library files which you have not directly assigned to a
+template. As of February 4.1, you will need to copy them over by hand, but we
+are working on a solution which might already be available.</p>
+
+<p class="cmd"><tt>$c["livepath"] = $c["basepath"] . "www/";<br />
+$c["livedocroot"] = $c["basedocroot"] . "www/";</tt></p>
+
+<p class="block">Path to the <tt>www</tt> directory. While the templates of the
+<b>development version of your homepage</b> reside in <tt>wwwdev</tt>, the live
+website can be found in <tt>www</tt>. Never directly change a template by
+editing it in the <tt>www</tt> folder, but change it in <tt>wwwdev</tt> and
+afterwards launch it.</p>
+
+<h5><a name="toc1-5-2-2-2"></a>1.5.2.2.2. Caching I</h5>
+
+<p class="cmd"><tt>$c["docroothtml"] = $c["livedocroot"];</tt></p>
+
+<p class="block">You can generate static HTML files with N/X. Assuming that you
+have installed N/X on your computer at home and would create <b>static HTML</b>
+with it, N/X would do it in a way that the paths are correct for your home box.
+I am running a website on <a href="http://weih.de/"
+target="_blank">http://weih.de/</a>. I want to upload the static files into the
+<tt>info</tt> directory. The whole URL would thus be <tt>weih.de/info</tt>. To
+accomplish this, I thus enter <tt>$c["docroothtml"] =
+"http://weih.de/info/";</tt>. The trailing backslash is -- as always --
+necessary!</p>
+
+<h5><a name="toc1-5-2-2-3"></a>1.5.2.2.3. Where to go with photos?</h5>
+
+<p class="cmd"><tt>$c["devfilespath"] = $c["basepath"] . "wwwdev/images/";
+$c["devfilesdocroot"] = $c["basedocroot"] . "wwwdev/images/";
+$c["livefilespath"] = $c["basepath"] . "www/images/";
+$c["livefilesdocroot"] =  $c["livedocroot"] . "images/";</tt></p>
+
+<p class="block">The following paths describe the folders in which N/X stores
+files. By default the folder is called <tt>images</tt>, since in most cases,
+exclusively your pictures are stored there. Rename the folder if you like.
+Again we differentiate between the development and live version of files (dev
+vs. live). If a file is uploaded for the first time, it goes into the
+<tt>dev</tt> directory. Upon the launch of a page, it is automatically copied
+into the live folder.</p>
+
+<h5><a name="toc1-5-2-2-4"></a>1.5.2.2.4. Caching II</h5>
+
+<p class="cmd"><tt>$c["cachepath"] = $c["livepath"] . "pages/";
+$c["cachedocroot"] = $c["livedocroot"] . "pages/";
+$c["tmpcachepath"] = $c["cachepath"] . "tmp/";
+$c["dyncachepath"] = $c["cachepath"] . "tmp/";</tt></p>
+
+<p class="block">The paths listed are exclusively available for caching of
+pages and increasing system performance. N/X has two different caching modes:
+dynamic and static. For static caching, a HTML file is created which will not
+be modified until the next launch. Dynamic caching, which is based on the
+JPCache 2.0 script, a HTML file is generated and cached for a time period of
+about 15 minutes. Whenever that page is accessed, the cached version is
+delivered first. More on that later on. The paths <tt>cachepath</tt> and
+<tt>cachedocroot</tt> serve the purpose of specifying the directory where to
+store the static HTML files.</p>
+
+<p class="block">To avoid 404 errors during the rendering process of static
+pages in a launch, they are first created in a temporary folder and then to the
+cache. The temporary folder for static cache files is defined in
+<tt>$c["tmpcachepath"]</tt>. By the N/X standard, this is also at the same time
+the folder for dynamic cache files. You can flexibly change this in
+<tt>$c["dyncachepath"]</tt>.</p>
+
+<h5><a name="toc1-5-2-2-5"></a>1.5.2.2.5. Internal directories</h5>
+
+<p class="cmd"><tt>$c["spmthumbpath"] = $c["path"] . "modules/sitepages/thumbnails/";
+$c["spmthumbdocroot"] = $c["docroot"] . "modules/sitepages/thumbnails/";
+$c["themepath"] = $c["path"] . "api/userinterface/themes/standard/";
+$c["themedocroot"] = $c["docroot"]."api/userinterface/themes/standard/";</tt></p>
+
+<p class="block">The variable <tt>$c["spmthumb</tt>...<tt>"]</tt> stores the
+folder in which you can put thumbnails for page templates into. If an editor
+wants to create a new page, the templates are shown in a graphical list with
+symbols. The symbols are stored in this folder. We recommend to keep the
+default folder <tt>nx4.1/cms/modules/sitepages/thumbnails</tt>.</p>
+
+<p class="block">Since N/X 4.1, you can create and define your <b>own
+themes</b> for the user interface. Note that the themes are exclusively used
+for the back-office! The themes are stored in
+<tt>nx4.1/cms/api/userinterface/themes</tt>. Simply choose a theme for the
+system. The default is <tt>standard</tt>.</p>
+
+<h4><a name="toc1-5-2-3"></a>1.5.2.3. Configuration of the database</h4>
+
+<p class="cmd"><tt>// Database variables<br />
+$c["dbhost"] = "localhost";<br />
+$c["database"] = "nx4.1"; // name of the database<br />
+$c["dbuser"] = "root"; &nbsp; &nbsp; // name of the database user<br />
+$c["dbpasswd"] = ""; &nbsp; &nbsp; &nbsp; // password of the database user<br />
+$c["dbdriver"] = "mysql"; &nbsp;// type of your database<br />
+$c["dbnow"] = "NOW()";<br />
+$c["dbcode"] = "3dYqpm8UhF";</tt></p>
+
+<p class="block">We assume that the database configuration is self-explanatory,
+so we concluded it in the following table.</p>
+
+<table class="bordered">
+  <tr>
+    <td><tt>dbhost</tt></td>
+    <td>Address to your database server. Should you change the port, please
+      contact us at <tt>sven@nxsystems.org</tt>.</td>
+  </tr>
+  <tr>
+    <td><tt>database</tt></td>
+    <td>Name of the database in which you have imported the N/X dump.</td>
+  </tr>
+  <tr>
+    <td><tt>dbuser</tt></td>
+    <td>User name for logon into the database<br />
+      If you want to go sure, deny the creation and deletion of tables, but
+      then you can not install plugins any more!</td>
+  </tr>
+  <tr>
+    <td><tt>dbpasswd</tt></td>
+    <td>Password for the database user</td>
+  </tr>
+  <tr>
+    <td><tt>dbdriver</tt></td>
+    <td>Used database. Currently, only <tt>mysql</tt> is supported.</td>
+  </tr>
+  <tr>
+    <td><tt>dbnow</tt></td>
+    <td>Internal, do not change!</td>
+  </tr>
+  <tr>
+    <td><tt>dbcode</tt></td>
+    <td>Internal, do not change! Compatibility option for N/X 2002.</td>
+  </tr>
+</table>
+
+<p class="block">No other database except MySQL is currently supported.
+Different than N/X 2002, 4.1 works with the abstraction layer ADOdb. We use
+another additional abstraction layer to cache and assemble our queries. Future
+database server support could be added in here.</p>
+
+<h4><a name="toc1-5-2-4"></a>1.5.2.4. Setting the default language
+(variation)</h4>
+
+<p class="block">In N/X, languages are called variations. This is due to that
+variations can not only be used as language, but also as different qualities of
+a content or different capabilities for different output media. The standard
+variation (language) now is the one that the system always uses when no other
+variation has been specified or no other is available.</p>
+
+<p class="cmd"><tt>$c["stdvariation"] = 1;</tt></p>
+
+<p class="block">The following line sets the default variation. <tt>1</tt>
+corresponds to the "Standard" selection. If you want to make another language
+the default variation, create it first under "Administration/Variations".
+Afterwards, let the system give you the database table <tt>variations</tt> and
+choose the appropriate <tt>VARIATION_ID</tt> from it that you want to have as
+the new default. If you like you can also change the name "Standard" into
+"English" within the <tt>variations</tt> table.</p>
+
+<h4><a name="toc1-5-2-5"></a>1.5.2.5. Generating static HTML pages -- static
+caching</h4>
+
+<p class="cmd"><tt>$c["renderstatichtml"] = false;<br />
+$c["timeout"] = 180;</tt></p>
+
+<p class="block">You can activate the generation of static HTML pages via
+<tt>renderstatichtml</tt>. The activation does not necessarily mean that all
+pages are statically generated, but that it is generally possible that pages do
+so. On each webpage within the system you can choose the caching method for
+that page under the registry card "Page Properties".</p>
+
+<p class="block">The variable <tt>timeout</tt> defines the maximum amount of
+time the system has time to generate static pages. The specification is in
+seconds; the default is 180 seconds = 3 minutes. Especially when you launch
+complete page folders (Launch tree), some 1000 or more pages need to be
+recreated. Calculate an average buffer time of 2 to 3 seconds for each, on
+slower servers probably more and set the timeout accordingly. So if you often
+relaunch some 100 pages, set the timeout to at least 300 seconds.</p>
+
+<h4><a name="toc1-5-2-6"></a>1.5.2.6. Localizing the backend</h4>
+<!-- localization of the backend -->
+
+<p class="block">If you use a language like Chinese or Russian within N/X,
+setting the default encoding is of significance.</p>
+
+<p class="cmd"><tt>$c["standardencoding"] = "text/html; charset=iso-8859-1";
+$c["lang"] = "EN";</tt></p>
+
+<p class="block">Inform yourself about what charset you will need to choose for
+your language and replace the entry under <tt>charset</tt>. With
+<tt>$c["lang"]</tt>, you can set the default language for the backend, which is
+used when a help text is not available in the language selected by the user.
+Defaults to "EN".</p>
+
+<h4><a name="toc1-5-2-7"></a>1.5.2.7. Page statistics</h4>
+
+<p class="block">N/X provides you with integrated page statistics based on
+phpOpenTracker (<a href="http://phpopentracker.org/"
+target="_blank">http://phpopentracker.org/</a>). You can deactivate all page
+tracking with the <tt>$c["pagetracking"]</tt> switch.</p>
+
+<p class="cmd"><tt>$c["pagetracking"] = true;<br />
+$c["usewebbug"] = true;<br />
+$c["trackexitpages"] = true;<br />
+$c["usettf"] = false;</tt></p>
+
+<p class="block">With the control variable <tt>$c["usewebbug"]</tt> you can
+decide whether N/X will directly write to the database upon page access, or
+whether a transparent pixel, a so-called Webbug, which does the counting, shall
+be included. If you use caching -- be it dynamic or static -- you should always
+use the webbug, since otherwise only during creation or writing the file into
+the cache a hit is scored and thus many statistics do not work. (They seem to
+be missing a lot of hits.)</p>
+
+<p class="block"><tt>$c["trackexitpages"]</tt> lets you decide whether N/X
+shall remember the links a user entered and finally left your page.
+Trackexitpages does not work with the webbug. The statistics evaluation by
+search engines will also not work when using the webbug.</p>
+
+<p class="block">Hint: Always use the direct recording of data for the front
+page, for all others use the webbug method. You can read more about this in the
+Developer's Book.</p> <!-- "N/X Architecture" I presume? -->
+
+<p class="block">N/X evaluates statistics as graphics. Upon desire, the font
+face "Tahoma" is used for this when <tt>$c["usettf"]</tt> is true.</p>
+
+<p class="block">Warning: Due to a bug in PHP or the GD library, you should
+urgently deactivate <tt>$c["usettf"]</tt> in the Windows environment!</p>
+
+<h4><a name="toc1-5-2-8"></a>1.5.2.8. Exchanging data -- N/X Syndication</h4>
+
+<p class="block">Many users of N/X 2002 have waited for a facility to exchange
+cluster templates, page templates (sitepage masters in N/X 2002) or clusters
+among each other. The export and import wizard as well as the new CMS and XML
+API allow for this in an easy and uncomplicated way.</p>
+
+<p class="cmd"><tt>$c["provider"] = "www.nxsystems.org";</tt></p>
+
+<p class="block">To correctly assign your data, you need to choose a unique
+name to identify the data source before using the import and/or export
+assistant. For the name of the data source <tt>$c["provider"]</tt>, we have
+chosen the URL of our homepage.</p>
+
+<p class="block">This has the following background: Suppose you exchange
+clusters with another user. The other user can not do anything with the
+clusters if he does not have the underlying cluster templates. Thus, also the
+cluster template needs to be exported. To not create a new cluster template for
+each import, N/X evaluates the provider and the ID of the data. Data which has
+already been imported is not re-imported. This also applies to clusters. An
+update of data upon import is not possible at the moment.</p>
+
+<h4><a name="toc1-5-2-9"></a>1.5.2.9. Firewalls and IP locking</h4>
+
+<p class="block">Many users report about problems with firewalls which assign
+them a new IP address for each access to the backend. N/X stores the IP address
+upon login of a user and compares it on each access of the user. If it has
+changed, the access is automatically denied. This of course collides with some
+company firewalls. By the way, this also means that a user can only be logged
+into the backend once!</p>
+
+<p class="cmd"><tt>$c["disablehostchecking"] = false;</tt></p>
+
+<p class="block">To disable this security feature, set the value of the
+variable <tt>$c["disablehostchecking"]</tt> to <tt>true</tt>.</p>
+
+<h4><a name="toc1-5-2-10"></a>1.5.2.10. Dynamic caching</h4>
+
+<p class="block">N/X uses JPCACHE to dynamically cache pages. This really
+awards systems with frequent accesses and some semi-dynamic contents a
+significant performance boost. At any time you can activate the cache by
+setting <tt>$JP_CACHE_ON = true</tt>.</p>
+
+<p class="cmd"><tt>$JPCACHE_ON = false; &nbsp; // Turn caching on/off<br />
+$JPCACHE_TIME = 900;<br />
+$JPCACHE_USE_GZIP = 0; // Whether or not to use GZIP</tt></p>
+
+<p class="block">With <tt>$JPCACHE_TIME</tt>, you set the time in seconds after
+which a page in the cache becomes invalid and needs to be re-created. (Default
+is 15 minutes = 900 seconds.) By activating <tt>$JPCACHE_USE_GZIP</tt>, the
+cache files can be stored in GZIP format. The special feature is, that most
+browsers can unpack HTML-GZIP files and that by this, the website gets faster
+and you save traffic.</p>
+
+<p class="block">Hint: For websites that you do daily news for and which do not
+have more than 250,000 hits per day, we recommend to not use static caching and
+to fall back to dynamic caching. Within other overall situations the only
+method is to try and see what your server can do. In general, dynamic caching
+is bound to less administrative expenditure since you do not need to "flush the
+cache by hand" -- the dynamic cache autoflushes itself. A manual flush is
+required if you want to change the menu or teaser of cached static pages.
+Though N/X provides a list of IDs to reflush upon launch of a page, but with
+the use of channels, this may mean a flush of the whole website.</p>
+
+<h4><a name="toc1-5-2-11"></a>1.5.2.11. When no cache fits -- the Query
+Cache</h4>
+
+<p class="cmd"><tt>$QUERY_CACHE = false; // Cache database queries done in www<br />
+$QUERY_CACHE_TIME = 900;</tt></p>
+
+<p class="block">If you want to use neither of static and dynamic caching --
+this is mostly the case when you display a page specialized for the user -- the
+QUERY CACHE may help you. All results of SQL queries which are run by the
+website are cached on disk. Upon a new request, the results are directly read
+in. Please note that you will need to set permissions in the
+<tt>/cms/cache/adodb</tt> folder for N/X accordingly.</p>
+
+<p class="block">Additionally, you(!) will need to <b>secure the folder with a
+password</b> so that nobody can access it from outside. (Cmp. chapter
+Security.) Suppose you have a result list with credit card numbers which you
+have stored unencrypted in your database, one could find this data by
+error-and-trial/trying. <!-- (/Wortwahl /trying) --> Thus, also encrypt all
+sensitive data!</p>
+
+<h4><a name="toc1-5-2-12"></a>1.5.2.12. When the websites gets too big</h4>
+
+<p class="cmd"><tt>$c["disableClustersInTree"] = false;</tt></p>
+
+<p class="block">If your website gets too big, many control elements within N/X
+become slow, especially all trees and menus which work with the JavaScript
+engine. Set <tt>$c["disableClustersInTree"] = true</tt> if your developers and
+editors complain about a too slow system, or a system that was faster in the
+past. Note that some comfort is lost.</p>
+
+<h4><a name="toc1-5-2-13"></a>1.5.2.13. Backup</h4>
+
+<p class="cmd"><tt>$c["backupStore"] = $c["basepath"] . "backup";<br />
+$c["storeBackupFTP"] = false;<br />
+$c["ftpUsername"] = "";<br />
+$c["ftpPassword"] = "";<br />
+$c["ftpServer"] = "";<br />
+$c["ftpDir"] = "/";<br />
+$c["ftpPort"] = 21;<br />
+$c["deleteAfterFTP"] = false;</tt></p>
+
+<p class="block">Since N/X 4.1 you can opt-in to automatically generate
+backups of your website and database. For this to work, you first need to
+create the local path (including correct permissions) to store the backups in.
+As default folder, we suggest <tt>/nx4.1/cms/backup</tt> for
+<tt>$c["backupStore"]</tt>, but if you have a dedicated server, always store
+the backups outside the web root. Again, you should secure that folder with a
+password!</p>
+
+<p class="block">Now, if your hardware fails, a local backup does not help you
+in any way. N/X offers you the possibility of transferring the backups to a
+remote machine via FTP. To activate this functionality, set
+<tt>$c["storeBackupFTP"] = true</tt> and configure all further variables
+according to the following table:</p>
+
+<table class="bordered">
+  <tr>
+    <td><tt>FtpUsername</tt></td>
+    <td>User name for the login on the FTP server</td>
+  </tr>
+  <tr>
+    <td><tt>FtpPassword</tt></td>
+    <td>Suiting password for the user name</td>
+  </tr>
+  <tr>
+    <td><tt>FTPServer</tt></td>
+    <td>Address of the FTP servers</td>
+  </tr>
+  <tr>
+    <td><tt>FtpDir</tt></td>
+    <td>Directory on the FTP server in which the backup files shall be stored into</td>
+  </tr>
+  <tr>
+    <td><tt>FTPPort</tt></td>
+    <td>Port of the FTP server (default: 21)</td>
+  </tr>
+  <tr>
+    <td><tt>DeleteAfterFTP</tt></td>
+    <td>Should the local backup be deleted after it was transferred via FTP?</td>
+  </tr>
+</table>
+
+<p class="block">After <tt>settings.inc.php</tt> has now been configured
+completely and you understood it, N/X should be ready for action.</p>
+
+<h2><a name="toc1-6"></a>1.6. The first logon</h2>
+
+<p class="block">After successful installation, log into the system and check
+everything to work as expected. Nothing is more troublesome than letting some
+developers go play with the system while it is not quite working since
+permissions are wrong.</p>
+
+<p class="block">Falsely configured permissions are also the most common cause
+why N/X comes up with problems. Check all URLs:</p>
+
+<p class="cmd"><tt>nx4.1/cms<br />
+nx4.1/wwwdev<br />
+nx4.1/www</tt></p>
+
+<p class="block">If you have changed the paths in <tt>settings.inc.php</tt>,
+use your new paths. Should an error such as "<tt>Session could not be
+started</tt>" come up when you request <tt>nx4.1/cms</tt>, you got a problem
+with your database. Check your database configuration then.</p>
+
+<p class="block">Now open <tt>nx4.1/cms</tt>. Logon with your user name:</p>
+
+<table>
+  <tr>
+    <td align="right">User name:</td>
+    <td>Administrator</td>
+  </tr>
+  <tr>
+    <td align="right">Password:</td>
+    <td>Administrator</td>
+  </tr>
+</table>
+
+<p class="block">The system now delays for 4 seconds. This is a small security
+measure against brute force attacks. After successful logon, first change your
+password under "Administration/My Profile". Afterwards, go onto
+"Administration/Access" and deactivate all users you do not need. The passwords
+of the listed standard users is the same as their respective user name.</p>
+
+<p class="block">Check whether the systems works as you think it should, and
+finally create the user accounts for your editors and developers.</p>
+
+<hr />
+
+<h1><a name="toc2"></a>2. Security</h1>
+
+<h2><a name="toc2-1"></a>2.1. Protection of directories</h2>
+
+<p class="block">As already mentioned multiple times, directories which no
+internet user has access to, should be protected. This includes the directory
+of the query cache and the directory in which your backups are put. We strongly
+recommend to protect the whole <tt>nx4.1/cms</tt> directory. The following
+step-by-step instructions show you how to accomplish this.</p>
+
+<h3><a name="toc2-1-1"></a>2.1.1. Step 1</h3>
+
+<p class="block">Look for the program <tt>htpasswd</tt> in your Apache folder.
+We will now create a user called <tt>sven</tt> with password <tt>123456</tt>
+for the <tt>C:\Web\nx4.1\cms</tt> folder. This is a Windows folder; it is
+about the same for Linux, but it looks like this:
+<tt>/usr/www/nx4.1/cms</tt>.</p>
+
+<p class="cmd"><tt>htpasswd -c /usr/www/nx4.1/cms/.htpasswd sven</tt></p>
+
+<p class="block">With this command, we create (<tt>-c</tt>) the
+<tt>.htpasswd</tt> file in the <tt>cms</tt> folder. The command prompts you for
+the desired password. It often suffices to have a single user/password pair for
+a whole group of users.</p>
+
+<p class="block">The file itself, after it is created, could look like
+this:</p>
+
+<p class="cmd"><tt>sven:$apr1$R20.....$CLQ9L5OC8QRp0hlMOTtBT1</tt></p>
+
+<p class="block">You can add any number of users. To do so, call the
+<tt>htpasswd</tt> command without the <tt>-c</tt> parameter which stands for
+Create. To change a user's password simply rerun the <tt>htpasswd</tt> command,
+without <tt>-c</tt> (but with the user name of course).</p>
+
+<p class="block">The following dump of the <tt>htpasswd</tt> command describes
+its functions and parameters.</p>
+
+<p class="cmd"><tt>Usage:<br />
+&nbsp; &nbsp; htpasswd [-cmdpsD] passwordfile username<br />
+&nbsp; &nbsp; htpasswd -b[cmdpsD] passwordfile username password<br />
+<br />
+&nbsp; &nbsp; htpasswd -n[mdps] username<br />
+&nbsp; &nbsp; htpasswd -nb[mdps] username password<br />
+<br />
+ -c &nbsp;Create a new file.<br />
+ -n &nbsp;Don't update file; display results on stdout.<br />
+ -m &nbsp;Force MD5 encryption of the password (default).<br />
+ -d &nbsp;Force CRYPT encryption of the password.<br />
+ -p &nbsp;Do not encrypt the password (plaintext).<br />
+ -s &nbsp;Force SHA encryption of the password.<br />
+ -b &nbsp;Use the password from the command line rather than prompting for it.<br />
+ -D &nbsp;Delete the specified user.<br />
+<br />
+On Windows, NetWare and TPF systems the "-m" flag is used by default.<br />
+On all other systems, the "-p" flag will probably not work.</tt></p>
+
+<h3><a name="toc2-1-2"></a>2.1.2. Step 2</h3>
+
+<p class="block">After having created a file with passwords, we need to tell
+the Apache server which server to protect with it. This is accomplished by
+creating a <tt>.htaccess</tt> file in the same directory as <tt>.htpasswd</tt>.
+In that file we write:</p>
+
+<p class="cmd"><tt>AuthName "cms restricted area"<br />
+AuthType Basic<br />
+AuthUserFile "/usr/www/nx4.1/cms/.htpasswd"<br />
+require valid-user</tt></p>
+
+<p class="block"><tt>AuthName</tt> is used to show the user where s/he actually
+logs on. <tt>AuthUserFile</tt> points to the <tt>.htpasswd</tt> file we have
+created before.</p>
+
+<p class="block">In the basic case, password protection should now be active.
+If not, head on to Step 3.</p>
+
+<h3><a name="toc2-1-3"></a>2.1.3. Step 3</h3>
+
+<p class="block">If the password protection is not in place after passing Step
+2, it is due to the configuration of your web server. Search for the following
+text block in the <tt>httpd.conf</tt> of your server:</p>
+
+<p class="cmd"><tt>&lt;Directory /&gt;<br />
+&nbsp; &nbsp; Options FollowSymLinks<br />
+&nbsp; &nbsp; AllowOverride None<br />
+&lt;/Directory&gt;</tt></p>
+
+<p class="block">Change <tt>None</tt> (near <tt>AllowOverride</tt>) into
+<tt>AuthConfig</tt> and restart (or reload) the Apache server.</p>
+
+<p class="block">If you restrain <!-- XXX korrekt? --> to completely change the
+Apache server, just create a new directory and omit the <tt>.htaccess</tt>
+file. Suppose N/X 4.1 resides in <tt>C:\web\nx4.1\cms</tt>, a new directory
+entry (within <tt>httpd.conf</tt>) would look as follows:</p>
+
+<p class="cmd"><tt>&lt;Directory c:/web/nx4.1/cms&gt;<br />
+&nbsp; &nbsp; AuthName "cms restricted area"<br />
+&nbsp; &nbsp; AuthType Basic<br />
+&nbsp; &nbsp; AuthUserFile "C:\Web\nx4.1\cms\.htpasswd"<br />
+&nbsp; &nbsp; require valid-user<br />
+&nbsp; &nbsp; Options FollowSymLinks<br />
+&nbsp; &nbsp; AllowOverride None<br />
+&lt;/Directory&gt;</tt></p>
+
+<h2><a name="toc2-2"></a>2.2. Secured connections with SSL (Windows)</h2>
+
+<p class="block">In this chapter we will secure your back-office with SSL
+connections. This makes sure your data can not be read by others while you are
+working with the system. The following step-by-step instruction list again
+guides you to the destination: we make N/X more secure, with SSL.</p>
+
+<h3><a name="toc2-2-1"></a>2.2.1. Step 1</h3>
+
+<p class="block">First, we will need to download the <tt>mod_ssl</tt> package
+for Apache from the Internet. A list of suited files for the corresponding
+server can be found at <a href="http://apache-ssl.org/"
+target="_blank">http://apache-ssl.org</a> or <a
+href="http://hunter.campbus.com/"
+target="_blank">http://hunter.campbus.com</a>. Additionally, we need OpenSSL,
+which can be found in the <tt>README</tt> within <tt>mod_ssl</tt>. Windows
+users may just visit http://hunter.campbus.com/ again for download.</p>
+
+<p class="block">However, the Apache webserver can also be downloaded together
+with SSL bundled, which is way easier.</p>
+
+<h3><a name="toc2-2-2"></a>2.2.2. Step 2</h3>
+
+<p class="block">After download we unpack the archives and copy
+<tt>mod_ssl</tt> into the <tt>modules</tt> directory within Apache and
+<tt>openssl</tt> completely in a sub-folder called <tt>openssl</tt> into the
+Apache root directory. Important: Under Windows, the <tt>ssleay32.dll</tt> and
+<tt>libeay32.dll</tt> files need to be copied into <tt>windows/system32</tt>
+(NT cores) or <tt>windows/system</tt> (Win 9x), respectively.</p>
+
+<h3><a name="toc2-2-3"></a>2.2.3. Step 3</h3>
+
+<p class="block">Next, we download the file <a
+href="http://download.netzadmin.org/openssl.cnf"
+target="_blank">http://download.netzadmin.org/openssl.cnf</a> and copy it into
+the <tt>openssl</tt> folder. In there, we start <tt>openssl.exe</tt>, where the
+following four commands are to be entered once you are presented with the
+command line interface. For some commands you enter, you will be prompted for a
+password etc. Note what you have specified there or yet better: remember the
+password by heart. Important: You will be asked for a <tt>CommonName</tt>.
+Enter the name of your server.</p>
+
+<p class="cmd"><tt>&gt; req -config openssl.cnf -new -out certificate.csr<br />
+&gt; rsa -in privkey.pem -out certificate.key<br />
+&gt; x509 -in certificate.csr -out certificate.crt -req -signkey certificate.key -days 365<br />
+&gt; x509 -in certificate.crt -out certificate.der.crt -outform DER</tt></p>
+
+<p class="block">The newly created certificate is valid for 365 days.</p>
+
+<h3><a name="toc2-2-4"></a>2.2.4. Step 4</h3>
+
+<p class="block">Create a new folder <tt>certificates</tt> within the Apache
+root directory and copy the <tt>certificate.crt</tt>, <tt>certificate.key</tt>
+and <tt>certificate.der.crt</tt> files into it.</p>
+
+<h3><a name="toc2-2-5"></a>2.2.5. Step 5</h3>
+
+<p class="block">Open <tt>httpd.conf</tt> of your Apache Server. Append the
+following lines if this has not yet been done:</p>
+
+<p class="cmd"><tt>Listen 443<br />
+LoadModule ssl_module modules/mod_ssl.so<br />
+<br />
+AddType application/x-x509-ca-cert .crt<br />
+AddType application/x-pkcs7-crl &nbsp; &nbsp;.crl<br />
+<br />
+SSLPassPhraseDialog builtin<br />
+SSLSessionCache dbm:logs/ssl_scache<br />
+SSLSessionCacheTimeout 300<br />
+SSLRandomSeed startup builtin<br />
+SSLRandomSeed connect builtin<br />
+<br />
+&lt;VirtualHost jupiter:443&gt;<br />
+&nbsp; &nbsp; DocumentRoot "c:/web"<br />
+&nbsp; &nbsp; ServerName cms.jupiter:443<br />
+&nbsp; &nbsp; ServerAdmin you@your.address<br />
+&nbsp; &nbsp; ErrorLog logs/error_log<br />
+&nbsp; &nbsp; TransferLog logs/access_log<br />
+&nbsp; &nbsp; SSLEngine on<br />
+&nbsp; &nbsp; SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL<br />
+&nbsp; &nbsp; SSLCertificateFile "c:/programme/apache group/apache2/certificates/certificate.crt"<br />
+&nbsp; &nbsp; SSLCertificateKeyFile "c:/programme/apache group/apache2/certificates/certificate.key"<br />
+&lt;/VirtualHost&gt;</tt></p>
+
+<p class="block">Replace the paths to the certificates to reflect your paths as
+well as the name of the VirtualHost. You can find more instructions and
+examples on how to configure SSL in the mod_ssl package.</p>
+
+<h3><a name="toc2-2-6"></a>2.2.6. Step 6</h3>
+
+<p class="block">Open <tt>settings.inc.php</tt> and replace <tt>$c["host"] =
+"http://servername"</tt> by <tt>http<b><u>s</u></b>://servername</tt>, as now
+we are using SSL!</p>
+
+<p class="block">If you use SSL together with the password protection from
+2.1., then you have created a secure environment for N/X. Be sure to know that
+complete security does not exist and that every software can contain bugs!</p>
+
+<h2><a name="toc2-3"></a>2.3. Secured connections with SSL (Linux)</h2>
+
+<p class="block">As a Linux administrator, you can surely learn a lot from the
+Windows help. To set up SSL on an Apache server on Linux, the following
+articles might be helpful:</p>
+
+<p class="block"><a
+href="http://www.linux-magazin.de/Artikel/ausgabe/2000/08/Apache/Apache-SSL.html"
+target="_blank">http://www.linux-magazin.de/Artikel/ausgabe/2000/08/Apache/Apache-SSL.html</a>
+(German)<br /> <a href="http://www.linuxnetmag.com/de/issue6/m6ssl1.html"
+target="_blank">http://www.linuxnetmag.com/de/issue6/m6ssl1.html</a>
+(German)<br /> <a href="http://www.linuxhelp.net/guides/apachessl/"
+target="_blank">http://www.linuxhelp.net/guides/apachessl/</a> (English)</p>
+
+<p class="block">Furthermore, most distributions provide an already compiled
+package (mostly called <tt>mod_ssl</tt> or similar). Read the readme files of
+the packages for more information. The creation of certificates with OpenSSL
+works the same under Linux as under Windows.</p>
+
+<h2><a name="toc2-4"></a>2.4. Authentification with certificates</h2>
+
+<p class="block">Since the backend of N/X is only used by a limited number of
+users, you can additionally secure the system with browser certificates. For
+this you need to generate the certificates for the browser, or better yet, let
+them be created. Use a professional certification authority -- which only costs
+about 100 Euro, but provides you with the security that everything is
+correct.</p>
+
+<p class="block">To create certificates yourself, use OpenSSL with the
+<tt>ca</tt> command. More detailed information can be obtained from the
+instruction manual of OpenSSL at <a href="http://www.openssl.org/docs/"
+target="_blank">http://www.openssl.org/docs/</a>.</p>
+
+<p class="block">As soon as you created a browser certificate, you will need to
+distribute it to your users. They then install it in their browsers. To make
+the authentification with certificate work, you will need to reconfigure the
+Apache webserver as a last step:</p>
+
+<p class="cmd"><tt>Listen 443<br />
+LoadModule ssl_module modules/mod_ssl.so<br />
+<br />
+AddType application/x-x509-ca-cert .crt<br />
+AddType application/x-pkcs7-crl &nbsp; &nbsp;.crl<br />
+<br />
+SSLCACertificateFile "c:\programme\apache group\apache2\certificates\certificate.crt"<br />
+<br />
+&lt;Directory c:/web/nx4.1/cms&gt;<br />
+&nbsp; &nbsp; SSLVerifyClient require<br />
+&nbsp; &nbsp; SSLVerifyDepth 1<br />
+&nbsp; &nbsp; require valid-user<br />
+&nbsp; &nbsp; Options FollowSymLinks<br />
+&nbsp; &nbsp; AllowOverride None<br />
+&lt;/Directory&gt;</tt></p>
+
+<p class="block">Make sure that all access possibilities but this URL are
+denied. Restart Apache afterwards.</p>
+
+<h2><a name="toc2-5"></a>2.5. Check list for proper installation</h2>
+
+<table class="bordered">
+  <tr>
+    <th>Configuration</th>
+    <th>Check</th>
+  </tr>
+  <tr>
+    <td>PHP <tt>register_globals = off</tt></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>PHP <tt>error_reporting = E_ALL &amp; ~E_NOTICE</tt></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Package is complete</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Directory permissions set</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Database correctly created</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Database connection works (test with i.e. phpMyAdmin)</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><tt>config.inc.php</tt> has been edited</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><tt>settings.inc.php</tt> has been edited</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>First login successful</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Skimming through N/X without errors</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Calling <b>rebuild cache</b> function (when using static caching)</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Calling <b>rebuild data types</b> function</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Changing passwords of all users</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Configuring SSL for Apache</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Client authentification with certificates</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Protection of the N/X directories</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+<hr />
+
+<h1><a name="toc3"></a>3. Deployment</h1>
+
+<p class="block">Beginning with version 4.1, N/X can automatically be
+distributed over multiple webservers. Upon launch, either static HTML pages are
+distributed or the corresponding templates are copied over. Furthermore,
+picture data and flash movies are copied.</p>
+
+<p class="block">We strongly recommend using static caching when distributing
+pages among multiple webservers. You should take care when setting the paths so
+that you only use relative paths. Thus, if you have a picture on your server is
+accessible through the URI <tt>httP://server1/images/image1.jpeg</tt>, the URI
+on the second server should be <tt>http://server2/images/image1.jpeg</tt>. If
+this is the case, you can and must use relative paths, which means that the
+picture is to be found under the URI <tt>/images/image1.jpg</tt>.</p>
+
+<h2><a name="toc3-1"></a>3.1. Setting up slave servers</h2>
+
+<p class="block">You need a base server and can server about 10 slave servers.
+A required necessity is a fast connection between the servers! To set up a
+slave server, install N/X as you would normally do if it was an independent CMS
+system. Afterwards, delete the following files and directories:</p>
+
+<p class="cmd"><tt>cms/modules<br />
+cms/index.php<br />
+wwwdev</tt></p>
+
+<p class="block">The rest remains unchanged. Please take care that all plugins
+that are available on the master system are also present in the slaves' plugin
+folder.</p>
+
+<p class="block">When configuring the database, enter the values which are
+present in the master system. Your slave system thus does not get a dedicated
+database. Especially when you can not use any caching this might be unbearable
+so that you will need to set up a database replication. The database should be
+replicated in cyclic order to the slave systems. All applications that are
+based on the CMS plugin -- this includes i.e. the guestbook -- or an N/X forum,
+can not be used anymore.</p>
+
+<p class="block">We originally developed the Deployment to have a backup server
+running in parallel to the main webserver to which you can instantly switch
+over when there is a problem with the main one. However, you should also use an
+external database backup facility, if there should ever be an error with
+it.</p>
+
+<p>Conclusion:</p>
+
+<ul>
+  <li>Slave server is to be configured like a normal N/X server</li>
+  <li>Static caching is really recommended</lI>
+  <li>Best is to use the same database for both systems</lI>
+</ul>
+
+<h2><a name="toc3-2"></a>3.2. Setting up the master server</h2>
+
+<p class="block">In the master server's <tt>settings.inc.php</tt> you can
+define to what slave servers data is to be transferred upon a launch. At the
+moment, N/X can handle two different transferring mechanisms: FTP and local
+file access. You can, for example, use already existing network shares
+(SMB/CIFS, NFS) to directly copy N/X's files there. The N/X package contains
+two specialized <tt>settings.inc.php</tt> files; one with a trailing
+<tt>.fileconfig</tt>, another with <tt>.ftpconfig</tt>, with each having an
+example configuration for the particular deployment protocol. Take a look at
+these to find out how to perfectly configure the deployment.</p>
+
+<p class="block">Before you configure any slaves, the following line should be
+added to <tt>settings.inc.php</tt>:</p>
+
+<p class="cmd"><tt>$c["ftplivepath"] = "www/";</tt></p>
+
+<p class="block">Note that the path is relative to <tt>$c["basepath"]</tt> and
+describes your <tt>www</tt> directory. Further, set the
+<tt>$c["cachedocroot"]</tt> variable to change the paths within the static
+files. If you put, say <tt>file:///c:/....</tt> here, this will exactly be
+reprinted in the static HTML files.</p>
+
+<p class="block">The deployment to the slaves is activated by creating the
+<tt>$deploy</tt> array. For the first server that you want to distribute data
+to, create the <tt>$deploy[0]</tt> array; for the second, use
+<tt>$deploy[1]</tt>, etc. (So that <tt>$deploy</tt> itself is really an array
+of arrays.)</p>
+
+<h3><a name="toc3-2-1"></a>3.2.1. Configuration for FTP deployment</h3>
+
+<p class="cmd"><tt>$deploy[0]["mode"] = "ftp"; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// file or ftp<br />
+$deploy[0]["ftpserver"] = "localhost"; &nbsp; &nbsp; &nbsp; // if ftp, server-address<br />
+$deploy[0]["ftpport"] = 21; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// if ftp, server-port<br />
+$deploy[0]["ftpuser"] = "test"; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// if ftp, server-user<br />
+$deploy[0]["ftppasswd"] = "test"; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// if ftp, user-password<br />
+$deploy[0]["ftprootdir"] = "/"; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// if ftp, ftp-root-dir<br />
+$deploy[0]["livepath"] = "www/"; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // if ftp, ftp-live-files-path (pages)<br />
+$deploy[0]["livefilespath"] = "www/images/"; // if ftp, ftp-live-data-files (images)-path<br />
+$deploy[0]["cachepath"] = "www/pages/"; &nbsp; &nbsp; &nbsp;// path, where cache files go to</tt></p>
+
+<p class="block">By setting the <tt>MODE</tt> to <tt>ftp</tt>, N/X is told to
+use the FTP protocol for this deployment slave server.</p>
+
+<p class="block">The <tt>ftp</tt> variables then also describe the access to
+the FTP server. In <tt>livepath</tt> you set the path to where N/X shall copy
+the templates; normally this is the <tt>www</tt> directory.
+<tt>LivefilesPath</tt> points to the path where pictures shall go;
+<tt>cachepath</tt> where static HTML pages are put. Please note, that the
+directories must all have the same name as on the master server and that the
+file tree hierarchy needs to be exactly the same!</p>
+
+<h3><a name="toc3-2-2"></a>3.2.2. Deployment with network shares</h3>
+
+<p class="cmd"><tt>$deploy[1]["mode"] = "file"; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // file or ftp
+$deploy[1]["livepath"] = "z:/test/"; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // live files-path (pages)
+$deploy[1]["livefilespath"] = "z:/test/images/"; // live-data-files (images) -path
+$deploy[1]["cachepath"] = "z:/test/pages/"; &nbsp; &nbsp; &nbsp;// path, where cache files go to</tt></p>
+
+<p class="block">As you can see, <tt>MODE</tt> is set to <tt>file</tt> this
+time. The variables <tt>livepath</tt>, <tt>livefilespath</tt> and
+<tt>cachepath</tt> are the same as in the example above. If you look close, you
+can see that N/X distributes files on local filesystem. Use the "Connect
+network share" function of Windows, UNC paths (<tt>\\computername\share</tt>)
+or Linux's <tt>mount</tt> command for NFS for distribution of data along other
+servers.</p>
+
+<h3><a name="toc3-2-3"></a>3.2.3. Hints</h3>
+
+<table class="bordered">
+  <tr>
+    <td>If you want to create CD-ROMs, you can create an efficient offline
+      webpage for CDs when using deployment and static caching.</td>
+  </tr>
+  <tr>
+    <td>You can install N/X on your local Windows machine and handle a static
+      webpage over FTP on your webserver easily.</td>
+  </tr>
+</table>
+
+<hr />
+
+<p>Translated by: Jan Engelhardt &lt;jengelh [at] linux01 gwdg de&gt;</p>
+
+<p>Dictionaries used:</p>
+
+<ul>
+  <li>Langenscheidts Universal-Wörterbuch Deutsch-Englisch<br />
+    GER-EN + EN-GER,<br />
+    1992 - 1995, 576 pages, sizes: 8 x 10.7 x 2.5 cm,<br />
+    ISBN 3-468-18122-1</li>
+  <li>lot of brainpower ;)</li>
+</ul>
+
+<hr />
+</body>
+</html>

@@ -1,0 +1,1 @@
+ALTER TABLE `cluster_variations` ADD `LAST_CHANGED` TIMESTAMP NOT NULL ;

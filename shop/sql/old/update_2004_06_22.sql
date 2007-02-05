@@ -1,0 +1,1 @@
+ALTER TABLE `channel_articles` ADD `ARTICLE_DATE` DATETIME;

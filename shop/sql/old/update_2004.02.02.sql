@@ -1,0 +1,1 @@
+ALTER TABLE `internal_resources` CHANGE `VALUE` `VALUE` TEXT DEFAULT NULL

@@ -1,0 +1,50 @@
+***************************************************
+ RELEASEPLAN
+***************************************************
+
+BETA 1:
+----------
++		[0,0h] Alte Portalfunktion entfernen.
++		[ 10h] Logfile-Analysis entwickeln.
++		[  4h] Sortier-/Anzeigeprobleme beim Umsortieren von Seiten (Content/Website)
++ 		[  4h] Live-Authoring-Button
++		[  8h] Bugfixing/Parser content lib.
++		[  4h] Sprachumschaltung in "My Profile" fixen.
++		[ 40h] Meta-Template- & Cluster-Template-Editor komplett überarbeiten
++		[  5h] Installationsanleitung
++		[  5h] Konfigurationsanleitung
+
+-		[ 24h] Library ACLs sichern.
+-		[ 40h] Bugfixing
+-		[ 50h] Anleitung für neues CDS
+-		[ 16h] Clustereditor komplett überarbeiten
+
+
+
+
+***************************************************
+ Ideen:
+***************************************************
+
+- 		Dateiendungen für statische Seiten in sitepage_master und launch (nicht nur .html sonder .xml)
+- 		light theme without any graphics as far as this is appropriate
+- 		aqua theme
+- 		Mainmenu without JAVA-Script (compatibility-mode). To be set in user settings for each user (My Profile, User general)
+-	 	Poll Plugin
+- 		Forum Plugin
+- 		Blackboard Plugin
+- 		RSS Reader Plugin (see N/X homepage)
+- 		separate Plugins: Text, Rhichtext
+- 		Image Generator Plugin
+- 		Enhance Ticket Plugin (Sort for columns, date as new column, better user database)
+
+***********************************************
+ Fertig
+***********************************************
+- [sweih, 100%]		Cluster mit Layout (compounds) als Bausteine für Portale oder Teaserersatz.
+- [sweih, 100%]	Compound Gruppen (Sortierung, Zufällig, Datum usw.) Bsp: 10 beliebige FAQs als Baustein
+- [sweih, 100%]	Homepageuser authentification.
+- [sweih, 100%]		Enhance Event-Plugin (Add Calendar-view in cds, ...)
+- [sweih, 100%]	Rate Plugin
+- [sweih, 100%]	Wetter Plugin (wetter.de, wetter.com)
+- [fkoenig, 100%] Thumbnailauswahl bei Sitepage-mastern als Dropdownbox (vgl. Plugins)

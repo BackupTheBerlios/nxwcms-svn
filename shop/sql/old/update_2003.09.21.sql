@@ -1,0 +1,5 @@
+CREATE TABLE `compound_group_members` (
+`CGID` BIGINT NOT NULL ,
+`CGMID` BIGINT NOT NULL ,
+`POSITION` BIGINT NOT NULL 
+);
