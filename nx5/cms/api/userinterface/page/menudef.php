@@ -61,7 +61,6 @@ if ($c["pagetracking"])
 
 $pagemenu->addMenu($lang->get("m_eservices", "E-Services"). " (under development)", "ESERVICES", false);
 $pagemenu->addSubMenu($lang->get("contacts", "Contacts"), "modules/address/overview.php", "ADDRESS");
-$pagemenu->addSubMenu($lang->get("shop", "Shop"), "modules/shop/overview.php", "SHOP");
 $pagemenu->addSubMenu($lang->get("newsletter", "Newsletter"), "modules/newsletter/overview.php", "NEWSLETTER");
 $pagemenu->addSubMenu($lang->get("mailings", "Mailings"), "modules/customercare/index.php", "CUSTOMERCARE|CUSTOMERCAREADMIN");
 
