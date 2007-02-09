@@ -53,7 +53,7 @@
 		 * returns array with names, which need to be deployed when the plugin is installed
 		 */
 		function getInstallationFiles() {
-		  return array("rate0.gif", "rate1.gif");
+		  return array("rate0.gif", "rate1.gif", "rater.php");
 		}
 		
 		/**
@@ -101,38 +101,17 @@
 	    * @param string Thankyou-Text
 	    */
 	   function drawForm($question="How did you rate the quality of this content?", $poor="Poor", $good="Outstanding", $comment="Your Comment", $rating="Average Rating", $submit="Submit", $thankyou="Thank you for your vote!" ) {
-	        $out = '<table class="rate_table">'."<tr>\n";
-	        $out.= '<form name="rate" method="post">';
-	        if ($this->_processForm()) {
-	            $out.= '<td class="rate_copy">'.$thankyou."</td>\n</tr>\n<tr>";
-	            $out.= '<td class="rate_copy">'.$this->drawResults()."</td>\n</tr>\n";
-	        } else {;
-	            $out.= '<td colspan="11" class="rate_label">'.$question."</td>\n</tr>\n<tr>";
-	            $out.= '<td colspan="11" class="rate_copy"><img src="sys/ptrans.gif" border="0" height="5" width="1">'."</td>\n</tr>\n<tr>";
-	            $out.= '<td class="rate_label" width="10%">&nbsp;<input type="hidden" name="pgnratingsend'.$this->sourceId.'" value="1"></td>';
-	            for ($i=1; $i < 10; $i++) {
-    	            $out.= '<td class="rate_copy" align="center" width="10%">'.$i.'</td>';
-	            }    
-	            $out.= '<td class="rate_copy" width="10%">&nbsp;</td>'."\n</tr>\n<tr>";
-	            $out.= '<td class="rate_label" width="10%">'.$poor.'</td>';
-	            for ($i=1; $i < 10; $i++) {
-	                $out.= '<td class="rate_copy" align="center" width="10%"><input type="radio" name="pgnrating'.$this->sourceId.'" value="'.$i.'"></td>';
-	            }
-	            $out.= '<td class="rate_copy" width="10%">'.$good.'</td>'."\n</tr>\n<tr>";
-	            $out.= '<td colspan="11" class="rate_copy"><img src="sys/ptrans.gif" border="0" height="5" width="1">'."</td>\n</tr>\n<tr>";
-	            $out.= '<td colspan="11" class="rate_label">'.$comment."</td>\n</tr>\n<tr>";
-	            $out.= '<td colspan="11" class="rate_copy"><textarea class="rate_textarea" name="pgnratingcomment'.$this->sourceId.'" size="4"></textarea>'."</td>\n</tr>\n<tr>";
-	            $out.= '<td colspan="11" class="rate_copy"><input type="submit" name="submit" value="'.$submit.'">'."</td>\n</tr>";
-	        }
-	        $out.= '</form>';
-	        $out.= '</table>'."\n";    
+          global $cds;
+          $out = $this->drawRating();
+          $out.= '<iframe style="width:400px; height:250px;" frameborder="0" border="0" src="'.$cds->docroot.'sys/rater.php?source='.$this->sourceId.'"></iframe>';          
+          $out.= $this->drawComments();
 	        return $out;
 	   }
 	 
 	   /**
 	    * Draw result list
 	    */
-	   function drawResults($average="Average Rating", $count="Ratings") {
+	   function drawRating($average="Average Rating", $count="Ratings") {
 	      $out = '<table class="rate_table">'."\n";
 	      $out.= '<tr>';
 	      $out.= '<td valign="middle" class="rate_label">'.$average."</td>\n";
@@ -151,33 +130,15 @@
 	      return $out;
 	   }
 	 
-	   /**
-	    * Store a vote
-	    * @param integer Vote of user (1-8)
-	    * @param string comment of user
-	    */
-	   function saveData($vote, $comment="") {
-	     if ($vote>0 && $vote <10) {
-	       global $db;
-	       $sql = "INSERT INTO pgn_rating (VOTE, COMMENT, SOURCEID) VALUES($vote, '".addslashes($comment)."', $this->sourceId)";
-	       $query = new query($db, $sql);
-	       $query->free();
-	       return true;  
-	     }
-	     return false;
-	   }
-	   
-	   /**
-	    * Process the formfields, if set. Takes fields pgnratingcomment<id>, pgnratingvote<id>,
-	    * pgnratingsend<id>
-	    */
-	    function _processForm() {
-	      if (value("pgnratingsend".$this->sourceId) == "1") {
-	        return $this->saveData(value("pgnrating".$this->sourceId, "NUMERIC"), value("pgnratingcomment".$this->sourceId, "", ""));
-	      }
-	      return false;
-	    }
-	   
+		function drawComments() {
+			$data = $this->getComments(20);
+			$out = '';
+			for ($i=0; $i<count($data); $i++) {
+				$out.=$data[$i]["date"].'<br>'.$data[$i]["comment"].'<br><br>';
+			}
+			return $out;
+		}
+   
 	   /**
 	    * Returns array with rated data.
 	    * ["ratings"] # of ratings
