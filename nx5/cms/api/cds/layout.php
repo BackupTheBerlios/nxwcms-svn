@@ -44,6 +44,8 @@
 		var $docType = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
 		var $contentType='text/html; charset=iso-8859-1';
 		var $menuRef;
+		var $keywords;
+		var $description;
 		var $images;
 		
 		/**
@@ -150,7 +152,24 @@
 		 function setStaticTitle($title) {
 			$this->staticTitle = $title;
 		 }
+
+		/**
+		 * Add static keywords to the meta tags
+		 * @param string Static keywords
+		 */	
+		function setStaticMetaKeywords($keywords) {
+			$this->keywords = $keywords;
+		}
 		 
+		/**
+		 * Add static description to the meta tags
+		 * @param string Static description
+		 */	
+		function setStaticMetaDescription($description) {
+			$this->description = $description;
+		}
+
+
 		/**
 		 * Overwrite automatic page-title generation with manual title.
 		 * @param string page title
@@ -285,8 +304,8 @@
 		 	echo '  <meta http-equiv="Content-Type" content="'.$this->contentType.'"/>'."\n";
 			echo '  <meta name="generator" content="N/X WCMS 2004 - www.nxsystems.org"/>'."\n";
 			echo '  <meta name="date" content = "'. gmdate("Y-m-d H:i:s") .'"/>'."\n";
-			echo '  <meta name="keywords" content = "'.$this->parent->meta->get("Keywords").'"/>'."\n";
-			echo '  <meta name="description" content = "'.$this->parent->meta->get("Description").'"/>'."\n";
+			echo '  <meta name="keywords" content = "'.$this->keywords.','.$this->parent->meta->get("Keywords").'"/>'."\n";
+			echo '  <meta name="description" content = "'.$this->description.' '.$this->parent->meta->get("Description").'"/>'."\n";
 			echo '  <meta name="revisit-after" content="7 days"/>'."\n";
 			echo '  <meta name="robots" content="follow,index"/>'."\n";		 			 	
 		 	
