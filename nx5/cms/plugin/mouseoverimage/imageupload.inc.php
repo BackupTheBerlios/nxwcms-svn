@@ -31,7 +31,7 @@
 	 * all mechanisms for upload the image.
 	 * @package DatabaseConnectedInput
 	 */
-	class ImageUpload3 {
+	class ImageUpload3 extends WUIInterface {
 		var $v_label;
 
 		var $v_wuiobject;

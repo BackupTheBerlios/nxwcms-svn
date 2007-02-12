@@ -132,7 +132,7 @@
 			if ($page_state == "processing" && $page_action = "UPDATE") {
 				for ($i=0; $i<count($this->settings); $i++) {
 				  if ($this->settings[$i][1] != "") {
-				    $value = value("set".$i, "", $this->settings[$i][3]);
+				    $value = value("set".$i, "", '');
 				    reg_save($this->settings[$i][1], $value);
 				    $this->settings[$i][3] = $value;
 				  }	

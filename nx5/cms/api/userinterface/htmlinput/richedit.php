@@ -26,7 +26,7 @@
 	* @version 1.00
 	* @package WebUserInterface
 	*/
-	require_once $c["path"] . "ext/fckeditor22/fckeditor.php";
+	require_once $c["path"] . "ext/fckeditor24/fckeditor.php";
 
 	class Richedit extends WUIObject {
 		var $action;
@@ -66,7 +66,7 @@
 			$oFCKeditor->Value = $this->value;
 			$oFCKeditor->Width = '100%';
 			$oFCKeditor->Height = 300;
-			$oFCKeditor->BasePath = $c["host"].$c["docroot"]."ext/fckeditor22/";
+			$oFCKeditor->BasePath = $c["host"].$c["docroot"]."ext/fckeditor24/";
 			$oFCKeditor->Create();
 			$output = WUIObject::std_footer();
 			echo $output;

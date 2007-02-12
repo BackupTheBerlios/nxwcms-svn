@@ -91,7 +91,7 @@
 		}
 		
 		function getInstallationFiles() {
-			return "draw_teaser.php";
+			return array("draw_teaser.php");
 		}
 
 		/**
