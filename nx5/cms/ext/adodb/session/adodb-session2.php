@@ -177,7 +177,7 @@ class ADODB_Session {
 	function host($host = null) {
 		static $_host = 'localhost';
 		static $set = false;
-
+    
 		if (!is_null($host)) {
 			$_host = trim($host);
 			$set = true;
@@ -537,18 +537,19 @@ class ADODB_Session {
 	*/
 	function open($save_path, $session_name, $persist = null) 
 	{
+		global $c;
 		$conn =& ADODB_Session::_conn();
 
 		if ($conn) {
 			return true;
 		}
 
-		$database	= ADODB_Session::database();
+		$database	= $c['database'];
 		$debug		= ADODB_Session::debug();
-		$driver		= ADODB_Session::driver();
-		$host		= ADODB_Session::host();
-		$password	= ADODB_Session::password();
-		$user		= ADODB_Session::user();
+		$driver		= $c['dbdriver'];
+		$host		  = $c['dbhost']; 
+		$password	= $c['dbpasswd'];
+		$user		  = $c['dbuser'];
 
 		if (!is_null($persist)) {
 			ADODB_Session::persist($persist);

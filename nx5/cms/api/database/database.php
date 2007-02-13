@@ -50,8 +50,8 @@
 				$database = $c["database"];
 
 			if ($c["dbdriver"] == "mysql") {
-                    $this->ADODB = &ADONewConnection($this->type);
-			        $this->ADODB->PConnect($dbhost, $dbuser, $dbpasswd, $database);
+                    $this->ADODB = NewADOConnection($this->type);			        		
+			        			$this->ADODB->PConnect($dbhost, $dbuser, $dbpasswd, $database);
                         } else if ($c["dbdriver"] == "mssql") {
                                 $this->ADODB = &ADONewConnection("ado_mssql");
                                 $dsn = "PROVIDER=MSDASQL;DRIVER={SQL Server};SERVER=".$dbhost.";DATABASE=".$database.";UID=".$dbuser.";PWD=".$dbpasswd.";";                      
