@@ -30,7 +30,7 @@
 	<title>FCKeditor</title>
 	<meta name="robots" content="noindex, nofollow" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta http-equiv="Cache-Control" content="public" />
+	<meta http-equiv="Cache-Control" content="public" />	
 	<script type="text/javascript">
 
 // Instead of loading scripts and CSSs using inline tags, all scripts are
@@ -203,6 +203,7 @@ if ( FCKBrowserInfo.IsGecko )
 }
 
 	</script>
+	<SCRIPT type="text/javascript" src="js/nx_config.php"></SCRIPT>
 </head>
 <body>
 	<table width="100%" cellpadding="0" cellspacing="0" style="height: 100%; table-layout: fixed">

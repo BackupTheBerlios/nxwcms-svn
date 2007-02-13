@@ -30,6 +30,17 @@
 
 // Disable the custom Enter Key Handler (this configuration will be removed in
 // version 2.5).
+
+var URLParams = new Object();
+
+var aParams = document.location.search.substr(1).split('&');
+
+for (i = 0; i < aParams.length; i++) {
+	var aParam = aParams[i].split('=');
+
+	URLParams[aParam[0]] = aParam[1];
+}
+
 FCKConfig.DisableEnterKeyHandler = false ;
 
 FCKConfig.CustomConfigurationsPath = '' ;
@@ -185,14 +196,15 @@ var _QuickUploadLanguage	= 'asp' ;	// asp | aspx | cfm | lasso | php
 // Don't care about the following line. It just calculates the correct connector 
 // extension to use for the default File Browser (Perl uses "cgi").
 var _FileBrowserExtension = _FileBrowserLanguage == 'perl' ? 'cgi' : _FileBrowserLanguage ;
+var sid = URLParams['sid'];
 
 FCKConfig.LinkBrowser = true ;
-FCKConfig.LinkBrowserURL = FCKConfig.BasePath + 'filemanager/browser/default/browser.html?Connector=connectors/' + _FileBrowserLanguage + '/connector.' + _FileBrowserExtension ;
-FCKConfig.LinkBrowserWindowWidth	= FCKConfig.ScreenWidth * 0.7 ;		// 70%
-FCKConfig.LinkBrowserWindowHeight	= FCKConfig.ScreenHeight * 0.7 ;	// 70%
+FCKConfig.LinkBrowserURL = nxpath + "plugin/text/internallink.php?sid=" + sid;
+FCKConfig.LinkBrowserWindowWidth	= 800	// 70%
+FCKConfig.LinkBrowserWindowHeight	= 300;	// 70%
 
 FCKConfig.ImageBrowser = true ;
-FCKConfig.ImageBrowserURL = FCKConfig.BasePath + 'filemanager/browser/default/browser.html?Type=Image&Connector=connectors/' + _FileBrowserLanguage + '/connector.' + _FileBrowserExtension ;
+FCKConfig.ImageBrowserURL = nxpath + 'modules/content/objectbrowser.php?sid=' + sid + "&linkset=SELECT|EDIT|USAGE|LAUNCH|DELETE&filter=IMAGE";;
 FCKConfig.ImageBrowserWindowWidth  = FCKConfig.ScreenWidth * 0.7 ;	// 70% ;
 FCKConfig.ImageBrowserWindowHeight = FCKConfig.ScreenHeight * 0.7 ;	// 70% ;
 
@@ -211,7 +223,7 @@ FCKConfig.ImageUploadURL = FCKConfig.BasePath + 'filemanager/upload/' + _QuickUp
 FCKConfig.ImageUploadAllowedExtensions	= ".(jpg|gif|jpeg|png|bmp)$" ;		// empty for all
 FCKConfig.ImageUploadDeniedExtensions	= "" ;							// empty for no one
 
-FCKConfig.FlashUpload = false ;
+FCKConfig.FlashUpload = true ;
 FCKConfig.FlashUploadURL = FCKConfig.BasePath + 'filemanager/upload/' + _QuickUploadLanguage + '/upload.' + _QuickUploadLanguage + '?Type=Flash' ;
 FCKConfig.FlashUploadAllowedExtensions	= ".(swf|fla)$" ;		// empty for all
 FCKConfig.FlashUploadDeniedExtensions	= "" ;					// empty for no one

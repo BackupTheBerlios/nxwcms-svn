@@ -59,6 +59,9 @@ class FCKeditor
 	
 	function CreateHtml()
 	{
+		global $sid;
+		if (!isset($sid))
+		  $sid = getVar($sid);
 		$HtmlValue = htmlspecialchars( $this->Value ) ;
 
 		$Html = '<div>' ;
@@ -70,7 +73,7 @@ class FCKeditor
 			else
 				$File = 'fckeditor.html' ;
 
-			$Link = "{$this->BasePath}editor/{$File}?InstanceName={$this->InstanceName}" ;
+			$Link = "{$this->BasePath}editor/{$File}?InstanceName={$this->InstanceName}&sid=$sid" ;
 			
 			if ( $this->ToolbarSet != '' )
 				$Link .= "&amp;Toolbar={$this->ToolbarSet}" ;
