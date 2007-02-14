@@ -103,19 +103,20 @@
 
 			$alt = getDBCell("pgn_mouseoverimage", "ALT", "FKID = $this->fkid");
 			$filename = getDBCell("pgn_mouseoverimage", "FILENAME1", "FKID = $this->fkid");
-			$copyright = getDBCell("pgn_mouseoverimage", "COPYRIGHT", "FKID = $this->fkid");
+			
 
 			// painting preview.
 			mt_srand((double)microtime() * 1000000);
 			$randval = mt_rand();
-			$output = "<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">";
-			$output .= "<tr><td class=\"bcopy\"><b>Width:</b> $width<br><b>Height:</b> $height<br><br><b>ALT-Tag:</b> $alt<br><b>Copyright:</b> $copyright</td><td><a href=\"#\" border=\"0\" onClick=\"preview = window.open('" . $c["devfilesdocroot"] . $filename . "', '', 'width=".($width + 20).",height=".($height + 20).",scrollbars=no,status=no,menubar=no');\">";
+			$output = "<table width=\"150\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">";
+			$output .= "<tr><td><a href=\"#\" border=\"0\" onClick=\"preview = window.open('" . $c["devfilesdocroot"] . $filename . "', '', 'width=".($width + 20).",height=".($height + 20).",scrollbars=no,status=no,menubar=no');\">";
 			if (file_exists($c["devfilespath"]."t".$filename)) {
 				$output .= "<img src=\"" . $c["devfilesdocroot"] . "t" . $filename . "?$randval\" alt=\"$alt\" border=\"0\">";				
 			} else {
 				$output .= "<img src=\"" . $c["devfilesdocroot"] . $filename . "?$randval\" width=\"$dwidth\" height=\"$dheight\" alt=\"$alt\" border=\"0\">";
 			}
 			$output .= "</a></td></tr>";
+			$output.= "<tr><td><b>Width:</b> $width<br><b>Height:</b> $height<br><b>ALT-Tag:</b> $alt</td></tr>";
 			$output .= "</table>";
 			return $output;
 		}

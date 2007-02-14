@@ -239,10 +239,11 @@
 			$query = new query($db, $querySQL);
 			$query->getrow();
 			$content = $query->field("CONTENT");
-			$parser = new LaunchText(variation(), false);
+			$parser = new LaunchText(variation(), false);			
 			$content = addslashes($parser->parseText($content));			
 			$query->free();
-
+			$launchparser = new ObjectParser();
+			$launchparser->launch($content, variation());
 			$sql = "INSERT INTO $this->management_table ($this->pk_name, CONTENT) VALUES ($newid, '$content')";
 			return $sql;
 		}

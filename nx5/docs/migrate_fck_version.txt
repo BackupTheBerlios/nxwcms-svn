@@ -31,7 +31,7 @@ config.ToolbarSets["Default"] = [
 ***
 
 config.ImageBrowser = true;
-var sid = URLParams['sid'];
+
 config.ImageBrowserURL = nxpath + "modules/content/objectbrowser.php?sid=" + sid + "&linkset=SELECT|EDIT|USAGE|LAUNCH|DELETE&filter=IMAGE";
 config.ImageBrowserWindowWidth = 950;
 config.ImageBrowserWindowHeight = 550;

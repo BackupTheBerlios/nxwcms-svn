@@ -96,11 +96,7 @@
 					echo buttonLink($lang->get("edit"), $c["docroot"] . "modules/content/object_edit.php?go=update&sid=$sid&oid=" . $this->oid). "&nbsp;";
 			}
 
-			if (stristr($this->linkset, "LIB") || stristr($this->linkset, "USAGE")) {
-				if ($aclf->checkAccessToFunction("OBJ_USAGE"))
-					echo buttonLink($lang->get("usage", "Usage"), "#", "window.open('" . $c["docroot"] . "modules/common/object_usage.php?oid=" . $this->oid . "&sid=$sid', 'usage','Width=350px,Height=500px,help=no,status=yes,scrollbars=yes,resizable=yes');return true;"). "&nbsp;&nbsp;";
-			}
-
+			
 			if (stristr($this->linkset, "LIB") || stristr($this->linkset, "LAUNCH")) {				
 				if ($aclf->checkAccessToFunction("OBJECT_LAUNCH"))
 					echo buttonLink($lang->get("launch", "Launch"), "?action=launch&sid=$sid&oid=" . $this->oid). "&nbsp;&nbsp;";

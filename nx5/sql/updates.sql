@@ -3703,22 +3703,6 @@ VALUES (
 'ADDRESS', 'ESERVICES', 'Address Editor', 'Allow displaying, editing and deleting Contacts'
 );
 
-INSERT INTO `sys_functions` (`FUNCTION_ID`, `PARENT_ID`, `NAME`, `DESCRIPTION`) VALUES ('SHOP', 'ESERVICES', 'Shop Access', 'Allow access to general shop backoffice');
-INSERT INTO `sys_functions` (`FUNCTION_ID`, `PARENT_ID`, `NAME`, `DESCRIPTION`) VALUES ('SHOPADM', 'SHOP', 'Shop-Administrator', 'Technical Shop Administration');
-INSERT INTO `sys_functions` (`FUNCTION_ID`, `PARENT_ID`, `NAME`, `DESCRIPTION`) VALUES ('SHOPPRODADM', 'SHOP', 'Product-Administrator', 'Edit categories, products.....');
-INSERT INTO `sys_functions` (`FUNCTION_ID`, `PARENT_ID`, `NAME`, `DESCRIPTION`) VALUES ('ORDERPROC', 'SHOP', 'Order Processor', 'Account for processing orders');
-
-CREATE TABLE `categories_info` (
-`CATEGORY_ID` BIGINT NOT NULL ,
-`VARIATION_ID` BIGINT NOT NULL ,
-`IMAGE` BIGINT NOT NULL ,
-`HEADER` TEXT NOT NULL ,
-`FOOTER` TEXT NOT NULL ,
-`TITLE` VARCHAR( 1024 ) NOT NULL ,
-`SORT_ORDER` TINYINT NOT NULL ,
-`DATE_ADDED` DATETIME NOT NULL ,
-PRIMARY KEY ( `CATEGORY_ID` , `VARIATION_ID` ) 
-) TYPE = MYISAM ;
 
 INSERT INTO `sys_functions` (`FUNCTION_ID`, `PARENT_ID`, `NAME`, `DESCRIPTION`) VALUES ('NEWSLETTER', 'ESERVICES', 'Newsletter Access', 'Allow access to general newsletter backoffice');
 INSERT INTO `sys_functions` (`FUNCTION_ID`, `PARENT_ID`, `NAME`, `DESCRIPTION`) VALUES ('NEWSLETTERADM', 'NEWSLETTER', 'Newsletter-Administrator', 'Technical Newsletter Administration');
@@ -3736,13 +3720,6 @@ CREATE TABLE `mailinglist` (
 PRIMARY KEY ( `MAILINGLIST_ID` )
 ) TYPE = MYISAM ;
 
-
-CREATE TABLE `shop_tax` (
-`TAX_ID` BIGINT NOT NULL ,
-`NAME` VARCHAR( 128 ) NOT NULL ,
-`PERCENT` FLOAT DEFAULT '0' NOT NULL ,
-PRIMARY KEY ( `TAX_ID` )
-);
 
 CREATE TABLE `tickets_answers` (
   `ID` int(7) NOT NULL auto_increment,
@@ -3808,31 +3785,12 @@ CREATE TABLE `tickets` (
   PRIMARY KEY  (`ID`)
 ) ENGINE=MyISAM;
 
-CREATE TABLE `shop_configurator` (
-`CONFIGURATOR_ID` BIGINT NOT NULL ,
-`NAME` VARCHAR( 64 ) NOT NULL ,
-`DESCRIPTION` VARCHAR( 255 ) NULL ,
-PRIMARY KEY ( `CONFIGURATOR_ID` ) 
-) TYPE = MYISAM ;
-
-CREATE TABLE `shop_configurator_item` (
-`GUID` BIGINT NOT NULL ,
-`CONFIGURATOR_ID` BIGINT NOT NULL ,
-`POSITION` INT( 3 ) NOT NULL ,
-`TYPE` INT( 3 ) NOT NULL ,
-`TITLE` VARCHAR( 255 ) NOT NULL ,
-`VALUE` VARCHAR( 1024 ) NULL ,
-PRIMARY KEY ( `GUID` ) 
-) TYPE = MYISAM ;
-
-ALTER TABLE `cluster_templates` ADD `IS_SHOP_PRODUCT` TINYINT NULL DEFAULT '0',
-ADD `IS_SHOP_CATEGORY` TINYINT NULL DEFAULT '0';
-
-ALTER TABLE `cluster_templates` ADD `IS_SHOP_CATEGORY` TINYINT NOT NULL DEFAULT '0' AFTER `CLT_TYPE_ID` ,
-ADD `IS_SHOP_PRODUCT` TINYINT NOT NULL DEFAULT '0' AFTER `IS_SHOP_CATEGORY` ;
 
 
 
+DROP TABLE /*! IF EXISTS */ sessions;
+
+CREATE TABLE sessions2(	  sesskey VARCHAR( 64 ) NOT NULL DEFAULT '',	  expiry TIMESTAMP NOT NULL ,	  expireref VARCHAR( 250 ) DEFAULT '',	  created TIMESTAMP NOT NULL ,	  modified TIMESTAMP NOT NULL ,	  sessdata LONGTEXT DEFAULT '',	PRIMARY KEY ( sesskey ) ,	INDEX sess2_expiry( expiry ),	INDEX sess2_expireref( expireref ))
 
 
 

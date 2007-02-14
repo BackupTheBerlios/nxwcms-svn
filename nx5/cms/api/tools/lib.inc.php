@@ -39,5 +39,4 @@
 	require_once $c["path"] . "api/tools/class.stats.php";
 	require_once $c["path"] . "api/tools/statistics.php";	
 	require_once $c["path"] . "api/tools/jpcache.php";
-  require_once $c["path"] . "api/tools/nxgoogleanalyticsapi.php";
 ?>
