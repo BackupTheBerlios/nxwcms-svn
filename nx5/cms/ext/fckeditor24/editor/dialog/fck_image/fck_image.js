@@ -387,7 +387,6 @@ function ResetSizes()
 
 function BrowseServer()
 {
-	alert(FCKConfig.ImageBrowserURL);
 	OpenServerBrowser(
 		'Image',
 		FCKConfig.ImageBrowserURL,
