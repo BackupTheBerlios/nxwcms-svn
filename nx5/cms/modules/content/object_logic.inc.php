@@ -82,6 +82,7 @@
 
 		$go = "view";
 		$form = new Form($lang->get("library", "Content Library"));
+		$form->cols = 3;
 
 		if ($aclf->checkAccessToFunction("NEW_OBJECT")) {
 		  $form->buttonbar->add("action", $lang->get("new_content", "New Content"), "submit", "document.form1.processing.value = '';");
@@ -97,9 +98,9 @@
 
 		$str = pathToRootFolder($pnode);
 		
-		$form->add(new Spacer(2));
-		$form->add(new AlignedLabel('lnl', getBoxedText($str, 'headergrey', '100%'), 'left', '', 2));
-		$form->add(new Spacer(2));
+		$form->add(new Spacer(3));
+		$form->add(new AlignedLabel('lnl', getBoxedText($str, 'headergrey', '100%'), 'left', '', 3));
+		$form->add(new Spacer(3));
 
 		// add contents
 		if ($filter != "0") {
@@ -149,11 +150,11 @@
 		includePGNSources();
 
 		for ($i = 0; $i < count($content); $i++) {
-			$form->add(new LibraryViewer($content[$i], 2, $linkset, "image"));
+			$form->add(new LibraryViewer($content[$i], 1, $linkset, "image"));
 		}
 
 		if (count($content) == 0) {
-			$form->add(new Label("lbl", "<center>" . $lang->get("no_contents", "No Contents available in this folder."). "</center>", "standard", 2));
+			$form->add(new Label("lbl", "<center>" . $lang->get("no_contents", "No Contents available in this folder."). "</center>", "standard", 3));
 		}
 
 		if (isset($topText)) {

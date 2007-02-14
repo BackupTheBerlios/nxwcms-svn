@@ -342,12 +342,12 @@
 			echo '</table>';
 
 			echo "<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" align=\"center\" border=\"0\">";
-			echo "<tr>";
-			$cl1 = new Cell("cl1", "border", 1, ceil($this->width / 5)*2, 12);
-			$cl2 = new Cell("cl2", "border", 1, ceil(($this->width / 5)*3 ), 12);
-			$cl1->draw();
-			$cl2->draw();
-			echo "</tr>";
+			//echo "<tr>";
+			//$cl1 = new Cell("cl1", "border", 1, ceil($this->width / 5)*2, 12);
+			//$cl2 = new Cell("cl2", "border", $this->cols-1, ceil(($this->width / 5)*3 ), 12);
+			//$cl1->draw();
+			//$cl2->draw();
+			//echo "</tr>";
 			$this->draw_toptext();			
 			$col = 1;
 
@@ -356,22 +356,20 @@
 					$this->container[$i]->draw();
 				} else {
 					if ($col == 1)
-						echo "<tr valign=\"top\">\n";
-
-					$col += $this->container[$i]->draw();
-
+						echo "<tr valign=\"top\">\n";						
+					  $coladd = $this->container[$i]->draw();					  
+					  $col = $col + $coladd;				  
 					if ($col > $this->cols) {
-						$col = 0;
-
+						$col = 1;
 						echo "</tr>";
 					}
 
-					$col++;
+					
 				}
 			}
-			echo '<tr><td colspan="2">&nbsp;</td></tr>';
+			echo '<tr><td colspan="'.$this->cols.'">&nbsp;</td></tr>';
 			$this->draw_buttons();
-			echo '<tr><td colspan="2">&nbsp;</td></tr>';
+			echo '<tr><td colspan="'.$this->cols.'">&nbsp;</td></tr>';
 			echo "</table> "; 			
 		}
 

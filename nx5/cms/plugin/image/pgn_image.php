@@ -90,7 +90,7 @@
 				return "<div align=\"center\">No image uploaded yet.</div>";
 
 			// Scaling down image.
-			$scale_to = 120; //scale to 200px.
+			$scale_to = 150; //scale to 200px.
 			$scale = 1;
 			$dwidth = $width;
 			$dheight = $height;
@@ -112,15 +112,20 @@
 			// painting preview.
 			mt_srand((double)microtime() * 1000000);
 			$randval = mt_rand();
-			$output = "<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">";
-			$output .= "<tr><td class=\"bcopy\"><b>Width:</b> $width<br><b>Height:</b> $height<br><br><b>ALT-Tag:</b> $alt<br><b>Copyright:</b> $copyright</td><td><a href=\"#\" border=\"0\" onClick=\"preview = window.open('" . $c["devfilesdocroot"] . $filename . "', '', 'width=".($width + 20).",height=".($height + 20).",scrollbars=no,status=no,menubar=no');\">";
+			
+			$output = "<div align='left' style='width:120px;'><a href=\"#\" border=\"0\" onClick=\"preview = window.open('" . $c["devfilesdocroot"] . $filename . "', '', 'width=".($width + 20).",height=".($height + 20).",scrollbars=no,status=no,menubar=no');\">";			
+			$alt = getDBCell("pgn_image", "ALT", "FKID = $this->fkid");
+			$filename = getDBCell("pgn_image", "FILENAME", "FKID = $this->fkid");			
 			if (file_exists($c["devfilespath"]."t".$filename)) {
 				$output .= "<img src=\"" . $c["devfilesdocroot"] . "t" . $filename . "?$randval\" alt=\"$alt\" border=\"0\">";				
 			} else {
 				$output .= "<img src=\"" . $c["devfilesdocroot"] . $filename . "?$randval\" width=\"$dwidth\" height=\"$dheight\" alt=\"$alt\" border=\"0\">";
 			}
-			$output .= "</a></td></tr>";
-			$output .= "</table>";
+			$output.= '</a><br>';
+			$output.= '<b>Width</b>:'.$width.'<br>';
+			$output.= '<b>Height:</b>'.$height.'<br>';
+			$output.= '<b>Alt-Tag:</b>'.$alt.'<br>';		
+			$output.='</div>';
 			return $output;
 		}
 

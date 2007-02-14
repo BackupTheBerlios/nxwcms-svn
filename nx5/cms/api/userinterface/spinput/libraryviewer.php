@@ -44,7 +44,7 @@
 		  * @param $linkset specifies which buttons to display. Possible values: LIB, SELECT, EDIT, USAGE, LAUNCH, DELETE, COPY, combination sparated by | e.g. "LIB|SELECT", Standard: LIB
 		  * @param $filter specifies which plugins to display. Specify plugin name(s) e.g. IMAGE|TEXT
 		  */
-		function LibraryViewer($oid, $cells = 2, $linkset = "LIB", $filter = "") {
+		function LibraryViewer($oid, $cells = 1, $linkset = "LIB", $filter = "") {
 			$this->oid = $oid;
 
 			$this->cells = $cells;
@@ -67,14 +67,13 @@
 		function draw() {
 			global $lang, $c, $sid, $aclf;
 
-			echo '<td colspan="' . $this->cells . '">';
-			echo '<table cellpadding="2" cellspacing="1" height="140" border="0" width="100%">';
+			echo '<td colspan="' . $this->cells . '">';			
+			echo '<table cellpadding="0" cellspacing="0" height="140" border="0" width="190">';
 			echo '<tr>';
-			echo '<td width="300" height="1">' . drawSpacer(300, 1). '</td>';
-			echo '<td width="300" height="1">' . drawSpacer(300, 1). '</td>';
+			echo '<td width="190" height="1">' . drawSpacer(190, 1). '</td>';			
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td colspan="2" class="headbox">';
+			echo '<td class="headbox">';
 			echo '<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td>';
 			echo '<b>'.$this->name.'</b>&nbsp;&nbsp;&nbsp;('.$this->module_name.')';						
 			echo '</td><td align="right"><b>';
@@ -87,6 +86,11 @@
 				if ($ref->management_table == "pgn_image") $ref_array = $ref->draw("ALL");			
 			}
 			
+			// draw information on the content
+			echo '</b>';			
+			echo '</td></tr></table>';
+			echo '</td></tr>';
+			echo '<tr><td class="standardlight">';
 			if (stristr($this->linkset, "LIB") || stristr($this->linkset, "EDIT")) {
 				if ($aclf->checkAccessToFunction("EDIT_OBJECT") || $aclf->checkAccessToFunction("OBJECT_PROPS"))
 					echo buttonLink($lang->get("edit"), $c["docroot"] . "modules/content/object_edit.php?go=update&sid=$sid&oid=" . $this->oid). "&nbsp;";
@@ -119,44 +123,25 @@
 					}
 					echo buttonLink($lang->get("select", "Select"), "$jsAction"). "&nbsp;&nbsp;";
 				}
-			}
-	
-			// draw information on the content
-			echo '</b>';			
-			echo '</td></tr></table>';
-			echo '</td>';
-			echo '</tr><tr>';
-			echo '<td valign="top" style="border: 1px solid black;">';
+			}			
+			echo '</td></tr>';
+			echo '<tr>';
+			echo '<td valign="top" align="center" class="standardlight">';
 			echo  $ref->preview();
-			unset($ref);
-			echo '</td><td valign="top" class="standardlight">';
-		
-			echo "<br><b>" . $lang->get("ackey", 'Access Key'). ": </b>";
+			echo '</td></tr>';
+			
+			echo '<tr><td valign="top" class="standardlight">';		
+			echo '<b>'.$lang->get("ackey", 'Access Key'). ":</b> ";
 			echo "[".$this->accesskey."]";
-
-
-			br();
-			br();
-			echo "<b>" . $lang->get("avail_variations", "Variations"). ": </b><br/>";			
-			$variations = createDBCArray("content_variations", "VARIATION_ID", "DELETED=0 AND CID = " . $this->oid);
-			$comma = false;
-
-			if (is_array($variations)) {
-				foreach ($variations as $var) {
-					if ($comma)
-					echo ", ";
-					
-					$comma = true;
-					echo getDBCell("variations", "NAME", "VARIATION_ID = $var AND DELETED = 0");
-				}
-			}
-
 			echo "</td>";
-			echo "</tr>";
-			echo '<tr><td><br/><br/></td></tr>';
+			echo "</tr>";			
+			
+			echo '<tr><td class="line">'.drawSpacer(1,1).'</td></tr>';			
 			echo "</table>";
+			br();
 			echo "</td>";
-			return $this->cells;
+			unset($ref);
+			return 1;
 		}
 
 		function process() {
