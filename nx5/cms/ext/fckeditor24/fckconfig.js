@@ -200,12 +200,12 @@ var sid = URLParams['sid'];
 
 FCKConfig.LinkBrowser = true ;
 FCKConfig.LinkBrowserURL = nxpath + "plugin/text/internallink.php?sid=" + sid;
-FCKConfig.LinkBrowserWindowWidth	= 800	// 70%
-FCKConfig.LinkBrowserWindowHeight	= 300;	// 70%
+FCKConfig.LinkBrowserWindowWidth	= 850	// 70%
+FCKConfig.LinkBrowserWindowHeight	= 240;	// 70%
 
 FCKConfig.ImageBrowser = true ;
 FCKConfig.ImageBrowserURL = nxpath + 'modules/content/objectbrowser.php?sid=' + sid + "&linkset=SELECT|EDIT|USAGE|LAUNCH|DELETE&filter=IMAGE";;
-FCKConfig.ImageBrowserWindowWidth  = FCKConfig.ScreenWidth * 0.7 ;	// 70% ;
+FCKConfig.ImageBrowserWindowWidth  = 900 ;	// 70% ;
 FCKConfig.ImageBrowserWindowHeight = FCKConfig.ScreenHeight * 0.7 ;	// 70% ;
 
 FCKConfig.FlashBrowser = false ;
