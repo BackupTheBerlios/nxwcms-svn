@@ -223,7 +223,7 @@
 	require_once $c["path"] . "api/tools/datatypes.php";
 	require_once $c["path"] . "plugin/plugin.inc.php";
 	require_once $c["path"] . "api/database/lib.inc.php";
-	require_once $c["path"] . "ext/adodb/adodb-session.php";
+	require_once $c["path"] . "ext/adodb/session/adodb-session2.php";
 	require_once $c["path"] . "api/auth/lib.inc.php";
 	require_once $c["path"] . "api/userinterface/form/pagestate.php";
 	require_once $c["path"] . "api/common/lib.inc.php";
