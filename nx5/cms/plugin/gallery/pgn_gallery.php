@@ -91,6 +91,14 @@ class pgnGallery extends Plugin {
 		  return $result;
 		}
 
+	
+	/**
+	 * Add css and javascript to the html-header of the page
+	 */
+	function getHTMLHeader() {
+	  return '';
+	}
+	
 	/**
 		   * This function is used for drawing the html-code out to the templates.
 		   * It just returns the code

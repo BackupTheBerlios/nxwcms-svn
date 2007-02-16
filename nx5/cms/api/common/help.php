@@ -681,7 +681,23 @@ function crlf() {
 		} else {
 			$PGNRef = null;
 		}
-
+		return $PGNRef;
+	}
+	
+		/**
+	 * Creates an instance of the Selected plugin
+	 * returns the plugin-Class
+	 * @param integer Name of the plugin which is to be created
+	 * @return Object	Object of type Plugin.
+	 */
+	function createPGNRef3($pluginName) {
+		global $c;
+		$classname = getDBCell("modules", "CLASS", "UPPER(MODULE_NAME) = \"".strtoupper($pluginName).'"');
+		if ($classname != "") {			
+			$PGNRef = new $classname(0,0);
+		} else {
+			$PGNRef = null;
+		}
 		return $PGNRef;
 	}
 		

@@ -285,12 +285,44 @@
 		   $this->images[] = $obj["path"];	
 		 }
 		 
+		/**
+		 * Initialize a plugin which needs header code to be included
+		 * @param name string Name of the plugin
+		 */
+		function initPlugin($pluginName) {
+		 	global $db;
+		 	$ref = createPGNRef3($pluginName);
+		 	if (is_object($ref)) {
+		 		 $this->header.= "\n".$ref->getHTMLHeader();
+		 		 unset($ref);
+		 	}
+		}
+		 
+		/**
+		 * Called to get the necessary html-headers of the plugins that are used within 
+		 * the class on which the page is based
+		 */
+		function _autoInitPlugins() {
+		  $clt = getDBCell('cluster_node', 'CLT_ID', 'CLNID='.$this->parent->pageClusterNodeId);		  
+		  $ar = createDBCArray('cluster_template_items', 'FKID', 'CLT_ID='.$clt.' AND CLTITYPE_ID IN (1,2,5)');
+		  for ($i=0; $i < count($ar); $i++) {
+		  	$ref = createPGNRef($ar[$i], 0);
+		  	if (is_object($ref)) {
+		  		$out = $ref->getHTMLHeader();
+		  		if (strlen($out) > 0 )
+		  		  $this->header.= "\n".$ref->getHTMLHeader();
+		  		unset($ref);
+		  	}
+		  }
+		} 
 		  
 		/**
 		  * Draw a header for the HTML-Page
 		  */
 		 function htmlHeader() {
 		 	global $cds;
+		  
+		  $this->_autoInitPlugins();
 		 	echo $this->docType."\n";
 		 	echo "<html>\n";
 		 	echo "<head>\n";

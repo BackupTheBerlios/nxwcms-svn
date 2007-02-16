@@ -143,6 +143,16 @@
 		}
 		
 		/**
+		 * If a plugin needs to add javascript code to the header of a page, then you can return this code
+		 * in the getHTMLHeader() method. Please note, that the code will be added only on pages, which use
+		 * the plugin type as native content.
+		 * Otherwise you have to do this yourself by calling $cds->layout->initPlugin("PluginName")
+		 */
+		function getHTMLHeader() {
+		  return "";
+		}
+		
+		/**
 		 * Creates the input fields for editing the individual Configuration.
 		 * @param integer &$form link to the form the input-fields are to be created in 
 		 */
