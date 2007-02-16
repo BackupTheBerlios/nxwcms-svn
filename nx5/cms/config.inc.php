@@ -25,9 +25,9 @@
 
 	// Database variables.
 	$c["dbhost"] = "localhost";  				// name of the mysql-Database. Standard-port is used.
-	$c["database"] = "demo";   					// name of the database. 
+	$c["database"] = "newnxhp";   					// name of the database. 
 	$c["dbuser"] = "root";       				// name of the database user.
-	$c["dbpasswd"] = "test";         			// password of the database user.
+	$c["dbpasswd"] = "";         			// password of the database user.
 	$c["dbdriver"] = "mysql";    				// type of your database. Do not change.
 	$c["dbnow"] = "NOW()";       				// for future versions. Do not change.
 	$c["dbcode"] = "3dYqpm8UhF"; 				// for future versions. Do not change.
@@ -60,12 +60,8 @@
 	$QUERY_CACHE_TIME = 900; 					// Default number of seconds to cache a query
 
 	
-	// Get GOOGLE Ready
-	$c['googlemapskey'] = '';
-	$c['googleanalyticskey'] = '';
-		
-	
 	// CDS Configuration
+
 	
   	// statistics
   	$c["pagetracking"] = true;                   // enable page-statistics
@@ -114,8 +110,8 @@
 	// base paths
 	// attention: please read the readme file to know, which paths must be set writable! 
 	// (all www and wwwdev + subfolders)
-	$c["basepath"] = "C:\\Web\\nx5/";				// path of your nx-home-folder on harddrive. ends with slash.
-	$c["basedocroot"] = "/nx5/";		// docroot on your webserver, which corresponds 
+	$c["basepath"] = "C:\\Web\\nxhp/";				// path of your nx-home-folder on harddrive. ends with slash.
+	$c["basedocroot"] = "/nxhp/";		// docroot on your webserver, which corresponds 
 											// to the path you just entered. starts and ends with a slash!
 	$c["host"] = "http://localhost"; 				// address of your web-server. Ends without slash
 	$c["cmsfolder"] = "cms";					// name or relative path of the folder cms, if renamed.
