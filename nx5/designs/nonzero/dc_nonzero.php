@@ -174,7 +174,7 @@
   	 */
   	function setupPage(&$layout)	{
   			global $c; 
-  			$tag = '<link href="'.$layout->parent->docroot.'sys/designs/menu/nonzero/style.css" rel="stylesheet" type="text/css" media="screen, projection, print">'; 			  			
+  			$tag = '<link href="'.$this->docroot().'style.css" rel="stylesheet" type="text/css" media="screen, projection, print">'; 			  			
 			$layout->addToHeader($tag);
   	}
   	

@@ -1,15 +1,16 @@
 <?php
-  // DEMOHOMEPAGE
-  
-  // Add CSS and JS to the Header, Setup the Title of the homepage 
-  $cds->layout->setStaticTitle($cds->content->getByAccessKey("HomepageTitle"));
  
+  // Add CSS and JS to the Header, Setup the Title of the homepage 
+  $cds->layout->setStaticTitle( $cds->content->getByAccessKey("sitetitle") );
+  $cds->layout->setStaticMetaKeywords( $cds->content->getByAccessKey("metakeywords") );
+  $cds->layout->setStaticMetaDescription( $cds->content->getByAccessKey("metadescription") );
+  
   // Check, if an rss-link is defined and set if.
-  $rss = $cds->content->getByAccessKey("rssfeed", "ALL");  
-  $rsslink = $rss["HREF"];
-  if (strlen($rsslink) > 0 ) {
-  	$cds->layout->addRSSFeed($cds->servername.$rsslink);
-  }
+ // $rss = $cds->content->getByAccessKey("rssfeed", "ALL");  
+  //$rsslink = $rss["HREF"];
+  //if (strlen($rsslink) > 0 ) {
+  //	$cds->layout->addRSSFeed($cds->servername.$rsslink);
+ // }
   
   // Draw the HTML Header with title tags, js, css.... 
   $cds->layout->htmlHeader(); 

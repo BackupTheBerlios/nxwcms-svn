@@ -34,7 +34,7 @@ $c_stdVariation = 1;		// use this variation, if a content is not available in an
 $c_pageTracking = %STATS%;	// enable page-statistics here. Experimental!!
 $c_siteCaching = %SCACHE%;  	// enable Site-Caching here. Experimental !!
 $c_rebuildCache_timeout = 180; 	// max time in seconds the process of rebuilding a site-cache may take
-$c_standardEncoding = "text/html; charset=iso-8859-1"; // set standard coding scheme for CDS-Output
+$c_standardEncoding = "text/html; charset=utf-8"; // set standard coding scheme for CDS-Output
 
 // AUTH
 $c_disableHostChecking = %HOSTAUTH%; // Disabled auth-check, if user still has same IP or host-address. Required for some firewalls.

@@ -5,7 +5,7 @@ require_once $cds->path."inc/header.php";
 
 $headline = $cds->content->get("Headline");
 if ($headline != "") {
-	echo $headline;
+	echo '<h1>'.$headline.'</h1>';
 	br();
 }
 

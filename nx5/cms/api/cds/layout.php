@@ -42,7 +42,7 @@
 		var $dhtml = null;
 		var $media = null;
 		var $docType = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
-		var $contentType='text/html; charset=iso-8859-1';
+		var $contentType;
 		var $menuRef;
 		var $keywords;
 		var $description;
@@ -53,6 +53,7 @@
 		*/
 		function Layout(&$parent) { 
 			global $c;
+			$this->contentType = $c["standardencoding"];
 			$this->parent = &$parent; 
 			$this->images = array();
 			$this->menu = new MenuLayout($this->parent);
@@ -61,7 +62,7 @@
 			if (!is_object($this->menuRef)) {
 		   	   $menuType = reg_load('CDS/MENU');	
 		   	   if ($menuType != "")	   	
-		   	     $this->menuRef = createDCRef($c["path"]."designs/menu/".$menuType);
+		   	     $this->menuRef = createDCRef($c["basepath"]."designs/".$menuType);
 		    }
 		   
 		    if (is_object($this->menuRef))
@@ -224,7 +225,7 @@
 		 /**
 		  * Draw the menu selected in designclasses.		  
 		  */
-		 function drawMenu() {
+		 function drawMenu() {		 	
 		 	$this->drawMenuHeader();
 		 	$this->drawMenuFooter();		 	
 		 }
@@ -238,7 +239,7 @@
 		    if (!is_object($this->menuRef)) {
 		   	 $menuType = reg_load('CDS/MENU');		   	
 		   	 if ($menuType != "") 
-		   	   $this->menuRef = createDCRef($c["path"]."designs/menu/".$menuType);
+		   	   $this->menuRef = createDCRef($c["basepath"]."designs/".$menuType);
 		   }
 		   echo $this->menuRef->getHeader();
 		 }
@@ -252,7 +253,7 @@
 		 	if (!is_object($this->menuRef)) {
 		   	 $menuType = reg_load('CDS/MENU');
 		   	 if ($menuType != "")
-		   	   $this->menuRef = createDCRef($c["path"]."designs/menu/".$menuType);
+		   	   $this->menuRef = createDCRef($c["basepath"]."designs/".$menuType);
 		   }		   
 		   echo $this->menuRef->getFooter();
 		 }

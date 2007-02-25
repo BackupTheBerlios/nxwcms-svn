@@ -33,12 +33,12 @@
 	function getDCFileList ($folder) {
 		global $c, $lang;
 		$ret = array ();
-		$ret[] = array($lang->get('nomenu', 'No automatic menu drawing'), '');
-		$dirhandle = opendir($c["path"].$folder.'/');
+		$ret[] = array($lang->get('no_design', 'No design selected'), '');
+		$dirhandle = opendir($c["basepath"].$folder.'/');
 		while (false !== ($fname = readdir ($dirhandle))):
 		  $pgn_fname = $fname."/dc_".$fname.".php";
-		  if (is_dir ($c["path"].$folder.'/'.$fname) && file_exists($c["path"].$folder.'/'.$pgn_fname)):		
-		    $ref = createDCRef($c["path"].$folder.'/'.$pgn_fname);
+		  if (is_dir ($c["basepath"].$folder.'/'.$fname) && file_exists($c["basepath"].$folder.'/'.$pgn_fname)):		
+		    $ref = createDCRef($c["basepath"].$folder.'/'.$pgn_fname);
 		    $ret[] = array($ref->getName(), $pgn_fname );
 		    unset($ref);
 		  endif;

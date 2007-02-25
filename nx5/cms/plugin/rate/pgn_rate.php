@@ -67,7 +67,7 @@
 				$this->description = "CDS-API-Extension for rating items.";
 				$this->version = 1;
 				$mtid = nextGUID(); // getting next GUID.
-				$this->installHandler->addDBAction("CREATE TABLE `pgn_rating` (  `RATINGID` bigint(20) NOT NULL auto_increment,  `SOURCEID` bigint(20) NOT NULL default '0',  `VOTE` tinyint(4) NOT NULL default '0',  `COMMENT` text NOT NULL,  `timestamp` timestamp(14) NOT NULL,  PRIMARY KEY  (`RATINGID`)) TYPE=MyISAM AUTO_INCREMENT=1 ;");
+				$this->installHandler->addDBAction("CREATE TABLE `pgn_rating` (  `RATINGID` bigint(20) NOT NULL auto_increment,  `SOURCEID` bigint(20) NOT NULL default '0',  `VOTE` tinyint(4) NOT NULL default '0',  `COMMENT` text NOT NULL,  `timestamp` timestamp(14) NOT NULL,  PSEUDO varchar(64) null, EMail varchar(128) null, Published tinyint(1) not null default 0, PRIMARY KEY  (`RATINGID`)) TYPE=MyISAM AUTO_INCREMENT=1 ;");
 				$this->uninstallHandler->addDBAction("DROP TABLE `pgn_rating`");
 				global $source, $classname; // the source path has to be provided by the calling template
 				$modId = nextGUID();
@@ -91,21 +91,13 @@
 	   }
 	   
 	   /**
-	    * Draw the plugin
-	    * @param string Question
-	    * @param string Poor-Label
-	    * @param string Good-Label
-	    * @param string Comment-Label
-	    * @param string Average-rating label
-	    * @param string Submitbutton-text
-	    * @param string Thankyou-Text
+	    * Draw the link which opens the rating form.
+	    * @param string title of the link
 	    */
-	   function drawForm($question="How did you rate the quality of this content?", $poor="Poor", $good="Outstanding", $comment="Your Comment", $rating="Average Rating", $submit="Submit", $thankyou="Thank you for your vote!" ) {
+	   function drawForm($title='Write a review now' ) {
           global $cds;
-          $out = $this->drawRating();
-          $out.= '<iframe style="width:400px; height:250px;" frameborder="0" border="0" src="'.$cds->docroot.'sys/rater.php?source='.$this->sourceId.'"></iframe>';          
-          $out.= $this->drawComments();
-	        return $out;
+		   $out= '<a href="'.$cds->docroot.'sys/rater.php?source='.$this->sourceId.'" target="_blank">'.$title.'</a>';          
+           return $out;
 	   }
 	 
 	   /**
@@ -119,7 +111,7 @@
 	      for ($i=0; $i< $data["average"]; $i++) {
 	         $out.= '<td valign="middle" class="rate_label"><img src="sys/rate1.gif" border="0" width="16" height="16"></td>'."\n";
 	      }
-	      for ($i=0; $i< (9 - $data["average"]); $i++) {
+	      for ($i=0; $i< (10 - $data["average"]); $i++) {
 	         $out.= '<td valign="middle" class="rate_label"><img src="sys/rate0.gif" border="0" width="16" height="16"></td>'."\n";
 	      }
 	      $out.= '<td valign="middle" class="rate_label">('.sprintf("%01.2f",$data["average"]).")</td>\n";
@@ -134,7 +126,10 @@
 			$data = $this->getComments(20);
 			$out = '';
 			for ($i=0; $i<count($data); $i++) {
-				$out.=$data[$i]["date"].'<br>'.$data[$i]["comment"].'<br><br>';
+				$name = $data[$i]["name"];
+				if ($name=="") $name = "Anonym";
+				$out.='<b>Kommentar von '.$name.' am  '.$data[$i]["date"].':</b><br>';
+				$out.=$data[$i]["comment"].'<br><br>';
 			}
 			return $out;
 		}
@@ -166,11 +161,12 @@
 	   function getComments($limit=5) {
 	     global $db;
 	     $result = array();
-	     $sql= "SELECT COMMENT, TIMESTAMP FROM pgn_rating WHERE COMMENT <> '' ORDER BY TIMESTAMP DESC LIMIT ".$limit;
+	     $sql= "SELECT COMMENT, PSEUDO, DATE_FORMAT(timestamp, '%d.%m.%Y') as time1 FROM pgn_rating WHERE COMMENT <> '' and Published=1 AND SOURCEID=".$this->sourceId."  ORDER BY TIMESTAMP DESC LIMIT ".$limit;
 	     $query = new query($db, $sql);
 	     while ($query->getrow()) {
-	       $result[] = array("comment" => $query->field("COMMENT"), "date" => $query->field("TIMESTAMP"));
+	       $result[] = array("comment" => $query->field("COMMENT"),"name"=>$query->field('PSEUDO'), "date" => $query->field("time1"));
 	     }
+	     
 	     $query->free();
 	     return $result;
 	   }

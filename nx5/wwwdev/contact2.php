@@ -2,7 +2,7 @@
 require_once "nxheader.inc.php";
 require_once $cds->path."inc/header.php";
 
-echo $cds->content->get("Headline");
+echo '<h1>'.$cds->content->get("Headline").'</h1>';
 br();
 
 $captchaAPI = $cds->plugins->getAPI("Captcha");

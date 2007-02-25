@@ -3,7 +3,7 @@
   include $cds->path."inc/header.php";
 
   // Start of individual template
-  echo '<h3>'.$cds->content->get("Headline").'</h3>';
+  echo '<h1>'.$cds->content->get("Headline").'</h1>';
   br();
   echo $cds->content->get("Body");  
   

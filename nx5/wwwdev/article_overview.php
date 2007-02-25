@@ -3,7 +3,7 @@
   require_once $cds->path."inc/header.php";
   
   // draw the Headline and the body
-  echo $cds->content->get("Headline");
+  echo '<h1>'.$cds->content->get("Headline").'</h1>';
   br();
   $body = $cds->content->get("Body");
   if ($body != "") {

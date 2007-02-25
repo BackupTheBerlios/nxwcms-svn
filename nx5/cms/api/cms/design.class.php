@@ -64,11 +64,17 @@
 		}
 		
 		/**
-		 * Returns the name of the extendsion in a html-layouted manner. You can
-		 * add images there, work with tables....		 
+		 * Returns the ClassName and the FolderName of the extension.
 		 */
 		function getName() {
 			return "AbstractDesign";
+		}
+		
+		/**
+		 * The display name which is shown in the backoffice to select a menu		 		
+		 */
+		function getDisplayName() {
+			return $this->getName();
 		}
 		
 		/**
@@ -92,6 +98,16 @@
 		 */
 		function getFooter() {
 			// empty
+		}
+		
+		/**
+		 * Document-Root of the design
+		 *
+		 * @return unknown
+		 */
+		function docroot() {
+			global $c;
+			return $c["basedocroot"].'/designs/'.$this->getName().'/';
 		}
 		
 		

@@ -14,7 +14,7 @@ $headline = $cds->content->get("Headline");
 $body = $cds->content->get("Body");
 
 if ($headline != "") {
-	echo $headline;
+	echo '<h1>'.$headline.'</h1>';
 	br();
 }
 

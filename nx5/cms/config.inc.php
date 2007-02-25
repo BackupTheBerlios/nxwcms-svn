@@ -45,7 +45,7 @@
 												// in another variation. You can retrieve the ID from database table variations
 												// Defaul: standard.
 	$c["timeout"] = 360;                        // max time in seconds the process of rebuilding a site-cache may take
-	$c["standardencoding"] = "text/html; charset=iso-8859-1"; // set standard encoding scheme for the Website
+	$c["standardencoding"] = "text/html; charset=utf-8"; // set standard encoding scheme for the Website
 
 	// Static Cache (generate html-files)
 	$c["renderstatichtml"] = false;              // enable Rendering of Static HTML-Code (Caching)
