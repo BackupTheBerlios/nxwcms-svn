@@ -1,5 +1,5 @@
 <?php
-  echo $cds->content->getByAccessKey('logo');
+  echo $cds->content->getByAccessKey('logo', array('class' => 'logo'));
 ?>
 <br>
 <h3><span><?php echo $cds->content->getByAccessKey('title'); ?></span></h3>

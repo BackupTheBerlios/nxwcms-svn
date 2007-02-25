@@ -198,9 +198,12 @@
 
 			if (stristr($param, "ALL"))
 				return $im;
-
+			if (is_array($param)) {
+				$class = $param["class"];
+				if ($class != '') $class= ' class="'.$class.'" ';
+			}
 			if ($im["width"] != 0) {
-				$tag = "<img src=\"" . $im["path"] . "\" width=\"" . $im["width"] . "\" height=\"" . $im["height"] . "\" alt=\"" . $im["alt"] . "\" border=\"0\" >";
+				$tag = "<img src=\"" . $im["path"] . "\" width=\"" . $im["width"] . "\" height=\"" . $im["height"] . "\" alt=\"" . $im["alt"] . "\" border=\"0\" $class>";
 			} else {
 				$tag = "";
 			}

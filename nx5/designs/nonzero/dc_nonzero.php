@@ -27,6 +27,7 @@
 		
 		var $pathToRoot;
 		var $prefix;
+		var $mainmenu;
 		
 		/**
 		 * Returns the name and the description of the DesignClass for Backoffice adjustments.
@@ -46,15 +47,14 @@
 		  echo '</div></div>';
 		  echo '<div id="secondaryContent_3columns"><div id="columnB_3columns">';
 		  // menu drawing.
-		  echo '
-		  <h2><span>Veroeros</span> Etiam</h2>
-				<ul class="links">
-				<li class="first"><a href="#">Velit molestie</a></li>
-				<li><a href="#">Consequat cursus</a></li>
-				<li><a href="#">Tempus nullam</a></li>
-				<li><a href="#">Magna sed mauris</a></li>
-				<li><a href="#">Semper molestie</a></li>
-				</ul>';
+		  echo '<h2><span>'.$cds->content->getByAccessKey('submenutitle').'</span></h2>
+				<ul class="links">';
+		  $this->drawSubMenu();				
+//				<li><a href="#">Consequat cursus</a></li>
+	//			<li><a href="#">Tempus nullam</a></li>
+		//		<li><a href="#">Magna sed mauris</a></li>
+			//	<li><a href="#">Semper molestie</a></li>
+		  echo  '	</ul>';
 		  echo  '<br>';
 		  include($cds->path.'inc/side1.php');
 		  echo  '</div>';
@@ -63,9 +63,15 @@
 		  echo  '</div>';
 		 
 
-		  echo '<br class="clear" /> ';
-		  echo  '</div></div>';
-		  echo  '<div id="footer" class="fluid">Copyright &copy; 2006 Your Website. All rights reserved. Design by <a href="http://www.nodethirtythree.com/">NodeThirtyThree Design</a>.';
+		  echo '<br class="clear" /> ';		  
+		  echo  '</div>';		  
+		  echo '</div>';
+		  include $cds->path.'inc/foot1.php';
+		  echo  '<div id="footer" class="fluid">';
+		  echo $cds->content->getByAccessKey('footermessage');
+		  br();
+		  echo 'Design by <a href="http://www.nodethirtythree.com/" target="_blank">NodeThirtyThree Design</a>. &nbsp; Powered by <a href="http://www.nxsystems.org" target="_blank">N/X CMS</a>.';
+		  
 		  echo  '</div>';
 		 
 		}
@@ -100,8 +106,10 @@
  			$link  = $firstLevelMenues[$i]->getLink();
  			$isPopup = $firstLevelMenues[$i]->isPopup();
  			
- 			if ($firstLevelMenues[$i]->pageId == $topMenu->pageId) 
+ 			if ($firstLevelMenues[$i]->pageId == $topMenu->pageId)  {
  				  $add = ' class="active" ';
+ 				  $this->mainmenu = $firstLevelMenues[$i];
+ 			}
  			
  			if ($isPopup) {
  				$add.= ' target="_blank" ';
@@ -122,48 +130,29 @@
   	
 
 		/**
-		 * Draw a submenu
-		 *
-		 * @param object $startPage Menu-Object
-		 * @param integer $level depth of menu
+		 * Draw a submenu		 	 
 		 */
-	function drawSubMenu($mainmenu, $level) {
-
-	  $menues = $mainmenu->lowerLevel();  	 
-  	  if (is_array($this->pathToRoot))
-  	    $submenu = array_pop($this->pathToRoot);
-  	    $activeSubmenu = $submenu->pageId;
-		  
-		$max = count($menues)-1;
+	function drawSubMenu() {
+	  if (is_object($this->mainmenu)) {
+	  	
+	    $menues = $this->mainmenu->lowerLevel();  	 
   	    for ($i=0; $i < count($menues); $i++) {  	 
   	      $href    = $menues[$i]->getLink();
   	      $title   = $menues[$i]->getTitle();
   	      $isPopup = $menues[$i]->isPopup();
   	      $add = "";
-
-  	      if ($i == $max) {
-  	      	$add2 = 'class="bottom"';
-  	      }
-  	      if ( $activeSubmenu == $menues[$i]->pageId)
-  	    	$add = 'class="menuactive"';
-  	    	// inaktives Submenu
-
-  	      $out.= '<li '.$add2.'>';
+  	   
+  	      $out.= '<li>';
   	      $out.= '<a '.$add.' href="' . $href . '"';
   	      if ($isPopup)
   	    	  $out.=' target="_blank"';
   	      $out.=' '.$add.'>';
   	      $out.= $this->prefix.$title;
   	      $out.= '</a>';
-  	      if ($activeSubmenu == $menues[$i]->pageId && $level < 3) {
-  	    		$out.= '<ul>';
-  	    		$out.= $this->drawSubMenu($menues[$i], $level+1);  	    		
-  	    		$out.= '</ul>';
-  	      }
-  	      $out.= '</li>';	    	
-  	    
-		}
-		return $out;
+  	      $out.= '</li>';	    	  	  
+  	    }
+	  }	    		
+	  echo $out;
 	 }
   	
   	
