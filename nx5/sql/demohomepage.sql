@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Erstellungszeit: 16. Februar 2007 um 17:47
+-- Erstellungszeit: 27. Februar 2007 um 20:53
 -- Server Version: 5.0.27
 -- PHP-Version: 5.2.0
 -- 
@@ -115,10 +115,7 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` VALUES (100013, 'CStructures', 0, 0);
 INSERT INTO `categories` VALUES (100012, 'CArticles', 0, 0);
 INSERT INTO `categories` VALUES (100011, 'CPages', 0, 0);
-INSERT INTO `categories` VALUES (100001, 'Header', 100000, 0);
-INSERT INTO `categories` VALUES (100000, 'Layout', 0, 0);
-INSERT INTO `categories` VALUES (100045, 'Sidebar', 100000, 0);
-INSERT INTO `categories` VALUES (100893, 'test', 11, 0);
+INSERT INTO `categories` VALUES (101310, 'Layout', 0, 0);
 INSERT INTO `categories` VALUES (100960, 'Pictures', 0, 0);
 
 -- --------------------------------------------------------
@@ -259,139 +256,36 @@ CREATE TABLE `cluster_content` (
 -- Daten für Tabelle `cluster_content`
 -- 
 
-INSERT INTO `cluster_content` VALUES (100022, 100021, 100015, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100023, 100021, 100016, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100040, 100038, 100036, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100039, 100038, 100035, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100057, 100056, 100051, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100070, 100069, 100064, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100071, 100069, 100065, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100076, 100075, 100015, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100077, 100075, 100016, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100092, 100091, 100089, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100099, 100097, 100036, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100098, 100097, 100035, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100116, 100114, 100112, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100115, 100114, 100111, 1, '', 0, 0);
 INSERT INTO `cluster_content` VALUES (100158, 100157, 100135, 1, '', 0, 0);
 INSERT INTO `cluster_content` VALUES (100159, 100157, 100136, 1, '', 0, 0);
 INSERT INTO `cluster_content` VALUES (100179, 100176, 100174, 1, '', 100179, 0);
 INSERT INTO `cluster_content` VALUES (100178, 100176, 100173, 1, '', 0, 0);
 INSERT INTO `cluster_content` VALUES (100177, 100176, 100172, 1, '', 0, 0);
 INSERT INTO `cluster_content` VALUES (100199, 100198, 100184, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100240, 100239, 100139, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100241, 100239, 100140, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100242, 100239, 100141, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100248, 100245, 100174, 1, '', 100248, 0);
-INSERT INTO `cluster_content` VALUES (100247, 100245, 100173, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100246, 100245, 100172, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100259, 100258, 100168, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100263, 100262, 100184, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100165, 100160, 100163, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100166, 100160, 100164, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100290, 100289, 100283, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100291, 100289, 100282, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100292, 100289, 100284, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100293, 100289, 100267, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100294, 100289, 100268, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100295, 100289, 100269, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100296, 100289, 100270, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100297, 100289, 100271, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100298, 100289, 100272, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100299, 100289, 100273, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100300, 100289, 100274, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100301, 100289, 100275, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100302, 100289, 100276, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100303, 100289, 100277, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100304, 100289, 100278, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100305, 100289, 100279, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100306, 100289, 100280, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100307, 100289, 100281, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100317, 100316, 100283, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100318, 100316, 100282, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100319, 100316, 100284, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100320, 100316, 100267, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100321, 100316, 100268, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100322, 100316, 100269, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100323, 100316, 100270, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100324, 100316, 100271, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100325, 100316, 100272, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100326, 100316, 100273, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100327, 100316, 100274, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100328, 100316, 100275, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100329, 100316, 100276, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100330, 100316, 100277, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100331, 100316, 100278, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100332, 100316, 100279, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100333, 100316, 100280, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100334, 100316, 100281, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100358, 100357, 100352, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100359, 100357, 100351, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100360, 100357, 100353, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100361, 100357, 100336, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100362, 100357, 100337, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100363, 100357, 100338, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100364, 100357, 100339, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100365, 100357, 100340, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100366, 100357, 100341, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100367, 100357, 100342, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100368, 100357, 100343, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100369, 100357, 100344, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100370, 100357, 100345, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100371, 100357, 100346, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100372, 100357, 100347, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100373, 100357, 100348, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100374, 100357, 100349, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100375, 100357, 100350, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100378, 100377, 100283, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100379, 100377, 100282, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100380, 100377, 100267, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100381, 100377, 100284, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100382, 100377, 100268, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100383, 100377, 100269, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100384, 100377, 100270, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100385, 100377, 100271, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100386, 100377, 100272, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100387, 100377, 100273, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100388, 100377, 100274, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100389, 100377, 100275, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100390, 100377, 100276, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100391, 100377, 100277, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100392, 100377, 100278, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100393, 100377, 100279, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100394, 100377, 100280, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100395, 100377, 100281, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100411, 100410, 100401, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100412, 100410, 100400, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100413, 100410, 100399, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100418, 100417, 100397, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100419, 100417, 100402, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100421, 100417, 100420, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100441, 100440, 100429, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100442, 100440, 100430, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100443, 100440, 100431, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100467, 100417, 100454, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100468, 100417, 100456, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100494, 100417, 100487, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100515, 100508, 100506, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100514, 100508, 100505, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100512, 100508, 100513, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100511, 100508, 100504, 1, '', 100511, 0);
-INSERT INTO `cluster_content` VALUES (100509, 100508, 100510, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100516, 100508, 100503, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100591, 100590, 100564, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100592, 100590, 100566, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100593, 100590, 100568, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100667, 100666, 100616, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100668, 100666, 100618, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100669, 100666, 100620, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100670, 100666, 100622, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100671, 100666, 100647, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100672, 100666, 100645, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100759, 100758, 100720, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100760, 100758, 100722, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100761, 100758, 100724, 1, '', 0, 0);
-INSERT INTO `cluster_content` VALUES (100762, 100758, 100726, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101486, 101484, 100016, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101485, 101484, 100015, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101477, 101475, 100016, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101495, 101493, 100065, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101494, 101493, 100064, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101476, 101475, 100015, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101468, 101450, 100350, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101467, 101450, 100349, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101466, 101450, 100348, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101465, 101450, 100347, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101464, 101450, 100346, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101463, 101450, 100345, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101462, 101450, 100344, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101461, 101450, 100343, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101460, 101450, 100342, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101459, 101450, 100341, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101458, 101450, 100340, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101457, 101450, 100339, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101456, 101450, 100338, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101455, 101450, 100337, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101454, 101450, 100336, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101453, 101450, 100353, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101452, 101450, 100351, 1, '', 0, 0);
+INSERT INTO `cluster_content` VALUES (101451, 101450, 100352, 1, '', 0, 0);
 INSERT INTO `cluster_content` VALUES (101070, 101069, 100015, 1, '', 0, 0);
 INSERT INTO `cluster_content` VALUES (101071, 101069, 100016, 1, '', 0, 0);
 INSERT INTO `cluster_content` VALUES (101089, 101088, 100139, 1, '', 0, 0);
@@ -448,37 +342,15 @@ CREATE TABLE `cluster_node` (
 -- Daten für Tabelle `cluster_node`
 -- 
 
-INSERT INTO `cluster_node` VALUES (100020, 100014, 'test', 1, 0);
-INSERT INTO `cluster_node` VALUES (100037, 100033, 'test', 0, 10);
-INSERT INTO `cluster_node` VALUES (100055, 100050, 'Forum', 1, 0);
-INSERT INTO `cluster_node` VALUES (100068, 100063, 'Sitemap', 1, 0);
-INSERT INTO `cluster_node` VALUES (100074, 100014, 'Profiles', 1, 0);
-INSERT INTO `cluster_node` VALUES (100082, 100078, 'Serivepages', 1, 0);
-INSERT INTO `cluster_node` VALUES (100090, 100088, 'Forum', 0, 10);
-INSERT INTO `cluster_node` VALUES (100096, 100033, 'Profiles', 0, 10);
-INSERT INTO `cluster_node` VALUES (100105, 100104, 'Serivepages', 0, 10);
-INSERT INTO `cluster_node` VALUES (100113, 100110, 'Sitemap', 0, 10);
 INSERT INTO `cluster_node` VALUES (100156, 100134, 'Welcome', 0, 0);
 INSERT INTO `cluster_node` VALUES (100175, 100171, 'News', 0, 10);
 INSERT INTO `cluster_node` VALUES (100197, 100183, 'Articles', 0, 10);
-INSERT INTO `cluster_node` VALUES (100238, 100138, 'News (2)', 1, 0);
-INSERT INTO `cluster_node` VALUES (100244, 100171, 'News (2)', 0, 10);
-INSERT INTO `cluster_node` VALUES (100257, 100167, 'Article (2)', 1, 0);
-INSERT INTO `cluster_node` VALUES (100261, 100183, 'Article (2)', 0, 10);
-INSERT INTO `cluster_node` VALUES (100161, 100162, 'Welcome', 0, 10);
-INSERT INTO `cluster_node` VALUES (100288, 100554, 'Contact', 1, 0);
-INSERT INTO `cluster_node` VALUES (100315, 100554, 'Contact Mailinga', 1, 0);
-INSERT INTO `cluster_node` VALUES (100356, 100335, 'Contact new', 1, 0);
-INSERT INTO `cluster_node` VALUES (100376, 100554, 'Contact New', 1, 0);
-INSERT INTO `cluster_node` VALUES (100405, 100078, 'RSS', 1, 0);
-INSERT INTO `cluster_node` VALUES (100409, 101177, 'Read', 1, 0);
-INSERT INTO `cluster_node` VALUES (100416, 100511, 'Create', 1, 0);
-INSERT INTO `cluster_node` VALUES (100439, 100428, 'Gallery', 1, 0);
-INSERT INTO `cluster_node` VALUES (100507, 100502, 'Create', 0, 10);
-INSERT INTO `cluster_node` VALUES (100527, 100104, 'RSS', 0, 10);
-INSERT INTO `cluster_node` VALUES (100589, 100560, 'test in frame', 1, 0);
-INSERT INTO `cluster_node` VALUES (100665, 100612, 'Map', 1, 0);
-INSERT INTO `cluster_node` VALUES (100757, 100716, 'Search', 1, 0);
+INSERT INTO `cluster_node` VALUES (101492, 100063, 'Sitemap', 0, 0);
+INSERT INTO `cluster_node` VALUES (101483, 100014, 'Privacy Statement', 0, 0);
+INSERT INTO `cluster_node` VALUES (101474, 100014, 'Legal Notices and Terms', 0, 0);
+INSERT INTO `cluster_node` VALUES (101449, 100335, 'Contact (2)', 0, 0);
+INSERT INTO `cluster_node` VALUES (101442, 100078, 'Footerlinks', 0, 0);
+INSERT INTO `cluster_node` VALUES (101435, 100078, 'Headerlinks', 0, 0);
 INSERT INTO `cluster_node` VALUES (101068, 100014, 'Home', 0, 0);
 INSERT INTO `cluster_node` VALUES (101080, 100078, 'News', 0, 0);
 INSERT INTO `cluster_node` VALUES (101087, 100138, 'Overview', 0, 0);
@@ -545,13 +417,9 @@ CREATE TABLE `cluster_template_items` (
 
 INSERT INTO `cluster_template_items` VALUES (100015, 100014, 'Headline', 1, 1, 1, 100018, 2, 0, 0, 0);
 INSERT INTO `cluster_template_items` VALUES (100016, 100014, 'Body', 2, 1, 1, 100024, 2, 0, 0, 0);
-INSERT INTO `cluster_template_items` VALUES (100051, 100050, 'URL', 1, 1, 1, 100048, 2, 0, 0, 0);
+INSERT INTO `cluster_template_items` VALUES (100051, 100050, 'URL', 1, 1, 1, 0, 2, 0, 0, 0);
 INSERT INTO `cluster_template_items` VALUES (100064, 100063, 'Headline', 1, 1, 1, 100018, 2, 0, 0, 0);
 INSERT INTO `cluster_template_items` VALUES (100065, 100063, 'Commented Sitemap', 2, 1, 1, 100062, 2, 0, 0, 0);
-INSERT INTO `cluster_template_items` VALUES (100035, 100033, 'Headline', 1, 1, 1, 100018, 2, 0, 0, 10);
-INSERT INTO `cluster_template_items` VALUES (100089, 100088, 'URL', 1, 1, 1, 100048, 2, 0, 0, 10);
-INSERT INTO `cluster_template_items` VALUES (100112, 100110, 'Commented Sitemap', 2, 1, 1, 100062, 2, 0, 0, 10);
-INSERT INTO `cluster_template_items` VALUES (100111, 100110, 'Headline', 1, 1, 1, 100018, 2, 0, 0, 10);
 INSERT INTO `cluster_template_items` VALUES (100135, 100134, 'Headline', 1, 1, 1, 100018, 2, 0, 0, 0);
 INSERT INTO `cluster_template_items` VALUES (100136, 100134, 'Body', 2, 1, 1, 100024, 2, 0, 0, 0);
 INSERT INTO `cluster_template_items` VALUES (100139, 100138, 'Headline', 1, 1, 1, 100018, 2, 0, 0, 0);
@@ -562,9 +430,6 @@ INSERT INTO `cluster_template_items` VALUES (100174, 100171, 'Articles', 3, 1, 1
 INSERT INTO `cluster_template_items` VALUES (100173, 100171, 'Body', 2, 1, 1, 100024, 2, 0, 0, 10);
 INSERT INTO `cluster_template_items` VALUES (100172, 100171, 'Headline', 1, 1, 1, 100018, 2, 0, 0, 10);
 INSERT INTO `cluster_template_items` VALUES (100184, 100183, 'Backlink Title', 1, 1, 1, 100018, 2, 0, 0, 10);
-INSERT INTO `cluster_template_items` VALUES (100036, 100033, 'Body', 2, 1, 1, 100024, 2, 0, 0, 10);
-INSERT INTO `cluster_template_items` VALUES (100163, 100162, 'Headline', 1, 1, 1, 100018, 2, 0, 0, 10);
-INSERT INTO `cluster_template_items` VALUES (100164, 100162, 'Body', 2, 1, 1, 100024, 2, 0, 0, 10);
 INSERT INTO `cluster_template_items` VALUES (100267, 100554, 'Body', 3, 1, 1, 100024, 2, 0, 0, 0);
 INSERT INTO `cluster_template_items` VALUES (100268, 100554, 'Name', 5, 1, 1, 100018, 2, 0, 0, 0);
 INSERT INTO `cluster_template_items` VALUES (100269, 100554, 'Christian Name', 6, 1, 1, 100018, 2, 0, 0, 0);
@@ -611,13 +476,9 @@ INSERT INTO `cluster_template_items` VALUES (100430, 100428, 'Body', 2, 1, 1, 10
 INSERT INTO `cluster_template_items` VALUES (100431, 100428, 'Gallery', 3, 1, 1, 100427, 2, 0, 0, 0);
 INSERT INTO `cluster_template_items` VALUES (100454, 100511, 'Feed Title', 1, 1, 1, 100018, 2, 0, 0, 0);
 INSERT INTO `cluster_template_items` VALUES (100456, 100511, 'Feed Description', 2, 1, 1, 100018, 2, 0, 0, 0);
-INSERT INTO `cluster_template_items` VALUES (100505, 100502, 'Feed Title', 1, 1, 1, 100018, 2, 0, 0, 10);
-INSERT INTO `cluster_template_items` VALUES (100504, 100502, 'Channel', 3, 1, 1, 1, 8, 0, 0, 10);
-INSERT INTO `cluster_template_items` VALUES (100503, 100502, 'Feedname', 4, 1, 1, 100018, 2, 0, 0, 10);
-INSERT INTO `cluster_template_items` VALUES (100506, 100502, 'Feed Description', 2, 1, 1, 100018, 2, 0, 0, 10);
 INSERT INTO `cluster_template_items` VALUES (100564, 100560, 'Headline', 1, 1, 1, 100018, 2, 0, 0, 0);
 INSERT INTO `cluster_template_items` VALUES (100566, 100560, 'Body', 2, 1, 1, 100024, 2, 0, 0, 0);
-INSERT INTO `cluster_template_items` VALUES (100568, 100560, 'URL', 3, 1, 1, 100048, 2, 0, 0, 0);
+INSERT INTO `cluster_template_items` VALUES (100568, 100560, 'URL', 3, 1, 1, 0, 2, 0, 0, 0);
 INSERT INTO `cluster_template_items` VALUES (100616, 100612, 'Headline', 1, 1, 1, 100018, 2, 0, 0, 0);
 INSERT INTO `cluster_template_items` VALUES (100618, 100612, 'Body', 2, 1, 1, 100024, 2, 0, 0, 0);
 INSERT INTO `cluster_template_items` VALUES (100620, 100612, 'Address', 3, 1, 1, 100018, 2, 0, 0, 0);
@@ -657,25 +518,19 @@ CREATE TABLE `cluster_templates` (
 -- 
 
 INSERT INTO `cluster_templates` VALUES (100014, 100432, 100011, 'Text', '', 0, '', 0, 0, 0, 0);
-INSERT INTO `cluster_templates` VALUES (100033, 100034, 100011, 'Text', '', 0, '', 0, 10, 0, 0);
 INSERT INTO `cluster_templates` VALUES (100050, 100432, 100011, 'URL', 'Stores an URL only', 0, '', 0, 0, 0, 0);
 INSERT INTO `cluster_templates` VALUES (100063, 2, 100011, 'Sitemap', 'Class for building sitemap pages', 0, '', 0, 0, 0, 0);
 INSERT INTO `cluster_templates` VALUES (100078, 2, 100011, 'Empty', 'Empty Class with no content.', 0, '', 0, 0, 0, 0);
-INSERT INTO `cluster_templates` VALUES (100088, 100034, 100011, 'URL', 'Stores an URL only', 0, '', 0, 10, 0, 0);
-INSERT INTO `cluster_templates` VALUES (100104, 100034, 100011, 'Empty', 'Empty Class with no content.', 0, '', 0, 10, 0, 0);
-INSERT INTO `cluster_templates` VALUES (100110, 100034, 100011, 'Sitemap', 'Class for building sitemap pages', 0, '', 0, 10, 0, 0);
 INSERT INTO `cluster_templates` VALUES (100134, 2, 100012, 'Text Article', 'Standard article with Headline and Body.', 1, 'echo &#039;&lt;span class=&quot;head1&quot;&gt;&#039;.$me-&gt;content-&gt;get(&quot;Headline&quot;).&#039;&lt;/span&gt;&#039;;\r\nbr();\r\necho $me-&gt;content-&gt;get(&quot;Body&quot;);', 0, 0, 0, 0);
 INSERT INTO `cluster_templates` VALUES (100138, 100432, 100011, 'Articles Overview', 'Wrapper Class for showing the overview of a channel.', 0, '', 0, 0, 0, 0);
 INSERT INTO `cluster_templates` VALUES (100167, 100432, 100011, 'Article Page', '', 0, '', 0, 0, 0, 0);
 INSERT INTO `cluster_templates` VALUES (100171, 100034, 100011, 'Articles Overview', 'Wrapper Class for showing the overview of a channel.', 0, '', 0, 10, 0, 0);
 INSERT INTO `cluster_templates` VALUES (100183, 100034, 100011, 'Article Page', '', 0, '', 0, 10, 0, 0);
-INSERT INTO `cluster_templates` VALUES (100162, 100034, 100012, 'Text Article', 'Standard article with Headline and Body.', 1, 'echo &#039;&lt;span class=&quot;head1&quot;&gt;&#039;.$me-&gt;content-&gt;get(&quot;Headline&quot;).&#039;&lt;/span&gt;&#039;;\r\nbr();\r\necho $me-&gt;content-&gt;get(&quot;Body&quot;);', 0, 10, 0, 0);
 INSERT INTO `cluster_templates` VALUES (100554, 100432, 100011, 'Contact  (Mailing System)', '', 0, '', 0, 0, 0, 0);
 INSERT INTO `cluster_templates` VALUES (100335, 100432, 100011, 'Contact (Email)', '', 0, '', 0, 0, 0, 0);
 INSERT INTO `cluster_templates` VALUES (100511, 2, 100011, 'RSS Creator', '', 0, '', 0, 0, 0, 0);
 INSERT INTO `cluster_templates` VALUES (101177, 100432, 100011, 'RSS Reader', '', 0, '', 0, 0, 0, 0);
 INSERT INTO `cluster_templates` VALUES (100428, 100432, 100011, 'Gallery', 'Class which is used to build a Gallery', 0, '', 0, 0, 0, 0);
-INSERT INTO `cluster_templates` VALUES (100502, 100034, 100011, 'RSS Creator', '', 0, '', 0, 10, 0, 0);
 INSERT INTO `cluster_templates` VALUES (100560, 2, 100011, 'Internal Frame', '', 0, '', 0, 0, 0, 0);
 INSERT INTO `cluster_templates` VALUES (100612, 100432, 100011, 'Map Page', '', 0, '', 0, 0, 0, 0);
 INSERT INTO `cluster_templates` VALUES (100716, 2, 100011, 'Search engine', 'Content definition for the search page.', 0, '', 0, 0, 0, 0);
@@ -704,37 +559,14 @@ CREATE TABLE `cluster_variations` (
 -- Daten für Tabelle `cluster_variations`
 -- 
 
-INSERT INTO `cluster_variations` VALUES (100020, 1, 100021, 0, 20060809212156, 20060809212137, 'Administrator', 'Administrator', 20060811200603, 'Administrator');
-INSERT INTO `cluster_variations` VALUES (100037, 1, 100038, 0, 20060809212156, 20060809212137, NULL, NULL, NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100055, 1, 100056, 0, 20060810135757, 20060810135606, 'Administrator', 'Administrator', 20060811200603, 'Administrator');
-INSERT INTO `cluster_variations` VALUES (100068, 1, 100069, 0, 20060811091936, 20060811091714, 'Administrator', 'Administrator', 20060811200603, 'Administrator');
-INSERT INTO `cluster_variations` VALUES (100074, 1, 100075, 0, 20060811094916, 20060811094859, 'Administrator', 'Administrator', 20060811200603, 'Administrator');
-INSERT INTO `cluster_variations` VALUES (100082, 1, 100083, 0, 20060811153233, 20060811102741, 'Administrator', 'Administrator', 20060811200603, 'Administrator');
-INSERT INTO `cluster_variations` VALUES (100090, 1, 100091, 0, 20060810135757, 20060810135606, NULL, NULL, NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100096, 1, 100097, 0, 20060811094916, 20060811094859, NULL, NULL, NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100105, 1, 100106, 0, 20060811153233, 20060811102741, NULL, NULL, NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100113, 1, 100114, 0, 20060811091936, 20060811091714, NULL, NULL, NULL, NULL);
 INSERT INTO `cluster_variations` VALUES (100156, 1, 100157, 0, 20060815214402, 20060811140618, 'Administrator', 'Administrator', 20060811200603, 'Administrator');
 INSERT INTO `cluster_variations` VALUES (100175, 1, 100176, 0, 20060811140730, 20060811140431, NULL, NULL, NULL, NULL);
 INSERT INTO `cluster_variations` VALUES (100197, 1, 100198, 0, 20060811150340, 20060811150326, NULL, NULL, NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100238, 1, 100239, 0, 20060811152355, 20060811152340, 'Administrator', 'Administrator', 20060811200603, 'Administrator');
-INSERT INTO `cluster_variations` VALUES (100244, 1, 100245, 0, 20060811152355, 20060811152340, NULL, NULL, NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100257, 1, 100258, 0, 20060811152451, 20060811152438, 'Administrator', 'Administrator', 20060811200603, 'Administrator');
-INSERT INTO `cluster_variations` VALUES (100261, 1, 100262, 0, 20060811152451, 20060811152438, NULL, NULL, NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100161, 1, 100160, 0, 20060811140641, 20060811140618, NULL, NULL, NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100288, 1, 100289, 0, 20060811213434, 20060811202255, 'Administrator', 'Administrator', NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100315, 1, 100316, 0, 20060811225251, 20060811225146, 'Administrator', 'Administrator', NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100356, 1, 100357, 0, 20060811231155, 20060811231102, 'Administrator', 'Administrator', NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100376, 1, 100377, 0, 20060811231530, 20060811231425, 'Administrator', 'Administrator', NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100405, 1, 100406, 0, NULL, 20060811234340, NULL, 'Administrator', 20060813125132, 'Administrator');
-INSERT INTO `cluster_variations` VALUES (100409, 1, 100410, 0, 20060812000325, 20060811234353, 'Administrator', 'Administrator', NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100416, 1, 100417, 0, 20060813124833, 20060811234658, 'Administrator', 'Administrator', 20060813125138, 'Administrator');
-INSERT INTO `cluster_variations` VALUES (100439, 1, 100440, 0, 20060812171436, 20060812171410, 'Administrator', 'Administrator', NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100507, 1, 100508, 0, 20060813124833, 20060811234658, NULL, NULL, NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100527, 1, 100528, 0, NULL, 20060811234340, NULL, NULL, NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100589, 1, 100590, 0, 20060813132859, 20060813132507, 'Administrator', 'Administrator', NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100665, 1, 100666, 0, 20060813153808, 20060813145308, 'Administrator', 'Administrator', NULL, NULL);
-INSERT INTO `cluster_variations` VALUES (100757, 1, 100758, 0, 20060813170814, 20060813170738, 'Administrator', 'Administrator', NULL, NULL);
+INSERT INTO `cluster_variations` VALUES (101492, 1, 101493, 0, NULL, 20070225214810, NULL, 'Administrator', NULL, NULL);
+INSERT INTO `cluster_variations` VALUES (101483, 1, 101484, 0, NULL, 20070225214750, NULL, 'Administrator', NULL, NULL);
+INSERT INTO `cluster_variations` VALUES (101449, 1, 101450, 0, NULL, 20070225214619, NULL, 'Administrator', NULL, NULL);
+INSERT INTO `cluster_variations` VALUES (101442, 1, 101443, 0, NULL, 20070225214546, NULL, 'Administrator', NULL, NULL);
+INSERT INTO `cluster_variations` VALUES (101435, 1, 101436, 0, NULL, 20070225214525, NULL, 'Administrator', NULL, NULL);
 INSERT INTO `cluster_variations` VALUES (101068, 1, 101069, 0, 20060815214029, 20060815213354, 'Administrator', 'Administrator', NULL, NULL);
 INSERT INTO `cluster_variations` VALUES (101080, 1, 101081, 0, NULL, 20060815214046, NULL, 'Administrator', NULL, NULL);
 INSERT INTO `cluster_variations` VALUES (101087, 1, 101088, 0, 20060815214118, 20060815214059, 'Administrator', 'Administrator', NULL, NULL);
@@ -745,6 +577,7 @@ INSERT INTO `cluster_variations` VALUES (101166, 1, 101167, 0, 20060815214839, 2
 INSERT INTO `cluster_variations` VALUES (101180, 1, 101181, 0, 20060815214919, 20060815214908, 'Administrator', 'Administrator', NULL, NULL);
 INSERT INTO `cluster_variations` VALUES (101192, 1, 101193, 0, 20060815215008, 20060815214935, 'Administrator', 'Administrator', NULL, NULL);
 INSERT INTO `cluster_variations` VALUES (101206, 1, 101207, 0, 20060815215043, 20060815215028, 'Administrator', 'Administrator', NULL, NULL);
+INSERT INTO `cluster_variations` VALUES (101474, 1, 101475, 0, NULL, 20070225214731, NULL, 'Administrator', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -814,18 +647,15 @@ CREATE TABLE `content` (
 -- Daten für Tabelle `content`
 -- 
 
-INSERT INTO `content` VALUES (100002, 100012, 100001, 2, 'Logo', 'Logo', '', '', '2006-08-09 21:01:40', '2006-08-09 20:58:25', 'Administrator', 0, 0);
-INSERT INTO `content` VALUES (100008, 100007, 100001, 2, 'Banner1', 'Banner', '', '', '2006-08-09 21:08:08', '2006-08-09 21:03:52', 'Administrator', 0, 0);
-INSERT INTO `content` VALUES (100046, 100007, 100045, 2, 'side1', 'SideAd1', '', '', '2006-08-10 12:53:57', '2006-08-10 12:50:29', 'Administrator', 0, 0);
-INSERT INTO `content` VALUES (100048, 100007, 100045, 2, 'side2', 'side2', '', '', '2006-08-10 12:57:37', '2006-08-10 12:54:10', 'Administrator', 0, 0);
-INSERT INTO `content` VALUES (100126, 100007, 100045, 100034, 'side2', 'side2', '', '', '2006-08-11 15:07:14', '0000-00-00 00:00:00', 'Administrator', 0, 10);
-INSERT INTO `content` VALUES (100124, 100012, 100001, 100034, 'Logo', 'Logo', '', '', '2006-08-11 15:07:09', '0000-00-00 00:00:00', 'Administrator', 0, 10);
-INSERT INTO `content` VALUES (100132, 100018, 100001, 100034, 'homepagetitle', 'Homepage Title', '', '', '2006-08-11 15:07:07', '0000-00-00 00:00:00', 'Administrator', 0, 10);
-INSERT INTO `content` VALUES (100130, 100018, 100001, 2, 'homepagetitle', 'Homepage Title', '', '', '2006-08-11 11:24:11', '2006-08-11 11:23:43', 'Administrator', 0, 0);
-INSERT INTO `content` VALUES (100122, 100007, 100001, 100034, 'Banner1', 'Banner', '', '', '2006-08-11 15:07:05', '0000-00-00 00:00:00', 'Administrator', 0, 10);
-INSERT INTO `content` VALUES (100128, 100007, 100045, 100034, 'side1', 'SideAd1', '', '', '2006-08-11 15:07:16', '0000-00-00 00:00:00', 'Administrator', 0, 10);
-INSERT INTO `content` VALUES (100538, 100048, 100001, 2, 'rssfeed', 'Standard RSS Feed', '', '', '2006-08-13 12:58:23', '2006-08-13 12:58:15', 'Administrator', 0, 0);
-INSERT INTO `content` VALUES (100543, 100048, 100001, 100034, 'rssfeed', 'Standard RSS Feed', '', '', '2006-08-13 12:58:29', '0000-00-00 00:00:00', 'Administrator', 0, 10);
+INSERT INTO `content` VALUES (101364, 100018, 101310, 2, 'metakeywords', 'Meta Keywords', '', '', '2007-02-25 13:36:19', '2007-02-25 13:36:04', 'Administrator', 0, 0);
+INSERT INTO `content` VALUES (101355, 100012, 101310, 2, 'logo', 'Logo', '', '', '2007-02-25 13:31:25', '2007-02-25 13:30:54', 'Administrator', 0, 0);
+INSERT INTO `content` VALUES (101344, 100018, 101310, 2, 'subtitle', 'Homepage SubTitle', '', '', '2007-02-25 13:29:09', '2007-02-25 13:28:51', 'Administrator', 0, 0);
+INSERT INTO `content` VALUES (101331, 100018, 101310, 100034, 'sitetitle', 'Site title', '', '', '2007-02-25 13:26:22', '0000-00-00 00:00:00', 'Administrator', 0, 10);
+INSERT INTO `content` VALUES (101335, 100018, 101310, 2, 'title', 'Homepage Title', '', '', '2007-02-25 13:28:19', '2007-02-25 13:28:06', 'Administrator', 0, 0);
+INSERT INTO `content` VALUES (101320, 100018, 101310, 2, 'side2', 'Side 2', '', '', '2007-02-25 13:23:47', '2007-02-25 13:23:22', 'Administrator', 0, 0);
+INSERT INTO `content` VALUES (101326, 100018, 101310, 2, 'sitetitle', 'Site title', '', '', '2007-02-25 13:26:18', '2007-02-25 13:25:57', 'Administrator', 0, 0);
+INSERT INTO `content` VALUES (101313, 100018, 101310, 2, 'side1', 'Side 1', '', '', '2007-02-25 13:23:06', '2007-02-25 13:20:51', 'Administrator', 0, 0);
+INSERT INTO `content` VALUES (101340, 100018, 101310, 100034, 'title', 'Homepage Title', '', '', '2007-02-25 13:28:26', '0000-00-00 00:00:00', 'Administrator', 0, 10);
 INSERT INTO `content` VALUES (100968, 100012, 100960, 0, '', 'Clouds.jpg', NULL, '', '2006-08-15 20:05:33', '0000-00-00 00:00:00', NULL, 0, 0);
 INSERT INTO `content` VALUES (100970, 100012, 100960, 0, '', 'DenMark.jpg', NULL, '', '2006-08-15 20:06:03', '0000-00-00 00:00:00', NULL, 0, 0);
 INSERT INTO `content` VALUES (100972, 100012, 100960, 0, '', 'Entre.jpg', NULL, '', '2006-08-15 20:06:36', '0000-00-00 00:00:00', NULL, 0, 0);
@@ -845,6 +675,12 @@ INSERT INTO `content` VALUES (100998, 100012, 100960, 0, '', 'TakeASeat.jpg', NU
 INSERT INTO `content` VALUES (101000, 100012, 100960, 0, '', 'Towering.jpg', NULL, '', '2006-08-15 20:11:59', '0000-00-00 00:00:00', NULL, 0, 0);
 INSERT INTO `content` VALUES (101002, 100012, 100960, 0, '', 'Tranquility.jpg', NULL, '', '2006-08-15 20:11:35', '0000-00-00 00:00:00', NULL, 0, 0);
 INSERT INTO `content` VALUES (101004, 100012, 100960, 0, '', 'WideWeb.jpg', NULL, '', '2006-08-15 20:11:25', '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `content` VALUES (101360, 100012, 101310, 100034, 'logo', 'Logo', '', '', '2007-02-25 13:31:30', '0000-00-00 00:00:00', 'Administrator', 0, 10);
+INSERT INTO `content` VALUES (101386, 100018, 101310, 2, 'metadescription', 'Meta Description', '', '', '2007-02-25 13:37:40', '2007-02-25 13:37:25', 'Administrator', 0, 0);
+INSERT INTO `content` VALUES (101411, 100018, 101310, 2, 'footermessage', 'Footertext', '', '', '2007-02-25 15:09:07', '2007-02-25 15:08:42', 'Administrator', 0, 0);
+INSERT INTO `content` VALUES (101416, 100018, 101310, 100034, 'footermessage', 'Footertext', '', '', '2007-02-25 15:09:14', '0000-00-00 00:00:00', 'Administrator', 0, 10);
+INSERT INTO `content` VALUES (101420, 100018, 101310, 2, 'submenutitle', 'Submenu Title', '', '', '2007-02-25 15:23:42', '2007-02-25 15:23:18', 'Administrator', 0, 0);
+INSERT INTO `content` VALUES (101425, 100018, 101310, 100034, 'submenutitle', 'Submenu Title', '', '', '2007-02-25 15:23:50', '0000-00-00 00:00:00', 'Administrator', 0, 10);
 
 -- --------------------------------------------------------
 
@@ -866,17 +702,17 @@ CREATE TABLE `content_variations` (
 -- Daten für Tabelle `content_variations`
 -- 
 
-INSERT INTO `content_variations` VALUES (100002, 1, 100003, 0);
-INSERT INTO `content_variations` VALUES (100008, 1, 100009, 0);
-INSERT INTO `content_variations` VALUES (100046, 1, 100047, 0);
-INSERT INTO `content_variations` VALUES (100048, 1, 100049, 0);
+INSERT INTO `content_variations` VALUES (101340, 1, 101341, 0);
+INSERT INTO `content_variations` VALUES (101335, 1, 101336, 0);
+INSERT INTO `content_variations` VALUES (101331, 1, 101332, 0);
+INSERT INTO `content_variations` VALUES (101326, 1, 101327, 0);
 INSERT INTO `content_variations` VALUES (100128, 1, 100129, 0);
 INSERT INTO `content_variations` VALUES (100126, 1, 100127, 0);
 INSERT INTO `content_variations` VALUES (100124, 1, 100125, 0);
 INSERT INTO `content_variations` VALUES (100132, 1, 100133, 0);
-INSERT INTO `content_variations` VALUES (100130, 1, 100131, 0);
+INSERT INTO `content_variations` VALUES (101320, 1, 101321, 0);
 INSERT INTO `content_variations` VALUES (100122, 1, 100123, 0);
-INSERT INTO `content_variations` VALUES (100538, 1, 100539, 0);
+INSERT INTO `content_variations` VALUES (101313, 1, 101314, 0);
 INSERT INTO `content_variations` VALUES (100543, 1, 100544, 0);
 INSERT INTO `content_variations` VALUES (100968, 1, 100967, 0);
 INSERT INTO `content_variations` VALUES (100970, 1, 100969, 0);
@@ -897,6 +733,15 @@ INSERT INTO `content_variations` VALUES (100998, 1, 100997, 0);
 INSERT INTO `content_variations` VALUES (101000, 1, 100999, 0);
 INSERT INTO `content_variations` VALUES (101002, 1, 101001, 0);
 INSERT INTO `content_variations` VALUES (101004, 1, 101003, 0);
+INSERT INTO `content_variations` VALUES (101344, 1, 101345, 0);
+INSERT INTO `content_variations` VALUES (101355, 1, 101356, 0);
+INSERT INTO `content_variations` VALUES (101360, 1, 101361, 0);
+INSERT INTO `content_variations` VALUES (101364, 1, 101365, 0);
+INSERT INTO `content_variations` VALUES (101386, 1, 101387, 0);
+INSERT INTO `content_variations` VALUES (101411, 1, 101412, 0);
+INSERT INTO `content_variations` VALUES (101416, 1, 101417, 0);
+INSERT INTO `content_variations` VALUES (101420, 1, 101421, 0);
+INSERT INTO `content_variations` VALUES (101425, 1, 101426, 0);
 
 -- --------------------------------------------------------
 
@@ -4733,6 +4578,10 @@ INSERT INTO `internal_resources` VALUES ('NEWSLETTERS', 'EN', 'Newsletters', '')
 INSERT INTO `internal_resources` VALUES ('SUBSCRIPTIONS', 'EN', 'Subscriptions', '');
 INSERT INTO `internal_resources` VALUES ('NO_ARCHIVE', 'EN', 'The file you uploaded is not an zip-archive or your browser does not send the file correct!', '');
 INSERT INTO `internal_resources` VALUES ('ARCHEMPTY', 'EN', 'The archive seems to empty or could not be unzipped successfully.', '');
+INSERT INTO `internal_resources` VALUES ('SEL_DESIGN', 'EN', 'Select Design', '');
+INSERT INTO `internal_resources` VALUES ('ADJUST/DESUGB', 'EN', 'Adjust Design', '');
+INSERT INTO `internal_resources` VALUES ('WEBSITE_DESIGNS', 'EN', 'Website Designs', '');
+INSERT INTO `internal_resources` VALUES ('NO_DESIGN', 'EN', 'No design selected', '');
 
 -- --------------------------------------------------------
 
@@ -4783,6 +4632,10 @@ CREATE TABLE `log` (
 -- Daten für Tabelle `log`
 -- 
 
+INSERT INTO `log` VALUES (100082, 'AUTH', 'Login failed for user Administrator with IP 127.0.0.1', 0, NULL, NULL, '2007-02-16 19:43:06');
+INSERT INTO `log` VALUES (100083, 'LAUNCH', 'C:Web\nxhp/www/images/101361.gif could not be deleted.', 1, NULL, NULL, '2007-02-25 13:31:30');
+INSERT INTO `log` VALUES (100084, 'LAUNCH', 'C:Web\nxhp/www/images/t101361.gif could not be deleted.', 1, NULL, NULL, '2007-02-25 13:31:30');
+INSERT INTO `log` VALUES (100085, 'AUTH', 'Login failed for user Administrator with IP 127.0.0.1', 0, NULL, NULL, '2007-02-25 21:44:57');
 
 -- --------------------------------------------------------
 
@@ -5001,9 +4854,6 @@ CREATE TABLE `pgn_adsense` (
 -- Daten für Tabelle `pgn_adsense`
 -- 
 
-INSERT INTO `pgn_adsense` VALUES (100009, '&lt;script type=&quot;text/javascript&quot;&gt;&lt;!--\r\ngoogle_ad_client = &quot;pub-9320408685906498&quot;;\r\ngoogle_ad_width = 468;\r\ngoogle_ad_height = 60;\r\ngoogle_ad_format = &quot;468x60_as&quot;;\r\ngoogle_ad_type = &quot;text_image&quot;;\r\ngoogle_ad_channel =&quot;3676843672&quot;;\r\ngoogle_color_border = &quot;FFFFFF&quot;;\r\ngoogle_color_bg = &quot;FFFFFF&quot;;\r\ngoogle_color_link = &quot;990000&quot;;\r\ngoogle_color_text = &quot;333333&quot;;\r\ngoogle_color_url = &quot;999999&quot;;\r\n//--&gt;&lt;/script&gt;\r\n&lt;script type=&quot;text/javascript&quot;\r\n  src=&quot;http://pagead2.googlesyndication.com/pagead/show_ads.js&quot;&gt;\r\n&lt;/script&gt;', 0, 0);
-INSERT INTO `pgn_adsense` VALUES (100047, '&lt;script type=&quot;text/javascript&quot;&gt;&lt;!--\r\ngoogle_ad_client = &quot;pub-9320408685906498&quot;;\r\ngoogle_ad_width = 160;\r\ngoogle_ad_height = 600;\r\ngoogle_ad_format = &quot;160x600_as&quot;;\r\ngoogle_ad_type = &quot;text_image&quot;;\r\ngoogle_ad_channel =&quot;3676843672&quot;;\r\ngoogle_color_border = &quot;FFFFFF&quot;;\r\ngoogle_color_bg = &quot;FFFFFF&quot;;\r\ngoogle_color_link = &quot;990000&quot;;\r\ngoogle_color_text = &quot;333333&quot;;\r\ngoogle_color_url = &quot;999999&quot;;\r\n//--&gt;&lt;/script&gt;\r\n&lt;script type=&quot;text/javascript&quot;\r\n  src=&quot;http://pagead2.googlesyndication.com/pagead/show_ads.js&quot;&gt;\r\n&lt;/script&gt;', 0, 0);
-INSERT INTO `pgn_adsense` VALUES (100049, '&lt;script type=&quot;text/javascript&quot;&gt;&lt;!--\r\ngoogle_ad_client = &quot;pub-9320408685906498&quot;;\r\ngoogle_ad_width = 125;\r\ngoogle_ad_height = 125;\r\ngoogle_ad_format = &quot;125x125_as_rimg&quot;;\r\ngoogle_cpa_choice = &quot;CAAQsdyWhAIaCMvLJa9eDHjiKJ_D93M&quot;;\r\ngoogle_ad_channel = &quot;3608138593&quot;;\r\n//--&gt;&lt;/script&gt;\r\n&lt;script type=&quot;text/javascript&quot; src=&quot;http://pagead2.googlesyndication.com/pagead/show_ads.js&quot;&gt;\r\n&lt;/script&gt;', 0, 0);
 INSERT INTO `pgn_adsense` VALUES (100129, '&lt;script type=&quot;text/javascript&quot;&gt;&lt;!--\r\ngoogle_ad_client = &quot;pub-9320408685906498&quot;;\r\ngoogle_ad_width = 160;\r\ngoogle_ad_height = 600;\r\ngoogle_ad_format = &quot;160x600_as&quot;;\r\ngoogle_ad_type = &quot;text_image&quot;;\r\ngoogle_ad_channel =&quot;3676843672&quot;;\r\ngoogle_color_border = &quot;FFFFFF&quot;;\r\ngoogle_color_bg = &quot;FFFFFF&quot;;\r\ngoogle_color_link = &quot;990000&quot;;\r\ngoogle_color_text = &quot;333333&quot;;\r\ngoogle_color_url = &quot;999999&quot;;\r\n//--&gt;&lt;/script&gt;\r\n&lt;script type=&quot;text/javascript&quot;\r\n  src=&quot;http://pagead2.googlesyndication.com/pagead/show_ads.js&quot;&gt;\r\n&lt;/script&gt;', 0, 0);
 INSERT INTO `pgn_adsense` VALUES (100127, '&lt;script type=&quot;text/javascript&quot;&gt;&lt;!--\r\ngoogle_ad_client = &quot;pub-9320408685906498&quot;;\r\ngoogle_ad_width = 125;\r\ngoogle_ad_height = 125;\r\ngoogle_ad_format = &quot;125x125_as_rimg&quot;;\r\ngoogle_cpa_choice = &quot;CAAQsdyWhAIaCMvLJa9eDHjiKJ_D93M&quot;;\r\ngoogle_ad_channel = &quot;3608138593&quot;;\r\n//--&gt;&lt;/script&gt;\r\n&lt;script type=&quot;text/javascript&quot; src=&quot;http://pagead2.googlesyndication.com/pagead/show_ads.js&quot;&gt;\r\n&lt;/script&gt;', 0, 0);
 INSERT INTO `pgn_adsense` VALUES (100123, '&lt;script type=&quot;text/javascript&quot;&gt;&lt;!--\r\ngoogle_ad_client = &quot;pub-9320408685906498&quot;;\r\ngoogle_ad_width = 468;\r\ngoogle_ad_height = 60;\r\ngoogle_ad_format = &quot;468x60_as&quot;;\r\ngoogle_ad_type = &quot;text_image&quot;;\r\ngoogle_ad_channel =&quot;3676843672&quot;;\r\ngoogle_color_border = &quot;FFFFFF&quot;;\r\ngoogle_color_bg = &quot;FFFFFF&quot;;\r\ngoogle_color_link = &quot;990000&quot;;\r\ngoogle_color_text = &quot;333333&quot;;\r\ngoogle_color_url = &quot;999999&quot;;\r\n//--&gt;&lt;/script&gt;\r\n&lt;script type=&quot;text/javascript&quot;\r\n  src=&quot;http://pagead2.googlesyndication.com/pagead/show_ads.js&quot;&gt;\r\n&lt;/script&gt;', 0, 0);
@@ -5025,9 +4875,7 @@ CREATE TABLE `pgn_boolean` (
 -- Daten für Tabelle `pgn_boolean`
 -- 
 
-INSERT INTO `pgn_boolean` VALUES (100071, 1);
-INSERT INTO `pgn_boolean` VALUES (100116, 1);
-INSERT INTO `pgn_boolean` VALUES (100670, 1);
+INSERT INTO `pgn_boolean` VALUES (101495, 0);
 INSERT INTO `pgn_boolean` VALUES (101183, 0);
 
 -- --------------------------------------------------------
@@ -5161,7 +5009,6 @@ CREATE TABLE `pgn_gallery` (
 -- Daten für Tabelle `pgn_gallery`
 -- 
 
-INSERT INTO `pgn_gallery` VALUES (100443, 'Gallery 1', '', 100001, 2, 4, 0);
 INSERT INTO `pgn_gallery` VALUES (101170, 'Gallery 1', '', 100960, 2, 4, 0);
 
 -- --------------------------------------------------------
@@ -5185,7 +5032,7 @@ CREATE TABLE `pgn_image` (
 -- Daten für Tabelle `pgn_image`
 -- 
 
-INSERT INTO `pgn_image` VALUES (100003, '100003.gif', 'Logo', 120, 60, '');
+INSERT INTO `pgn_image` VALUES (101356, '101356.gif', 'N/X CMS', 80, 40, '');
 INSERT INTO `pgn_image` VALUES (100125, '100125.gif', 'Logo', 120, 60, '');
 INSERT INTO `pgn_image` VALUES (100967, '100967.jpg', '', 500, 365, 'rick.harris from flickr.com');
 INSERT INTO `pgn_image` VALUES (100969, '100969.jpg', '', 500, 375, 'josef.stuefer from flickr.com');
@@ -5206,6 +5053,7 @@ INSERT INTO `pgn_image` VALUES (100997, '100997.jpg', '', 500, 375, 'josef.stuef
 INSERT INTO `pgn_image` VALUES (100999, '100999.jpg', '', 500, 388, 'Binary Code from Flickr.com');
 INSERT INTO `pgn_image` VALUES (101001, '101001.jpg', '', 500, 375, 'josef.stuefer from flickr.com');
 INSERT INTO `pgn_image` VALUES (101003, '101003.jpg', '', 500, 500, 'josef.stuefer from flickr.com');
+INSERT INTO `pgn_image` VALUES (101361, '101361.gif', 'N/X CMS', 80, 40, '');
 
 -- --------------------------------------------------------
 
@@ -5224,106 +5072,43 @@ CREATE TABLE `pgn_label` (
 -- Daten für Tabelle `pgn_label`
 -- 
 
-INSERT INTO `pgn_label` VALUES (100022, '<DIV class=head1>Title of this page5478</DIV>');
-INSERT INTO `pgn_label` VALUES (100039, '<DIV class=head1>Title of this page</DIV>');
-INSERT INTO `pgn_label` VALUES (100070, 'Sitemap');
-INSERT INTO `pgn_label` VALUES (100076, 'Profiles');
-INSERT INTO `pgn_label` VALUES (100098, 'Profiles');
-INSERT INTO `pgn_label` VALUES (100115, 'Sitemap');
-INSERT INTO `pgn_label` VALUES (100131, 'N/X Demohomepage -');
 INSERT INTO `pgn_label` VALUES (100133, 'N/X Demohomepage -');
 INSERT INTO `pgn_label` VALUES (100158, 'Welcome to N/X');
 INSERT INTO `pgn_label` VALUES (100177, 'News');
 INSERT INTO `pgn_label` VALUES (100199, 'Back to news Overview');
-INSERT INTO `pgn_label` VALUES (100240, 'News');
-INSERT INTO `pgn_label` VALUES (100246, 'News');
-INSERT INTO `pgn_label` VALUES (100259, 'Back to News Overview');
-INSERT INTO `pgn_label` VALUES (100263, 'Back to News Overview');
-INSERT INTO `pgn_label` VALUES (100165, 'Welcome to N/X');
-INSERT INTO `pgn_label` VALUES (100290, 'Contact');
-INSERT INTO `pgn_label` VALUES (100291, 'Subject');
-INSERT INTO `pgn_label` VALUES (100292, 'Message');
-INSERT INTO `pgn_label` VALUES (100294, 'Name');
-INSERT INTO `pgn_label` VALUES (100295, 'Christianname');
-INSERT INTO `pgn_label` VALUES (100296, '');
-INSERT INTO `pgn_label` VALUES (100297, '');
-INSERT INTO `pgn_label` VALUES (100298, 'City');
-INSERT INTO `pgn_label` VALUES (100299, 'Phone');
-INSERT INTO `pgn_label` VALUES (100300, '');
-INSERT INTO `pgn_label` VALUES (100301, 'E-Mail-Address');
-INSERT INTO `pgn_label` VALUES (100302, 'Send');
-INSERT INTO `pgn_label` VALUES (100303, 'Reset');
-INSERT INTO `pgn_label` VALUES (100304, 'We received your request.');
-INSERT INTO `pgn_label` VALUES (100305, 'Validation Code');
-INSERT INTO `pgn_label` VALUES (100306, 'sven.weih@gmail.com');
-INSERT INTO `pgn_label` VALUES (100307, '[homepage mailing]');
-INSERT INTO `pgn_label` VALUES (100317, 'This goes to Mailings');
-INSERT INTO `pgn_label` VALUES (100318, 'Subject');
-INSERT INTO `pgn_label` VALUES (100319, 'Question');
-INSERT INTO `pgn_label` VALUES (100321, 'Name');
-INSERT INTO `pgn_label` VALUES (100322, 'Christian Name');
-INSERT INTO `pgn_label` VALUES (100323, '');
-INSERT INTO `pgn_label` VALUES (100324, '');
-INSERT INTO `pgn_label` VALUES (100325, '');
-INSERT INTO `pgn_label` VALUES (100326, 'Phone');
-INSERT INTO `pgn_label` VALUES (100327, '');
-INSERT INTO `pgn_label` VALUES (100328, 'E-Mail');
-INSERT INTO `pgn_label` VALUES (100329, 'Submit');
-INSERT INTO `pgn_label` VALUES (100330, 'Reset');
-INSERT INTO `pgn_label` VALUES (100331, 'We received your message');
-INSERT INTO `pgn_label` VALUES (100332, '');
-INSERT INTO `pgn_label` VALUES (100333, '');
-INSERT INTO `pgn_label` VALUES (100334, '');
-INSERT INTO `pgn_label` VALUES (100358, 'Contact Form New');
-INSERT INTO `pgn_label` VALUES (100359, 'Subject');
-INSERT INTO `pgn_label` VALUES (100360, 'Question');
-INSERT INTO `pgn_label` VALUES (100362, 'Name');
-INSERT INTO `pgn_label` VALUES (100363, '');
-INSERT INTO `pgn_label` VALUES (100364, '');
-INSERT INTO `pgn_label` VALUES (100365, '');
-INSERT INTO `pgn_label` VALUES (100366, '');
-INSERT INTO `pgn_label` VALUES (100367, '');
-INSERT INTO `pgn_label` VALUES (100368, '');
-INSERT INTO `pgn_label` VALUES (100369, 'E-Mail');
-INSERT INTO `pgn_label` VALUES (100370, '');
-INSERT INTO `pgn_label` VALUES (100371, '');
-INSERT INTO `pgn_label` VALUES (100372, '');
-INSERT INTO `pgn_label` VALUES (100373, '');
-INSERT INTO `pgn_label` VALUES (100374, '');
-INSERT INTO `pgn_label` VALUES (100375, '');
-INSERT INTO `pgn_label` VALUES (100378, 'New Contactform');
-INSERT INTO `pgn_label` VALUES (100379, 'Question');
-INSERT INTO `pgn_label` VALUES (100381, 'test me');
-INSERT INTO `pgn_label` VALUES (100382, 'Name');
-INSERT INTO `pgn_label` VALUES (100383, 'Christian Name');
-INSERT INTO `pgn_label` VALUES (100384, '');
-INSERT INTO `pgn_label` VALUES (100385, '');
-INSERT INTO `pgn_label` VALUES (100386, '');
-INSERT INTO `pgn_label` VALUES (100387, '');
-INSERT INTO `pgn_label` VALUES (100388, '');
-INSERT INTO `pgn_label` VALUES (100389, 'E-Mail');
-INSERT INTO `pgn_label` VALUES (100390, 'Send Email');
-INSERT INTO `pgn_label` VALUES (100391, 'Reset Form');
-INSERT INTO `pgn_label` VALUES (100392, 'Succeded');
-INSERT INTO `pgn_label` VALUES (100393, 'Validation Code');
-INSERT INTO `pgn_label` VALUES (100394, 'sven.weih@gmail.com');
-INSERT INTO `pgn_label` VALUES (100395, 'info');
-INSERT INTO `pgn_label` VALUES (100411, 'News from bild.de');
-INSERT INTO `pgn_label` VALUES (100413, 'http://sourceforge.net/export/rss2_projfiles.php?group_id=47362');
-INSERT INTO `pgn_label` VALUES (100441, 'My Image Gallery');
-INSERT INTO `pgn_label` VALUES (100467, 'Test Feed');
-INSERT INTO `pgn_label` VALUES (100468, 'This is a n/x test feed.');
-INSERT INTO `pgn_label` VALUES (100494, 'test');
-INSERT INTO `pgn_label` VALUES (100514, 'Test Feed');
-INSERT INTO `pgn_label` VALUES (100515, 'This is a n/x test feed.');
-INSERT INTO `pgn_label` VALUES (100516, 'test');
-INSERT INTO `pgn_label` VALUES (100591, 'test 1234');
-INSERT INTO `pgn_label` VALUES (100667, 'Arrival via Car');
-INSERT INTO `pgn_label` VALUES (100669, '10 Market St, San Francisco, CA 94111');
-INSERT INTO `pgn_label` VALUES (100672, '');
-INSERT INTO `pgn_label` VALUES (100759, 'Search engine');
-INSERT INTO `pgn_label` VALUES (100761, 'Search now');
-INSERT INTO `pgn_label` VALUES (100762, 'No results found.');
+INSERT INTO `pgn_label` VALUES (101494, '');
+INSERT INTO `pgn_label` VALUES (101485, '');
+INSERT INTO `pgn_label` VALUES (101476, '');
+INSERT INTO `pgn_label` VALUES (101468, '');
+INSERT INTO `pgn_label` VALUES (101467, '');
+INSERT INTO `pgn_label` VALUES (101466, '');
+INSERT INTO `pgn_label` VALUES (101465, '');
+INSERT INTO `pgn_label` VALUES (101464, '');
+INSERT INTO `pgn_label` VALUES (101463, '');
+INSERT INTO `pgn_label` VALUES (101462, '');
+INSERT INTO `pgn_label` VALUES (101461, '');
+INSERT INTO `pgn_label` VALUES (101460, '');
+INSERT INTO `pgn_label` VALUES (101459, '');
+INSERT INTO `pgn_label` VALUES (101458, '');
+INSERT INTO `pgn_label` VALUES (101457, '');
+INSERT INTO `pgn_label` VALUES (101456, '');
+INSERT INTO `pgn_label` VALUES (101455, '');
+INSERT INTO `pgn_label` VALUES (101453, '');
+INSERT INTO `pgn_label` VALUES (101452, '');
+INSERT INTO `pgn_label` VALUES (101451, '');
+INSERT INTO `pgn_label` VALUES (101426, 'Read more');
+INSERT INTO `pgn_label` VALUES (101421, 'Read more');
+INSERT INTO `pgn_label` VALUES (101417, 'Copyright 2007 by www.yourwebsite.com.');
+INSERT INTO `pgn_label` VALUES (101412, 'Copyright 2007 by www.yourwebsite.com.');
+INSERT INTO `pgn_label` VALUES (101387, 'Description of your website.');
+INSERT INTO `pgn_label` VALUES (101365, 'Keyword1, Keyword2, Keyword3');
+INSERT INTO `pgn_label` VALUES (101345, 'free php content management system');
+INSERT INTO `pgn_label` VALUES (101341, 'N/X CMS');
+INSERT INTO `pgn_label` VALUES (101336, 'N/X CMS');
+INSERT INTO `pgn_label` VALUES (101332, 'Website Title');
+INSERT INTO `pgn_label` VALUES (101327, 'Website Title');
+INSERT INTO `pgn_label` VALUES (101321, 'This is content side2. You can modify this content in the content library by deleting it and creating a new one with access-key "side2". You can also modify the file wwwdev/inc/side2.php which is for creating the whole region.');
+INSERT INTO `pgn_label` VALUES (101314, 'This is content side1. You can modify this content in the content library by deleting it and creating a new one with access-key "side1". You can also modify the file wwwdev/inc/side1.php which is for creating the whole region.');
 INSERT INTO `pgn_label` VALUES (101070, 'Welcome');
 INSERT INTO `pgn_label` VALUES (101089, 'News');
 INSERT INTO `pgn_label` VALUES (101102, 'Back to News Overview');
@@ -5375,7 +5160,6 @@ INSERT INTO `pgn_link` VALUES (100057, 'Forum', 0, 'http://www.nxsystems.org/xmb
 INSERT INTO `pgn_link` VALUES (100092, 'Forum', 0, 'http://www.nxsystems.org/xmb', 100042, '');
 INSERT INTO `pgn_link` VALUES (100418, '', 0, NULL, NULL, NULL);
 INSERT INTO `pgn_link` VALUES (100421, '', 0, '', 100256, '');
-INSERT INTO `pgn_link` VALUES (100539, 'rssfeed', 0, '', 100415, '');
 INSERT INTO `pgn_link` VALUES (100544, '', 0, '', 100500, '');
 INSERT INTO `pgn_link` VALUES (100593, '', 0, 'http://www.bild.de', 0, '');
 INSERT INTO `pgn_link` VALUES (101208, 'N/X Forum', 0, 'http://www.nxsystems.org/xmb', 0, '');
@@ -5398,25 +5182,11 @@ CREATE TABLE `pgn_text` (
 -- Daten für Tabelle `pgn_text`
 -- 
 
-INSERT INTO `pgn_text` VALUES (100023, '<P>This is a demotext.</P>\r\n<P>Nevertheless we think it is cool, that one can edit the text in a Wysiwyg online mode.</P>\r\n<P>12345679821564</P>');
-INSERT INTO `pgn_text` VALUES (100040, 'This is a demotext');
-INSERT INTO `pgn_text` VALUES (100077, 'test test test');
-INSERT INTO `pgn_text` VALUES (100099, 'test test test');
 INSERT INTO `pgn_text` VALUES (100159, '<p>Phoebe silvarumque potens Diana,<br />lucidum caeli decus, o colendi<br />semper et culti, date quae precamur<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tempore sacro,</p>\r\n<p><br />quo <strong>Sibyllini monuere versus&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />virgines lectas</strong> puerosque castos<br />dis, quibus septem placuere colles,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dicere carmen.<br />alme Sol, curru nitido diem qui<br />promis et celas aliusque et idem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />nasceris, possis nihil urbe Roma<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visere maius.<br />Rite maturos aperire partus<br />lenis, Ilithyia, tuere matres,<br />sive tu Lucina probas vocari&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seu Genitalis: <br />diva, producas subolem patrumque<br />prosperes decreta super iugandis<br />feminis prolisque novae feraci<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lege marita,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />certus undenos deciens per annos<br />orbis ut cantus referatque ludos<br />ter die claro totiensque grata<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nocte frequentis.<br />Vosque, veraces cecinisse Parcae,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />quod semel dictum est stabilisque rerum<br />terminus servet, bona iam peractis<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iungite fata.<br />fertilis frugum pecorisque Tellus<br />spicea donet Cererem corona;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />nutriant fetus et aquae salubres<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;et Iovis aurae.<br />condito mitis placidusque telo<br />supplices audi pueros, Apollo;<br />siderum regina bicornis, audi,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Luna, puellas.<br />Roma si vestrum est opus Iliaeque<br />litus Etruscum tenuere turmae,<br />iussa pars mutare lares et urbem<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sospite cursu,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />cui per ardentem sine fraude Troiam<br />castus Aeneas patriae superstes<br />liberum munivit iter, daturus<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;plura relictis:<br />di, probos mores docili iuventae,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />di, senectuti placidae quietem,<br />Romulae genti date remque prolemque<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;et decus omne.<br />Quaeque vos bobus veneratur albis<br />clarus Anchisae Venerisque sanguis,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />impetret, bellante prior, iacentem <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lenis in hostem.<br />iam mari terraque manus potentis<br />Medus Albanasque timet securis,<br />iam Scythae responsa petunt, superbi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nuper et Indi.<br />iam Fides et Pax et Honos Pudorque<br />priscus et neglecta redire Virtus<br />audet adparetque beata pleno<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copia cornu.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />Augur et fulgente decorus arcu<br />Phoebus acceptusque novem Camenis,<br />qui salutari levat arte fessos<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;corporis artus, <br />si Palatinas videt aequos aras,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />remque Romanam Latiumque felix<br />alterum in lustrum meliusque semper<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prorogat aevum,<br />quaeque Aventinum tenet Algidumque,<br />quindecim Diana preces virorum&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />curat et votis puerorum amicas<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;adplicat auris.<br />Haec Iovem sentire deosque cunctos<br />spem bonam certamque domum reporto,<br />doctus et Phoebi chorus et Dianae&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dicere laudes. </p>');
 INSERT INTO `pgn_text` VALUES (100178, '');
-INSERT INTO `pgn_text` VALUES (100241, '');
-INSERT INTO `pgn_text` VALUES (100247, '');
-INSERT INTO `pgn_text` VALUES (100166, 'Welcome to the N/X new administration.');
-INSERT INTO `pgn_text` VALUES (100293, '<p>body of the whole thing.</p>\r\n<p>&nbsp;</p>');
-INSERT INTO `pgn_text` VALUES (100320, '');
-INSERT INTO `pgn_text` VALUES (100361, '');
-INSERT INTO `pgn_text` VALUES (100380, '');
-INSERT INTO `pgn_text` VALUES (100412, 'Latest news');
-INSERT INTO `pgn_text` VALUES (100442, 'test');
-INSERT INTO `pgn_text` VALUES (100592, 'test324');
-INSERT INTO `pgn_text` VALUES (100668, 'Learn, how to drive to us.');
-INSERT INTO `pgn_text` VALUES (100671, 'Description of this <strong>place</strong>');
-INSERT INTO `pgn_text` VALUES (100760, 'search here');
+INSERT INTO `pgn_text` VALUES (101477, '');
+INSERT INTO `pgn_text` VALUES (101486, '');
+INSERT INTO `pgn_text` VALUES (101454, '');
 INSERT INTO `pgn_text` VALUES (101071, '<p>{NX:IMAGE ID="100978" HEIGHT="376" WIDTH="500" ALT=""}</p>\r\n<p>Ibis Liburnis inter alta navium,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; amice, propugnacula,<br />paratus omne Caesaris periculum<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; subire, Maecenas, tuo:<br />quid nos, quibus te vita sit superstite<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iucunda, si contra, gravis?<br />utrumne iussi persequemur otium<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; non dulce, ni tecum simul,<br />an hunc laborem mente laturi, decet<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; qua ferre non mollis viros?<br />feremus et te vel per Alpium iuga<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inhospitalem et Caucasum<br />vel occidentis usque ad ultimum sinum<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; forti sequemur pectore.<br />roges, tuom labore quid iuvem meo,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inbellis ac firmus parum?<br />comes minore sum futurus in metu,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; qui maior absentis habet:<br />ut adsidens inplumibus pullis avis<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; serpentium adlapsus timet<br />magis relictis, non, ut adsit, auxili<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; latura plus praesentibus.<br />libenter hoc et omne militabitur<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bellum in tuae spem gratiae,<br />non ut iuvencis inligata pluribus<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; aratra nitantur meis<br />pecusve Calabris ante Sidus fervidum<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Lucana mutet pascuis<br />neque ut superni villa candens Tusculi<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Circaea tangat moenia:<br />satis superque me benignitas tua<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ditavit, haud paravero<br />quod aut avarus ut Chremes terra premam,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; discinctus aut perdam nepos. </p>');
 INSERT INTO `pgn_text` VALUES (101090, '');
 INSERT INTO `pgn_text` VALUES (101129, '<p>{NX:IMAGE ID="100986" HEIGHT="500" WIDTH="375" ALT=""}</p>\r\n<p>&nbsp;</p>\r\n<p>''Beatus ille qui procul negotiis,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ut prisca gens mortalium,<br />paterna rura bubus exercet suis<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; solutus omni faenore<br />neque excitatur classico miles truci<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; neque horret iratum mare<br />forumque vitat et superba civium<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; potentiorum limina.<br />ergo aut adulta vitium propagine<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; altas maritat populos<br />aut in reducta valle mugientium<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; prospectat errantis greges<br />inutilisque falce ramos amputans<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; feliciores inserit<br />aut pressa puris mella condit amphoris<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; aut tondet infirmas ovis.<br />vel cum decorum mitibus pomis caput<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Autumnus agris extulit,<br />ut gaudet insitiva decerpens pira<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; certantem et uvam purpurae,<br />qua muneretur te, Priape, et te, pater<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Silvane, tutor finium.<br />libet iacere modo sub antiqua ilice,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; modo in tenaci gramine:<br />labuntur altis interim ripis aquae,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queruntur in Silvis aves<br />frondesque lymphis obstrepunt manantibus,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; somnos quod invitet levis.<br />at cum tonantis annus hibernus Iovis<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; imbris nivisque conparat,<br />aut trudit acris hinc et hinc multa cane<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; apros in obstantis plagas<br />aut amite levi rara tendit retia<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; turdis edacibus dolos<br />pavidumque leporem et advenam laqueo gruem<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iucunda captat praemia.<br />quis non malarum quas amor curas habet<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; haec inter obliviscitur?<br />quodsi pudica mulier in partem iuvet<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; domum atque dulcis liberos,<br />Sabina qualis aut perusta Solibus<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pernicis uxor Apuli,<br />sacrum vetustis exstruat lignis focum<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lassi Sub adventum viri<br />claudensque textis cratibus laetum pecus<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; distenta siccet ubera<br />et horna dulci vina promens dolio<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dapes inemptas adparet:<br />non me Lucrina iuverint conchylia<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; magisve rhombus aut scari,<br />siquos Eois intonata fluctibus<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hiems ad hoc vertat mare,<br />non Afra avis descendat in ventrem meum,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; non attagen Ionicus<br />iucundior quam lecta de pinguissimis<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; oliva ramis arborum<br />aut herba lapathi prata amantis et gravi<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; malvae salubres corpori<br />vel agna festis caesa Terminalibus<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vel haedus ereptus lupo.<br />has inter epulas ut iuvat pastas ovis<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; videre properantis domum,<br />videre fessos vomerem inversum boves<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; collo trahentis languido<br />positosque vernas, ditis examen domus,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; circum renidentis Laris.''<br />haec ubi locutus faenerator Alfius,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iam iam futurus rusticus,<br />omnem redegit idibus pecuniam,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; quaerit kalendis ponere. </p>');
@@ -5726,12 +5496,12 @@ INSERT INTO `registry` VALUES (101148, 'WWWDEV', '', 101147);
 INSERT INTO `registry` VALUES (101149, 'WWW', '', 101147);
 INSERT INTO `registry` VALUES (101150, 'BB', '', 101147);
 INSERT INTO `registry` VALUES (100024, 'CDS', '', 0);
-INSERT INTO `registry` VALUES (100025, 'MENU', 'dropdownmenu/dc_dropdownmenu.php', 100024);
-INSERT INTO `registry` VALUES (100026, 'COLORACTIVE', '#6699cc', 100025);
-INSERT INTO `registry` VALUES (100027, 'COLORTACTIVE', '#cbe5ff', 100025);
-INSERT INTO `registry` VALUES (100028, 'COLORSTACTIVE', '#ffffff', 100025);
-INSERT INTO `registry` VALUES (100029, 'COLORINACTIVE', '#efefef', 100025);
-INSERT INTO `registry` VALUES (100030, 'COLORTINACTIVE', '#0000ff', 100025);
+INSERT INTO `registry` VALUES (100025, 'MENU', 'nonzero/dc_nonzero.php', 100024);
+INSERT INTO `registry` VALUES (100026, 'COLORACTIVE', '', 100025);
+INSERT INTO `registry` VALUES (100027, 'COLORTACTIVE', '', 100025);
+INSERT INTO `registry` VALUES (100028, 'COLORSTACTIVE', '', 100025);
+INSERT INTO `registry` VALUES (100029, 'COLORINACTIVE', '', 100025);
+INSERT INTO `registry` VALUES (100030, 'COLORTINACTIVE', '', 100025);
 
 -- --------------------------------------------------------
 
@@ -5913,8 +5683,8 @@ CREATE TABLE `sequences` (
 -- Daten für Tabelle `sequences`
 -- 
 
-INSERT INTO `sequences` VALUES ('GUID', 101232);
-INSERT INTO `sequences` VALUES ('log', 100082);
+INSERT INTO `sequences` VALUES ('GUID', 101497);
+INSERT INTO `sequences` VALUES ('log', 100086);
 
 -- --------------------------------------------------------
 
@@ -5967,26 +5737,23 @@ CREATE TABLE `sitemap` (
 -- Daten für Tabelle `sitemap`
 -- 
 
-INSERT INTO `sitemap` VALUES (100041, 100042, 100032, 'test', 1, 0, 0, 10, 1, 1, 0, NULL);
 INSERT INTO `sitemap` VALUES (101204, 101123, 100052, 'Forum', 3, 0, 0, 0, 1, 1, 0, NULL);
-INSERT INTO `sitemap` VALUES (100093, 100041, 100087, 'Forum', 1, 1, 0, 10, 1, 1, 0, NULL);
-INSERT INTO `sitemap` VALUES (100100, 100093, 100032, 'Profiles', 1, 0, 0, 10, 1, 1, 0, NULL);
-INSERT INTO `sitemap` VALUES (100084, 100042, 100103, 'Serivepages', 3, 0, 0, 10, 1, 1, 0, NULL);
-INSERT INTO `sitemap` VALUES (100117, 100084, 100109, 'Sitemap', 2, 0, 0, 10, 1, 1, 0, NULL);
+INSERT INTO `sitemap` VALUES (101490, 101433, 100058, 'Sitemap', 2, 0, 0, 0, 1, 1, 0, NULL);
+INSERT INTO `sitemap` VALUES (101481, 101440, 100017, 'Privacy Statement', 2, 0, 0, 0, 1, 1, 0, NULL);
 INSERT INTO `sitemap` VALUES (101178, 101066, 100058, 'Sitemap', 1, 0, 0, 0, 1, 1, 0, NULL);
 INSERT INTO `sitemap` VALUES (100180, 100042, 100170, 'News', 4, 0, 0, 10, 1, 1, 0, NULL);
-INSERT INTO `sitemap` VALUES (100249, 100042, 100170, 'News', 4, 0, 0, 10, 1, 1, 0, NULL);
 INSERT INTO `sitemap` VALUES (101164, 101123, 100436, 'Gallery', 2, 0, 0, 0, 1, 1, 0, NULL);
-INSERT INTO `sitemap` VALUES (100264, 100249, 100182, 'Article', 1, 0, 0, 10, 0, 1, 0, NULL);
+INSERT INTO `sitemap` VALUES (101447, 101433, 100572, 'Contact', 1, 0, 0, 0, 1, 1, 0, NULL);
 INSERT INTO `sitemap` VALUES (101190, 101066, 100743, 'Search Engine', 2, 0, 0, 0, 1, 1, 0, NULL);
 INSERT INTO `sitemap` VALUES (101136, 101123, 100572, 'Contact', 1, 0, 0, 0, 1, 1, 0, NULL);
 INSERT INTO `sitemap` VALUES (101123, 0, 100017, 'About', 2, 0, 0, 0, 1, 1, 0, NULL);
 INSERT INTO `sitemap` VALUES (101098, 101085, 100137, 'News', 1, 0, 0, 0, 0, 1, 1, NULL);
-INSERT INTO `sitemap` VALUES (100517, 100518, 100501, 'Create', 2, 0, 0, 10, 1, 1, 0, NULL);
-INSERT INTO `sitemap` VALUES (100518, 100042, 100103, 'RSS', 5, 0, 0, 10, 1, 1, 0, NULL);
+INSERT INTO `sitemap` VALUES (101440, 0, 100079, 'Footerlinks', 5, 0, 0, 0, 1, 1, 0, NULL);
+INSERT INTO `sitemap` VALUES (101433, 0, 100079, 'Headerlinks', 4, 0, 0, 0, 1, 1, 0, NULL);
 INSERT INTO `sitemap` VALUES (101085, 101078, 100142, 'Overview', 1, 0, 0, 0, 1, 1, 0, NULL);
 INSERT INTO `sitemap` VALUES (101078, 0, 100079, 'News', 3, 0, 0, 0, 1, 1, 0, NULL);
 INSERT INTO `sitemap` VALUES (101066, 0, 100017, 'Home', 1, 0, 0, 0, 1, 1, 0, NULL);
+INSERT INTO `sitemap` VALUES (101472, 101440, 100017, 'Legal Notices and Terms', 1, 0, 0, 0, 1, 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -6015,26 +5782,23 @@ CREATE TABLE `sitepage` (
 -- Daten für Tabelle `sitepage`
 -- 
 
-INSERT INTO `sitepage` VALUES (100031, 100032, 100041, 1, 100037, NULL, NULL, 0, 0, 10);
-INSERT INTO `sitepage` VALUES (100086, 100087, 100093, 1, 100090, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 10);
-INSERT INTO `sitepage` VALUES (100095, 100032, 100100, 1, 100096, NULL, NULL, 0, 0, 10);
-INSERT INTO `sitepage` VALUES (100102, 100103, 100084, 1, 100105, NULL, NULL, 0, 0, 10);
-INSERT INTO `sitepage` VALUES (100108, 100109, 100117, 1, 100113, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 10);
+INSERT INTO `sitepage` VALUES (101491, 100058, 101490, 1, 101492, NULL, NULL, 0, 0, 0);
+INSERT INTO `sitepage` VALUES (101482, 100017, 101481, 1, 101483, NULL, NULL, 0, 0, 0);
 INSERT INTO `sitepage` VALUES (100144, 100142, 100143, 1, 100145, NULL, NULL, 0, 0, 0);
 INSERT INTO `sitepage` VALUES (100196, 100182, 100200, 1, 100197, NULL, NULL, 0, 0, 10);
 INSERT INTO `sitepage` VALUES (100169, 100170, 100180, 1, 100175, NULL, NULL, 0, 0, 10);
 INSERT INTO `sitepage` VALUES (100192, 100137, 100191, 1, 100193, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 0);
 INSERT INTO `sitepage` VALUES (101191, 100743, 101190, 1, 101192, NULL, NULL, 0, 0, 0);
-INSERT INTO `sitepage` VALUES (100243, 100170, 100249, 1, 100244, NULL, NULL, 0, 0, 10);
+INSERT INTO `sitepage` VALUES (101473, 100017, 101472, 1, 101474, NULL, NULL, 0, 0, 0);
 INSERT INTO `sitepage` VALUES (101179, 100058, 101178, 1, 101180, NULL, NULL, 0, 0, 0);
-INSERT INTO `sitepage` VALUES (100260, 100182, 100264, 1, 100261, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 10);
+INSERT INTO `sitepage` VALUES (101448, 100572, 101447, 1, 101449, NULL, NULL, 0, 0, 0);
 INSERT INTO `sitepage` VALUES (101205, 100052, 101204, 1, 101206, NULL, NULL, 0, 0, 0);
 INSERT INTO `sitepage` VALUES (101165, 100436, 101164, 1, 101166, NULL, NULL, 0, 0, 0);
 INSERT INTO `sitepage` VALUES (101137, 100572, 101136, 1, 101138, NULL, NULL, 0, 0, 0);
 INSERT INTO `sitepage` VALUES (101124, 100017, 101123, 1, 101125, NULL, NULL, 0, 0, 0);
 INSERT INTO `sitepage` VALUES (101099, 100137, 101098, 1, 101100, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 0);
-INSERT INTO `sitepage` VALUES (100500, 100501, 100517, 1, 100507, NULL, NULL, 0, 0, 10);
-INSERT INTO `sitepage` VALUES (100526, 100103, 100518, 1, 100527, NULL, NULL, 0, 0, 10);
+INSERT INTO `sitepage` VALUES (101441, 100079, 101440, 1, 101442, NULL, NULL, 0, 0, 0);
+INSERT INTO `sitepage` VALUES (101434, 100079, 101433, 1, 101435, NULL, NULL, 0, 0, 0);
 INSERT INTO `sitepage` VALUES (101086, 100142, 101085, 1, 101087, NULL, NULL, 0, 0, 0);
 INSERT INTO `sitepage` VALUES (101079, 100079, 101078, 1, 101080, NULL, NULL, 0, 0, 0);
 INSERT INTO `sitepage` VALUES (101067, 100017, 101066, 1, 101068, NULL, NULL, 0, 0, 0);
@@ -6064,13 +5828,9 @@ CREATE TABLE `sitepage_master` (
 -- 
 
 INSERT INTO `sitepage_master` VALUES (100017, 'Text', '- Headline\r\n- HTML-Text', 'text.php', 100014, 1, 0, 'HTML_Page.png', 0);
-INSERT INTO `sitepage_master` VALUES (100032, 'Text', '- Headline\r\n- HTML-Text', 'text.php', 100033, 1, 0, NULL, 10);
 INSERT INTO `sitepage_master` VALUES (100052, 'External Page', 'Opens a new window and displays the URL which is stored in the template.', 'external.php', 100050, 1, 0, 'Popup.png', 0);
 INSERT INTO `sitepage_master` VALUES (100058, 'Sitemap', 'Draws a sitemap for your homepage.', 'sitemap.php', 100063, 1, 0, 'Sitemap.png', 0);
 INSERT INTO `sitepage_master` VALUES (100079, 'Menu Separator', 'Use for creating menu-sections with no content. If the page is clicked, the system does an automatic forwarding to the first childpage.', 'separator.php', 100078, 1, 0, 'X.png', 0);
-INSERT INTO `sitepage_master` VALUES (100087, 'External Page', 'Opens a new window and displays the URL which is stored in the template.', 'external.php', 100088, 1, 0, NULL, 10);
-INSERT INTO `sitepage_master` VALUES (100103, 'Menu Separator', 'Use for creating menu-sections with no content. If the page is clicked, the system does an automatic forwarding to the first childpage.', 'separator.php', 100104, 1, 0, NULL, 10);
-INSERT INTO `sitepage_master` VALUES (100109, 'Sitemap', 'Draws a sitemap for your homepage.', 'sitemap.php', 100110, 1, 0, NULL, 10);
 INSERT INTO `sitepage_master` VALUES (100137, 'Article Page', 'Special Template for displaying an article. Articles are grouped in channels. When you setup a channel, you can define a output page for each channel category. Output pages are based on this template', 'article.php', 100167, 1, 0, 'Article.png', 0);
 INSERT INTO `sitepage_master` VALUES (100142, 'Article Overview', 'Displays a list with the selected articles from a channel. Use this template to create a overview page for News and other articles.', 'article_overview.php', 100138, 1, 0, 'Overview.png', 0);
 INSERT INTO `sitepage_master` VALUES (100170, 'Article Overview', 'Displays a list with the selected articles from a channel. Use this template to create a overview page for News and other articles.', 'article_overview.php', 100171, 1, 0, NULL, 10);
@@ -6080,7 +5840,6 @@ INSERT INTO `sitepage_master` VALUES (100312, 'Contact  (Mailing System)', 'Cont
 INSERT INTO `sitepage_master` VALUES (100513, 'RSS Creator', 'Create a RSS-Feed out of a channel.', 'rss.php', 100511, 1, 0, 'XML.png', 0);
 INSERT INTO `sitepage_master` VALUES (101212, 'RSS Reader', 'Load a RSS feed and display it on the homepage.', 'rssdisp.php', 101177, 1, 0, 'Overview2.png', 0);
 INSERT INTO `sitepage_master` VALUES (100436, 'Gallery', 'Template for creating image galleries', 'gallery.php', 100428, 1, 0, 'Gallery.png', 0);
-INSERT INTO `sitepage_master` VALUES (100501, 'RSS Creator', 'Create a RSS-Feed out of a channel.', 'rss.php', 100502, 1, 0, NULL, 10);
 INSERT INTO `sitepage_master` VALUES (101182, 'Show In Frame', 'Use this template, to show the content of an URL in an embedded frame (iframe).', 'inline.php', 100560, 1, 0, 'IFrame.png', 0);
 INSERT INTO `sitepage_master` VALUES (100639, 'Map', 'View a address with Google Maps.', 'map.php', 100612, 1, 0, 'Map.png', 0);
 INSERT INTO `sitepage_master` VALUES (100743, 'Search Engine', 'This page implements a search engine in your website. You must run the spiders before you can use the integrated searchengine. Therefore go to Maintenance/Search Indexing.', 'search.php', 100716, 1, 0, 'Search.png', 0);
@@ -6106,26 +5865,23 @@ CREATE TABLE `sitepage_names` (
 -- Daten für Tabelle `sitepage_names`
 -- 
 
-INSERT INTO `sitepage_names` VALUES (100031, 1, 'test', '', '', 1, 10);
 INSERT INTO `sitepage_names` VALUES (101191, 1, 'Search Engine', NULL, '', 0, 0);
 INSERT INTO `sitepage_names` VALUES (101205, 1, 'Forum', NULL, '', 0, 0);
-INSERT INTO `sitepage_names` VALUES (100086, 1, 'Forum', '', 'Shows the N/X forum.', 1, 10);
-INSERT INTO `sitepage_names` VALUES (100095, 1, 'Profiles', '', 'Displays, which profiles are in the forum', 1, 10);
-INSERT INTO `sitepage_names` VALUES (100102, 1, 'Servicepages', '', '', 1, 10);
-INSERT INTO `sitepage_names` VALUES (100108, 1, 'Sitemap', '', 'this page', 1, 10);
+INSERT INTO `sitepage_names` VALUES (101491, 1, 'Sitemap', NULL, '', 0, 0);
+INSERT INTO `sitepage_names` VALUES (101482, 1, 'Privacy Statement', NULL, '', 0, 0);
+INSERT INTO `sitepage_names` VALUES (101473, 1, 'Legal Notices and Terms', NULL, '', 0, 0);
 INSERT INTO `sitepage_names` VALUES (100144, 1, 'News', NULL, '', 0, 0);
 INSERT INTO `sitepage_names` VALUES (100196, 1, 'Articles', '', '', 0, 10);
 INSERT INTO `sitepage_names` VALUES (100169, 1, 'News', '', '', 0, 10);
 INSERT INTO `sitepage_names` VALUES (100192, 1, 'Articles', NULL, '', 0, 0);
-INSERT INTO `sitepage_names` VALUES (100243, 1, 'News', '', '', 1, 10);
-INSERT INTO `sitepage_names` VALUES (100260, 1, 'Article', '', '', 1, 10);
+INSERT INTO `sitepage_names` VALUES (101448, 1, 'Contact', NULL, '', 0, 0);
+INSERT INTO `sitepage_names` VALUES (101441, 1, 'Footerlinks', NULL, '', 0, 0);
 INSERT INTO `sitepage_names` VALUES (101179, 1, 'Sitemap', NULL, '', 0, 0);
 INSERT INTO `sitepage_names` VALUES (101165, 1, 'Gallery', NULL, '', 0, 0);
 INSERT INTO `sitepage_names` VALUES (101137, 1, 'Contact', NULL, '', 0, 0);
 INSERT INTO `sitepage_names` VALUES (101124, 1, 'About', NULL, '', 0, 0);
 INSERT INTO `sitepage_names` VALUES (101099, 1, 'News', NULL, '', 0, 0);
-INSERT INTO `sitepage_names` VALUES (100500, 1, 'Create', '', '', 1, 10);
-INSERT INTO `sitepage_names` VALUES (100526, 1, 'RSS', '', '', 1, 10);
+INSERT INTO `sitepage_names` VALUES (101434, 1, 'Headerlinks', NULL, '', 0, 0);
 INSERT INTO `sitepage_names` VALUES (101086, 1, 'Overview', NULL, '', 0, 0);
 INSERT INTO `sitepage_names` VALUES (101079, 1, 'News', NULL, '', 0, 0);
 INSERT INTO `sitepage_names` VALUES (101067, 1, 'Home', NULL, '', 0, 0);
@@ -6181,13 +5937,9 @@ CREATE TABLE `sitepage_variations` (
 -- 
 
 INSERT INTO `sitepage_variations` VALUES (100017, 1);
-INSERT INTO `sitepage_variations` VALUES (100032, 1);
 INSERT INTO `sitepage_variations` VALUES (100052, 1);
 INSERT INTO `sitepage_variations` VALUES (100058, 1);
 INSERT INTO `sitepage_variations` VALUES (100079, 1);
-INSERT INTO `sitepage_variations` VALUES (100087, 1);
-INSERT INTO `sitepage_variations` VALUES (100103, 1);
-INSERT INTO `sitepage_variations` VALUES (100109, 1);
 INSERT INTO `sitepage_variations` VALUES (100137, 1);
 INSERT INTO `sitepage_variations` VALUES (100142, 1);
 INSERT INTO `sitepage_variations` VALUES (100154, 1);
@@ -6198,7 +5950,6 @@ INSERT INTO `sitepage_variations` VALUES (100312, 1);
 INSERT INTO `sitepage_variations` VALUES (100513, 1);
 INSERT INTO `sitepage_variations` VALUES (101212, 1);
 INSERT INTO `sitepage_variations` VALUES (100436, 1);
-INSERT INTO `sitepage_variations` VALUES (100501, 1);
 INSERT INTO `sitepage_variations` VALUES (101182, 1);
 INSERT INTO `sitepage_variations` VALUES (100639, 1);
 INSERT INTO `sitepage_variations` VALUES (100743, 1);
@@ -6227,7 +5978,7 @@ CREATE TABLE `state_translation` (
 INSERT INTO `state_translation` VALUES (100019, 100031, 10, '2006-08-13 19:01:52', 1);
 INSERT INTO `state_translation` VALUES (100017, 100032, 10, '2006-08-09 22:05:37', 0);
 INSERT INTO `state_translation` VALUES (100014, 100033, 10, '2006-08-11 20:06:03', 0);
-INSERT INTO `state_translation` VALUES (2, 100034, 10, '2006-08-13 12:58:29', 0);
+INSERT INTO `state_translation` VALUES (2, 100034, 10, '2007-02-25 15:23:50', 0);
 INSERT INTO `state_translation` VALUES (100015, 100035, 10, '2006-08-11 20:06:03', 0);
 INSERT INTO `state_translation` VALUES (100016, 100036, 10, '2006-08-11 20:06:03', 0);
 INSERT INTO `state_translation` VALUES (100020, 100037, 10, '2006-08-11 20:06:03', 0);
@@ -6360,6 +6111,16 @@ INSERT INTO `state_translation` VALUES (100438, 100817, 10, '2006-08-13 19:02:57
 INSERT INTO `state_translation` VALUES (100588, 100819, 10, '2006-08-13 19:02:57', 1);
 INSERT INTO `state_translation` VALUES (100664, 100825, 10, '2006-08-13 19:03:10', 1);
 INSERT INTO `state_translation` VALUES (100316, 100838, 10, '2006-08-13 19:03:52', 1);
+INSERT INTO `state_translation` VALUES (101326, 101331, 10, '2007-02-25 13:26:22', 0);
+INSERT INTO `state_translation` VALUES (101327, 101332, 10, '2007-02-25 13:26:22', 0);
+INSERT INTO `state_translation` VALUES (101335, 101340, 10, '2007-02-25 13:28:26', 0);
+INSERT INTO `state_translation` VALUES (101336, 101341, 10, '2007-02-25 13:28:26', 0);
+INSERT INTO `state_translation` VALUES (101355, 101360, 10, '2007-02-25 13:31:30', 0);
+INSERT INTO `state_translation` VALUES (101356, 101361, 10, '2007-02-25 13:31:30', 0);
+INSERT INTO `state_translation` VALUES (101411, 101416, 10, '2007-02-25 15:09:14', 0);
+INSERT INTO `state_translation` VALUES (101412, 101417, 10, '2007-02-25 15:09:14', 0);
+INSERT INTO `state_translation` VALUES (101420, 101425, 10, '2007-02-25 15:23:50', 0);
+INSERT INTO `state_translation` VALUES (101421, 101426, 10, '2007-02-25 15:23:50', 0);
 
 -- --------------------------------------------------------
 
@@ -6517,7 +6278,7 @@ CREATE TABLE `temp_vars` (
 -- Daten für Tabelle `temp_vars`
 -- 
 
-INSERT INTO `temp_vars` VALUES ('pnode', '1', '100011');
+INSERT INTO `temp_vars` VALUES ('pnode', '1', '101310');
 INSERT INTO `temp_vars` VALUES ('channels.phpfilter_rule', '1', '');
 INSERT INTO `temp_vars` VALUES ('channels.phpfilter_page', '1', '1');
 INSERT INTO `temp_vars` VALUES ('categories.phpfilter_rule', '1', '');
@@ -6529,11 +6290,11 @@ INSERT INTO `temp_vars` VALUES ('overview.phpfilter_page', '1', '1');
 INSERT INTO `temp_vars` VALUES ('clt', '1', '100167');
 INSERT INTO `temp_vars` VALUES ('install.phpfilter_rule', '1', '');
 INSERT INTO `temp_vars` VALUES ('install.phpfilter_page', '1', '1');
-INSERT INTO `temp_vars` VALUES ('sitepage_master.phpfilter_rule', '1', '');
+INSERT INTO `temp_vars` VALUES ('menu', '1', '1x0');
 INSERT INTO `temp_vars` VALUES ('sitepage_master.phpfilter_page', '1', '1');
 INSERT INTO `temp_vars` VALUES ('edit_template.phpfilter_rule', '1', '');
 INSERT INTO `temp_vars` VALUES ('edit_template.phpfilter_page', '1', '1');
-INSERT INTO `temp_vars` VALUES ('mid', '1', '101123');
+INSERT INTO `temp_vars` VALUES ('mid', '1', '101433');
 INSERT INTO `temp_vars` VALUES ('sitepagebrowser.phpview', '1', '1');
 INSERT INTO `temp_vars` VALUES ('panelmenu', '1', '1x-1');
 INSERT INTO `temp_vars` VALUES ('variations.phpfilter_rule', '1', '');
@@ -6552,17 +6313,16 @@ INSERT INTO `temp_vars` VALUES ('chsel', '1', '100154');
 INSERT INTO `temp_vars` VALUES ('quickpanel', '1', '');
 INSERT INTO `temp_vars` VALUES ('edit.phpview', '1', '1');
 INSERT INTO `temp_vars` VALUES ('clusterbrowser.phpview', '1', '1');
-INSERT INTO `temp_vars` VALUES ('lastaction', '1', '0');
+INSERT INTO `temp_vars` VALUES ('lastaction', '1', 'editobject');
 INSERT INTO `temp_vars` VALUES ('metascheme.phpfilter_rule', '1', '');
 INSERT INTO `temp_vars` VALUES ('metascheme.phpfilter_page', '1', '1');
 INSERT INTO `temp_vars` VALUES ('meta.phpfilter_rule', '1', '');
 INSERT INTO `temp_vars` VALUES ('meta.phpfilter_page', '1', '1');
-INSERT INTO `temp_vars` VALUES ('filter', '1', 'IMAGE');
 INSERT INTO `temp_vars` VALUES ('snode', '1', '100893');
 INSERT INTO `temp_vars` VALUES ('tax.phpfilter_rule', '1', '');
 INSERT INTO `temp_vars` VALUES ('tax.phpfilter_page', '1', '1');
-INSERT INTO `temp_vars` VALUES ('linkset', '1', 'SELECT|EDIT|USAGE|LAUNCH|DELETE');
-INSERT INTO `temp_vars` VALUES ('menu', '1', '1x0');
+INSERT INTO `temp_vars` VALUES ('linkset', '1', '');
+INSERT INTO `temp_vars` VALUES ('sitepage_master.phpfilter_rule', '1', '');
 
 -- --------------------------------------------------------
 
@@ -6713,7 +6473,7 @@ CREATE TABLE `user_session` (
 -- Daten für Tabelle `user_session`
 -- 
 
-INSERT INTO `user_session` VALUES ('1', '2007-02-16 17:43:26', '150e6c835febcb6826af474a25e5e5cb', '127.0.0.1');
+INSERT INTO `user_session` VALUES ('1', '2007-02-25 21:45:04', '93ecf56f490c8966aba05d085002506f', '127.0.0.1');
 
 -- --------------------------------------------------------
 

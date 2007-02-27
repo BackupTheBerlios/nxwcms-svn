@@ -73,7 +73,7 @@
  
  $cfp->addWidget(new Label("Locale Settings", "headline2"));
  $cfp->addWidget(new SelectBox("Default Language of the Backend:", "DEFLANG", 1, $languages));
- $cfp->addWidget(new TextInput("Standard Encoding:", "ENCODING", "text/html; charset=iso-8859-1"));
+ $cfp->addWidget(new TextInput("Standard Encoding:", "ENCODING", "text/html; charset=utf-8"));
  $cfp->addWidget(new Retain("DB"));
  $cfp->addWidget(new Retain("DBSERVER"));
  $cfp->addWidget(new Retain("DBUSER"));
