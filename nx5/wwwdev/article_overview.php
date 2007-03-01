@@ -31,7 +31,7 @@
   	    $body = $cluster->content->get("Body");
   	    $body = $cds->tools->shortenText($body, 200, ' ...');
     	}
-    	echo '<tr><td valign="top>'.$date.'</td><td valign="top"><a href="'.$link.'">'.$title.'</a></td></tr>';
+    	echo '<tr><td valign="top">'.$date.'</td><td valign="top"><a href="'.$link.'">'.$title.'</a></td></tr>';
     	if ($body != "") {
   	    echo '<tr><td colspan="2">'.$body.'<br></td></tr>';	
     	} 	  	
