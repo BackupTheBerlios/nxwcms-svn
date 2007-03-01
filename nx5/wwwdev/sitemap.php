@@ -16,11 +16,11 @@
   
   // Get all the root-Nodes
   $startNodes = $node->sameLevel();
-  echo '<div style="margin:0px 0px 0px 20px;">';
+  echo '<div style="margin:0px 0px 0px 20px;"><ul>';
   for ($i=0; $i<count($startNodes); $i++) {
     drawNode($startNodes[$i], $commented);
   }
-  echo '</div>';
+  echo '</ul></div>';
  
   /**
    * Draw the ChildNOdes of the MenuNode which is passed and the menunode itself..
@@ -32,7 +32,7 @@
   function drawNode($node, $commented) {
   	global $cds;
 
-		echo "<li class='sitemap'>";
+		echo "<li>";
 		//Draw the link
 		echo $cds->layout->menu->getLink($node);
 		if ($commented) {
@@ -44,7 +44,7 @@
 		}  		
 		// query for childnodes
 		if ($node->hasLowerLevel()) {
-		  echo '<ul class="sitemap">';
+		  echo '<ul>';
 		  $childs = $node->lowerLevel();
 		  for ($i=0; $i<count($childs); $i++)  			  
 		    drawNode($childs[$i], $commented);			

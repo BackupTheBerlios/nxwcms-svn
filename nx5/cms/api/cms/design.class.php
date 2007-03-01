@@ -107,7 +107,7 @@
 		 */
 		function docroot() {
 			global $c;
-			return $c["basedocroot"].'/designs/'.$this->getName().'/';
+			return $c["basedocroot"].'designs/'.strtolower($this->getName()).'/';
 		}
 		
 		
