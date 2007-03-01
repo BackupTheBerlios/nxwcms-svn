@@ -55,8 +55,9 @@
   	  if (is_object($links)) {  	  	
   	  	$links = $links->lowerLevel();
   	  	if (is_array($links)) {
-  	  		for ($i=0; $i<count($links); $i++) {
-  	  			echo $links[$i]->getTag().'&nbsp;-&nbsp;';
+  	  		for ($i=0; $i<count($links); $i++) {  	  			
+  	  			echo $links[$i]->getTag().'&nbsp;';
+  	  			if ($i < (count($links)-1)) echo '-&nbsp;';
   	  		}
   	  	}
   	  }  	  			

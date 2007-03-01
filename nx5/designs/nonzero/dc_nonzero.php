@@ -44,30 +44,39 @@
 		 */
 		function getFooter() {
 		  global $cds, $c, $db;
+		  br();
+		  include $cds->path.'inc/foot1.php';
 		  echo '</div></div>';
 		  echo '<div id="secondaryContent_3columns"><div id="columnB_3columns">';
 		  // menu drawing.
 		  echo '<h2><span>'.$cds->content->getByAccessKey('submenutitle').'</span></h2>
 				<ul class="links">';
 		  $this->drawSubMenu();				
-//				<li><a href="#">Consequat cursus</a></li>
-	//			<li><a href="#">Tempus nullam</a></li>
-		//		<li><a href="#">Magna sed mauris</a></li>
-			//	<li><a href="#">Semper molestie</a></li>
 		  echo  '	</ul>';
 		  echo  '<br>';
 		  include($cds->path.'inc/side1.php');
 		  echo  '</div>';
 		  echo  '<div id="columnC_3columns">';
 		  include ($cds->path.'inc/side2.php');
-		  echo  '</div>';
-		 
-
+		  echo  '</div>';		      
 		  echo '<br class="clear" /> ';		  
-		  echo  '</div>';		  
+		  echo  '</div>';		  		  
 		  echo '</div>';
-		  include $cds->path.'inc/foot1.php';
+		  
 		  echo  '<div id="footer" class="fluid">';
+		  
+		  // footerlinks
+			$links = $cds->menu->getMenuByPath('/FooterLinks');
+  	  if (is_object($links)) {  	  	
+  	  	$links = $links->lowerLevel();
+  	  	if (is_array($links)) {
+  	  		for ($i=0; $i<count($links); $i++) {  	  			
+  	  			echo $links[$i]->getTag().'&nbsp;';
+  	  			if ($i < (count($links)-1)) echo '-&nbsp;';
+  	  		}
+  	  	}
+  	  }  	
+		  br();
 		  echo $cds->content->getByAccessKey('footermessage');
 		  br();
 		  echo 'Design by <a href="http://www.nodethirtythree.com/" target="_blank">NodeThirtyThree Design</a>. &nbsp; Powered by <a href="http://www.nxsystems.org" target="_blank">N/X CMS</a>.';
@@ -82,7 +91,18 @@
   	function getHeader() {
   	  global $cds;
   	  echo '<div id="header">';
-	  echo '<div id="header_inner" class="fluid">';
+  	  echo '<div id="header_inner" class="fluid">';
+	    echo '<div id="headerlinks">';
+	    $links = $cds->menu->getMenuByPath('/HeaderLinks');
+  	  if (is_object($links)) {  	  	
+  	  	$links = $links->lowerLevel();
+  	  	if (is_array($links)) {
+  	  		for ($i=0; $i<count($links); $i++) {
+  	  			echo $links[$i]->getTag().'&nbsp;&nbsp;';
+  	  		}
+  	  	}
+  	  } 
+	    echo '</div>';	  
 	  echo '<div id="logo">';
 	  include $cds->path.'inc/head1.php';
 	  echo '</div><div id="menu"><ul>';
