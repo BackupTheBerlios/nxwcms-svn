@@ -130,8 +130,7 @@
   	  echo '<div id="right_side">';
   	  echo '<h2>'.$cds->content->getByAccessKey('submenutitle').'</h2>';
   	  echo $this->drawSubMenu();
-  	  br();
-  	  br();
+  	  echo '</div><br><div id="right_side">';
   	  include $cds->path.'inc/side2.php';
   	  
   	  echo '</div></div>';
