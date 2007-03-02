@@ -34,7 +34,7 @@
 		 * @return string
 		 */
 		function getName() {
-			return "Standard-Menu";
+			return "StandardMenu";
 		}
 		
 		/**
@@ -42,18 +42,63 @@
 		 *
 		 */
 		function getFooter() {
-		  $out = "</td></tr></table>";
-		  return $out;
+		  global $cds;
+		  br();
+		  br();
+		  include $cds->path.'inc/foot1.php';  
+		  echo  "</td>";
+		  echo '<td width="20">&nbsp;</td>';
+		  echo '<td valign="top" width=200"><br><br><br><br>';
+		  include $cdsp->path.'inc/side1.php';
+		  br();
+		  br();		  
+		  include $cdsp->path.'inc/side2.php';
+		  echo "</td></tr></table>";
+		  	br();br();
+  		echo '<div id="footerline">';
+  		echo '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
+  		echo '<tr><td width="30%">';
+  		 // footerlinks
+			$links = $cds->menu->getMenuByPath('/FooterLinks');
+  	  if (is_object($links)) {  	  	
+  	  	$links = $links->lowerLevel();
+  	  	if (is_array($links)) {
+  	  		for ($i=0; $i<count($links); $i++) {  	  			
+  	  			echo $links[$i]->getTag().'&nbsp;';
+  	  			if ($i < (count($links)-1)) echo '-&nbsp;';
+  	  		}
+  	  	}
+  	  }  	  	  
+  	  echo '</td><td width="40%" align="center">'.$cds->content->getByAccessKey("footermessage");
+  	  echo '</td><td width="30%" align="right">Powered by <a href="http://www.nxsystems.org" target="_blank">N/X CMS</a></td></tr></table>';
+  		echo '</div></div>';
+  	
 		}
 
 	/**
   	 * Draw the Header
   	 */
   	function getHeader() {
+  	  global $cds;
   	  // draw a table around the menu
-  	  $out = '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
-  	  $out.= '<tr><td colspan="3" id="navheader">&nbsp;</td></tr>';
-  	  $out.= '<tr><td valign="top" width="180" align="left" id="navbox">';
+  	  echo '<div id="maindiv">';
+  	  include $cds->path.'inc/head1.php';
+  	    	 
+  	  echo  '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
+  	  echo  '<tr><td colspan="5" id="navheader" align="right">';
+  	  // headerlinks
+  	  $links = $cds->menu->getMenuByPath('/HeaderLinks');
+  	  if (is_object($links)) {  	  	
+  	  	$links = $links->lowerLevel();
+  	  	if (is_array($links)) {
+  	  		for ($i=0; $i<count($links); $i++) {
+  	  			echo $links[$i]->getTag().'&nbsp;&nbsp;';
+  	  		}
+  	  	}
+  	  }
+  	    	  	  
+  	  echo '</td></tr>';
+  	  echo  '<tr><td valign="top" align="left" id="navbox">';
   		
   	  // get the path of menues, e.g. if a thrid-level page is active you 
   	  // get the corresponding3rd/2nd/1st level menues
@@ -71,8 +116,8 @@
 			$this->prefix = '&rsaquo;'."&nbsp;";
 			
 			// Draw the menu
-			//$out.= '<div id="navbox" align="left"><ul>';
-			$out.='<ul>';
+			//echo  '<div id="navbox" align="left"><ul>';
+			echo '<ul>';
  			for ($i=0; $i < count($firstLevelMenues); $i++) {			
  				$title = $firstLevelMenues[$i]->getTitle();
  				$link  = $firstLevelMenues[$i]->getLink();
@@ -92,22 +137,22 @@
  				$tag.='>'.$this->prefix.$title.'</a>'; 				
  				
  				
- 				$out.= '<li>'.$tag;
+ 				echo  '<li>'.$tag;
  				
  				// draw submenu
  				if ($firstLevelMenues[$i]->pageId == $topMenu->pageId) {
- 				  $out.='<ul>';
- 				  $out.= $this->drawSubMenu($firstLevelMenues[$i], 1);
- 				  $out.='</ul>';
+ 				  echo '<ul>';
+ 				  echo  $this->drawSubMenu($firstLevelMenues[$i], 1);
+ 				  echo '</ul>';
  				 }
  				
  				 // close menu
- 				 $out.="</li>";
+ 				 echo "</li>";
  			}
-			$out.='</ul>';
+			echo '</ul>';
   			
 			// close the menu cell and open the output cell.
-			$out.='</td><td width="10">&nbsp;&nbsp;</td><td valign="top" style="padding-top:5px;">';
+			echo '</td><td width="30">&nbsp;&nbsp;</td><td valign="top" style="padding-top:5px;">';
   	  return $out;
   	}
   	
@@ -139,19 +184,19 @@
   	    	$add = 'class="menuactive"';
   	    	// inaktives Submenu
 
-  	      $out.= '<li '.$add2.'>';
-  	      $out.= '<a '.$add.' href="' . $href . '"';
+  	      echo  '<li '.$add2.'>';
+  	      echo  '<a '.$add.' href="' . $href . '"';
   	      if ($isPopup)
-  	    	  $out.=' target="_blank"';
-  	      $out.=' '.$add.'>';
-  	      $out.= $this->prefix.$title;
-  	      $out.= '</a>';
+  	    	  echo ' target="_blank"';
+  	      echo ' '.$add.'>';
+  	      echo  $this->prefix.$title;
+  	      echo  '</a>';
   	      if ($activeSubmenu == $menues[$i]->pageId && $level < 3) {
-  	    		$out.= '<ul>';
-  	    		$out.= $this->drawSubMenu($menues[$i], $level+1);  	    		
-  	    		$out.= '</ul>';
+  	    		echo  '<ul>';
+  	    		echo  $this->drawSubMenu($menues[$i], $level+1);  	    		
+  	    		echo  '</ul>';
   	      }
-  	      $out.= '</li>';	    	
+  	      echo  '</li>';	    	
   	    
 		}
 		return $out;
@@ -165,7 +210,7 @@
   	 */
   	function setupPage(&$layout)	{
   			global $c; 
-  			$tag = '<link href="'.$layout->parent->docroot.'sys/designs/menu/standardmenu/menu.css" rel="stylesheet" type="text/css" media="screen, projection, print">'; 			  			
+  			$tag = '<link href="'.$this->docroot().'menu.css" rel="stylesheet" type="text/css" media="screen, projection, print">'; 			  			
 			$layout->addToHeader($tag);
   	}
   	
