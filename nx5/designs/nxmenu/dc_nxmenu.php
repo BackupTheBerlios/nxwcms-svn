@@ -42,58 +42,100 @@
 		 *
 		 */
 		function getFooter() {
-		  $out = "</td></tr></table>";
-		  return $out;
-		}
+		  global $cds;
+		  br();
+		  br();
+		  include $cds->path.'inc/foot1.php';  
+		  echo  "</td>";
+		  echo '<td width="20">&nbsp;</td>';
+		  echo '<td valign="top" width=200"><br><br><br><br>';
+		  include $cdsp->path.'inc/side1.php';
+		  br();
+		  echo "</td></tr></table>";
+		  	br();br();
+  		echo '<div id="footerline">';
+  		echo '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
+  		echo '<tr><td width="30%">';
+  		 // footerlinks
+			$links = $cds->menu->getMenuByPath('/FooterLinks');
+  	  if (is_object($links)) {  	  	
+  	  	$links = $links->lowerLevel();
+  	  	if (is_array($links)) {
+  	  		for ($i=0; $i<count($links); $i++) {  	  			
+  	  			echo $links[$i]->getTag().'&nbsp;';
+  	  			if ($i < (count($links)-1)) echo '-&nbsp;';
+  	  		}
+  	  	}
+  	  }  	  	  
+  	  echo '</td><td width="40%" align="center">'.$cds->content->getByAccessKey("footermessage");
+  	  echo '</td><td width="30%" align="right">Powered by <a href="http://www.nxsystems.org" target="_blank">N/X CMS</a></td></tr></table>';
+  		echo '</div></div>';
+  	
+		}		
 
 	/**
   	 * Draw the Header
   	 */
   	function getHeader() {
   	  	global $cds;
-  		$out = '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
-  	  	$out.= '<tr><td width="318" height="180"><img src="'.$cds->docroot.'sys/designs/menu/nxmenu/logoplaceholder.jpg" alt=""></td>';
-  	  	$out.= '<td valign="top">hallo</td></tr>'; 	
-  	  	$out.= '</table>';
+  		echo  '<div id="main"><table width="100%" border="0" cellpadding="0" cellspacing="0">';
+  	  	echo  '<tr><td rowspan="2" width="318" valign="middle" align="left" height="180" style="padding-left:20px; background-repeat:no-repeat;background-image:url('.$this->docroot().'logoplaceholder.jpg)">';
+  	  	echo  $cds->content->getByAccessKey("logo");  	  	
+  	  	echo '</td>';
+  	  	echo  '<td height = "30" valign="middle" align="right">';
+  	  	 // headerlinks
+  	  $links = $cds->menu->getMenuByPath('/HeaderLinks');
+  	  if (is_object($links)) {  	  	
+  	  	$links = $links->lowerLevel();
+  	  	if (is_array($links)) {
+  	  		for ($i=0; $i<count($links); $i++) {
+  	  			echo $links[$i]->getTag().'&nbsp;&nbsp;';
+  	  		}
+  	  	}
+  	  }
+  	  	echo '</td></tr>'; 	
+  	  	echo '<tr><td valign="middle" align="center">';
+  	  	include $cds->path.'inc/side2.php';
+  	  	echo '</td></tr>';
+  	  	echo  '</table>';
   	  	
 		
   	  	// draw mainmenu
-  	  	$out.= '<table width="990" border="0" cellpadding="0" cellspacing="0">';
-  	  	$out.= '<tr>';
-  	  	$out.= '<td width="200">'.drawSpacer(200,1).'</td>';
+  	  	echo  '<table width="990" border="0" cellpadding="0" cellspacing="0">';
+  	  	echo  '<tr>';
+  	  	echo  '<td width="200">'.drawSpacer(200,1).'</td>';
   	  	
   	  	// get the first menu level.
   	  	$startMenu = $this->cds->menu->getMenuByPath("/");  	  
         $firstLevelMenues = $startMenu->sameLevel();
         for ($i=0; $i< count($firstLevelMenues); $i++) {
-          $out.= '<td class="mainmenu">';
+          echo  '<td class="mainmenu" align="center">';
           $title = $firstLevelMenues[$i]->getTitle();
  		  $link  = $firstLevelMenues[$i]->getLink();
  		  $isPopup = $firstLevelMenues[$i]->isPopup();
-          $out.= '<a class="mainmenu" href="'.$link.'" ';
-          if ($isPopup) $out.= 'target="_blank"';
-          $out.= '><nobr>'.strtoupper($title).'</nobr></a>';                 
-          $out.= '</td>'; 	       	
+          echo  '<a class="mainmenu" href="'.$link.'" ';
+          if ($isPopup) echo  'target="_blank"';
+          echo  '><nobr>'.strtoupper($title).'</nobr></a>';                 
+          echo  '</td>'; 	       	
         } 	  
-  	  	$out.= '<td width="40%" class="mainmenu">&nbsp;</td>';
-        $out.= '</tr>';
-  	  	$out.= '</table>';
-  	  	$out.= '<br>';
+  	  	echo  '<td width="40%" class="mainmenu">&nbsp;</td>';
+        echo  '</tr>';
+  	  	echo  '</table>';
+  	  	echo  '<br>';
   	  	
   	  	// submenu
   	  	$this->pathToRoot = $this->cds->menu->getPathToRoot();
   	  	$topMenu = array_pop($this->pathToRoot);
         if ($topMenu == null) $topMenu = $startMenu; 
-  	  	$out.= '<table width="" cellpadding="0" cellspacing="0" border="0">';
-  	  	$out.= '<tr><td width="180" height="400" class="cellsubmenu" valign="top">'; 	  	  	  	
-  	  	$out.= '<table width="100%" border="0" cellpadding="0" cellspacing="1">';
+  	  	echo  '<table width="" cellpadding="0" cellspacing="0" border="0">';
+  	  	echo  '<tr><td width="180" height="400" class="cellsubmenu" valign="top">'; 	  	  	  	
+  	  	echo  '<table width="180" border="0" cellpadding="0" cellspacing="1">';
   	  	// submenu malen.
-  	  	$out.= $this->drawSubMenu($topMenu);
-  	  	$out.= '</table>';
-  	  	$out.= '</td><td>';
-  	  		  	
-  	  	 $out.= "</td></tr></table>";
-  	  	return $out;
+  	  	echo  $this->drawSubMenu($topMenu);
+  	  	echo  '</table>';
+  	  	echo  '</td><td width="30">&nbsp;&nbsp;</td><td valign="top" width="600">';
+  	  			
+  	  	 
   	
     	}
   	
@@ -118,22 +160,20 @@
   	      $isPopup = $menues[$i]->isPopup();
 
 
-		  $out.= '<tr><td class="submenu'.$level.'">';  	      
-  	      $out.= '<a '.$add.' href="' . $href . '"';
+		  echo  '<tr><td class="submenu'.$level.'">';  	      
+  	      echo  '<a '.$add.' href="' . $href . '"';
   	      if ($isPopup)
-  	    	  $out.=' target="_blank"';
-  	      $out.=' '.$add.' class="submenu'.$level.'">';
-  	      $out.= $this->prefix.$title;
-  	      $out.= '</a>';
+  	    	  echo ' target="_blank"';
+  	      echo ' '.$add.' class="submenu'.$level.'">';
+  	      echo  $this->prefix.$title;
+  	      echo  '</a>';
 
   	      if ($activeSubmenu == $menues[$i]->pageId && $level < 3) {	
-  	    	 $out.= $this->drawSubMenu($menues[$i], $level+1);  	    		
+  	    	 echo  $this->drawSubMenu($menues[$i], $level+1);  	    		
   	      }
-  	      $out.= '</td></tr>';	    	
+  	      echo  '</td></tr>';	    	
   	    
-		}
-		return $out;
-		
+		}						
 	 }
   	
   	
@@ -144,7 +184,7 @@
   	 */
   	function setupPage(&$layout)	{
   			global $c; 
-  			$tag = '<link href="'.$layout->parent->docroot.'sys/designs/menu/nxmenu/menu.css" rel="stylesheet" type="text/css" media="screen, projection, print">'; 			  			
+  			$tag = '<link href="'.$this->docroot().'menu.css" rel="stylesheet" type="text/css" media="screen, projection, print">'; 			  			
 			$layout->addToHeader($tag);
   	}
   	
