@@ -33,24 +33,38 @@
 		 * @return string
 		 */
 		function getName() {
-			return "Tabmenu";
+			return "tabmenu";
 		}
 		
-		/**
-		 *  Draw the menu
-		 *
-		 */
-		function getHeader() {
-		  return $this->draw();
+		function getTitle() {
+			 return "Tabbed Menu";
 		}
 
+	
 	/**
   	 * Draw the tabbar.
   	 */
-  	function draw() {
+  	function getHeader() {
+  	  global $cds;
+  	  echo '<div id="maindiv">';
   	  // get the path of menues, e.g. if a thrid-level page is active you 
   	  // get the corresponding3rd/2nd/1st level menues
-  	  
+  	   
+  	  echo '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
+  	  echo '<tr><td width="60%" valign="top">';
+  	  include $cds->path.'inc/head1.php';
+  	  echo '</td><td valign="top" align="right" width="40%">';
+  	  // headerlinks
+  	  $links = $cds->menu->getMenuByPath('/HeaderLinks');
+  	  if (is_object($links)) {  	  	
+  	  	$links = $links->lowerLevel();
+  	  	if (is_array($links)) {
+  	  		for ($i=0; $i<count($links); $i++) {
+  	  			echo $links[$i]->getTag().'&nbsp;&nbsp;';
+  	  		}
+  	  	}
+  	  }
+  	  echo '</td></tr></table><br>';
   	  $this->pathToRoot = $this->cds->menu->getPathToRoot();
   	  // get the actice toplevelmenu
 	  // get the startpage
@@ -60,22 +74,55 @@
 
   	  $topMenu = array_pop($this->pathToRoot);
       if ($topMenu == null) $topMenu = $startMenu;
-
-  	  $out = '';
-  	  $out.= '<table cellpadding="0" width="100%" cellspacing="0" border="0">';
-  	  $out.= '<tr>';
+  	  
+  	  echo  '<table cellpadding="0" width="100%" cellspacing="0" border="0">';
+  	  echo  '<tr>';
   	   for ($i=0; $i < count($firstLevelMenues); $i++) {
   	  	 $this->drawTab($firstLevelMenues[$i], $firstLevelMenues[$i]->pageId == $topMenu->pageId, $out);
   	  }
-  	  $out.= '<td width="100%">&nbsp;</td>';
-  	  $out.= '</tr>';
-  	  $out.='</table>';	
-  	  $out.= '<table border="0" align="center" width="100%" cellpadding="0" cellspacing="0" id="subTabs">';
-  	  $out.= '<tr><td class=>';	  
+  	  echo  '<td width="100%">&nbsp;</td>';
+  	  echo  '</tr>';
+  	  echo '</table>';	
+  	  echo  '<table border="0" align="center" width="100%" cellpadding="0" cellspacing="0" id="subTabs">';
+  	  echo  '<tr><td class=>';	  
   	  $this->drawSubTabs($topMenu, $out);  
-      $out.='</td></tr></table><br/>';
+      echo '</td></tr></table><br/>';
+      echo '<div id="content">';
   
   	  return $out;
+  	}
+  	
+  	function getFooter() {
+  		global $cds;
+  		echo '</div>';
+  		echo '<div id="sidebar">';
+  		include $cds->path.'inc/side1.php';
+  		br();
+  		include $cds->path.'inc/side2.php';  		
+  		echo '</div>';
+  		echo '<div id="footerbox">';
+  		br(); br();
+  		include $cds->path.'inc/foot1.php';  		
+  		echo '</div>';
+  		br();br();
+  		echo '<div id="footerline">';
+  		echo '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
+  		echo '<tr><td width="30%">';
+  		 // footerlinks
+			$links = $cds->menu->getMenuByPath('/FooterLinks');
+  	  if (is_object($links)) {  	  	
+  	  	$links = $links->lowerLevel();
+  	  	if (is_array($links)) {
+  	  		for ($i=0; $i<count($links); $i++) {  	  			
+  	  			echo $links[$i]->getTag().'&nbsp;';
+  	  			if ($i < (count($links)-1)) echo '-&nbsp;';
+  	  		}
+  	  	}
+  	  }  	  	  
+  	  echo '</td><td width="40%" align="center">'.$cds->content->getByAccessKey("footermessage");
+  	  echo '</td><td width="30%" align="right">Powered by <a href="http://www.nxsystems.org" target="_blank">N/X CMS</a></td></tr></table>';
+  		echo '</div>';
+  		
   	}
   	
   	/**
@@ -93,22 +140,22 @@
   	  
   	  if ($active) {
   	    // active tab	
-  	    $out.= '<td nowrap class="activeTab">';
-  	    $out.= '<div class="active1"><div class="active2"><div class="active3"></div></div></div>';
-  	    $out.= '<div class="activeTabText">&nbsp;&nbsp;<a href="'.$href.'">';
-  	    $out.= $title;
-  	    $out.= '</a>&nbsp;&nbsp;</div>';
-  	    $out.= '</td>';
+  	    echo  '<td nowrap class="activeTab">';
+  	    echo  '<div class="active1"><div class="active2"><div class="active3"></div></div></div>';
+  	    echo  '<div class="activeTabText">&nbsp;&nbsp;<a href="'.$href.'">';
+  	    echo  $title;
+  	    echo  '</a>&nbsp;&nbsp;</div>';
+  	    echo  '</td>';
   	  } else {
   	  	// inactive tab  	  	
-  	  	$out.= '<td nowrap class="inactiveTab" onclick="'.$onclick.'">';
-  	  	$out.= '<div class="inactive1"><div class="inactive2"><div class="inactive3"></div></div></div>';
-  	    $out.= '<div class="inactiveTabText">&nbsp;&nbsp;<a href="'.$href.'" >';
-  	    $out.= $title;
-  	    $out.= '</a>&nbsp;&nbsp;</div>';
-  	    $out.= '</td>';  	    
+  	  	echo  '<td nowrap class="inactiveTab" onclick="'.$onclick.'">';
+  	  	echo  '<div class="inactive1"><div class="inactive2"><div class="inactive3"></div></div></div>';
+  	    echo  '<div class="inactiveTabText">&nbsp;&nbsp;<a href="'.$href.'" >';
+  	    echo  $title;
+  	    echo  '</a>&nbsp;&nbsp;</div>';
+  	    echo  '</td>';  	    
   	  }  	  
-  	  $out.= '<td>&nbsp;&nbsp;</td>';
+  	  echo  '<td>&nbsp;&nbsp;</td>';
   	}
   	
   	/**
@@ -129,22 +176,22 @@
   	  	
   	    if ( $activeSubmenu == $menues[$i]->pageId) {
   	    	// aktives Submenu
-  	    	$out.= '<span class="activeText">';
-  	    	$out.= $title;
-  	    	$out.= '</span>';
+  	    	echo  '<span class="activeText">';
+  	    	echo  $title;
+  	    	echo  '</span>';
   	    } else {
   	    	// inaktives Submenu
-  	    	$out.= '<span class="inactiveText">';
-  	    	$out.= '<a href="' . $href . '"';
+  	    	echo  '<span class="inactiveText">';
+  	    	echo  '<a href="' . $href . '"';
   	    	if ($isPopup)
-  	    	  $out.=' target="_blank"';
-  	    	$out.='>';
-  	    	$out.= $title;
-  	    	$out.= '</a>';
-  	    	$out.= '</span>';	    	
+  	    	  echo ' target="_blank"';
+  	    	echo '>';
+  	    	echo  $title;
+  	    	echo  '</a>';
+  	    	echo  '</span>';	    	
   	    }
   	    if ($i < count($menues)-1) 
-  	      $out.= ' | ';
+  	      echo  ' | ';
   	  }    	
   	} 
   	
@@ -155,138 +202,9 @@
   	 * @param unknown_type $layout
   	 */
   	function setupPage(&$layout)	{
-  			global $c;
-  			
-  			$acb  = reg_load('CDS/MENU/COLORACTIVE');
-  			$act  = reg_load('CDS/MENU/COLORTACTIVE');
-  			$acst = reg_load('CDS/MENU/COLORSTACTIVE');
-  			$ict  = reg_load('CDS/MENU/COLORTINACTIVE');
-  			$icb  = reg_load('CDS/MENU/COLORINACTIVE');
-  			
-			$css = '<style type="text/css">
-			div.active1 {
-				height: 4px;
-				background: url(' . $c["docroot"] . '/img/alb.gif) no-repeat top left;
-			}
-
-			div.active2 {
-				height: 4px;
-				background: url(' . $c["docroot"] . '/img/arb.gif) no-repeat top right;
-				padding: 1px 6px;
-			}
-						
-			
-			div.inactive1 {
-				height: 4px;
-				background: url(' . $c["docroot"] . '/img/ilb.gif) no-repeat top left;
-			}
-
-			div.inactive2 {
-				height: 4px;
-				background: url(' . $c["docroot"] . '/img/irb.gif) no-repeat top right;
-				padding: 0 4px;
-			}
-			
-			td.activeTab, td.inactiveTab {
-  				text-align:middle;
-  				text-align:top;
-  				color:'.$ict.';
-			}
-
-			td.activeTab {
-  				font-weight:bold;
-  				color:'.$act.';
-  				background-color:'.$acb.';
-			}
-
-			td.inactiveTab {
-  				background-color:'.$icb.';
-  				color:'.$ict.';
-  				cursor: pointer;
-			}
-
-			div.inactive3 {
-				  border-top: 1px solid #cccccc;
-			}
-
-			div.inactiveTabText {
-  				border-left: 1px solid #cccccc;
-  				border-right: 1px solid #cccccc;
-  				padding: 0px 1em 2px;
-  				color: blue;
-  				white-space: nowrap;
-			}
-
-			div.inactiveTabText a, div.inactiveTabText a:visisted {
-  				text-decoration: none;
-  				color: '.$ict.';
-			}
-
-
-			div.activeTabText a, div.activeTabText a:visited {
-  				padding: 0px 0px 2px;
-  				color: '.$act.';
-  				white-space: nowrap;
-  				text-decoration:none;
-			}
-
-			div.activeTabText {
-  				border-left: 1px solid #cccccc;
-  				border-right: 1px solid #cccccc;
-  				padding: 0px 1em 2px;
-  				color: '.$act.';
-  				white-space: nowrap;
-  				text-decoration:none;
-			}
-
-
-			#subtabs {
-	  			background-color:#'.$acb.';
-	  			height:4px;
-	  			padding:1 4px;
-			}
-
-			#subTabs td {
-  				color: #'.$ict.';
-			    padding: 4px;
- 			    padding-left:8px;
-  				background: '.$acb.';
-  				white-space: nowrap;
-			}
-	
-			#subTabs span.activeText {
-  				font-weight: bold;
-  				color: '.$acst.';
-  				display: inline;
-			}
-
-			#subTabs span.inactiveText {
-  				color: '.$ict.';
-  				margin: 0 1px;
-  				display: inline;
-  				text-decoration:none;
-			}
-
-			#subTabs span.inactiveText a {
-  				color: #'.$ict.';
-			}
-			</style>';
-			$layout->addToHeader($css);
-  	}
-  	
-  	
-  	/**
-  	 * Edit-Configuration for the Tab-Menu, esp. Colors.
-  	 *
-  	 * @param SettingsForm $settingsForm
-  	 */
-  	function editConfiguration(&$settingsForm) {
-  	  global $lang;
-  	  $settingsForm->addColorSetting($lang->get("activeColor", "Active Background-Color"), 'CDS/MENU/COLORACTIVE', '#6699cc');
-  	  $settingsForm->addColorSetting($lang->get("activeTColor", "Active Text-Color"), 'CDS/MENU/COLORTACTIVE', '#cbe5ff');
-  	  $settingsForm->addColorSetting($lang->get("activeTSColor", "Active SubText-Color"), 'CDS/MENU/COLORSTACTIVE', '#ffffff');
-  	  $settingsForm->addColorSetting($lang->get("inactiveColor", "Inactive Background-Color"), 'CDS/MENU/COLORINACTIVE', '#efefef');
-  	  $settingsForm->addColorSetting($lang->get("inactiveTColor", "Inactive Text-Color"), 'CDS/MENU/COLORTINACTIVE', '#0000ff');
-  	}
+  			global $c;  		
+			  $tag = '<link href="'.$this->docroot().'style.css" rel="stylesheet" type="text/css" media="screen, projection, print">'; 			  			
+			  $layout->addToHeader($tag);
+  	}  	  	
 	}
 ?>
