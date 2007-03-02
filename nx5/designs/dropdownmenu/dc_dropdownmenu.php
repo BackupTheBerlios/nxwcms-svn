@@ -35,23 +35,32 @@
 		function getName() {
 			return "DropdownMenu";
 		}
-		
-		/**
-		 *  Draw the menu
-		 *
-		 */
-		function getHeader() {
-		  return $this->draw();
-		}
+
 
 	/**
   	 * Draw the menu.
   	 */
-  	function draw() {
+  	function getHeader() {
   	  global $cds;
   	  // get the path of menues, e.g. if a thrid-level page is active you 
   	  // get the corresponding3rd/2nd/1st level menues
-  	    	  
+	   echo '<div id="maindiv">';  
+   	  echo '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
+  	  echo '<tr><td width="60%" valign="top">';
+  	  include $cds->path.'inc/head1.php';
+  	  echo '</td><td valign="top" align="right" width="40%">';
+  	  // headerlinks
+  	  $links = $cds->menu->getMenuByPath('/HeaderLinks');
+  	  if (is_object($links)) {  	  	
+  	  	$links = $links->lowerLevel();
+  	  	if (is_array($links)) {
+  	  		for ($i=0; $i<count($links); $i++) {
+  	  			echo $links[$i]->getTag().'&nbsp;&nbsp;';
+  	  		}
+  	  	}
+  	  }
+  	  echo '</td></tr></table>';
+	  
   	  $this->pathToRoot = $this->cds->menu->getPathToRoot();
   	  // get the actice toplevelmenu
 	  // get the startpage
@@ -62,23 +71,55 @@
   	  $topMenu = array_pop($this->pathToRoot);
       if ($topMenu == null) $topMenu = $startMenu;
        
-      $out= '<div id="mainmenu"><div id="mainmenuleft"></div><div id="mainmenucenter">';
-      $out.= "
+     echo'<div id="mainmenu"><div id="mainmenuleft"></div><div id="mainmenucenter">';
+      echo  "
 	  <SCRIPT type='text/javascript'>
 		var dsMenu =
 		[";
     
  	 
   	  for ($i=0; $i<count($firstLevelMenues); $i++) {
-			$out.=$this->drawMenu($firstLevelMenues[$i]); 	
+			echo $this->drawMenu($firstLevelMenues[$i]); 	
 			if (($i+1) < count($firstLevelMenues))  	  	
-			  $out.=',';
+			  echo ',';
   	  }
-  	  $out.=']; </SCRIPT><DIV ID="dsMenu"></DIV>
+  	  echo ']; </SCRIPT><DIV ID="dsMenu"></DIV>
 
 	<SCRIPT type="text/javascript">cmDraw ("dsMenu", dsMenu, "hbr", cmTheme'.$this->themeName.', "Theme'.$this->themeName.'");</SCRIPT>';
-    $out.= '</div><div id="mainmenuright"></div></div>';
-  	return $out;
+    echo  '</div><div id="mainmenuright"></div></div>';
+  	echo '<div id="content"><br>';
+  	}
+  	
+  	function getFooter() {
+  		global $cds;
+  		echo '</div>';
+  		echo '<div id="sidebar">';
+  		include $cds->path.'inc/side1.php';
+  		br(); br();
+  		include $cds->path.'inc/side2.php';  		
+  		echo '</div>';
+  		echo '<div id="footerbox">';
+  		br(); br();
+  		include $cds->path.'inc/foot1.php';  		
+  		echo '</div>';
+  		br();br();
+  		echo '<div id="footerline">';
+  		echo '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
+  		echo '<tr><td width="30%">';
+  		 // footerlinks
+			$links = $cds->menu->getMenuByPath('/FooterLinks');
+  	  if (is_object($links)) {  	  	
+  	  	$links = $links->lowerLevel();
+  	  	if (is_array($links)) {
+  	  		for ($i=0; $i<count($links); $i++) {  	  			
+  	  			echo $links[$i]->getTag().'&nbsp;';
+  	  			if ($i < (count($links)-1)) echo '-&nbsp;';
+  	  		}
+  	  	}
+  	  }  	  	  
+  	  echo '</td><td width="40%" align="center">'.$cds->content->getByAccessKey("footermessage");
+  	  echo '</td><td width="30%" align="right">Powered by <a href="http://www.nxsystems.org" target="_blank">N/X CMS</a></td></tr></table>';
+  		echo '</div></div>';
   	}
   	
 
@@ -97,18 +138,18 @@
 	} else {
 		$target="null";
 	}
-  	$out = "['', '$title', '$link', $target, ''";
+  	echo  "['', '$title', '$link', $target, ''";
   	if ($menuObject->hasLowerLevel()) {
-  	   $out.=',';
+  	   echo ',';
   		$lowerLevels = $menuObject->lowerLevel();
   	   for ($i=0; $i<count($lowerLevels); $i++)	{  	   	
-  	   	 $out.=$this->drawMenu($lowerLevels[$i]); 	
+  	   	 echo $this->drawMenu($lowerLevels[$i]); 	
 		 if (($i+1) < count($lowerLevels))  	  	
-		   $out.=',';
+		   echo ',';
   	   }
   	}
   	
-  	$out.= "]";
+  	echo  "]";
 	
     return $out;						   	
    }
@@ -121,9 +162,10 @@
   	function setupPage(&$layout)	{ 
   		global $cds; 						
   		$this->themeName = 'NX';
-  		$out = '<SCRIPT type="text/javascript" LANGUAGE="JavaScript" SRC="'.$layout->parent->docroot.'sys/designs/menu/dropdownmenu/JSCookMenu.js"></SCRIPT>
-<LINK REL="stylesheet" HREF="'.$layout->parent->docroot.'sys/designs/menu/dropdownmenu/Theme'.$this->themeName.'/theme.css" TYPE="text/css"/>
-<SCRIPT LANGUAGE="JavaScript" type="text/javascript" SRC="'.$layout->parent->docroot.'sys/designs/menu/dropdownmenu/Theme'.$this->themeName.'/theme.js"></SCRIPT>  		
+  		echo  '<SCRIPT type="text/javascript" LANGUAGE="JavaScript" SRC="'.$this->docroot().'JSCookMenu.js"></SCRIPT>
+<LINK REL="stylesheet" HREF="'.$this->docroot().'Theme'.$this->themeName.'/theme.css" TYPE="text/css"/>
+<LINK REL="stylesheet" HREF="'.$this->docroot().'styles.css" TYPE="text/css"/>
+<SCRIPT LANGUAGE="JavaScript" type="text/javascript" SRC="'.$this->docroot().'Theme'.$this->themeName.'/theme.js"></SCRIPT>  		
   		';
   		$layout->addToHeader($out);
   	}
