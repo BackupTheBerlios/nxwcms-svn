@@ -26,45 +26,42 @@
 	class DropdownSideMenu extends AbstractDesign {
 		
 		var $pathToRoot;
-		var $pathToRootIds;
 		var $themeName;
-		var $activeMenuId;
-		var $sideMenu;
-
 		/**
 		 * Returns the name and the description of the DesignClass for Backoffice adjustments.
 		 *
 		 * @return string
 		 */
 		function getName() {
-			return "DropdownSideMenu";
+			return "Dropdown Menu with Side Menu";
 		}
-		
-		/**
-		 *  Draw the menu
-		 *
-		 */
-		function getFooter() {
-		  $out = '</td></tr></table></div>';
-		  return $out;
-		}
+
 
 	/**
   	 * Draw the menu.
   	 */
   	function getHeader() {
-  	  global $cds;  	  
-  	  
+  	  global $cds;
   	  // get the path of menues, e.g. if a thrid-level page is active you 
   	  // get the corresponding3rd/2nd/1st level menues
-  	    	  
-  	  $this->pathToRoot = $this->cds->menu->getPathToRoot();  	   
-  	  // get the ids of the menuobjects
-  	  $this->pathToRootIds = array();
-  	  for ($i=0; $i<count($this->pathToRoot); $i++) {
-  	    array_push($this->pathToRootIds, $this->pathToRoot[$i]->menuId);	
+	   echo '<div id="maindiv">';  
+   	  echo '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
+  	  echo '<tr><td width="60%" valign="top">';
+  	  include $cds->path.'inc/head1.php';
+  	  echo '</td><td valign="top" align="right" width="40%">';
+  	  // headerlinks
+  	  $links = $cds->menu->getMenuByPath('/HeaderLinks');
+  	  if (is_object($links)) {  	  	
+  	  	$links = $links->lowerLevel();
+  	  	if (is_array($links)) {
+  	  		for ($i=0; $i<count($links); $i++) {
+  	  			echo $links[$i]->getTag().'&nbsp;&nbsp;';
+  	  		}
+  	  	}
   	  }
-  	  
+  	  echo '</td></tr></table>';
+	  
+  	  $this->pathToRoot = $this->cds->menu->getPathToRoot();
   	  // get the actice toplevelmenu
 	  // get the startpage
   	  $startMenu = $this->cds->menu->getMenuByPath("/");  	  
@@ -74,29 +71,65 @@
   	  $topMenu = array_pop($this->pathToRoot);
       if ($topMenu == null) $topMenu = $startMenu;
        
-      $out= '<div id="mainmenu"><div id="mainmenuleft"></div><div id="mainmenucenter">';
-      $out.= "
+     echo'<div id="mainmenu"><div id="mainmenuleft"></div><div id="mainmenucenter">';
+      echo  "
 	  <SCRIPT type='text/javascript'>
 		var dsMenu =
 		[";
     
  	 
   	  for ($i=0; $i<count($firstLevelMenues); $i++) {
-			$out.=$this->drawMenu($firstLevelMenues[$i]); 	
+			echo $this->drawMenu($firstLevelMenues[$i]); 	
 			if (($i+1) < count($firstLevelMenues))  	  	
-			  $out.=',';
+			  echo ',';
   	  }
-  	  $out.=']; </SCRIPT><DIV ID="dsMenu"></DIV>
+  	  echo ']; </SCRIPT><DIV ID="dsMenu"></DIV>
 
 	<SCRIPT type="text/javascript">cmDraw ("dsMenu", dsMenu, "hbr", cmTheme'.$this->themeName.', "Theme'.$this->themeName.'");</SCRIPT>';
-    $out.= '</div><div id="mainmenuright"></div></div>';
-    $out.= '<br/>';
-    $out.= '<div style="display:block;clear:both;">';
-    $out.= '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
-    $out.= '<tr><td valign="top" width="150">';
-    $out.= $this->getSideMenu();
-    $out.= '</td><td width="20">&nbsp;</td><td valign="top">';
-  	return $out;
+    echo  '</div><div id="mainmenuright"></div></div>';
+  	echo '<div id="sidemenu">';
+  	if ($cds->menu->hasLowerLevel()) {
+  	  echo '<h4>'.$cds->content->getByAccessKey("submenutitle").'</h4>';  	  
+  	  $menues = $cds->menu->lowerLevel();
+  	  for ($i=0; $i < count($menues); $i++) {
+  	  	echo $menues[$i]->getTag();
+  	  	br();
+  	  }  	  
+  	}
+  	echo '</div>';
+    echo '<div id="content"><br>';
+  	}
+  	
+  	function getFooter() {
+  		global $cds;
+  		echo '</div>';
+  		echo '<div id="sidebar">';
+  		include $cds->path.'inc/side1.php';
+  		br(); br();
+  		include $cds->path.'inc/side2.php';  		
+  		echo '</div>';
+  		echo '<div id="footerbox">';
+  		br(); br();
+  		include $cds->path.'inc/foot1.php';  		
+  		echo '</div>';
+  		br();br();
+  		echo '<div id="footerline">';
+  		echo '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
+  		echo '<tr><td width="30%">';
+  		 // footerlinks
+			$links = $cds->menu->getMenuByPath('/FooterLinks');
+  	  if (is_object($links)) {  	  	
+  	  	$links = $links->lowerLevel();
+  	  	if (is_array($links)) {
+  	  		for ($i=0; $i<count($links); $i++) {  	  			
+  	  			echo $links[$i]->getTag().'&nbsp;';
+  	  			if ($i < (count($links)-1)) echo '-&nbsp;';
+  	  		}
+  	  	}
+  	  }  	  	  
+  	  echo '</td><td width="40%" align="center">'.$cds->content->getByAccessKey("footermessage");
+  	  echo '</td><td width="30%" align="right">Powered by <a href="http://www.nxsystems.org" target="_blank">N/X CMS</a></td></tr></table>';
+  		echo '</div></div>';
   	}
   	
 
@@ -105,42 +138,30 @@
    *
    * @param menuObject $menuObject
    */
-  function drawMenu($menuObject, $level=0) {
+  function drawMenu($menuObject) {
     $title = $menuObject->getTitle();
- 	  $link  = $menuObject->getLink();
- 	  $isPopup = $menuObject->isPopup();
+ 	$link  = $menuObject->getLink();
+ 	$isPopup = $menuObject->isPopup();
 	
  	if ($isPopup)  {
 		$target = "'_blank'";
 	} else {
 		$target="null";
 	}
-  	$out = "['', '$title', '$link', $target, ''";
-  	
-  	if ($level<1) {
-  	   $out.=',';
+  	echo  "['', '$title', '$link', $target, ''";
+  	if ($menuObject->hasLowerLevel()) {
+  	   echo ',';
   		$lowerLevels = $menuObject->lowerLevel();
   	   for ($i=0; $i<count($lowerLevels); $i++)	{  	   	
-  	   	 $out.=$this->drawMenu($lowerLevels[$i], $level+1); 	
+  	   	 echo $this->drawMenu($lowerLevels[$i]); 	
 		 if (($i+1) < count($lowerLevels))  	  	
-		   $out.=',';
+		   echo ',';
   	   }
-  	} else if ((in_array($menuObject->menuId, $this->pathToRootIds) && ($menuObject->hasLowerLevel()))) {
-  		  $this->sideMenu = $menuObject->lowerLevel();
   	}
   	
-  	$out.= "]";
+  	echo  "]";
 	
     return $out;						   	
-   }
-   
-   
-   /**
-    *  Get the HTML for the sidemenu.
-    */
-   function getSideMenu() {
-   	 $out = "Sidemenu.";
-   	 return $out;
    }
   	
   	/**
@@ -148,12 +169,13 @@
   	 *
   	 * @param unknown_type $layout
   	 */
-  	function setupPage($layout)	{ 
+  	function setupPage(&$layout)	{ 
   		global $cds; 						
   		$this->themeName = 'NX';
-  		$out = '<SCRIPT type="text/javascript" LANGUAGE="JavaScript" SRC="'.$layout->parent->docroot.'sys/designs/menu/dropdownmenu/JSCookMenu.js"></SCRIPT>
-<LINK REL="stylesheet" HREF="'.$layout->parent->docroot.'sys/designs/menu/dropdownmenu/Theme'.$this->themeName.'/theme.css" TYPE="text/css"/>
-<SCRIPT LANGUAGE="JavaScript" type="text/javascript" SRC="'.$layout->parent->docroot.'sys/designs/menu/dropdownmenu/Theme'.$this->themeName.'/theme.js"></SCRIPT>  		
+  		echo  '<SCRIPT type="text/javascript" LANGUAGE="JavaScript" SRC="'.$this->docroot().'JSCookMenu.js"></SCRIPT>
+<LINK REL="stylesheet" HREF="'.$this->docroot().'Theme'.$this->themeName.'/theme.css" TYPE="text/css"/>
+<LINK REL="stylesheet" HREF="'.$this->docroot().'styles.css" TYPE="text/css"/>
+<SCRIPT LANGUAGE="JavaScript" type="text/javascript" SRC="'.$this->docroot().'Theme'.$this->themeName.'/theme.js"></SCRIPT>  		
   		';
   		$layout->addToHeader($out);
   	}
