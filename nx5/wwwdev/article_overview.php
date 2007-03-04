@@ -30,11 +30,13 @@
   	    $body = $cluster->content->get("Body");
   	    $body = strip_tags($body);
   	    $body = $cds->tools->shortenText($body, 300, ' ...');
-  	    }
-    	echo '<h2><a href="'.$link.'">'.$date.': '.$title.'</a></h2>';
+  	    }    	
+    	echo '<h2>'.$date.': '.$title.'</h2>';
     	if ($body != "") 	      
-    	  echo $body.'<br><br>';
-    	
+    	  echo $body;
+    	br();
+    	echo '<a href="'.$link.'">'.$cds->content->getByAccessKey("readmore").'&nbsp;'.$title.'</a>' ;
+    	br(); br();
     }
     
   }
