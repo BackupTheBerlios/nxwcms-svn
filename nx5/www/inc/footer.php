@@ -1,0 +1,3 @@
+<?php
+  $cds->layout->drawMenuFooter();     
+?>
