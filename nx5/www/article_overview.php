@@ -3,7 +3,7 @@
   require_once $cds->path."inc/header.php";
   
   // draw the Headline and the body
-  echo $cds->content->get("Headline");
+  echo '<h1>'.$cds->content->get("Headline").'</h1>';
   br();
   $body = $cds->content->get("Body");
   if ($body != "") {
@@ -15,8 +15,7 @@
   $articles = $cds->channel->get("Articles");
   
   if (count($articles) > 0) {  
-    // draw all the article headlines with links and short text.
-    echo '<table width="100%" cellpadding="2" cellspacing="0" border="0">';
+    // draw all the article headlines with links and short text.    
     for ($i=0; $i<count($articles); $i++) {
     	// if you want to format the article-date, set the formatstring as second parameter.
     	$date = $cds->channel->getArticleDate($articles[$i]); 
@@ -29,14 +28,17 @@
     	$body = "";
   	  if ($cluster->content->field_exists("Body")) {
   	    $body = $cluster->content->get("Body");
-  	    $body = $cds->tools->shortenText($body, 200, ' ...');
-    	}
-    	echo '<tr><td valign="top>'.$date.'</td><td valign="top"><a href="'.$link.'">'.$title.'</a></td></tr>';
-    	if ($body != "") {
-  	    echo '<tr><td colspan="2">'.$body.'<br></td></tr>';	
-    	} 	  	
+  	    $body = strip_tags($body);
+  	    $body = $cds->tools->shortenText($body, 300, ' ...');
+  	    }    	
+    	echo '<h2>'.$date.': '.$title.'</h2>';
+    	if ($body != "") 	      
+    	  echo $body;
+    	br();
+    	echo '<a href="'.$link.'">'.$cds->content->getByAccessKey("readmore").'&nbsp;'.$title.'</a>' ;
+    	br(); br();
     }
-    echo '</table>';
+    
   }
       
   require_once $cds->path."inc/footer.php";

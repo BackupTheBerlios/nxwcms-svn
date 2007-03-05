@@ -5,6 +5,10 @@
   $link = $cds->content->get("URL", "ALL");
   
   // forward to the link
-  header('Location: ' . $link["HREF"]);
+  if ($sma != 1) {
+  	header('Location: ' . $link["HREF"]);
+  } else {
+  	echo 'External URL: '.$link;
+  }
   require_once "nxfooter.inc.php";
 ?>
