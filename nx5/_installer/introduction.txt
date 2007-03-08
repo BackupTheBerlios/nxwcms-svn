@@ -14,9 +14,9 @@ N/X is a Web Content Management System written entirely in php. Its requirements
 
 
 
-   /nx4     (Read, Execute)
-   /nx4/www (Read, Write) on all subfolders!
-   /nx4/wwwdev (Read, Write) on all subfolders!
+   /nx5     (Read, Execute)
+   /nx5/www (Read, Write) on all subfolders!
+   /nx5/wwwdev (Read, Write) on all subfolders!
 
 
    To set these directory permissions, you may use your ftp-program or 

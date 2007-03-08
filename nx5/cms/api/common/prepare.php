@@ -10,9 +10,9 @@
 
 
 	if (ini_get("register_globals") == true) {
-		echo "For security reasons N/X WCMS should never be run with the PHP-Option register_globals=On!<br>";
+		echo "For security reasons N/X WCMS must not be run with the PHP-Option register_globals=On!<br>";
 		echo "You can change this option by editing your php.ini or by creating an .htaccess file if you are running on an shared hoster.<br><br>";
-		echo "To remove this message, you need to edit the file cms/api/common/prepare.php.";		
+		echo "N/X CMS is not considered to be secure 100% when running with register_globals=on!!";		
 		exit();
 	}
 	

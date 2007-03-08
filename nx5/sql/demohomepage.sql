@@ -6552,3 +6552,4 @@ CREATE TABLE `variations` (
 -- 
 
 INSERT INTO `variations` VALUES (1, 'English', 'en', 'English language version of website', 0);
+INSERT INTO `module_type` ( `MODULE_TYPE_ID` , `NAME` ) VALUES ('5', 'Mashup');
