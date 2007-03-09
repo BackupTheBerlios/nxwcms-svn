@@ -1,7 +1,8 @@
 <?
 	/**********************************************************************
 	 *	N/X - Web Content Management System
-	 *	Copyright 2006 Sven Weih
+	 *	Copyright 2007 Sven Weih, FZI Research Center for Information Technologies
+	 *	www.fzi.de
 	 *
 	 *	This file is part of N/X.
 	 *	The initial has been setup as a small diploma thesis (Studienarbeit) at the FZI.
@@ -23,43 +24,23 @@
 	 **********************************************************************/
 
 	/**
-	 * Adsense PlugIn
+	 * Tell a friend Mashup
 	 * Version 1.0
 	 *
 	 * @package Plugins
 	 */
-	class pgnAdsense extends Plugin {
-
-		// Name of the Management's Table Primary Key
-		var $pk_name = "FKID";
-
-		// Name of the Plugin's Management Table. All tables should start with pgn_
-		var $management_table = "pgn_adsense";
-		var $isSingleConfig = false;
+	class pgnTellAFriend extends Plugin {
 		
+	
 		/**
 		  * Creates the input fields for editing text
 		  * @param integer &$form link to the form the input-fields are to be created in 
 		  */
 		function edit(&$form) {
-			global $lang, $sid, $c;
-			// add button for external editor.
-			$condition = "FKID = $this->fkid";
-			$form->add(new TextInput($lang->get("adtextas", "AD-Javascript (copy from Google Adsense Homepage)"), "pgn_adsense", "ADTEXT", $condition, "type:textarea,width:350,size:10", ""));
 		}
+						
+
 		
-
-		/** 
-		  * Used, for painting a preview of the content in the cms. Note, that the data
-		  * is to be drawn in a table cell. Therefore you may design any html output, but
-		  * you must return it as return value!
-		  */
-		function preview() {
-			global $lang;						
-			$out= ' Impressions: '.getDBCell("hits", "HIT", "ID=".translateState($this->fkid, 10, false));			
-			return $out;
-		}
-
 		/**
 		   * This function is used for drawing the html-code out to the templates.
 		   * It just returns the code
@@ -67,27 +48,10 @@
 		   * @return		string	HTML-CODE to be written into the template.
 		   */
 		function draw($param = "") {
-			global $cds, $c;
-			if ($cds->is_development) {
-				$content = '<div style="border:1px solid black; background-color:#e0e0e0;align:center;vertical-align:middle;padding:10px;">Adsene Placeholder. <br>Avoids influences to your adsense statistics.</div>';
-			} else {			  
-			  $content = unhtmlspecialchars(getDBCell("pgn_adsense", "ADTEXT", "FKID = $this->fkid"));						  
-			  $content.= '<script type="text/javascript">bug = new Image(); bug.src=\''.$c["livedocroot"]."sys/hit.php?id=".$this->fkid.'&scope=adsense\';</script>';
-			}
-			return $content;
+			return "Tell a friend";
 		}
 		
- 		/**
-		  * Create a new Record with the given $this->fkid in the database.
-		  * Initialize with standard values!
-		  */
-		function createRecord() {
-			$createHandler = new ActionHandler("CREATE");
-			$createHandler->addDBAction("INSERT INTO $this->management_table ($this->pk_name, ADTEXT) VALUES ($this->fkid, '')");
-			$createHandler->process("CREATE");
-		}
-
-	
+    	  
 
 		/**
 		   * Specifies information for installation and deinstallation of the plugin.
@@ -102,22 +66,17 @@
 				Plugin::registration();
 
 				// Name of the Plugin. The name will be displayed in the WCMS for selection
-				$this->name = "Adsense";
+				$this->name = "Tell a Friend";
 				// A short description, what the Plugin is for.
-				$this->description = "Google Adsense Ad-Management Plugin.";
+				$this->description = "Add 'Tell a friend' functions to your website";
 				// Version of the plugin. Use integer numbers only. Is important for future releases.
 				$this->version = 1;
 
-				/**** do not change from this point ****/
-				$mtid = nextGUID(); // getting next GUID.
-				//del1
+				// Every module can have its own and individual META-Data in NX. The following Handler is
+				// for creating a META-Data-Template and for assigning it to the Plugin.
+				// IF you do not want to declare an individual META-Scheme, then set $mtid=0 and delete
+				// everything between del1 and /del1!
 
-				// SQL for creating the tables in the database. Do not call, if you do not need any tables in the database 
-				$this->installHandler->addDBAction("CREATE TABLE `pgn_adsense` (`FKID` BIGINT NOT NULL ,`ADTEXT` TEXT NULL ,`IMPRESSIONS` BIGINT NOT NULL DEFAULT '0',`CLICKS` BIGINT NOT NULL DEFAULT '0',PRIMARY KEY ( `FKID` ) );");
-				
-
-				// SQL for deleting the tables from the database. 
-				$this->uninstallHandler->addDBAction("DROP TABLE `pgn_adsense`");
 
 				/**** change nothing beyond this point ****/
 				global $source, $classname; // the source path has to be provided by the calling template
