@@ -6554,3 +6554,4 @@ CREATE TABLE `variations` (
 INSERT INTO `variations` VALUES (1, 'English', 'en', 'English language version of website', 0);
 INSERT INTO `module_type` ( `MODULE_TYPE_ID` , `NAME` ) VALUES ('5', 'Mashup');
 CREATE TABLE `hits` (`ID` BIGINT NOT NULL, `HIT` BIGINT NOT NULL,`SCOPE` CHAR( 8 ) NOT NULL ,PRIMARY KEY ( `ID` ) ,INDEX ( `SCOPE` )) ENGINE = MYISAM ;
+ALTER TABLE `modules` ADD `POSITION` SMALLINT NOT NULL DEFAULT '0' AFTER `SOURCE` ,ADD `REGION` CHAR( 8 ) NULL AFTER `POSITION` ;

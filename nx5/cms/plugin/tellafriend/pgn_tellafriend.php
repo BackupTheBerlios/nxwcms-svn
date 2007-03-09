@@ -31,7 +31,7 @@
 	 */
 	class pgnTellAFriend extends Plugin {
 		
-	
+	  var $pluginType = 4;
 		/**
 		  * Creates the input fields for editing text
 		  * @param integer &$form link to the form the input-fields are to be created in 
@@ -68,7 +68,7 @@
 				// Name of the Plugin. The name will be displayed in the WCMS for selection
 				$this->name = "Tell a Friend";
 				// A short description, what the Plugin is for.
-				$this->description = "Add 'Tell a friend' functions to your website";
+				$this->description = "Add Tell a friend functions to your website";
 				// Version of the plugin. Use integer numbers only. Is important for future releases.
 				$this->version = 1;
 
@@ -81,7 +81,9 @@
 				/**** change nothing beyond this point ****/
 				global $source, $classname; // the source path has to be provided by the calling template
 				$modId = nextGUID();
-				$this->installHandler->addDBAction("INSERT INTO modules (MODULE_ID, MODULE_NAME, DESCRIPTION, VERSION, MT_ID, CLASS, SOURCE) VALUES ($modId, '$this->name', '$this->description', $this->version, $mtid, '$classname', '$source')");
+				$mtid  = nextGUID();	      
+	
+				$this->installHandler->addDBAction("INSERT INTO modules (MODULE_ID, MODULE_NAME, DESCRIPTION, VERSION, MT_ID, CLASS, SOURCE, MODULE_TYPE_ID) VALUES ($modId, '$this->name', '$this->description', $this->version, $mtid, '$classname', '$source', $this->pluginType)");
 			}
 		}
 	}

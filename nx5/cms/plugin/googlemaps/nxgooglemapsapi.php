@@ -34,14 +34,27 @@
  * GOverviewMapControl - a collapsible overview map in the corner of the screen
  */
  
-  define(GoogleMapsKey, $c['googlemapskey']); 
+  define(GoogleMapsKey, '<your api key here>'); 
   
+  // Serverside geocoding
+  define(GeoCoderURI  , 'http://maps.google.com/maps/geo');
+  
+  // Use proxy-server for http-requests?
+  define( UseProxy, false);
+  define( ProxyServer, '127.0.0.1');
+  define( ProxyPort, '3128');
+
   define( GLargeMapControl 		, 'GLargeMapControl()');
   define( GSmallMapControl 		,	 'GSmallMapControl()');
   define( GSmallZoomControl 	, 'GSmallZoomControl()');
   define( GScaleControl     	, 'GSCALEControl()');
   define( GMapTypeControl   	, 'GMapTypeControl()');
   define( GOverviewMapControl , 'GOverviewMapControl()');
+  
+  // viewtypes  
+  define (VTSatellite			,'Satellite');
+  define (VTMap						,'Map');
+  define (VTHybrid				,'Hybrid');
 
 /**
  * API-Class for accessing Google Maps 
@@ -78,6 +91,8 @@ class NXGoogleMapsAPI {
   // Arrays with the controls that will be displayed
   var $controls;
   
+  // View Mode
+  var $viewMode;
 
   /**
    * Constructor
@@ -106,6 +121,46 @@ class NXGoogleMapsAPI {
   }
   
   /**
+   * Invokes the google geocoder to get the coordinates of the given address
+   *
+   * @param string $address Address you want to get the longitude and the lattitude of
+   * @return array format $array['longitude'], $array['lattitude'];
+   */
+  function geoCodeAddress($address) {
+    // initialization
+    $uri = GeoCoderURI.'?q='.urlencode($address).'&output=csv&key='.$this->apiKey;
+    $response = '0,0,0,0';
+  	if (UseProxy) { 	
+  	  $errno="";
+  		$errstr="";
+  		$file = fsockopen(ProxyServer, ProxyPort, &$errno, &$errstr,30); 
+  		if( !$file ) {
+   			fclose($file);    			
+ 		  } else { 
+   			$response = '';
+   			fputs($file,"GET $uri HTTP/1.0\n\n"); 
+   			while (!feof($file)) 
+   			{
+     				$response.=fread($file,4096);
+   			}
+   			fclose($file);
+  		}  		
+  		$response = substr($response,strpos($response,"\r\n\r\n")+4)  		;  		
+  	} else {
+  	  $response = file_get_contents($uri);
+  	}
+  	
+  	// compile result array
+  	$result = array('longitude' =>0, 'latitude' => 0);
+  	$tmpArray = @explode(',', $response);  	
+  	if (is_array($tmpArray)) {
+  		$result['latitude'] = $tmpArray[2];
+  		$result['longitude'] = $tmpArray[3];
+  	}
+  	return $result;  	
+  }
+  
+  /**
    * Add a dragable marker to the map. Only one Drag-Marker is allowed!
    *
    * @param integer $longitude Longitude of the point
@@ -125,7 +180,7 @@ class NXGoogleMapsAPI {
    * @param boolean Set the Center to this point(true) or not (false)
    */  
   function addGeoPoint($longitude, $latitude, $htmlinfo, $setCenter) {
-    $ar = array($longitude, $latitude, addSlashes($htmlinfo), $setCenter);
+    $ar = array($latitude, $longitude, addSlashes($htmlinfo), $setCenter);
     array_push($this->geopoints, $ar);	
   }
   
@@ -157,6 +212,18 @@ class NXGoogleMapsAPI {
   	 }
   }
   
+  /**
+   * Set the map Mode. Allowed options are:
+   *
+   * @param string $mode		VTMap - View as Map
+   *												VTSatellite - View as Satellite 
+   *												VTHybrid - View as Hybrid mode (mixed Sat and Map)
+   */
+  function setMapType($mode="Map") {
+  	  $this->viewMode = $mode;
+  	  $this->addControl(GMapTypeControl);
+  }
+
   /**
    * Set the width of the map
    *
@@ -193,13 +260,12 @@ class NXGoogleMapsAPI {
    * @returns string The Code for the <Head>-Tag
    */
   function getHeadCode() {
-  	$out = '
- <style type="text/css">
-  	 v\:* {
+  	$out = '<style type="text/css">
+   v\:* {
        behavior:url(#default#VML);
-     }
-    </style>
-    <script src="http://maps.google.com/maps?file=api&v=2&key='.$this->apiKey.'"  type="text/javascript"></script>';
+   }
+</style>
+<script src="http://maps.google.com/maps?file=api&v=2&key='.$this->apiKey.'"  type="text/javascript"></script>';
    $out.= $this->_getGMapInitCode();
    return $out;
   }
@@ -234,20 +300,19 @@ class NXGoogleMapsAPI {
    * Is automatically called, so do not call yourself.
    */
   function _getGMapInitCode() {
-  	$out = '
-<script type="text/javascript">
-//<![CDATA[
-var map = null;
-var geocoder = null;
-var center = null;
-var updateX = null;
-var updateY = null;
-var marker = null;';
+  	$out = '  <script type="text/javascript">
+  //<![CDATA[
+  var map      = null;
+  var geocoder = null;
+  var center   = null;
+  var updateX  = null;
+  var updateY  = null;
+  var marker   = null;';
       
 			 // Add Geopoints Array
 			 $out.="\n";
       if ( count($this->geopoints) > 0 ) {      	
-      	$out.= 'var geopoints = new Array(';
+      	$out.= '  var geopoints = new Array(';
       	for ($i=0; $i < count($this->geopoints); $i++) {
       	  	$out.= ' new Array('.$this->geopoints[$i][0].','.$this->geopoints[$i][1].' ,"'.$this->geopoints[$i][2].'", ';
       	  	// move to this address?
@@ -261,13 +326,12 @@ var marker = null;';
       	}
       	$out.=");\n";
       } else {
-      	  $out.="var geopoints = new Array();\n";
+      	  $out.="  var geopoints = new Array();\n";
       }
       
-			 // Add Addresses Array      
-      $out.="\n";
+			 // Add Addresses Array            
       if ( count($this->addresses) > 0 ) {      	
-      	$out.= 'var addresses = new Array(';
+      	$out.= '  var addresses = new Array(';
       	for ($i=0; $i < count($this->addresses); $i++) {
       	  	$out.= ' new Array("'.$this->addresses[$i][0].'", "'.$this->addresses[$i][1].'", ';
       	  	// move to this address?
@@ -281,145 +345,149 @@ var marker = null;';
       	}
       	$out.=");\n";
       } else {
-      	  $out.="var addresses = new Array();\n";
+      	  $out.="  var addresses = new Array();\n";
       }
+    	$out.="\n";
     	
     	// Draw standard js-functions and initialization code.
-    	$out.='
-function showAddresses() {
-  for (i=0; i < addresses.length; i++) {
- 	  	showAddress(addresses[i][0], addresses[i][1], addresses[i][2]);
-  }	
-}
+    	$out.='  function showAddresses() {
+    for (i=0; i < addresses.length; i++) {
+      showAddress(addresses[i][0], addresses[i][1], addresses[i][2]);
+    }	
+  }
     	
-function showAddress(address, htmlInfo, moveToPoint) {
- if (geocoder) {
-   geocoder.getLatLng(
-     address,
-     function(point) {
-       if (!point) {
-         alert("Location not found:" + address);
-       } else {              
-         if (moveToPoint) {
-           map.setCenter(point, '.$this->zoomFactor.');
+  function showAddress(address, htmlInfo, moveToPoint) {
+   if (geocoder) {
+     geocoder.getLatLng(
+       address,
+       function(point) {
+         if (!point) {
+           alert("Location not found:" + address);
+         } else {              
+           if (moveToPoint) {
+             map.setCenter(point, '.$this->zoomFactor.');
+           }
+           var marker = new GMarker(point);
+           map.addOverlay(marker);
+           if (htmlInfo != "") {
+             GEvent.addListener(marker, "click", function() {
+                marker.openInfoWindowHtml(htmlInfo);
+             });              
+           }
          }
-         var marker = new GMarker(point);
-         map.addOverlay(marker);
-         if (htmlInfo != "") {
-           GEvent.addListener(marker, "click", function() {
-              marker.openInfoWindowHtml(htmlInfo);
-           });              
-         }
        }
-     }
-   );
+     );
+    }
   }
-}
 
-function showGeopoints() {
-  for (i=0; i < geopoints.length; i++) {
- 	  	showGeopoint(geopoints[i][0], geopoints[i][1], geopoints[i][2], geopoints[i][3]);
-  }	
-}
-
-function showGeopoint(longitude, latitude, htmlInfo, moveToPoint) {
-  if (moveToPoint) {
-    map.setCenter(new GLatLng(longitude, latitude), '.$this->zoomFactor.');
+  function showGeopoints() {
+    for (i=0; i < geopoints.length; i++) {
+ 	    	showGeopoint(geopoints[i][0], geopoints[i][1], geopoints[i][2], geopoints[i][3]);
+    }	
   }
-  var marker = new GMarker(new GLatLng(longitude, latitude));
-  map.addOverlay(marker);
-  if (htmlInfo != "") {
-    GEvent.addListener(marker, "click", function() {
-      marker.openInfoWindowHtml(htmlInfo);
-    });              
-     }   
-}
 
-function moveToGeopoint(index) {
-	map.panTo(new GLatLng(geopoints[index][0], geopoints[index][1]));
-}
-
-function moveToAddress(index) {
-  moveToAddressEx(addresses[index][0]); 
-}
-
-function moveToAddressEx(addressString) {
-  if (geocoder) { 
-   geocoder.getLatLng(
-     addressString,
-     function(point) {       
-       if (!point) {
-         alert("Location not found:" + addressString);
-       } else {                                    
-          center = point;
-          map.panTo(point);           
-       }
-     });    
-  }
-}
-
-function moveToAddressDMarker(addressString) {
-  if (geocoder) { 
-   geocoder.getLatLng(
-     addressString,
-     function(point) {       
-       if (!point) {
-         alert("Location not found:" + addressString);
-       } else {                                    
-          center = point;
-          setZoomFactor(14);
-          map.panTo(point);  
-          addDragableMarker();         
-       }
-     });    
-  }
-}
-
-function setZoomFactor(factor) {
-	  map.setZoom(factor);
-}
-
-function addDragableMarker() {
-  if (!marker) {
-    marker = new GMarker(center, {draggable: true});
+  function showGeopoint(longitude, latitude, htmlInfo, moveToPoint) {
+    if (moveToPoint) {
+      map.setCenter(new GLatLng(longitude, latitude), '.$this->zoomFactor.');
+    }
+    var marker = new GMarker(new GLatLng(longitude, latitude));
     map.addOverlay(marker);
-       
-    GEvent.addListener(marker, "dragend", function() {      
-      var tpoint =  marker.getPoint();      
-      document.getElementById(updateX).value = tpoint.lat();
-      document.getElementById(updateY).value = tpoint.lng();              
-  });
-
-  } else {
-  	marker.setPoint(center);  	 
+    if (htmlInfo != "") {
+      GEvent.addListener(marker, "click", function() {
+        marker.openInfoWindowHtml(htmlInfo);
+      });              
+       }   
   }
-  
-  var tpoint =  marker.getPoint();      
-  document.getElementById(updateX).value = tpoint.lat();
-  document.getElementById(updateY).value = tpoint.lng();              
-}
+
+  function moveToGeopoint(index) {
+	  map.panTo(new GLatLng(geopoints[index][0], geopoints[index][1]));
+  }
+
+  function moveToAddress(index) {
+    moveToAddressEx(addresses[index][0]); 
+  }
+
+  function moveToAddressEx(addressString) {
+    if (geocoder) { 
+     geocoder.getLatLng(
+       addressString,
+       function(point) {       
+         if (!point) {
+           alert("Location not found:" + addressString);
+         } else {                                    
+            center = point;
+            map.panTo(point);           
+         }
+       });    
+    }
+  }
+
+  function moveToAddressDMarker(addressString) {
+    if (geocoder) { 
+     geocoder.getLatLng(
+       addressString,
+       function(point) {       
+         if (!point) {
+           alert("Location not found:" + addressString);
+         } else {                                    
+            center = point;
+            setZoomFactor(14);
+            map.panTo(point);  
+            addDragableMarker();         
+         }
+       });    
+    }
+  }
+
+  function setZoomFactor(factor) {
+	    map.setZoom(factor);
+  }
+
+  function addDragableMarker() {
+    if (!marker) {
+      marker = new GMarker(center, {draggable: true});
+      map.addOverlay(marker);
+       
+      GEvent.addListener(marker, "dragend", function() {      
+        var tpoint =  marker.getPoint();      
+        document.getElementById(updateX).value = tpoint.lat();
+        document.getElementById(updateY).value = tpoint.lng();              
+      });
+    } else {
+  	  marker.setPoint(center);  	 
+    }  
+    var tpoint =  marker.getPoint();      
+    document.getElementById(updateX).value = tpoint.lat();
+    document.getElementById(updateY).value = tpoint.lng();              
+  }
     	
-function initNXGMap(mapElement) {
- 	if (GBrowserIsCompatible()) {
-		map = new GMap2(mapElement);        
-		geocoder = new GClientGeocoder();';
+  function initNXGMap(mapElement) {
+    if (GBrowserIsCompatible()) {
+      map = new GMap2(mapElement);        
+      geocoder = new GClientGeocoder();'."\n";
       
-      // Add controls to the map
-   
+     
+      // Add controls to the map          
       if (count($this->controls) > 0) {
         for ($i=0; $i<count($this->controls); $i++) {
-          $out.=" map.addControl(new ".$this->controls[$i].");\n";
+          $out.="      map.addControl(new ".$this->controls[$i].");\n";
         }
       }
       
       // Center the map
       if (($this->centerX != -1000) && ($this->centerY != -1000)) {      	
-      	$out.= '    map.setCenter(new GLatLng('.$this->centerX.', '.$this->centerY.'), '.$this->zoomFactor.');'."\n";      	
-      } else {
-      	$out.= '    map.setCenter(new GLatLng(0,0),1);'."\n";      	
+      	$out.= '      map.setCenter(new GLatLng('.$this->centerX.', '.$this->centerY.'), '.$this->zoomFactor.');'."\n";      	
       }
       
-      $out.='updateX="coordX"; updateY="coordY";';
+            // Set the viewmode;
+      if (strtoupper($this->viewMode) == "SAT") {
+        $out.="      map.setMapType(G_SATELLITE_TYPE);\n";	
+      } else if (strtoupper($this->viewMode) == "HYBRID") {
+      	$out.="      map.setMapType(G_HYBRID_TYPE);\n";	
+      }          
+      
+      
+      $out.='      updateX="coordX"; updateY="coordY";'."\n";
       
       // Draw Dragmarker
       if (($this->dragX != 1000) && ($this->dragY != -1000)) {
@@ -433,20 +501,19 @@ function initNXGMap(mapElement) {
       			var tpoint =  marker.getPoint();      
       			document.getElementById(updateX).value = tpoint.lat();
       			document.getElementById(updateY).value = tpoint.lng();              
-  				});
-      	';
+  				});'."\n";
       }
       
       // Add AddressPoints
-			$out.="    showAddresses();\n";  
+			$out.="      showAddresses();\n";  
 			// Add GeoPoints
-			$out.="    showGeopoints();\n";
-          
-     $out.="\n";     
-     $out.=' 	}
-    	}
-     //]]>
-  	 </script>';
+			$out.="      showGeopoints();\n";
+           
+     $out.='
+    }
+  }
+  //]]>
+</script>';
   	return $out;
   }
   
@@ -463,6 +530,7 @@ function initNXGMap(mapElement) {
   	$this->centerY    = -1000;
   	$this->dragX			= -1000;
   	$this->dragY			= -1000;
+  	$this->viewMode   = "Map";
   	$this->addresses  = array();
   	$this->geopoints  = array();
   	$this->controls   = array();

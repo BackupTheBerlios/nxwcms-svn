@@ -57,19 +57,32 @@
 	if ($modRef->helpfile != "") {
 	  $form->buttonbar->add("help", $lang->get("disp_doc", "Display Documentation"), "button", "window.open('".$c["docroot"]."plugin/".$modRef->helpfile."', 'pgnhelp', '')");	
 	}
-	$form->buttonbar->addConfirm("action", $lang->get("uninstall", "Uninstall"), $lang->get("uninstconf","Uninstalling a plugin can cause damage to the website! Do you want to proceed?"), $c["docroot"]."modules/plugins/install.php?sid=$sid&oid=$oid&action=uninstall");    
+	  $modtype = getDBCell("modules", "MODULE_TYPE_ID", "MODULE_ID = $oid");	  
+	  if ($modtype==4) {
+	    $form->buttonbar->add("action", $lang->get("settings", "Settings"));
+	  }
+	  $form->buttonbar->addConfirm("action", $lang->get("uninstall", "Uninstall"), $lang->get("uninstconf","Uninstalling a plugin can cause damage to the website! Do you want to proceed?"), $c["docroot"]."modules/plugins/install.php?sid=$sid&oid=$oid&action=uninstall");    
   	$form->add(new DisplayedValue($lang->get("name"), "modules", "MODULE_NAME", "MODULE_ID=$oid"));
-  	$modtype = getDBCell("modules", "MODULE_TYPE_ID", "MODULE_ID = $oid");
+  	
   	$form->add(new DisplayedValue($lang->get("modtype", "Plugin Type"), "module_type", "NAME", "MODULE_TYPE_ID=$modtype"));
   	$form->add(new DisplayedValue($lang->get("description"), "modules", "DESCRIPTION", "MODULE_ID=$oid"));
   	$form->add(new DisplayedValue($lang->get("version", "Version"), "modules", "VERSION", "MODULE_ID=$oid"));
   	$form->add(new DisplayedValue($lang->get("sourcefile", "Source file"), "modules", "SOURCE", "MODULE_ID=$oid"));
   	$form->add(new Hidden("action", ""));
+  	$form->add(new Hidden("oid", $oid));
   	$form->forbidDelete(true);
   	$form->forbidUpdate(true);
   	if ((value("action") == "uninstall") && is_numeric($oid)) {
   		uninstallPlugin($oid);
   	}
+  }
+  if (value("action") == $lang->get("settings")) {  	
+  	$go="UPDATE";  	
+  	$page_action="UPDATE";
+  	$oid = value("oid", "NUMERIC");  	  	
+  	$form = new StdEDForm($lang->get("settings"));
+  	$form->forbidDelete(true);
+  	$form->add(new DisplayedValue($lang->get("name"), "modules", "MODULE_NAME", "MODULE_ID=$oid"));
   }
 
   $page->addMenu($filtermenu);
