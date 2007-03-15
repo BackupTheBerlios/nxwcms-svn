@@ -241,7 +241,8 @@
 		   	 if ($menuType != "") 
 		   	   $this->menuRef = createDCRef($c["basepath"]."designs/".$menuType);
 		   }
-		   echo $this->menuRef->getHeader();
+		   if (is_object($this->menuRef))
+		     echo $this->menuRef->getHeader();
 		 }
 		 
 		 /**
@@ -255,7 +256,8 @@
 		   	 if ($menuType != "")
 		   	   $this->menuRef = createDCRef($c["basepath"]."designs/".$menuType);
 		   }		   
-		   echo $this->menuRef->getFooter();
+		   if (is_object($this->menuRef))
+		     echo $this->menuRef->getFooter();
 		 }
 		 
 		/**

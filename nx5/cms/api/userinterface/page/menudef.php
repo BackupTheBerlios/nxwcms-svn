@@ -24,8 +24,7 @@ $pagemenu->addSubMenu($lang->get("mt_spider", "Run Spider"), "ext/phpdig/admin/n
 $pagemenu->addSubMenu($lang->get("mt_generate_dta", "Generate DataTypes"), "modules/maintenance/datatypes.php", "ADMINISTRATOR", "maintenance");			
 if ($c["renderstatichtml"])
 	$pagemenu->addSubMenu($lang->get("rb_cache", "Rebuild Cache"), "modules/maintenance/rebuild_cache.php", "ADMINISTRATOR", "maintenance2");	
-//		if ($JPCACHE_ON)
-//			$pagemenu->addSubMenu($lang->get("clear_jpcache", "Clear Cache"), "modules/maintenance/clear_jpcache.php", "ADMINISTRATOR", "purge");
+$pagemenu->addSubMenu($lang->get("clear_jpcache", "Clear Cache"), "modules/maintenance/clear_temp_cache.php", "ADMINISTRATOR", "purge");
 	
 $pagemenu->addSubMenu($lang->get("logs", "Logfile Analysis"), "modules/logs/logs.php", "LOGS", "logfile");
 $pagemenu->addSubMenu($lang->get("sync_clusters", "Synchronize Clusters"), "modules/maintenance/sync_clusters.php", "SYNC_CLUSTERS", "maintenance2");			

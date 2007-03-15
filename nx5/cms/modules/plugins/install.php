@@ -37,7 +37,7 @@
  
   $filtermenu = new Filtermenu($lang->get("pg_title"), $filter);
   $filtermenu->tipp = $lang->get("help_pgn", "Plug-ins allow you to enhance N/X beyond its standard features. Typically, plug-ins are used to create new objects types in addition to the two standard object types text and image.");
-  $oid = value("oid", "NUMERIC");  
+  //$oid = value("oid", "NUMERIC", '');  
   if ($pagestate->insert) {
   	$form = new EditForm($lang->get("pg_install"), "i_plugin.gif");
   	$form->addToTopText($lang->get("pg_installdesc")."<br><br>");
@@ -49,8 +49,10 @@
   	
   if (!$pagestate->insert || (value("action") == "install") || (value("action") == "uninstall")) {  	
   	$form = new StdEDForm($lang->get("pgn_info", "Plugin information"));
-  	if ((value("action") == "install")) $oid=install();   	
-  	$page_state="start";
+  	if ((value("action") == "install")) {
+  	  $oid=install();   	  
+  	  $page_state = "start";
+  	}
   	    
   	includePGNSource ($oid);
 	$modRef = createPGNRef($oid, 0);
@@ -58,7 +60,7 @@
 	  $form->buttonbar->add("help", $lang->get("disp_doc", "Display Documentation"), "button", "window.open('".$c["docroot"]."plugin/".$modRef->helpfile."', 'pgnhelp', '')");	
 	}
 	  $modtype = getDBCell("modules", "MODULE_TYPE_ID", "MODULE_ID = $oid");	  
-	  if ($modtype==4) {
+	  if ($modtype==5) {
 	    $form->buttonbar->add("action", $lang->get("settings", "Settings"));
 	  }
 	  $form->buttonbar->addConfirm("action", $lang->get("uninstall", "Uninstall"), $lang->get("uninstconf","Uninstalling a plugin can cause damage to the website! Do you want to proceed?"), $c["docroot"]."modules/plugins/install.php?sid=$sid&oid=$oid&action=uninstall");    
@@ -77,12 +79,37 @@
   	}
   }
   if (value("action") == $lang->get("settings")) {  	
-  	$go="UPDATE";  	
-  	$page_action="UPDATE";
+  	if ($page_action=="") {
+  		$page_action = 'UPDATE';
+  		$page_state = "start";
+  	}
+  	//if (!isset($go)) $go="update";
+  	  	
+  	//$page_action="UPDATE";
   	$oid = value("oid", "NUMERIC");  	  	
   	$form = new StdEDForm($lang->get("settings"));
+  	$cond = $form->setPK("modules", $oid);
   	$form->forbidDelete(true);
+  	$form->addHeaderLink(crHeaderLink($lang->get("Back"), 'modules/plugins/install.php?oid='.$oid.'&sid='.$sid.'&go=update'));
   	$form->add(new DisplayedValue($lang->get("name"), "modules", "MODULE_NAME", "MODULE_ID=$oid"));
+  	$region[0][0] = 'Please Select';
+  	$region[0][1] = '0';
+  	$region[1][0] = 'Website Header';
+  	$region[1][1] = 'HEAD1';
+  	$region[2][0] = 'Website Footer';
+  	$region[2][1] = 'FOOT1';
+  	$region[3][0] = 'Content Header';
+  	$region[3][1] = 'HEAD2';
+  	$region[4][0] = 'Content Footer';
+  	$region[4][1] = 'FOOT2';
+  	$region[5][0] = 'Content Side';
+  	$region[5][1] = 'SIDE1';
+  	$form->add(new SelectOneInputFixed($lang->get("region", "Place"), "modules", "REGION", $region, $cond, "type:dropdown", "MANDATORY", "TEXT"));
+  	$form->add(new TextInput($lang->get("position"), "modules", "POSITION", $cond, "type:text", "", "NUMBER"));
+  	$form->add(new Hidden("action", $lang->get("settings")));  	
+  	$modRef = createPGNRef($oid, $oid, $oid);
+  	$modRef->registration();
+  	$modRef->edit($form);
   }
 
   $page->addMenu($filtermenu);
@@ -153,7 +180,7 @@
  * Handler for installing a plugin
  */
 function install() {
-	global $filename, $filenameselect, $form, $lang, $errors, $c;
+	global $filename, $filenameselect, $form, $lang, $errors, $c, $db;
 	$filename = value("filename");
 	$filenameselect = value("filenameselect");
 
@@ -206,10 +233,12 @@ function install() {
 			$form->addToTopText($lang->get("pg_newerinstalled"));
 		endif;
 	endif;
-
+	
 	writeDataTypeArray();
-	return getDBCell("modules", "MODULE_ID", "MODULE_NAME='$module->name'");
-
+	$modId = getDBCell("modules", "MODULE_ID", "MODULE_NAME='$module->name'");
+	$sql = "INSERT INTO pgn_config_store (CLTI_ID) VALUES ($modId)";
+	$query = new query($db, $sql);
+	return $modId;
 }
 
 /**

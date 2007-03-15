@@ -31,13 +31,7 @@
 	 */
 	class pgnTellAFriend extends Plugin {
 		
-	  var $pluginType = 4;
-		/**
-		  * Creates the input fields for editing text
-		  * @param integer &$form link to the form the input-fields are to be created in 
-		  */
-		function edit(&$form) {
-		}
+	  var $pluginType = 5;
 						
 
 		
@@ -48,8 +42,23 @@
 		   * @return		string	HTML-CODE to be written into the template.
 		   */
 		function draw($param = "") {
-			return "Tell a friend";
+			$url = doc();
+			$modId = getDBCell("modules", "MODULE_ID", "MODULE_NAME='Tell a Friend'");
+			$label = getDBCell("pgn_config_store", "TEXT1", "CLTI_ID=".$modId);
+			return $label;
 		}
+		
+		
+		/**
+		 * Set the configuration-widgets for a cluster-content item.
+		 */
+		function edit(&$form) {
+			global $lang;
+			$form->add(new Subtitle("st", $lang->get("config", "Configuration")));
+			$form->add( new TextInput($lang->get("link_label", "Link Label"), "pgn_config_store", "TEXT1", "CLTI_ID = ".$this->cltiid, "type:text,size:256,width:300"));		
+		}
+			
+
 		
     	  
 
