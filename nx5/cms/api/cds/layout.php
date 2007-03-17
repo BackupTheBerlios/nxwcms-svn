@@ -136,6 +136,24 @@
 		   $out = '<img src="'.$this->parent->docroot.'images/ptrans.gif" border="0" alt="" width="'.$width.'" height="'.$height.'">';
 		   return $out;
 		 }
+		 
+		 /**
+		  * Draw the configured mashups
+		  *
+		  * @param string $position Masup Position. Allowed are: HEAD1,HEAD2,SIDE1,FOOT2,FOOT1
+		  */
+		 function drawMashups($position) {
+		 	$ar = createDBCArray("modules", "MODULE_ID", "REGION='".strtoupper($position)."'", "ORDER BY POSITION ASC");
+		 	if (count($ar)>0) {
+		 		echo '<div style="clear:both;">';
+		 		for ($i=0; $i<count($ar);$i++) {
+		 	  		$pgnRef = createPGNRef($ar[$i],$ar[$i],$ar[$i]);
+		 	  		echo $pgnRef->draw();		 	  		
+		 	  		unset($pgnRef);
+		 		}
+		 		echo '</div><br><br>';
+		 	}
+		 }
 		
 		/**
 		 * Add a line to the header

@@ -88,7 +88,7 @@
   	//$page_action="UPDATE";
   	$oid = value("oid", "NUMERIC");  	  	
   	$form = new StdEDForm($lang->get("settings"));
-  	$cond = $form->setPK("modules", $oid);
+  	$cond = $form->setPK("modules", "MODULE_ID");  	
   	$form->forbidDelete(true);
   	$form->addHeaderLink(crHeaderLink($lang->get("Back"), 'modules/plugins/install.php?oid='.$oid.'&sid='.$sid.'&go=update'));
   	$form->add(new DisplayedValue($lang->get("name"), "modules", "MODULE_NAME", "MODULE_ID=$oid"));

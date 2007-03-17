@@ -15,11 +15,11 @@
   // Draw the HTML Header with title tags, js, css.... 
   $cds->layout->htmlHeader(); 
   
+  $cds->layout->drawMashups("HEAD1");
   // Draw the Menu. Some Menues consist of Header and Footer. The footer is drawn with
   // the call $cds->layout->drawMenuFooter() in footer.php.
   $cds->layout->drawMenuHeader();
     
   // Draw the table, which separates the content from the sidebar.
-  // Draw the breadcrumb now
-  echo $cds->layout->menu->breadcrumb().'<br/>';
+  $cds->layout->drawMashups("HEAD2");
 ?>

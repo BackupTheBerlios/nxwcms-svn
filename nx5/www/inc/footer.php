@@ -1,3 +1,4 @@
 <?php
-  $cds->layout->drawMenuFooter();     
+  $cds->layout->drawMashups("FOOT2");
+  $cds->layout->drawMenuFooter();   
 ?>

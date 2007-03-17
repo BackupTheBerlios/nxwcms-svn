@@ -4,6 +4,7 @@
 
   // Start of individual template
   echo '<h1>'.$cds->content->get("Headline").'</h1>';
+  echo $cds->content->getByAccessKey("mainad");
   br();
   echo $cds->content->get("Body");  
   
