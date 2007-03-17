@@ -81,7 +81,7 @@ if (value("submit") != "0" && $femail != "" && $captchaValid) {
 		echo '</tr>';
 	}
 
-	$label = $cds->content->get("city");
+	$label = $cds->content->get("city");	
 	if ($label != "") {
 		echo '<tr>';
 		echo   '<td width="30%" class="copy1" valign="middle">'.$label.'</td>';
@@ -145,7 +145,7 @@ if (value("submit") != "0" && $femail != "" && $captchaValid) {
 	echo '<table border="0" cellspacing="0" cellpadding="2" width="100%">';
 	echo '<tr>';
 	echo   '<td width="30%" class="copy1" valign="middle">&nbsp;</td>';
-	if ($sma != 1) echo '<td width="400"><input type="reset" name="reset" value="'.$cds->content->get("reset").'">&nbsp;<input type="submit" name="submit" value="'.$cds->content->get("submit").'"></td>';
+	if ($sma != 1) echo '<td width="400"><input type="submit" name="submit" value="'.$cds->content->get("submit").'">&nbsp;<input type="reset" name="reset" value="'.$cds->content->get("reset").'"></td>';
 	echo '</tr>';
 	echo '</table>';
 
