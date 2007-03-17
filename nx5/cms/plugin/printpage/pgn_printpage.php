@@ -24,12 +24,12 @@
 	 **********************************************************************/
 
 	/**
-	 * Tell a friend Mashup
+	 * Print page
 	 * Version 1.0
 	 *
 	 * @package Plugins
 	 */
-	class pgnTellAFriend extends Plugin {
+	class pgnPrintPage extends Plugin {
 		
 	  var $pluginType = 5;
 						
@@ -44,26 +44,9 @@
 		function draw($param = "") {			
 			global $cds;
 			$label = getDBCell("pgn_config_store", "TEXT1", "CLTI_ID=".$this->fkid);
-			echo '<script language="javascript" type="text/javascript">
-	<!--
-	var win=null;
-	
-	function NewWindow(mypage,myname,w,h,scroll,pos){
-		if(pos=="random")
-			{LeftPosition=(screen.width)?Math.floor(Math.random()*(screen.width-w)):100;
-			TopPosition=(screen.height)?Math.floor(Math.random()*((screen.height-h)-75)):100;}
-		if(pos=="center")
-			{LeftPosition=(screen.width)?(screen.width-w)/2:100;
-			TopPosition=(screen.height)?(screen.height-h)/2:100;}
-	
-		else if((pos!="center" && pos!="random") || pos==null){LeftPosition=0;TopPosition=20}
-	settings=\'width=\'+w+\',height=\'+h+\',top=\'+TopPosition+\',left=\'+LeftPosition+\',scrollbars=\'+scroll+\',location=no,directories=no,status=no,menubar=no,toolbar=no,resizable=yes\';
-	win=window.open(mypage,myname,settings);}
-	// -->
-	</script>';
-		
+			
 			echo '<div style="float:right;">';
-			echo '&nbsp;&nbsp;<a class="breadcrumb" href="#" onclick="NewWindow'."('".$cds->docroot."/sys/tellafriend/recommend.popup.php','recommend','450','450','no','center');return false".'" onfocus="this.blur()">'.$label.'</a>&nbsp;&nbsp;';	
+			echo '&nbsp;&nbsp;<a class="breadcrumb" href="#" onclick="window.print();return false;">'.$label.'</a>&nbsp;&nbsp;';	
 			echo '</div>';
 		}	
 		
@@ -94,9 +77,9 @@
 				Plugin::registration();
 
 				// Name of the Plugin. The name will be displayed in the WCMS for selection
-				$this->name = "Tell a Friend";
+				$this->name = "Print this page";
 				// A short description, what the Plugin is for.
-				$this->description = "Add Tell a friend functions to your website";
+				$this->description = "Add Print this page to the website.";
 				// Version of the plugin. Use integer numbers only. Is important for future releases.
 				$this->version = 1;
 
