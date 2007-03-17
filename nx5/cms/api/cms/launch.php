@@ -136,7 +136,7 @@
 
 			// create new index-file...
 			global $c;
-			$index = 'html>';
+			$index = '<html>';
 			$index .= '<head>';
 			$index .= '<title>Page does not exist</title>';
 			$index .= '<meta name="generator" content="N/X WCMS">';

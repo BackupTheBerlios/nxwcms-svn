@@ -238,6 +238,7 @@
 	    	$short = substr($short, 1);
 
 	    	$allDir = $c["livepath"];
+	    	$docroot = '';
 	    	// ensure that path exists
 	    	$directories = explode("/", $short);
 
@@ -251,6 +252,7 @@
 	    				}
 
 	    				$allDir = $allDir . $thisDir . "/";
+	    				$docroot.=$thisDir.'/';
 	    			}
 	    		}
 
@@ -272,6 +274,22 @@
 	    		$index_file = fopen($allDir . "index.php", "w");
 	    		fwrite($index_file, $index);
 	    		fclose ($index_file);
+	    		if ($c["renderstatichtml"]) {	    				    			
+	    			$full_url = $c["hostlivedocroot"] . $docroot.'index.php';
+					$content = '';
+		
+					$fp = fopen($full_url, "r");
+				    if ($fp != "") {
+					   while (!feof($fp)) $content .= fgets($fp, 128);
+					   fclose ($fp);
+				    }
+				    @nxDelete ($allDir , "index.php");
+
+				    $index_file = fopen($allDir . "index.html", "w");
+	    		    fwrite($index_file, $content);
+	    		    fclose ($index_file);	    		   
+				    
+	    		}
 	    	}
 		}				    	
     }

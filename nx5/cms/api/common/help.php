@@ -366,13 +366,15 @@ function crlf() {
 	 *
 	 * @param string $uri URI to encode
 	 */
-	function makeURLSave($uri) {
-		$spname = strtolower($uri);
+	function makeURLSave($uri) {						    
+   		$spname = strtolower($uri);
 		$spname = stripslashes($spname);
 		$spname = strip_tags($spname);
 		$spname = str_replace("&", "", $spname);
+		$spname = str_replace(" ", "_", $spname);
 		$spname = str_replace("?", "", $spname);
 		$spname = str_replace(",", "", $spname);
+		$spname = str_replace(".", "_", $spname);
 		$spname = str_replace(";", "", $spname);
 		$spname = str_replace("#", "", $spname);
 		$spname = str_replace("$", "", $spname);
@@ -384,9 +386,17 @@ function crlf() {
 		$spname = str_replace("/", "", $spname);
 		$spname = str_replace("!", "_", $spname);
 		$spname = str_replace("\\", "", $spname);	
-		$spname_split = explode(' ', $spname);
-		$spname = implode('_', $spname_split);	
-		return $spname;
+		$spname = str_replace("ö", "oe", $spname);	
+		$spname = str_replace("Ö", "oe", $spname);	
+		$spname = str_replace("ü", "ue", $spname);	
+		$spname = str_replace("Ü", "ue", $spname);	
+		$spname = str_replace("ä", "ae", $spname);	
+		$spname = str_replace("Ä", "ae", $spname);	
+		$spname = str_replace("ß", "ss", $spname);	
+		
+		$s = preg_replace ("/([^a-z0-9])+/i", "_",$spname);
+   		
+   		return $s;
 	}
 	
 	/**
@@ -423,9 +433,9 @@ function crlf() {
 	    $spid = getDBCell("state_translation", "OUT_ID", "IN_ID=$spid AND LEVEL=10");
 	    if ($spid != "") {
 	      $menuId = getDBCell('sitepage', 'MENU_ID', 'SPID='.$spid);
-	      $result = getPageURL($menuId, $v);
+	      $result = getPageURL($menuId, $v);	      
 	      $result.='/'.makeURLSave($catname);
-	      $result.='/'.makeURLSave($name);
+	      $result.='/'.makeURLSave($name);	      
 	    } else {
 	    	$result = $lang->get('url_disp_later', 'The URL will be displayed after the linked template was launched.');
 	    }

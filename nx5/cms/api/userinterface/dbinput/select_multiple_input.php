@@ -112,10 +112,9 @@
 	  function querySelectedValues() {
 	  	$this->selectedValues = array();		
 		if ($this->cond != "1") {
-	  		pon();
+	  		
 			$ids = createDBCArray($this->table, $this->idcolumn, $this->cond, "ORDER BY POSITION");	
-			poff();
-	      		for ($i=0; $i < count($ids); $i++) {		        	
+				for ($i=0; $i < count($ids); $i++) {		        	
 	        		$sub[0] = getDBCell($this->lookupTable, $this->lookupName, $this->lookupID." = ".$ids[$i]);
 	        		$sub[1] = $ids[$i];
             			$tmp = array();
