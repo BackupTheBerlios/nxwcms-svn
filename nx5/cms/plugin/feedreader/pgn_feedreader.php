@@ -45,8 +45,23 @@
 			global $lang, $sid, $c;
 
 			// add button for external editor.
-			$condition = "FKID = $this->fkid";
-			$form->add(new TextInput($lang->get("feed_url", "Feed URL"), "pgn_feeds", "FEEDURL", $condition, "type:text,width:350,size:255", ""));
+			$cond = "FKID = $this->fkid";
+			$form->add(new TextInput($lang->get("feed_url", "Feed URL"), "pgn_feeds", "FEEDURL", $cond, "type:text,width:350,size:255", ""));
+			$form->add(new CheckboxTxtInput($lang->get("aggregate", "Aggregate news in channel"), "pgn_feeds", "SHOWLINKS", $cond));
+			
+			$chcat = array();
+            $channels = createNameValueArrayEx("channels", "NAME", "CHID", "1 ORDER BY NAME ASC");
+            if (!is_array($channels)) $channels=array();               
+            foreach ($channels as $channel){               
+              $categories = createNameValueArrayEx("channel_categories", "NAME", "CH_CAT_ID", "CHID = ".$channel[1]." ORDER BY NAME");
+              if (count($categories)>0) {
+                foreach ($categories as $category) {
+                  $chcat[] = array($channel[0]." - ".$category[0], $category[1]);
+                }
+              }
+            }
+            $form->add(new SelectOneInputFixed($lang->get("channel"), "pgn_feeds", "CHANNEL_CAT", $chcat, $cond));
+            $form->add(new SitepageSelector($lang->get("cop", "Channel Overview Page"), "pgn_feeds", 'CHANNEL_OVERVIEW_PAGE', $cond));
 		}
 		
 
