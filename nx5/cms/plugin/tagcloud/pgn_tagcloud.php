@@ -28,18 +28,11 @@
 	 *
 	 * @package Plugins
 	 */
-	class pgnMostWantedPages extends Plugin {
+	class pgnTagCloud extends Plugin {
 
-		// Name of the Management's Table Primary Key
-		var $pk_name = "FKID";
-
-		// Name of the Plugin's Management Table. All tables should start with pgn_
-		var $management_table = "";
-		var $pluginType=3;
-		var $isSingleConfig = false;
-		//var $helpfile = "googlemaps/plugin_googlemaps.pdf";
+		// Name of the Management's Table Primary Key		
 		
-
+		var $pluginType=5; // Mashup
 		/**
 		   *This functions returns a reference to the GoogleMaps API
 		   * It just returns the code
@@ -49,7 +42,8 @@
 		function draw($param = "") {
 			global $cds, $c;			
 			$api = new MostWanted();
-			return $api;
+			$out = $api->drawBand(30,6,8,32);
+			return $out;
 		}
 		
  		
@@ -67,7 +61,7 @@
 				Plugin::registration();
 
 				// Name of the Plugin. The name will be displayed in the WCMS for selection
-				$this->name = "Most Wanted Pages API";
+				$this->name = "TagCloud";
 				// A short description, what the Plugin is for.
 				$this->description = "Retrieve and display lists with the most wanted pages.";
 				// Version of the plugin. Use integer numbers only. Is important for future releases.
@@ -83,7 +77,7 @@
 				/**** change nothing beyond this point ****/
 				global $source, $classname; // the source path has to be provided by the calling template
 				$modId = nextGUID();				
-				$this->installHandler->addDBAction("INSERT INTO modules (MODULE_ID, MODULE_NAME, DESCRIPTION, VERSION, MT_ID, CLASS, SOURCE, MODULE_TYPE_ID) VALUES ($modId, '$this->name', '$this->description', $this->version, $mtid, '$classname', '$source', 3)");				
+				$this->installHandler->addDBAction("INSERT INTO modules (MODULE_ID, MODULE_NAME, DESCRIPTION, VERSION, MT_ID, CLASS, SOURCE, MODULE_TYPE_ID) VALUES ($modId, '$this->name', '$this->description', $this->version, $mtid, '$classname', '$source', 5)");				
 			}
 		}
 	}
@@ -141,8 +135,7 @@
 				$size = round((($data[$i][1] - $min) / (($max-$min)+0.1)) * ($maxsize-$minsize) + $minsize);
 				if ($size > $maxsize) $size = $maxsize;
 				if ($size < $minsize) $size = $minsize;
-				if (($i % $itemsPerRow) == 0) $out.= '<br/>';
-				echo $i;
+				if (($i % $itemsPerRow) == 0) $out.= '<br/>';				
 				$out.='<a href="'.$data[$i][0].'" style="font-size:'.$size.'px;">'.$data[$i][2].'</a>&nbsp;&nbsp;';
 			}			
 			return $out;			
