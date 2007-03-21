@@ -55,8 +55,8 @@ class pgnGallery extends Plugin {
 		$form->add(new TextInput($lang->get("galname", "Gallery Name"), "pgn_gallery", "NAME", $condition, "type:text,width:350,size:64", "MANDATORY"));
 		$form->add(new TextInput($lang->get("galdesc", "Gallery Description"), "pgn_gallery", "DESCRIPTION", $condition, "type:textarea,width:350,size:4"));
 		$form->add(new FolderDropdown($lang->get("gafolder", "Image-Folder"), "pgn_gallery", "IMAGE_FOLDER_ID", $condition));
-		$form->add(new TextInput($lang->get("galrows", "Rows"), "pgn_gallery", "ROWS", $condition, "type:text,width:30,size:2", "MANDATORY", "NUMBER"));
-		$form->add(new TextInput($lang->get("galcols", "Columns"), "pgn_gallery", "COLS", $condition, "type:text,width:30,size:2", "MANDATORY", "NUMBER"));
+		$form->add(new TextInput($lang->get("width", "WIDTH"), "pgn_gallery", "COLS", $condition, "type:text,width:40,size:4", "MANDATORY", "NUMBER"));
+		$form->add(new TextInput($lang->get("height", "HEIGHT"), "pgn_gallery", "ROWS", $condition, "type:text,width:40,size:4", "MANDATORY", "NUMBER"));
 		$form->add(new CheckboxInput($lang->get("flashgal", "Flash Gallery"), "pgn_gallery", "GALLERYTYPE", $condition, "1", "0", "NUMBER"));
 	}
 
@@ -66,21 +66,8 @@ class pgnGallery extends Plugin {
 	  * you must return it as return value!
 	  */
 	function preview() {
-		global $c, $variation, $lang;
-
-		$flash = getDBCell("pgn_gallery", "GALLERYTYPE", "GALLERY_ID=".$this->fkid);
-		if ($flash ==1) {
-			$v = $variation;
-			$width = 725;
-			$height = 530;
-			$content = '<object CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" CODEBASE="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="' . $width . '" HEIGHT="' . $height . '" HSPACE="0" VSPACE="0">';
-			$content .= '<param NAME="movie" VALUE="' . $c["devdocroot"] . 'sys/pg.swf?pageid=' . $this->fkid . '&v=' . $v . '&xmlfile=' . $c["devdocroot"] . 'sys/galxml.php" />';
-			$content .= '<param NAME="quality" VALUE="high" />';
-			$content .= '<embed SRC="' . $c["devdocroot"] . 'sys/pg.swf?pageid=' . $this->fkid . '&v=' . $v . '&xmlfile=' . $c["devdocroot"] . 'sys/galxml.php" width="' . $width . '" HEIGHT="' . $height . '" HSPACE="0" VSPACE="0" QUALITY="high" PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer" TYPE="application/x-shockwave-flash"></embed></object>';
-			return $content;
-		} else {
-			return $lang->get("no_preview", "No preview available.");
-		}
+		global $c, $variation, $lang;		
+		return $lang->get("no_preview", "No preview available.");		
 	}
 	
 			/**
@@ -96,7 +83,11 @@ class pgnGallery extends Plugin {
 	 * Add css and javascript to the html-header of the page
 	 */
 	function getHTMLHeader() {
-	  return '';
+	  global $cds;
+	  $out = '<script src="'.$cds->docroot.'sys/gallery/scripts/mootools.js" type="text/javascript"></script>';
+		$out.= '<script src="'.$cds->docroot.'sys/gallery/scripts/jd.gallery.js" type="text/javascript"></script>';
+		$out.= '<link rel="stylesheet" href="'.$cds->docroot.'sys/gallery/css/jd.gallery.css" type="text/css" media="screen" charset="utf-8" />';
+	  return $out;
 	}
 	
 	/**
@@ -106,161 +97,72 @@ class pgnGallery extends Plugin {
 		   * @return		string	HTML-CODE to be written into the template.
 		   */
 	function draw($param = "") {
-		global $c, $v, $variation, $cds, $pgnIG;		
-		$flash = getDBCell("pgn_gallery", "GALLERYTYPE", "GALLERY_ID=".$this->fkid);
+		global $c, $v, $variation, $cds, $pgnIG;				
+		$out = '';
 		$imFolder = getDBCell("pgn_gallery", "IMAGE_FOLDER_ID", "GALLERY_ID=" .$this->fkid);		
-		$width = $param[1];
-		$height= $param[2];
-		if ($flash ==1) {
-
-			global $c, $splevel, $v;
-
-			if ($splevel == 10) {
-				$root = $c["livedocroot"];
-			} else {
-				$root = $c["devdocroot"];
-			}
-
-			$content = '<object CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" CODEBASE="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="' . $width . '" HEIGHT="' . $height . '" HSPACE="0" VSPACE="0">';
-			$content .= '<param NAME="movie" VALUE="' . $c["devdocroot"] . 'sys/pg.swf?pageid=' . $this->fkid . '&v=' . $v . '&xmlfile=' . $root . 'sys/galxml.php" />';
-			$content .= '<param NAME="quality" VALUE="high" />';
-			$content .= '<embed SRC="' . $c_root . 'sys/pg.swf?pageid=' . $this->fkid . '&v=' . $v . '&xmlfile=' . $c_root . 'sys/galxml.php" width="' . $width . '" HEIGHT="' . $height . '" HSPACE="0" VSPACE="0" QUALITY="high" PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer" TYPE="application/x-shockwave-flash"></embed></object>';
-			return $content;
+		$width = getDBCell("pgn_gallery", "COLS", "GALLERY_ID=" .$this->fkid);	
+		$height= getDBCell("pgn_gallery", "ROWS", "GALLERY_ID=" .$this->fkid);	
+	
+		// get the images from n/x.
+		$live = $this->isLive($this->fkid);
+		if ($live) {
+			$impath = $c["livefilesdocroot"];
 		} else {
-			// ajax gallerie
-			if (strtoupper($param[0]) == "HEAD") {
+			$impath = $c["devfilesdocroot"];
+		}
+		$impath = $c["host"].$impath;
+		$syspath = $c["host"]	.$cds->docroot. 'sys/';		
 
-				// get the images from n/x.
-				$live = $this->isLive($this->fkid);
-				if ($live) {
-					$impath = $c["livefilesdocroot"];
-				} else {
-					$impath = $c["devfilesdocroot"];
+  	$imagePGNId = getDBCell("modules", "MODULE_ID", "UPPER(MODULE_NAME) ='IMAGE'");
+		$version=0;
+		if (! $cds->is_development) $version=10;
+		$imageList = createDBCArray("content", "CID", "MODULE_ID = $imagePGNId AND CATEGORY_ID = $imFolder AND DELETED=0 AND VERSION=".$version);
+		
+		
+		// Write the header
+		$out = "\n".'<script type="text/javascript">';
+		$out.= '	function startGallery() {';
+		$out.= 'var myGallery = new gallery($(\'myGallery'.$this->fkid.'\'), {';
+		$out.= '	timed: false	});';
+		$out.= '	}';
+		$out.= '	window.onDomReady(startGallery); </script>'."\n";
+	
+    $out.= "\n".'<div id="myGallery'.$this->fkid.'" style="width:'.$width.'px;height:'.$height.'px;">';
+						
+		for ($i = 0; $i < count($imageList); $i++) {
+  		$cid = $imageList[$i];
+
+			if ($live == $this->isLive($cid)) {
+				$fkid = getDBCell("content_variations", "FK_ID", "CID = $cid AND DELETED=0 AND VARIATION_ID = $cds->variation");
+				$filename = getDBCell("pgn_image", "FILENAME", "FKID=$fkid");
+				$iwidth = getDBCell("pgn_image", "WIDTH", "FKID=$fkid");
+				$iheight = getDBCell("pgn_image", "HEIGHT", "FKID=$fkid");
+				$alt = getDBCell("pgn_image", "ALt", "FKID=$fkid");
+
+				$owidth = $iwidth;
+				$oheight = $iheight;
+				// Scaling down image.
+
+				$scale = 1;
+
+				if ($iwidth > $width || $iheight > $height) {
+					$scale_w = $iwidth / $width;
+					$scale_h = $iheight / $height;
+					$scale = max($scale_w, $scale_h);
+						//scale down
+					$iwidth = $iwidth / $scale;
+					$iheight = $iheight / $scale;
 				}
-				$impath = $c["host"].$impath;
-				$syspath = $c["host"]	.$cds->docroot. 'sys/';
-				$content = '<link rel="stylesheet" href="'.$syspath.'gal.css" type="text/css"/>
-<script language="JavaScript" type="text/javascript">
-			
-	var photoDir = "'.$impath.'"; // Location of photos for gallery
-	var photoIndex = 0;
-	var photoArray = new Array(';
-				// correct gallery size:
-				$width-= 10;
-				$height-=40;
-
-				$syspath = $c["host"].$cds->docroot.'sys/';
-
-				$imagePGNId = getDBCell("modules", "MODULE_ID", "UPPER(MODULE_NAME) ='IMAGE'");
-				$version=0;
-				if (! $cds->is_development) $version=10;
-				$imageList = createDBCArray("content", "CID", "MODULE_ID = $imagePGNId AND CATEGORY_ID = $imFolder AND DELETED=0 AND VERSION=".$version);
-
-			$drawn = false;
-				for ($i = 0; $i < count($imageList); $i++) {
-					$cid = $imageList[$i];
-
-					if ($live == $this->isLive($cid)) {
-						$fkid = getDBCell("content_variations", "FK_ID", "CID = $cid AND DELETED=0 AND VARIATION_ID = $cds->variation");
-						$filename = getDBCell("pgn_image", "FILENAME", "FKID=$fkid");
-						$iwidth = getDBCell("pgn_image", "WIDTH", "FKID=$fkid");
-						$iheight = getDBCell("pgn_image", "HEIGHT", "FKID=$fkid");
-						$alt = getDBCell("pgn_image", "ALt", "FKID=$fkid");
-
-						$owidth = $iwidth;
-						$oheight = $iheight;
-						// Scaling down image.
-
-						$scale = 1;
-
-						if ($iwidth > $width || $iheight > $height) {
-							$scale_w = $iwidth / $width;
-							$scale_h = $iheight / $height;
-							$scale = max($scale_w, $scale_h);
-							//scale down
-							$iwidth = $iwidth / $scale;
-							$iheight = $iheight / $scale;
-						}
-
-						if ($i==0) {
-							$pgnIG["src"]	 = $impath.$filename;
-							$pgnIG["width"] = $iwidth;
-							$pgnIG["height"] = $iheight;
-							$pgnIG["owidth"] = $owidth;
-							$pgnIG["oheight"] = $oheight;
-							$pgnIG["alt"] = $alt;
-							$pgnIG["count"] = 0;
-						}
-						$pgnIG["count"]++;
-
-						if ($drawn) $content.=', ';
-						$content.= 'new Array("'.$filename.'", "'.$iwidth.'", "'.$iheight.'", "'.$alt.'",'.$owidth.','.$oheight.')';
-						$drawn = true;
-					}
-				}
-				$pgnIG["count"]--;
-
-				$content.=");
-	
-	var photoNum = photoArray.length-1;
-	
-	function pgnIGNext() {
-	  photoIndex++;
-	  if (photoIndex > photoNum) photoIndex = 0;
-	  showPhoto(photoIndex);
-	}
-	
-	function pgnIGPrev() {
-	  photoIndex--;
-	  if (photoIndex < 0 ) photoIndex = photoNum;	  
-	  showPhoto(photoIndex);
-	}
-	
-	function showPhoto(imgNum) {
-	  var photo = photoArray[imgNum];
-	  var src = photoDir + photo[0];
-	  var width = photo[1];
-	  var height = photo[2];
-	  var alt = photo[3];
-	  img = document.getElementById('pgnIGImage');
-	  img.src = src;
-	  img.height = height;
-	  img.width = width;
-	  img.alt = alt;
-	  
-	  desc = document.getElementById('pgnIGDescription');
-	  desc.innerHTML = '<b>' + (imgNum+1).toString() + '/' + (photoNum+1).toString() + '<\/b><br>' + alt;
-	}
-	
-	function popupImg() {
-	  var photo = photoArray[photoIndex];
-	  var src = photoDir + photo[0];
-	  var width = photo[4] + 10;
-	  var height = photo[5] + 25;  
-	  wnd = window.open(src, 'gal', 'height=' + height.toString() + ',width=' + width.toString() + ',toolbar=no,scroobars=no,menubar=no,titlebar=no');	  
-	  wnd.focus();
-	}
-	
-	</script>
-      ";
-				return $content;
-
-			}
-
-			if (strtoupper($param[0]) == "BODY") {
-				// get first image.
-
-				$syspath = $c["host"].$cds->docroot.'sys/';
-				$content = '<div id="pgnIGContainer" style="width:'.$width.'px;height:'.$height.'px;">
-				<div id="pgnIGButtons" align="center"><a href="#" onClick="pgnIGPrev();return false;"><img src="'.$syspath.'galprev.gif" border="0" alt="prev"/></a>&nbsp;&nbsp;<a href="#" onClick="pgnIGNext(); return false;"><img src="'.$syspath.'galnext.gif" border="0" alt="next"></a><br><br></div>
-			  <img onClick="popupImg();" style="cursor:pointer;" src="'.$pgnIG["src"].'" alt="'.$pgnIG["alt"].'" width="'.$pgnIG["width"].'" height="'.$pgnIG["height"].'" id="pgnIGImage"/>
-	          <div id="pgnIGDescription" align="center"><b>1/'.($pgnIG["count"]+1).'</b><br/>'.$pgnIG["alt"].'</div>			  
-			  </div>';
-
-				return $content;
-
+				
+					$out.= "\n".'<div class="imageElement">';
+					$out.= '<h3>'.$alt.' </h3><p> </p>';
+					$out.= '<a href="#" title="open image" class="open"></a>';
+					$out.= '<img src="'.$impath.$filename.'" width="'.$iwidth.'" height="'.$iheight.'" class="full" />';
+					$out.= '<img src="'.$impath.'t'.$filename.'" class="thumbnail" /></div>'."\n";						
 			}
 		}
+		$out.= '</div>';
+		return $out;
 	}
 
 
@@ -378,7 +280,7 @@ class pgnGallery extends Plugin {
 
 			// SQL for creating the tables in the database. Do not call, if you do not need any tables in the database
 			$this->installHandler->addDBAction(
-			"CREATE TABLE `pgn_gallery` ( `GALLERY_ID` BIGINT NOT NULL, `NAME` VARCHAR(64) NOT NULL, `DESCRIPTION` VARCHAR(255), `IMAGE_FOLDER_ID` BIGINT NOT NULL, `COLS` TINYINT DEFAULT '2' NOT NULL, `ROWS` TINYINT DEFAULT '4' NOT NULL, `GALLERYTYPE` TINYINT DEFAULT '0' NOT NULL, PRIMARY KEY (`GALLERY_ID`) );");
+			"CREATE TABLE `pgn_gallery` ( `GALLERY_ID` BIGINT NOT NULL, `NAME` VARCHAR(64) NOT NULL, `DESCRIPTION` VARCHAR(255), `IMAGE_FOLDER_ID` BIGINT NOT NULL, `COLS` MEDIUMINT DEFAULT '400' NOT NULL, `ROWS` MEDIUMINT DEFAULT '300' NOT NULL, `GALLERYTYPE` TINYINT DEFAULT '0' NOT NULL, PRIMARY KEY (`GALLERY_ID`) );");
 			// SQL for deleting the tables from the database.
 			$this->uninstallHandler->addDBAction("DROP TABLE `pgn_gallery`");
 

@@ -1,6 +1,6 @@
 <?PHP
 require_once "nxheader.inc.php";
-$cds->layout->addToHeader($cds->content->get("Gallery", array("HEAD", 800,600)));
+$cds->layout->preloadImageByAccessKey("beach");
 require_once $cds->path."inc/header.php";
 
 // draw the Headline and the body
@@ -11,6 +11,7 @@ if ($body != "") {
 	echo $body;
 	br();
 }
+
 
 echo '<div align="center">';
 echo $cds->content->get("Gallery", array("BODY", 640,480));
