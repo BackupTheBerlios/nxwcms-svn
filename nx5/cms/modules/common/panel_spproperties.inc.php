@@ -1,4 +1,5 @@
 <?php
+	don();
 	$resetbar = new ButtonBar("resetbar");
 
 	$resetbar->add("action", $lang->get('resetcli', 'Change Object'), "submit", "", "", true, $lang->get("tt_rstci", "Each page in N/X has a cluster. By pressing Reset ClusterInstance you can assign a new cluster to the page and remove the old one."));
@@ -39,6 +40,7 @@
 		if ($auth->checkAccessToFunction("POSITION")) {	
 			$propPanel->add(new MultipagePosition($lang->get("position"), "sitepage", "POSITION", "SPID = $spid", $spid, $menuID));			
 		}
+		
 		
 		
 		$propPanel->add(new Hidden("view", $view));
@@ -100,8 +102,11 @@
 			$propPanel->add(new MenuDropdown($lang->get("par_page", "Parent Page"), "sitemap", "PARENT_ID", $cond));
 		}
 
-		if ($auth->checkAccessToFunction("C_ACTIVE"))
+		if ($auth->checkAccessToFunction("C_ACTIVE")) {
 			$propPanel->add(new CheckboxInput($lang->get("active"), "sitemap", "IS_DISPLAYED", $cond, "1", "0"));
+			$propPanel->add(new CheckboxInput($lang->get("restricted_page", "Restricted page", "Page requires login by the user."), 'sitepage', 'PASSWORD_PROTECTED', "SPID = $spid"));
+		
+		}
 
 		if ($auth->checkAccessToFunction("C_CACHE") && $c["renderstatichtml"])
 			$propPanel->add(new CheckboxInput($lang->get("cached"), "sitemap", "IS_CACHED", $cond, "1", "0"));
@@ -116,6 +121,11 @@
 			$propPanel->add(new Subtitle("st", $lang->get("cconlaunch"),3));
 			$propPanel->add(new Textinput($lang->get("cconlaunch_lbl", "Dev-Page-IDs (commaseparated)"), "sitemap", "CC_ON_LAUNCH", "MENU_ID = " . $menuID, "type:text,size:250,width:300"));
 		}
+		
+		if (defined('ADMINMODE')) {
+			  $propPanel->add(new CheckboxInput('Deletable', 'sitepage', 'DELETABLE', "SPID = $spid"));
+		}
+		
 
 		$propPanel->add(new Hidden("view", $view));
 		$propPanel->add(new Hidden("oid", $menuID));

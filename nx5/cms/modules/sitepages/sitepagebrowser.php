@@ -13,6 +13,8 @@
 
 	$mid = value("mid", "NUMERIC");
 	$spid = value("oid", "NUMERIC");	
+	$isDeletable = (defined('ADMINMODE') || (getDBCell("sitepage", "DELETABLE", "SPID = $spid")=='1'));
+	
 	if ($mid == "0" && $spid != "0") 
 		$mid = getDBCell("sitepage", "MENU_ID", "SPID = $spid");
 	if ($mid == "") $mid = "0";
@@ -285,7 +287,7 @@
 			$nextPosition ++;	
 		}
 		
-		if ($aclf->checkAccessToFunction("SITEPAGE_PROPS")) {
+		if ($aclf->checkAccessToFunction("SITEPAGE_PROPS") && $isDeletable) {
 			$pos_objectProp = $nextPosition;
 			$nextPosition ++;	
 		}
@@ -380,7 +382,9 @@
 			$sitepage = true;
 			require_once $c["path"] . "modules/common/panel_cluster.inc.php";
 		} else if ($view == $pos_objectProp && $aclf->checkAccessToFunction("SITEPAGE_PROPS")) {
-			require_once $c["path"] . "modules/common/panel_spproperties.inc.php";
+			if ($isDeletable) {
+			  require_once $c["path"] . "modules/common/panel_spproperties.inc.php";
+			}
 		} else if ($view == $pos_metaPanel && $aclf->checkAccessToFunction("EDIT_META_DATA")) {
 			require_once $c["path"] . "modules/common/panel_meta.inc.php";
 		} else if (($view == $pos_menuPanel) && $aclf->checkAccessToFunction("MENU")) {
@@ -404,7 +408,7 @@
 					$form->addPanel($metaPanel);
 			}
 
-			if ($aclf->checkAccessToFunction("SITEPAGE_PROPS")) 
+			if ($aclf->checkAccessToFunction("SITEPAGE_PROPS") && $isDeletable) 
 				$form->addPanel($propPanel);
 		
 			if ($aclf->checkAccessToFunction("MENU"))

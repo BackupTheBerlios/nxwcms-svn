@@ -510,6 +510,7 @@
 		$posi = $query->field("POSITION");
 		$ldate = "'" . $query->field("LAUNCH_DATE"). "'";
 		$edate = "'" . $query->field("EXPIRE_DATE"). "'";
+		$pwp   = $query->field("PASSWORD_PROTECTED");
 		if ($ldate == "''")
 			$ldate = "NULL";
 
@@ -523,8 +524,8 @@
 		launchSitepageName($in, $level, $variation);
 		$sql = "DELETE FROM sitepage WHERE SPID = $out";
 		$query = new query($db, $sql);
-		$sql = "INSERT INTO sitepage (SPID, SPM_ID, MENU_ID, POSITION, CLNID, LAUNCH_DATE, EXPIRE_DATE, DELETED, VERSION) VALUES ";
-		$sql .= "($out, $spmTrans, $menuTrans, $posi, $clnTrans, $ldate, $edate, 0, $level)";
+		$sql = "INSERT INTO sitepage (SPID, SPM_ID, MENU_ID, POSITION, CLNID, LAUNCH_DATE, EXPIRE_DATE, DELETED, VERSION, PASSWORD_PROTECTED) VALUES ";
+		$sql .= "($out, $spmTrans, $menuTrans, $posi, $clnTrans, $ldate, $edate, 0, $level, $pwp)";
 		$query = new query($db, $sql);
 		$query->free();
 
@@ -559,15 +560,19 @@
 				$spidTrans = translateState($mparray[$i], $level, false);
 
 				if ($spidTrans != "" && isCached($mparray[$i], $variation)) {
-					renderSitePage($spidTrans, $variation);
 					if ($JPCACHE_ON) {
 		 			  @unlink($c["dyncachepath"]."dyncache-".jpcacheFilename($spidTrans, $variation));	
 					}
+					renderSitePage($spidTrans, $variation);
+					
 				}
 			}
 		}
 		$cached = getDBCell("sitemap", "IS_CACHED", "MENU_ID = " . $menuTrans);
 		if ($cached == 1) {
+			if ($JPCACHE_ON) {
+		 		  @unlink($c["dyncachepath"]."dyncache-".jpcacheFilename($out, $variation));	
+			}
 			renderSitePage($out, $variation);
 		}
 	}

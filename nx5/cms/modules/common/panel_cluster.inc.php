@@ -93,11 +93,11 @@
 		$clustereditbar->addAction('separator');
 	  	if ($sptype == 1) {
 	  		if (countRows("sitemap", "MENU_ID", "PARENT_ID=$mid") == 0) {
-	  	  	    if (!isSPLive($oid))
+	  	  	    if (!isSPLive($oid) && $isDeletable)
 	  	  		$clustereditbar->addAction($lang->get("delete_page", "Delete Page"));
 	  	  	}
 	  	} else if ($sptype == 2) {
-	  	 	if (!isSPLive($oid))
+	  	 	if (!isSPLive($oid) && $isDeletable)
 	  	 	  $clustereditbar->add($lang->get("delete"));
 	  	}
 	}
@@ -112,7 +112,7 @@
 		if ($aclf->checkAccessToFunction("B_EXPIRE_TREE"))
 			$clustereditbar->addAction($lang->get('exp_tree', 'Expire Tree'));
 
-		if ($aclf->checkAccessToFunction("B_DESTROY_TREE")) {
+		if ($aclf->checkAccessToFunction("B_DESTROY_TREE") && $isDeletable) {
 			$clustereditbar->addAction('separator');
 			$clustereditbar->addAction($lang->get('del_tree', 'Delete Tree'));
 		}
