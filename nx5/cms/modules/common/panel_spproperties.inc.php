@@ -1,5 +1,4 @@
 <?php
-	don();
 	$resetbar = new ButtonBar("resetbar");
 
 	$resetbar->add("action", $lang->get('resetcli', 'Change Object'), "submit", "", "", true, $lang->get("tt_rstci", "Each page in N/X has a cluster. By pressing Reset ClusterInstance you can assign a new cluster to the page and remove the old one."));

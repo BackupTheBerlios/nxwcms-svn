@@ -9,7 +9,7 @@
 	$acl = array ();
   
   // Adminmode allows editing of locked pages.
-  //define('ADMINMODE', true);
+  define('ADMINMODE', true);
 
 	if (ini_get("register_globals") == true) {
 		echo "For security reasons N/X WCMS must not be run with the PHP-Option register_globals=On!<br>";

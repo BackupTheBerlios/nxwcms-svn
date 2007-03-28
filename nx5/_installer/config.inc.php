@@ -1,8 +1,7 @@
 <?
 	/**********************************************************************
 	 *	N/X - Web Content Management System
-	 *	Copyright 2002 Sven Weih, FZI Research Center for Information Technologies
-	 *	www.fzi.de
+	 *	Copyright 2002-2007 Sven Weih, 
 	 *
 	 *	This file is part of N/X.
 	 *	The initial has been setup as a small diploma thesis (Studienarbeit) at the FZI.
@@ -71,7 +70,11 @@
 
 	// Syndication
 	$c["provider"] = "localhost";				 // this is used for exchanging content or data. 
-												 // Do not change when it has been setup once!
+	
+	// Email
+	$c["webmastermail"] = 'webmaster@mail.address';
+	
+	// Do not change when it has been setup once!
 	
 	// AUTH
 	$c["disalbehostchecking"] = %HOSTAUTH%; 			 // Disabled auth-check, if user still has same IP or host-address. 

@@ -23,7 +23,7 @@
  	// determine startpage and forward to startpage if no pageid isset.	 
 	 if (!isset($page)) {
 	    $page = value("page", "NUMERIC",-1);	    
-	    if ($page == -1) {
+	    if (($page == -1)  &&  ! defined('ACCESS_CONTENT_ONLY')) {	 			 
 	 			 $forward = getStartPageURI(0,0);
 	 			 if ($forward != "") 
 	 			   header("location: ".$forward); 
