@@ -1,9 +1,0 @@
-Charset:iso-8859-1||
-Subject:.username. - Profile Updated :: .site_name.||
-Message:Congratulations you have successfully updated your profile on .site_name.! If you changed your password, your new one will display below:
-
-.password.
-
-Your password is encrypted in our database and cannot be retrieved, so please keep this email! If you didn't update your profile, please contact the site owner.
-
-.email_signature.
