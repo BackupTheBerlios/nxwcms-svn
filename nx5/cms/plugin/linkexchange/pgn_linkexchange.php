@@ -44,12 +44,30 @@
 		function draw($param = "") {			
 			global $cds;
 			$label = getDBCell("pgn_config_store", "TEXT1", "CLTI_ID=".$this->fkid);
-			
-			echo '<div style="float:right;">';
-			echo '&nbsp;&nbsp;<a class="breadcrumb" href="#" onclick="NewWindow'."('".$cds->docroot."/sys/tellafriend/recommend.popup.php','recommend','450','450','no','center');return false".'" onfocus="this.blur()">'.$label.'</a>&nbsp;&nbsp;';	
-			echo '</div>';
-		}	
+			echo "<br><h2>$label</h2>";
+				echo '<script language="javascript" type="text/javascript">
+	<!--
+	var win=null;
+	
+	function NewWindow2(mypage,myname,w,h,scroll,pos){
+		if(pos=="random")
+			{LeftPosition=(screen.width)?Math.floor(Math.random()*(screen.width-w)):100;
+			TopPosition=(screen.height)?Math.floor(Math.random()*((screen.height-h)-75)):100;}
+		if(pos=="center")
+			{LeftPosition=(screen.width)?(screen.width-w)/2:100;
+			TopPosition=(screen.height)?(screen.height-h)/2:100;}
+	
+		else if((pos!="center" && pos!="random") || pos==null){LeftPosition=0;TopPosition=20}
+	settings=\'width=\'+w+\',height=\'+h+\',top=\'+TopPosition+\',left=\'+LeftPosition+\',scrollbars=\'+scroll+\',location=no,directories=no,status=no,menubar=no,toolbar=no,resizable=yes\';
+	win=window.open(mypage,myname,settings);}
+	// -->
+	</script>';
+		$label = getDBCell("pgn_config_store", "TEXT2", "CLTI_ID=".$this->fkid);
 		
+	 	echo '<a class="breadcrumb" href="#" onclick="NewWindow'."('".$cds->docroot."sys/linkexchange/addurl.php?id=".$cds->pageId."','addurl','600','450','no','center');return false".'" onfocus="this.blur()">'.$label.'</a>&nbsp;&nbsp;';	
+		
+			
+		}	
 		
 		/**
 		 * Set the configuration-widgets for a cluster-content item.
@@ -57,12 +75,11 @@
 		function edit(&$form) {
 			global $lang;
 			$form->add(new Subtitle("st", $lang->get("config", "Configuration")));
-			$form->add( new TextInput($lang->get("link_label", "Link Label"), "pgn_config_store", "TEXT1", "CLTI_ID = ".$this->cltiid, "type:text,size:256,width:300"));		
+			$form->add( new TextInput($lang->get("title", "Title"), "pgn_config_store", "TEXT1", "CLTI_ID = ".$this->cltiid, "type:text,size:256,width:300"));		
+			$form->add( new TextInput($lang->get("entrylink", "Add URL Link text"), "pgn_config_store", "TEXT2", "CLTI_ID = ".$this->cltiid, "type:text,size:256,width:300"));		
 		}
-			
 
-		
-    	  
+								    	  
 
 		/**
 		   * Specifies information for installation and deinstallation of the plugin.
@@ -93,7 +110,8 @@
 				global $source, $classname; // the source path has to be provided by the calling template
 				$modId = nextGUID();
 				$mtid  = nextGUID();	      
-	
+				$this->installHandler->addDBAction("CREATE TABLE `pgn_linkexchange` (`ID` BIGINT NOT NULL , `SOURCEID` BIGINT NOT NULL, `TITLE` VARCHAR( 256 ) NULL ,`URL` VARCHAR( 256 ) NULL ,`DESCRIPTION` VARCHAR( 1024 ) NULL ,`INSERTTIMESTAMP` DATETIME NOT NULL ,`EMAIL` VARCHAR( 128 ) NULL ,`KEYWORDS` VARCHAR( 1024 ) NULL ,`USERNAME` VARCHAR( 64 ) NULL ,`PASSWORD` VARCHAR( 64 ) NULL ,`RECIPROCALURL` VARCHAR( 256 ) NULL,APPROVED TINYINT(1) NOT NULL DEFAULT 0 ,PRIMARY KEY ( `ID` )) ENGINE = MYISAM ;");
+				
 				$this->installHandler->addDBAction("INSERT INTO modules (MODULE_ID, MODULE_NAME, DESCRIPTION, VERSION, MT_ID, CLASS, SOURCE, MODULE_TYPE_ID) VALUES ($modId, '$this->name', '$this->description', $this->version, $mtid, '$classname', '$source', $this->pluginType)");
 			}
 		}
