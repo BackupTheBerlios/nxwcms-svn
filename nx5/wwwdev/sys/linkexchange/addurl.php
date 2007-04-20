@@ -35,18 +35,59 @@ $errorstyleclass = 'error';					// The class that specifies the CSS error color.
 $errormessages = array(); 
 $errorfields = array(); 
 $entryadded = false;
-if(count($_POST) > 0) { 
-    if(get_magic_quotes_gpc()) $_POST = strip_magic_quotes($_POST); 
+$id = value("id", "NUMERIC", "0");
+
+if(count($_POST) > 0) {   
+    // process the entry....
+    if(empty($_POST['name'])) { 
+        $errormessages[] = $cds->content->getByAccessKey("taf_errname");
+        $errorfields[] = 'name'; 
+    } 
+    if(empty($_POST['email'])) { 
+        $errormessages[] = $cds->content->getByAccessKey("taf_entermail"); 
+        $errorfields[] = 'email'; 
+    } else { 
+        if(!eregi("^[a-z0-9\._-]+@+[a-z0-9\._-]+\.+[a-z]{2,3}$", $_POST['email'])) { 
+            $errormessages[] =  $cds->content->getByAccessKey("taf_entermail2"); 
+            $errorfields[] = 'email'; 
+        } 
+    } 
+    if(empty($_POST['title'])) { 
+        $errormessages[] = 'You must enter a Title.';
+        $errorfields[] = 'title'; 
+    }
+    
+    if(empty($_POST['url'])) { 
+        $errormessages[] = 'You must enter an URL.';
+        $errorfields[] = 'url'; 
+    } 
+    
+    if(empty($_POST['backlink'])) { 
+        $errormessages[] = 'Please enter a backlink. If you cannot provide a backlink, then type a "no backlink". However we can add your site only on certain circumstances then.';
+        $errorfields[] = 'backlink'; 
+    } 
+    if(empty($_POST['description'])) { 
+        $errormessages[] = 'Please enter a description';
+        $errorfields[] = 'description'; 
+    } 
+    if (count($errorfields) == 0) {
+      $nid = nextGUID();    
+    
+      $sql = "INSERT INTO pgn_linkexchange (ID,TITLE,EMAIL,USERNAME,URL,RECIPROCALURL,SOURCEID,DESCRIPTION,INSERTTIMESTAMP) VALUES ";
+      $sql.= "($nid,'".value("title")."','".value('email')."','".value("name")."','".value("url")."','".value("backlink")."',$id,'".value("description")."',now() )";      
+      $query = new query($db, $sql);
+      $entryadded = true;
+    }
 
 }
 ?> 
 
 <?php 
 if($entryadded) { 
-	echo empty($sent) ? '' : '<p>'.$cds->content->getByAccessKey("taf_success").' ' . implode(', ', $sent) . '</p>'; 
-	echo empty($failed) ? '' : '<p>'.$cds->content->getByAccessKey("taf_failed").' '. implode(', ', $failed);
-} else { 
+	echo 'The entry was added to the database.'; 
+} else {    
     if(count($_POST) > 0 && !empty($errormessages)) { 
+        if(get_magic_quotes_gpc()) $_POST = strip_magic_quotes($_POST); 
         echo '<table><tr><td><span class="' , $errorstyleclass , '">'; 
         echo $cds->content->getByAccessKey('taf_errors').'<br />'; 
         foreach($errormessages as $value) { 
@@ -94,9 +135,11 @@ if($entryadded) {
     </tr>
     
     <tr>
-        <td colspan="2">
+        <td>&nbsp;</td><td>
+            <br>
             <table>
                 <tr>
+                    <input type="hidden" name="id" value="<?php echo $id; ?>"/>
                     <td><input class="send" type="submit" value="Submit Form"/></td>
                     <td class="formtext">&nbsp;</td>
                     <td><input class="reset" type="reset" value="Reset Form" /></td>
@@ -126,7 +169,7 @@ function strip_magic_quotes($arr) {
 			
 			
 			
-			<br><a href="javascript:window.close()"><?php echo $cds->content->getByAccessKey("taf_close"); ?></a>
+			<br><a href="javascript:window.close()">Close window</a>
 		</td>
 	</tr>
 </table>

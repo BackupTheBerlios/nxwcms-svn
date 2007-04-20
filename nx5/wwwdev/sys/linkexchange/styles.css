@@ -24,7 +24,7 @@ body {
 	padding: 0;
 }
 
-input {
+input,textarea {
 	background-color: #ffffff;
 	border: 1px solid #c0c0c0;
 	color: #000000;
@@ -89,7 +89,7 @@ td.formtext {
 td.formtexttitle {
 	color: #0072bc;
 	font-family: verdana;
-	font-size: 11px;
+	font-size: 14px;
 	font-weight: bold;
 	padding: 0px 0px 24px 0px;
 	text-decoration: none;
