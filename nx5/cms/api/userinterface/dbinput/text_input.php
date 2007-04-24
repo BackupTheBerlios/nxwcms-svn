@@ -37,7 +37,7 @@
 		  * @param string $row_identifier Usually to be generated with form->setPK. Identifies the
 		  * row in db, you want to affect with operation. Keep empty for insert. (Example: stdEDForm)
 		  * @param string $params Allowed parameters are:
-		  * type:TEXT|TEXTAREA|COLOR|RICH;
+		  * type:TEXT|TEXTAREA|COLOR|RICH|URL;
 		  * size:XX Size of Input in chars.
 		  * width:XX Size of Input in pixel.
 		  * @param string $check Does checks on user input. Allowed are MANDATORY (=not null)|UNIQUE. Separate with &.
@@ -63,6 +63,10 @@
 
 				case "RICH":
 					$this->v_wuiobject = new Richedit($this->name, $this->value, $this->std_style, $this->size, $this->parameter, $this->width);
+					break;
+				case "URL":
+					$this->v_wuiobject = new InputURL($this->name, $this->value, $this->std_style, $this->size, $this->parameter, $this->width);
+
 					break;
 			endswitch;
 		}

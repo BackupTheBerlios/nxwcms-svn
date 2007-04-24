@@ -77,4 +77,25 @@
 			return $this->columns;
 		}
 	}
+	
+	class InputURL extends Input {
+				/**
+		  * Draws the layout-element
+		  */
+		function draw() {
+			$output = WUIObject::std_header();
+
+			$output .= "<input type=\"$this->type\" name=\"$this->name\" id=\"$this->name\" value=\"$this->value\" maxlength=$this->size style=\"width:" . ($this->iwidth-60) . "px;\"".$this->additionalParameters." ";
+
+			if ($this->action != "") {
+				$output .= " onChange=\"$this->action\"";
+			}
+
+			$output .= " $this->params>";
+			$output.= '<input style="width:60px;" type="button" name="churl" value="Check" onClick="window.open(document.getElementById(\''.$this->name.'\').value, \'check\', \'\')">';
+			$output .= WUIObject::std_footer();
+			echo $output;
+			return $this->columns;
+		}
+	}
 ?>

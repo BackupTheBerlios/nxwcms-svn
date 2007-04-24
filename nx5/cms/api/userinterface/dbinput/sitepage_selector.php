@@ -26,6 +26,7 @@
 	
 	class SitepageSelector extends DBO {
 	
+	  var $livepages;
 	/**
  	 * standard constructor
  	 * @param string Text that is to be shown as description or label with your object.
@@ -38,10 +39,11 @@
  	 * @param string $check Does checks on user input. Allowed are MANDATORY (=not null)|UNIQUE. Separate with &.
  	 * @param string $db_datatype Datatype of the database, you want to use. Allowed is DATE only.
  	 */
- 	 function SitepageSelector($label, $table, $column, $row_identifier="1", $params="", $check="", $db_datatype="NUMBER") {
+ 	 function SitepageSelector($label, $table, $column, $row_identifier="1", $params="", $check="", $db_datatype="NUMBER", $livepages = false) {
  	 	DBO::DBO($label, $table, $column, $row_identifier, $params, $db_datatype, $check);		
  		$this->v_wuiobject = new Dropdown($this->name, null , $this->std_style, $this->value, 300, 1 );
  		if ($this->value=="" || $this->value==0) $this->value = "0";
+ 		$this->livepages = $livepages;
  	}
  	
  	/**
@@ -54,7 +56,11 @@
  		$folders[0][0]="&gt;";
  		$folders[0][1]=0;
  		
- 		$this->createFolders($folders,"&gt;", 0);		
+ 		if ($this->livepages) {
+ 		 $this->createFolders($folders,"&gt;", translateState(0,10,false));		
+ 		} else {
+ 		  $this->createFolders($folders,"&gt;", 0);		
+ 		}
  		
  	 	// set the values
  	 	$this->v_wuiobject->value = $folders;

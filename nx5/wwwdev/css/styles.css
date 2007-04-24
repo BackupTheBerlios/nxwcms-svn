@@ -8,8 +8,7 @@ padding: 0px;
 
 /*- Sets the width of the page  -*/
 #maindiv {
-  align:center;
-  width:1000px;
+  align:center;  
   padding: 10px 20px 10px 20px;
 }
 
@@ -57,4 +56,10 @@ li.sitemap {
 ul.sitemap {
   padding:0px 0px 0px 10px;
   margin:0px 0px 0px 20px;
+}
+
+#navheader a {
+  color: #ffffff;
+  text-decoration:none;
+
 }

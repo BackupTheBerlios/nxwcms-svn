@@ -32,6 +32,8 @@
 	class pgnLinkExchange extends Plugin {
 		
 	  var $pluginType = 5;
+	  var $globalConfigPage = "plugin/linkexchange/overview.php";
+	  var $globalConfigRoles = "ADMINISTRATOR|LINKEXCHANGE";
 						
 
 		
@@ -42,9 +44,30 @@
 		   * @return		string	HTML-CODE to be written into the template.
 		   */
 		function draw($param = "") {			
-			global $cds;
+			global $cds, $db;
 			$label = getDBCell("pgn_config_store", "TEXT1", "CLTI_ID=".$this->fkid);
 			echo "<br><h2>$label</h2>";
+			$label = getDBCell("pgn_config_store", "TEXT3", "CLTI_ID=".$this->fkid);
+			echo $label;
+			br(); br();
+			// draw the linklist...
+			$sql = "Select * FROM pgn_linkexchange WHERE APPROVED=1 AND SOURCEID=".$cds->pageId. " ORDER BY INSERTTIMESTAMP DESC";
+			$query = new query($db, $sql);
+			$counter = 0;
+			while ($query->getrow()) {			  			  
+			  $title = $query->field("TITLE");
+			  $description = $query->field("DESCRIPTION");
+			  $url = $query->field("URL");
+			  echo '<b><a href="'.$url.'" target="_blank">'.$title.'</a></b><br>';
+			  echo $description;
+			  br();
+			  echo '<a style="font-size:11px;text-decoration:none;" href="'.$url.'" target="blank"><span style="color:#008000;">'.$url.'</span></a>';
+			  br();
+			  br();
+			}
+			
+			
+			
 				echo '<script language="javascript" type="text/javascript">
 	<!--
 	var win=null;
@@ -77,7 +100,16 @@
 			$form->add(new Subtitle("st", $lang->get("config", "Configuration")));
 			$form->add( new TextInput($lang->get("title", "Title"), "pgn_config_store", "TEXT1", "CLTI_ID = ".$this->cltiid, "type:text,size:256,width:300"));		
 			$form->add( new TextInput($lang->get("entrylink", "Add URL Link text"), "pgn_config_store", "TEXT2", "CLTI_ID = ".$this->cltiid, "type:text,size:256,width:300"));		
+			$form->add( new TextInput($lang->get("intro", "Introduction"), "pgn_config_store", "TEXT3", "CLTI_ID = ".$this->cltiid, "type:text,size:256,width:300"));		
 		}
+		
+		    /**
+         * Define function tree that will be created...
+         */
+        function getSystemFunctions() {
+           return array("PLUGINS_M" => array(array("LINKEXCHANGE", "Linkexchange Administration", "Linkexchange Plugin")));
+        }
+            
 
 								    	  
 
