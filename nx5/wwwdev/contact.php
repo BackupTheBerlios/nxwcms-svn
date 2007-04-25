@@ -1,4 +1,7 @@
 <?PHP
+// disable the dynamic cache
+define("_disableCache", true);
+
 require_once "nxheader.inc.php";
 require_once $cds->path."inc/header.php";
 

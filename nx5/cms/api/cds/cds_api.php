@@ -69,7 +69,7 @@
 		if ($this->pageId == "0" || $this->pageId == "") {
 			$this->pageId = $this->management->getStartPage();				
 		} else {			
-			if ($this->management->isSPExpired($this->pageId))	{
+			if ($this->management->isSPExpired($this->pageId) && ($this->pageId != -1))	{
 				$this->messages->draw("pageExpired");
 				
 				// if the request to this expired page comes from our own host, we assume it comes from within our live site...

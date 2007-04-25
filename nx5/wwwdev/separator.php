@@ -1,4 +1,7 @@
 <?PHP
+  // disable the dynamic cache
+  define("_disableCache", true);
+
   require_once "nxheader.inc.php";  
   if ($cds->menu->hasLowerLevel()) {
     $childs = $cds->menu->lowerLevel();
