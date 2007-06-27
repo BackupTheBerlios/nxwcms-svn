@@ -5,20 +5,43 @@
 	 */
 
 
-/** 
- * adds a parameter to a given url whether with ? or &
- * @param string URL
- * @param string Parameter in format paramname=value
- */
+  /** 
+   * adds a parameter to a given url whether with ? or &
+   * @param string URL
+   * @param string Parameter in format paramname=value
+   * 
+   * Based on: http://www.phpinsider.com/smarty-forum/viewtopic.php?t=4356  
+   */
   function addParam($url, $paramstring) {
-	  if (strstr($url, '?') === FALSE) {
-	  	$url = $url . '?' . $paramstring;
-	  } else {
-	  	 $url = $url . '&' . $paramstring;
-	  }
-	  return $url;
+    
+    $paramData = explode("=",$paramstring);
+    $paramName = $paramData[0];  
+    $paramValue = $paramData[1];
+    
+    // first check whether the parameter is already 
+    // defined in the URL so that we can just update 
+    // the value if that's the case. 
+    
+    if (preg_match('/[?&]('.$paramName.')=[^&]*/', $url)) { 
+    
+      // parameter is already defined in the URL, so 
+      // replace the parameter value, rather than 
+      // append it to the end. 
+      $url = preg_replace('/([?&]'.$paramName.')=[^&]*/', '$1='.$paramValue, $url) ; 
+    
+    } else { 
+      // can simply append to the end of the URL, once 
+      // we know whether this is the only parameter in 
+      // there or not. 
+      $url .= strpos($url, '?') ? '&' : '?'; 
+      $url .= $paramName . '=' . $paramValue; 
+    
+    } 
+    return $url ;
+    
+    
+	  
   }
-
 
 /**
  * Fix for php4.
@@ -47,13 +70,6 @@
    }
 }
 	
-	
-/**
- * echos a carriage return linefeed
- */
-function crlf() {
-  echo "\n";
-}	
 	
 	/**
 	 * Reverse htmlspecialchars
@@ -366,15 +382,13 @@ function crlf() {
 	 *
 	 * @param string $uri URI to encode
 	 */
-	function makeURLSave($uri) {						    
-   		$spname = strtolower($uri);
+	function makeURLSave($uri) {
+		$spname = strtolower($uri);
 		$spname = stripslashes($spname);
 		$spname = strip_tags($spname);
 		$spname = str_replace("&", "", $spname);
-		$spname = str_replace(" ", "_", $spname);
 		$spname = str_replace("?", "", $spname);
 		$spname = str_replace(",", "", $spname);
-		$spname = str_replace(".", "_", $spname);
 		$spname = str_replace(";", "", $spname);
 		$spname = str_replace("#", "", $spname);
 		$spname = str_replace("$", "", $spname);
@@ -386,17 +400,9 @@ function crlf() {
 		$spname = str_replace("/", "", $spname);
 		$spname = str_replace("!", "_", $spname);
 		$spname = str_replace("\\", "", $spname);	
-		$spname = str_replace("ö", "oe", $spname);	
-		$spname = str_replace("Ö", "oe", $spname);	
-		$spname = str_replace("ü", "ue", $spname);	
-		$spname = str_replace("Ü", "ue", $spname);	
-		$spname = str_replace("ä", "ae", $spname);	
-		$spname = str_replace("Ä", "ae", $spname);	
-		$spname = str_replace("ß", "ss", $spname);	
-		
-		$s = preg_replace ("/([^a-z0-9])+/i", "_",$spname);
-   		
-   		return $s;
+		$spname_split = explode(' ', $spname);
+		$spname = implode('_', $spname_split);	
+		return $spname;
 	}
 	
 	/**
@@ -433,9 +439,9 @@ function crlf() {
 	    $spid = getDBCell("state_translation", "OUT_ID", "IN_ID=$spid AND LEVEL=10");
 	    if ($spid != "") {
 	      $menuId = getDBCell('sitepage', 'MENU_ID', 'SPID='.$spid);
-	      $result = getPageURL($menuId, $v);	      
+	      $result = getPageURL($menuId, $v);
 	      $result.='/'.makeURLSave($catname);
-	      $result.='/'.makeURLSave($name);	      
+	      $result.='/'.makeURLSave($name);
 	    } else {
 	    	$result = $lang->get('url_disp_later', 'The URL will be displayed after the linked template was launched.');
 	    }
@@ -691,23 +697,7 @@ function crlf() {
 		} else {
 			$PGNRef = null;
 		}
-		return $PGNRef;
-	}
-	
-		/**
-	 * Creates an instance of the Selected plugin
-	 * returns the plugin-Class
-	 * @param integer Name of the plugin which is to be created
-	 * @return Object	Object of type Plugin.
-	 */
-	function createPGNRef3($pluginName) {
-		global $c;
-		$classname = getDBCell("modules", "CLASS", "UPPER(MODULE_NAME) = \"".strtoupper($pluginName).'"');
-		if ($classname != "") {			
-			$PGNRef = new $classname(0,0);
-		} else {
-			$PGNRef = null;
-		}
+
 		return $PGNRef;
 	}
 		
