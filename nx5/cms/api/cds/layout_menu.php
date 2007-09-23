@@ -120,5 +120,21 @@
 	 	}
 	 	return $out;
 	}
+	
+	/**
+	 * Draws a dropdownmenu with the menues given in the array.
+	 *
+	 * @param array of menu $menues Menu-array created with lowerLevel()...
+	 */
+	function dropDownMenu($menues, $baseText="Please Select", $width=250) {
+		$out = '<select name="dropdown" onChange="document.location.href=this.options[this.selectedIndex].value;" size="1" style="width:'.$width.'px;">';
+		$out.= '<option>'.$baseText.'</option>';
+		for ($i=0; $i<count($menues); $i++) {
+		  $out.= '<option value="'.$menues[$i]->getLink().'">'.$menues[$i]->getTitle().'</option>';	
+		}
+		$out.= '</select>';
+		return $out;
+		
+	}
 }
 ?>
