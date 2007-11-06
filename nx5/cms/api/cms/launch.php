@@ -771,7 +771,7 @@
 */
 	function launchContent($in, $level, $variation) {
 		global $db, $auth;
-		if (!checkACL($in)) {			
+		if (!checkACL($in)) {						
 			$out = translateState($in, $level);
 			$sql = "SELECT * FROM content WHERE CID = $in";
 			$query = new query($db, $sql);
@@ -795,7 +795,10 @@
 			
 			$query = new query($db, $sql);
 			// launch the content.
-			launchContentVariation($in, $module, $level, $variation);
+			$dbc = createDBCArray("content_variations", "VARIATION_ID", "DELETED=0 AND CID=".$in);
+			for ($i=0; $i<count($dbc);$i++) {
+			  launchContentVariation($in, $module, $level, $dbc[$i]);
+      }		
 			// launch metas
 			$sql = "SELECT MID FROM meta WHERE CID = $in AND DELETED=0";
 			$query = new query($db, $sql);
