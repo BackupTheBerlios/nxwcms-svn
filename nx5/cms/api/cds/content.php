@@ -207,7 +207,7 @@
 
 			$type = getDBCell("cluster_template_items", "CLTITYPE_ID", "CLTI_ID = $clti");
 			$res = array ();
-
+			
 			if ($type == 1)
 				$res[0] = "$name is a static content and therefore not a field!";
 
@@ -216,9 +216,9 @@
 
 				$field = createDBCArray("cluster_content", "CLCID", "CLTI_ID = $clti AND CLID = $this->pageClusterId ORDER BY $order");
 
-				if (count($field) == 0 && $this->variation != $this->parent->stdVariation)
-					$res = $this->getField($name, $params, $order, $this->parent->stdVariation);
-
+				if (count($field) == 0 && $variation != $this->parent->stdVariation)
+					$res = $this->getField($name, $params, $this->parent->stdVariation, $order);
+					
 				for ($i = 0; $i < count($field); $i++) {
 					if ($field[$i] != "" && $plugin != "") {
 						$ref = createPGNRef($plugin, $field[$i]);
@@ -232,8 +232,8 @@
 				$plugin = getDBCell("cluster_template_items", "FKID", "CLTI_ID = $clti");
 				$field = createDBCArray("cluster_content", "FKID", "CLTI_ID = $clti AND CLID = $this->pageClusterId", "ORDER BY ".$order, false);
 				
-				if (count($field) == 0 && $this->variation != $this->parent->stdVariation)
-					$res = $this->getField($name, $params, $order, $this->parent->stdVariation);
+				if (count($field) == 0 && $variation != $this->parent->stdVariation)
+					$res = $this->getField($name, $params, $this->parent->stdVariation, $order);
 
 				for ($i = 0; $i < count($field); $i++) {
 					if ($field[$i] != "" && $plugin != "") {
