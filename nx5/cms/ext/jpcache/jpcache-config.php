@@ -47,6 +47,11 @@
     $JPCACHE_FILEPREFIX   = "dyncache-";// Prefix used in the filename. This enables
                                    // us to (more accuratly) recognize jpcache-
                                    // files.
+    if (isset($renderOnAccess)) {
+      $JPCACHE_DIR          = $c["cachepath"] . "static/"; 
+      $JPCACHE_ON = true;    					// Turn dynamic page caching on/off
+	    $JPCACHE_TIME = 1500000000; // Set Time to very long
+    }                                   
 
     
 ?>

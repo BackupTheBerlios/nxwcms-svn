@@ -115,6 +115,20 @@
 			ini_set("max_execution_time", $maxtime);
 		}
 	}
+	
+	
+	function flushOnAccessCache() {
+		global $c;
+		$dir = $c["cachepath"].'static/';
+		$files = opendir($dir);
+	    while ($file = readdir ($files))  {
+                if($file != "." && $file != "..")
+                {
+                    unlink($dir.$file);
+                }
+        }
+        closedir($files);	
+	}
 
 	/**
 		* removes the cached version of a SitePage from $c["cachepath"]
@@ -211,12 +225,12 @@
 	 * @param integer pageId id of the page 
 	 * @param integer Variation Id of the page.
      */
-    function jpcacheFilename($pageid, $variation)
+    function jpcacheFilename($spid, $variation)
     {                        
         global $c;
-    	$get = array("page" => "$pageid", "v" => "$variation"); 
-    	$varkey .= "GET=".serialize($get);
-    	$name = $c["livedocroot"].getTemplate($pageid);
+    	$menu = getDBCell("sitepage", "MENU_ID", "SPID=".$spid);
+    	$varkey = 'GET=N;';
+    	$name = $c['livedocroot'].getPageURL($menu, $variation).'/index.php';    	
     	$key = md5($name.$varkey);
         return $key;
     }

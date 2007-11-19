@@ -24,13 +24,13 @@
                 $key = eregi_replace("[^A-Z,0-9,=]", "_", jpcache_scriptkey());
                 $key .= ".".eregi_replace("[^A-Z,0-9,=]", "_", jpcache_varkey());
                 if (strlen($key) > 255)
-                {
+                {                        
                     // Too large, fallback to md5!
                     $key = md5(jpcache_scriptkey().jpcache_varkey());
                 }
             }
             else
-            {
+            {                
                 $key = md5(jpcache_scriptkey().jpcache_varkey());
             }
             jpcache_debug("Cachekey is set to $key");

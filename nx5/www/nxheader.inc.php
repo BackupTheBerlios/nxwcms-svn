@@ -38,8 +38,7 @@
 	 }
 	 if (! (isset($disableCache) || isset($disableCaching)))
 	   require_once $c["path"]."ext/jpcache/jpcache.php";
-	 
-	 require_once $c["path"]."ext/jpcache/jpcache.php";
+	 	 
 	 includePGNISources();		
 	 	 
 	 $cds = new CDSApi(false, $page, $v);

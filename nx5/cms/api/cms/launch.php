@@ -92,6 +92,9 @@
 			$index.= ' $v='.$variation.';'."\n";
 			$index.= ' $page='.$spid.';'."\n";
 			$index.= ' $c["path"] = \''.$c["path"].'\';'."\n";
+			if ($c["renderstatichtml"] && isCached($spid, $variation)) {
+				$index.=' $renderOnAccess=true;'."\n";				
+			}
 			$index.= ' require_once \''.$c["livepath"].$template.'\';'."\n";			
 			$index.= "?>";
 			
@@ -445,9 +448,12 @@
 			$spidTrans = translateState($mparray[$i], $level, false);
 
 			if ($spidTrans != ""  && isCached($mparray[$i], $variation)) {	
-				renderSitePage($spidTrans, $variation);
-				if ($JPCACHE_ON) {
-					@unlink($c["dyncachepath"]."dyncache-".jpcacheFilename($spidTrans, $variation));
+				// old html caching
+				// renderSitePage($spidTrans, $variation);
+				if ($JPCACHE_ON  && !$c["renderstatichtml"]) {					
+					@unlink($c["dyncachepath"]."dyncache-".jpcacheFilename($spidTrans, $variation));					
+				} else {
+				  @unlink($c["cachepath"]."static/dyncache-".jpcacheFilename($spidTrans, $variation));									  
 				}
 
 			}
@@ -539,41 +545,14 @@
 		  @unlink($c["dyncachepath"]."dyncache-".jpcacheFilename($out, $variation));	
 		}
 
-
-		if ($c["renderstatichtml"]) {
-			$cconlaunch = getDBCell("sitemap", "CC_ON_LAUNCH", "MENU_ID = " . $menu);
-			$ccarray = explode(",", $cconlaunch);
-			$mparray = createDBCArray("sitepage", "SPID", "MENU_ID = " . $menu);
-
-			for ($i = 0; $i < count($ccarray); $i++) {
-				$spidTrans = translateState($ccarray[$i], $level, false);
-
-				if ($spidTrans != ""  && isCached($ccarray[$i], $variation)) {
-					renderSitePage($spidTrans, $variation);
-					if ($JPCACHE_ON) {
-		 			  @unlink($c["dyncachepath"]."dyncache-".jpcacheFilename($spidTrans, $variation));	
-					}
-				}
-			}
-
-			for ($i = 0; $i < count($mparray); $i++) {
-				$spidTrans = translateState($mparray[$i], $level, false);
-
-				if ($spidTrans != "" && isCached($mparray[$i], $variation)) {
-					if ($JPCACHE_ON) {
-		 			  @unlink($c["dyncachepath"]."dyncache-".jpcacheFilename($spidTrans, $variation));	
-					}
-					renderSitePage($spidTrans, $variation);
-					
-				}
-			}
-		}
+	
 		$cached = getDBCell("sitemap", "IS_CACHED", "MENU_ID = " . $menuTrans);
 		if ($cached == 1) {
-			if ($JPCACHE_ON) {
+			if ($JPCACHE_ON  && !$c["renderstatichtml"]) {
 		 		  @unlink($c["dyncachepath"]."dyncache-".jpcacheFilename($out, $variation));	
-			}
-			renderSitePage($out, $variation);
+			}	else if ($c["renderstatichtml"]) {
+			    @unlink($c["cachepath"]."static/dyncache-".jpcacheFilename($out, $variation));				
+			}		
 		}
 	}
 

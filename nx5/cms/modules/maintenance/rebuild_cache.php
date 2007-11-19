@@ -32,7 +32,7 @@
 	$form = new CommitForm($lang->get("rb_cache", "Rebuild Cache"));
 	$form->addToTopText($lang->get("mt_rb_cache_mes", "Rebuild Cache of all live pages"));
 	$maintenanceHandler = new ActionHandler("generate");
-	$maintenanceHandler->addFncAction("rebuildCache");
+	$maintenanceHandler->addFncAction("flushOnAccessCache");
 	$form->addCheck("generate", $lang->get("rb_cache", "Rebuild Cache"), $maintenanceHandler);
 
 	$page->add($form);	
