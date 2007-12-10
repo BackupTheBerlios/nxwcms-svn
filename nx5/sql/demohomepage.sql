@@ -6652,6 +6652,41 @@ CREATE TABLE `users` (
   PRIMARY KEY  (`USER_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+CREATE TABLE `auth_site` (
+  `site_id` mediumint(5) unsigned NOT NULL auto_increment,
+  `sitename` varchar(75) NOT NULL default '',
+  `siteurl` varchar(150) NOT NULL default '',
+  `sitemail` varchar(100) NOT NULL default '',
+  `template` varchar(50) NOT NULL default '',
+  `version` varchar(10) NOT NULL default '',
+  PRIMARY KEY  (`site_id`)
+) TYPE=MyISAM AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `user`
+-- 
+
+CREATE TABLE `auth_user` (
+  `user_id` mediumint(8) unsigned NOT NULL auto_increment,
+  `username` varchar(20) NOT NULL default '',
+  `password` varchar(20) NOT NULL default '',
+  `email` varchar(100) NOT NULL default '',
+  `active` enum('yes','no') NOT NULL default 'no',
+  `confirm` varchar(20) NOT NULL default '',
+  PRIMARY KEY  (`user_id`)
+) TYPE=MyISAM AUTO_INCREMENT=2 ;
+
+-- 
+-- Dumping data for table `user`
+-- 
+
+INSERT INTO `auth_user` (`user_id`, `username`, `password`, `email`, `active`, `confirm`) VALUES 
+(1, 'admin', 'admin1', '', 'yes', ''); 
+
+
+
 -- 
 -- Daten für Tabelle `users`
 -- 
@@ -6695,3 +6730,13 @@ CREATE TABLE `variations` (
 -- 
 
 INSERT INTO `variations` VALUES (1, 'English', 'en', 'English language version of website', 0);
+
+CREATE TABLE `auth_user` (
+  `user_id` mediumint(8) unsigned NOT NULL default '0',
+  `password` varchar(64) NOT NULL default '',
+  `email` varchar(100) NOT NULL default '',
+  `active` tinyint(1) NOT NULL default '0',
+  `confirm` varchar(20) NOT NULL default '',
+  PRIMARY KEY  (`user_id`),
+  KEY `email_2` (`email`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;

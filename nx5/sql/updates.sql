@@ -3801,7 +3801,22 @@ ALTER TABLE `pgn_gallery` CHANGE `ROWS` `ROWS` MEDIUMINT NOT NULL DEFAULT '300';
 
 ALTER TABLE `sitepage` ADD `DELETABLE` TINYINT NOT NULL DEFAULT '1' AFTER `POPUP_WINDOW` , ADD `PASSWORD_PROTECTED` TINYINT NOT NULL DEFAULT '0' AFTER `DELETABLE` ;
  
- 
+CREATE TABLE `auth_user` (
+  `user_id` mediumint(8) unsigned NOT NULL auto_increment,
+  `username` varchar(20) NOT NULL default '',
+  `password` varchar(20) NOT NULL default '',
+  `email` varchar(100) NOT NULL default '',
+  `active` enum('yes','no') NOT NULL default 'no',
+  `confirm` varchar(20) NOT NULL default '',
+  PRIMARY KEY  (`user_id`)
+) TYPE=MyISAM AUTO_INCREMENT=2 ;
+
+-- 
+-- Dumping data for table `user`
+-- 
+
+INSERT INTO `auth_user` (`user_id`, `username`, `password`, `email`, `active`, `confirm`) VALUES 
+(1, 'admin', 'admin1', '', 'yes', ''); 
 
 
 
