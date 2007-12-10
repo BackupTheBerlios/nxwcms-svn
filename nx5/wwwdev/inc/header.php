@@ -18,7 +18,7 @@
   $cds->layout->drawMashups("HEAD1");
   // Draw the Menu. Some Menues consist of Header and Footer. The footer is drawn with
   // the call $cds->layout->drawMenuFooter() in footer.php.
-  $cds->layout->drawMenuHeader();
+  $cds->layout->drawMenuHeader();  
     
   // Draw the table, which separates the content from the sidebar.
   $cds->layout->drawMashups("HEAD2");

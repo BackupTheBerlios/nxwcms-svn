@@ -42,6 +42,12 @@
 
 		
 		
+		function isPasswordProtected($spid) {
+			$result = false;
+			$res = getDBCell("sitepage", "PASSWORD_PROTECTED","SPID=".$spid);
+			if ($res==1) $result = true;
+			return $result;
+		}
 		
 		/**
 		 * To be used in start file (e.g. index.php) to determine the first pageId

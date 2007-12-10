@@ -82,16 +82,40 @@
 					$JPCACHE_ON = false;
 				}
 				exit;
-			}
+			}		
 		}
 
  		AbstractCDSApi::AbstractCDSApi($is_development, $this->management->getClusterNodeFromPage($this->pageId), $this->variation);
  		$this->layout = new Layout($this);
  		$this->menu = new Menu($this);
  		$this->searchengine = new CDSSearchengine();
-        $this->plugins = new CDSPlugins();
-        $this->servername = $c["host"];
+    $this->plugins = new CDSPlugins();
+    $this->servername = $c["host"];
+    
+    // password-protected page?
+		if ($this->management->isPasswordProtected($this->pageId)) {
+			  $this->auth();
+		}
  	}
+ 	
+ 	/*
+ 	 * Dispatch the login of the user....
+ 	 */
+ 	function auth() { 		
+ 		if (!$this->loggedIn() && (value("login","NUMERIC","0")== 0)) { 		  		
+ 		  header("Location: ".$this->servername.$this->docroot.'login.php?page='.$this->pageId.'&login=1&v='.$this->variation);
+ 		  exit;
+ 	  }
+ 	}
+ 	
+ 	
+ 	/**
+ 	 * Check if User is logged in or not.
+ 	 */
+ 	function loggedIn() {
+ 	  return false;
+ 	}
+ 	
  	
  		/**
 	 	 * Return a CDSApi-Object
