@@ -6319,3 +6319,12 @@ CREATE TABLE `variations` (
 -- 
 
 INSERT INTO `variations` VALUES (1, 'English', 'en', 'English language version of website', 0);
+
+CREATE TABLE `auth_user` (
+  `user_id` bigint(12) unsigned NOT NULL,
+  `password` varchar(40) NOT NULL default '',
+  `email` varchar(100) NOT NULL default '',
+  `active` tinyint NOT NULL,
+  `confirm` varchar(40) NOT NULL default '',
+  PRIMARY KEY  (`user_id`)
+) TYPE=MyISAM ;
