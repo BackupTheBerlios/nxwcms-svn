@@ -59,6 +59,7 @@ if ($c["pagetracking"])
 	$pagemenu->addSubmenu($lang->get("m_report"), "modules/stats/report.php", "TRAFFIC", "stats");
 
 $pagemenu->addMenu($lang->get("m_eservices", "E-Services"). " (under development)", "ESERVICES", false);
+$pagemenu->addSubmenu($lang->get("m_cuser", "Community Users"), "modules/communitylogin/user_general.php", "CUSTOMERCAREADMIN", "accesscontrol");
 $pagemenu->addSubMenu($lang->get("contacts", "Contacts"), "modules/address/overview.php", "ADDRESS");
 $pagemenu->addSubMenu($lang->get("newsletter", "Newsletter"), "modules/newsletter/overview.php", "NEWSLETTER");
 $pagemenu->addSubMenu($lang->get("mailings", "Mailings"), "modules/customercare/index.php", "CUSTOMERCARE|CUSTOMERCAREADMIN");

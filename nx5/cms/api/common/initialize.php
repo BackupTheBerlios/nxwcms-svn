@@ -26,8 +26,7 @@
 
 	// Init the CMS....
 
-	// Start session handler.
-	session_start();
+	// Start session handler.	
 	define('RDFAPI_INCLUDE_DIR', $c["path"]."ext/rap/");
 	$pagestate = new PageState();
 ?>
