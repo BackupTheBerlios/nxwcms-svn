@@ -3810,3 +3810,6 @@ CREATE TABLE `auth_user` (
   PRIMARY KEY  (`user_id`)
 ) TYPE=MyISAM ;
 
+ALTER TABLE `auth_user` ADD `registration_date` DATETIME NULL ,
+ADD `lastlogin_date` DATETIME NULL ,
+ADD `logins` MEDIUMINT( 8 ) NOT NULL DEFAULT '0';
