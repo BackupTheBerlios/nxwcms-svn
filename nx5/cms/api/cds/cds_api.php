@@ -38,8 +38,11 @@
 	var $layout = null;
 	var $menu = null;
 	var $searchengine = NULL;
-    var $plugins = NULL;
-    var $servername = '';
+  var $plugins = NULL;
+  var $servername = '';
+  var $loginError;
+  var $session;
+  var $user_id;
 	
  	/**
  	 * Constructor for creating the CDS API interface
@@ -102,8 +105,10 @@
  	 * Dispatch the login of the user....
  	 */
  	function auth() { 		
- 		if (!$this->loggedIn() && (value("login","NUMERIC","0")== 0)) { 		  		
- 		  header("Location: ".$this->servername.$this->docroot.'login.php?page='.$this->pageId.'&login=1&v='.$this->variation);
+ 		session_start();
+ 		if (!$this->loggedIn() && (value("login","NUMERIC","0")== 0)) { 		  		 		  
+ 		  if ($this->loginError != "") $add="&le=".$this->loginError;
+ 		  header("Location: ".$this->servername.$this->docroot.'login.php?page='.$this->pageId.'&login=1&v='.$this->variation.$add);
  		  exit;
  	  }
  	}
@@ -113,8 +118,79 @@
  	 * Check if User is logged in or not.
  	 */
  	function loggedIn() {
+ 	  $email = value("email","NOSPACES", "");
+ 	  $password = value("password", "", ""); 	  
+ 	  if ($email != "") { 	  	
+ 	  	// check the password....
+ 	  	$user_id = getDBCell("auth_user", "user_id", "password='$password' AND active>0 AND UPPER(email)=UPPER('$email')"); 	  	
+ 	  	if ($user_id != "") {
+ 	  	  $this->createSession($user_id);
+ 	  	  return true;
+ 	  	} else {
+ 	  		$user_id = getDBCell("auth_user", "user_id", "password='$password' AND UPPER(email)=UPPER('$email')"); 	  	
+ 	  		if ($user_id != "")
+ 	  		  $this->loginError = 'confirm';
+ 	  		} else {
+ 	  		  $user_id= getDBCell("auth_user", "user_id", "UPPER(email)=UPPER('$email')");
+ 	  		  if ($user_id == "") {
+ 	  		  	$this->loginError = 'unknown';
+ 	  	  	} else {
+ 	  	  		$this->loginError = 'pwd';
+ 	  	  	}
+ 	  	  }
+ 	  	}
+ 	  }
+ 	  
+ 	  // Auth anhand von Session-ID
+ 	  $sid = $_SESSION['id']; 	  
+ 	  if ($sid != "") { 	  	
+ 	  	return $this->validateSession(); 	  	
+ 	  }
  	  return false;
  	}
+ 	
+ 	/**
+ 	 * Creates a session when the user logs in
+ 	 */
+ 	function createSession($userId) {
+ 			//create session
+		mt_srand ((double)microtime()*1000000);
+    $this->session = md5(uniqid(mt_rand()));
+
+		// write to db
+		global $db, $c;
+		$sql = "INSERT INTO user_session (SESSION_ID, LAST_LOGIN, REMOTE_ADDRESS, USER_ID) VALUES ('$this->session',".$c["dbnow"].", '', $userId)";		
+		$query = new query($db, $sql);
+		$query->free();			
+		$_SESSION["id"] = $this->session;
+ 	}
+ 	
+ 	/**
+	 * Checks, if a session is still correct. If so, returns true, else false.
+	 * The procedure checks, if the timeout is not reached yet and if the given sid
+	 * is correct. Also the remote address of the user is checked. The maximum login time
+	 * that is allowed is 4 hours at the moment. After that time, a new login is necessary.
+	 * @return boolean true if Session valid, else false.
+	 */
+	function validateSession() {
+		global $db, $c;
+		$this->session = $_SESSION["id"];		
+		if ($this->session !="") {
+			$sql = "SELECT u.user_id FROM user_session s, auth_user u WHERE u.user_id = s.user_id AND s.SESSION_ID='$this->session' AND u.active>0 AND NOW() <= DATE_ADD(S.LAST_LOGIN, INTERVAL 24 HOUR)";
+			
+			$query = new query($db, $sql);					
+			if 	($query->count()==1) {
+				// login successfull
+				$query->getrow();
+				$this->userId = $query->field("USER_ID");				
+							
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return false;
+	}
  	
  	
  		/**
