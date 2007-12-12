@@ -13,6 +13,8 @@
   	echo '<span style="color:#cc0000;">Error: The username is unknown.</span>';  	
   } else if ($le=="pwd") {
   	echo '<span style="color:#cc0000;">Error: Incorrect password.</span>';  	
+  } else if ($le=="confirm") {
+  	echo '<span style="color:#cc0000;">Error: You did not confirm your account yet.</span><br>Request E-Mail-Confirmation';
   }
   
   echo '<form method="post" action="'.$action.'">';
@@ -37,7 +39,7 @@
   br();
   br();
   
-  echo 'Register new account&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Forgot your password?';
+  echo '<a href="'.$cds->docroot.'/auth_register.php?page='.$cds->page.'&v='.$cds->variation.'">Register new account</a>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Forgot your password?';
   echo '</center>';
   
  
