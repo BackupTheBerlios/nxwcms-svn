@@ -170,5 +170,16 @@
 
 			echo "Time elapsed: " . $res . " seconds";
 		}
+		
+		/** 
+		 * Encode an URL so that it lands on the exit page - for seo
+		 * @param string URL to encode
+		 * @returns string encoded URL
+		 */
+		 function encodeURL($url) {
+		   global $cds;
+		   $url = base64_encode($url);	
+		   return $cds->docroot.'sys/go.php?u='.$url;
+		 }
 	}
 ?>
