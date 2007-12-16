@@ -73,7 +73,7 @@
 			$this->pageId = $this->management->getStartPage();				
 		} else {			
 			if ($this->management->isSPExpired($this->pageId) && ($this->pageId != -1))	{
-				$this->messages->draw("pageExpired");
+				//$this->messages->draw("pageExpired");
 				
 				// if the request to this expired page comes from our own host, we assume it comes from within our live site...
 				if (stristr($_SERVER["HTTP_REFERER"], $c["host"])) {
@@ -84,7 +84,7 @@
 					global $JPCACHE_ON;
 					$JPCACHE_ON = false;
 				}
-				exit;
+				//exit;
 			}		
 		}
 
