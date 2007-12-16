@@ -328,13 +328,13 @@
 					return ($link_uri);
 				} else {
 					$template = $this->getTemplate();
-					$link_uri = $c["docroothtml"] . $template . "?page=" . $this->pageId . "&amp;v=" . $this->variation;
+					$link_uri = $c["docroothtml"] . $template . "?page=" . $this->pageId . "&v=" . $this->variation;
 					return ($link_uri . $linkadd);
 				}
 			}
 		} else { // Development- (Template-) Version
 			$template = $this->getTemplate();
-			$link_uri = $c["devdocroot"] . $template . "?page=" . $this->pageId . "&amp;v=" . $this->variation;
+			$link_uri = $c["devdocroot"] . $template . "?page=" . $this->pageId . "&v=" . $this->variation;
 			return ($link_uri . $linkadd);
 		}
 	}
