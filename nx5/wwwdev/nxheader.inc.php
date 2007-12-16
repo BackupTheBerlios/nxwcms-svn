@@ -24,17 +24,14 @@
 	 if (!isset($page)) {
 	    $page = value("page", "NUMERIC",-1);	    
 	    if (($page == -1)  &&  ! defined('ACCESS_CONTENT_ONLY')) {	 			 
-	 			 $forward = getStartPageURI(0,0);
+	 			 $forward = getStartPageURI(value("v", "NUMERIC", 0),0);
 	 			 if ($forward != "") 
 	 			   header("location: ".$forward); 
 	    }    	
 	 }
  		
- 	if (!isset($article)) 
-	   $article = value("article", "NUMERIC");
- 		
- 		
- 		
- 		$cds = new CDSApi(true);
-	}
+ 	  if (!isset($article)) 
+	   $article = value("article", "NUMERIC"); 			 		
+ 	  $cds = new CDSApi(true);
+	}	
 ?>
