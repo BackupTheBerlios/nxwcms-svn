@@ -29,7 +29,7 @@
 	  * Access this class with $cds->content
 	  */
 	 class Content extends CDSInterface {
-		function Content(&$parent) { CDSInterface::CDSInterface($parent); }
+		function Content(&$parent) { CDSInterface::CDSInterface($parent);}
 
 		/**
 		 * Retrieves the output of a field as defined in Cluster-Template. 
@@ -40,9 +40,9 @@
 		 * @returns string The output of the module.
 		 */
 		function get($name, $params = null, $variation = 0) {
-			
-			if ($variation)
-				$this->variation = $variation;
+						
+			if ($variation == 0)
+				$variation = $this->variation;
 
 
 			// get the clti..
@@ -61,7 +61,7 @@
 				$cid = getDBCell("cluster_template_items", "FKID", "CLTI_ID = $clti");
 
 				$plugin = getDBCell("content", "MODULE_ID", "CID = $cid");
-				$oid = getDBCell("content_variations", "FK_ID", "CID = $cid AND VARIATION_ID = $this->variation AND DELETED=0");
+				$oid = getDBCell("content_variations", "FK_ID", "CID = $cid AND VARIATION_ID = $variation AND DELETED=0");
 			} else if ($type == 2) { // dynamic content
 				$plugin = getDBCell("cluster_template_items", "FKID", "CLTI_ID = $clti");
 
@@ -69,11 +69,11 @@
 			} else if ($type == 5) {
                 $plugin = getDBCell("cluster_template_items", "FKID", "CLTI_ID = $clti");
                 $cid = getDBCell("cluster_content", "FKID", "CLID = $this->pageClusterId AND CLTI_ID = $clti AND DELETED=0");
-                if ($cid == 0 && $variation <> "" && $this->variation == 1) {
+                if ($cid == 0 && $variation <> "" && $variation == 1) {
                    $clid = getDBCell("cluster_variations", "CLID", "CLNID = $this->pageClusterNodeId AND VARIATION_ID = 1");
                    $cid = getDBCell("cluster_content", "FKID", "CLID = $clid AND CLTI_ID = $clti AND DELETED=0");
                  }
-                 $oid = getDBCell("content_variations", "FK_ID", "CID = $cid AND VARIATION_ID = $this->variation AND DELETED=0");			
+                 $oid = getDBCell("content_variations", "FK_ID", "CID = $cid AND VARIATION_ID = $variation AND DELETED=0");			
 			}
 
 			if ($oid != "" && $plugin != "") {
@@ -88,7 +88,7 @@
 				return $content;
 
 			// now the content seems to be empty. So we try standard variation.
-			if ($this->variation != $this->parent->stdVariation)
+			if ($variation != $this->parent->stdVariation)
 				$content = $this->get($name, $params, $this->parent->stdVariation);
 
 			return $content;
@@ -105,19 +105,19 @@
 		 * @returns string The output of the module.
 		 */
 		function getByAccessKey($key, $params = null, $variation = 0) {
-			// set variation.
-			if ($variation)
-				$this->variation = $variation;	
-			
+					
+			// set variation.						
+			if ($variation==0 )
+				$variation = $this->variation;				
+				
 				// get content id.
 				$cid = getDBCell("content", "CID", "UPPER(ACCESSKEY)='".strtoupper($key)."' AND VERSION=".$this->parent->level);
 				if ($cid != "") {
 					$plugin = getDBCell("content", "MODULE_ID", "UPPER(ACCESSKEY)='".strtoupper($key)."'");
-					$oid = getDBCell("content_variations", "FK_ID", "CID = $cid AND VARIATION_ID = $this->variation AND DELETED=0");
+					$oid = getDBCell("content_variations", "FK_ID", "CID = $cid AND VARIATION_ID = $variation AND DELETED=0");
 
 					if ($oid != "" && $plugin != "") {
 						$ref = createPGNRef($plugin, $oid, $clti);
-
 						$content = $ref->draw($params);
 						unset ($ref);
 					} else 
@@ -127,8 +127,8 @@
 					  return $content;
 
 					// now the content seems to be empty. So we try standard variation.
-					if ($this->variation != $this->parent->stdVariation)
-					  $content = $this->get($name, $params, $this->parent->stdVariation);
+					if ($variation != $this->parent->stdVariation)
+					  $content = $this->getByAccessKey($key, $params, $this->parent->stdVariation);
 					return $content;			  
 					
 				} else {
@@ -148,13 +148,13 @@
 		 */
 		function getById($cid, $params = null, $variation = 0) {
 			// set variation.
-			if ($variation)
-				$this->variation = $variation;	
+			if ($variation==0)
+				$variation = $this->variation;	
 			
 								
 				if ($cid != "") {
 					$plugin = getDBCell("content", "MODULE_ID", "UPPER(ACCESSKEY)='".strtoupper($key)."'");
-					$oid = getDBCell("content_variations", "FK_ID", "CID = $cid AND VARIATION_ID = $this->variation AND DELETED=0");
+					$oid = getDBCell("content_variations", "FK_ID", "CID = $cid AND VARIATION_ID = $variation AND DELETED=0");
 
 					if ($oid != "" && $plugin != "") {
 						$ref = createPGNRef($plugin, $oid, $clti);
@@ -168,7 +168,7 @@
 					  return $content;
 
 					// now the content seems to be empty. So we try standard variation.
-					if ($this->variation != $this->parent->stdVariation)
+					if ($variation != $this->parent->stdVariation)
 					  $content = $this->get($name, $params, $this->parent->stdVariation);
 					return $content;			  
 					
