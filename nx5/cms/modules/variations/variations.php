@@ -15,7 +15,7 @@
 	$filter->icon = "li_variation.gif";	
 
 	$filtermenu = new Filtermenu($lang->get("variations"), $filter);
-			
+	include "menu.php";		
 	$deleteHandler = new ActionHandler("DELETE");
 	$deleteHandler->addDbAction("UPDATE variations SET DELETED=1 where variation_id=$oid and variation_id > 999");
 

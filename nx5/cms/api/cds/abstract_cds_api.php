@@ -19,7 +19,7 @@
  *	along with N/X; if not, write to the Free Software
  *	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **********************************************************************/
-
+ 
  define("_LIVE", "10");
  define("_DEV", "0");
  $clusterCache = array();
@@ -47,6 +47,7 @@
 	var $meta = null;
     var $channel = null;
     var $logTo = "";
+    var $langTag;
 		
  	/**
  	 * Constructor for creating the CDS API interface
@@ -55,8 +56,7 @@
  	 * @param integer ID of the current Variation.
  	 */
 	function AbstractCDSApi($is_development, $clusterNodeId, $variation) {
- 		global $c;
-		
+ 		global $c;	
 		$this->is_development = $is_development;
 		if (! $is_development) {
 			$this->level = _LIVE;
@@ -79,7 +79,8 @@
 		$this->stdVariation = $c["stdvariation"];	
 		if ($this->variation == "0" || $this->variation == "")
 		    $this->variation = $this->stdVariation;
-		    			
+
+		$this->langTag = strtoupper(getDBCell("variations", "SHORTTEXT", "VARIATION_ID=".$this->variation));		    
 		// Initialize Management
 		$this->pageClusterNodeId = $clusterNodeId;
 		if ($this->pageClusterNodeId != "") {
