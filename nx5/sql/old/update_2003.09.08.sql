@@ -1,1 +1,0 @@
-ALTER TABLE `internal_resources` CHANGE `RESID` `RESID` VARCHAR( 32 ) NOT NULL ;
